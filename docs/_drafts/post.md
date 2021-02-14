@@ -1,138 +1,105 @@
----
-layout: post
----
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.
 
-## Typography Elements in One
+## Some great heading (h2)
 
-Let's start with a informative paragraph. **This text is bolded.** But not this one! _How about italic text?_ Cool right? Ok, let's **_combine_** them together. Yeah, that's right! I have code to highlight, so `ThisIsMyCode()`. What a nice! Good people will hyperlink away, so [here we go](#) or [http://www.example.com](http://www.example.com).
+Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu.
 
-<div class="divider"></div>
+Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.
 
-## Headings H1 to H6
+## Another great heading (h2)
 
-# H1 Heading
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.
 
-## H2 Heading
+### Some great subheading (h3)
 
-### H3 Heading
+Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum.
 
-#### H4 Heading
+Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc.
 
-##### H5 Heading
+### Some great subheading (h3)
 
-###### H6 Heading
+Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.
 
-<div class="divider"></div>
+> This quote will *change* your life. It will reveal the <i>secrets</i> of the universe, and all the wonders of humanity. Don't <em>misuse</em> it.
 
-## Footnote
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt.
 
-Let's say you have text that you want to refer with a footnote, you can do that too! This is an example for the footnote number one [[^1]]. You can even add more footnotes, with link! [[^2]]
+### Some great subheading (h3)
 
-<div class="divider"></div>
+Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum.
 
-## Blockquote
-
-> Start by doing what's necessary; then do what's possible; and suddenly you are doing the impossible. --Francis of Assisi
-
-**NOTE:** This theme does NOT support nested blockquotes.
-
-<div class="divider"></div>
-
-## List Items
-
-1. First order list item
-2. Second item
-
-* Unordered list can use asterisks
-- Or minuses
-+ Or pluses
-
-<div class="divider"></div>
-
-## Code Blocks
-
-```javascript
-var modularpattern = (function() {
-    // your module code goes here
-    var sum = 0 ;
-
-    return {
-        add:function() {
-            sum = sum + 1;
-            return sum;
-        },
-        reset:function() {
-            return sum = 0;    
-        }  
-    }   
-}());
-alert(modularpattern.add());    // alerts: 1
-alert(modularpattern.add());    // alerts: 2
-alert(modularpattern.reset());  // alerts: 0
+```html
+<html>
+  <head>
+  </head>
+  <body>
+    <p>Hello, World!</p>
+  </body>
+</html>
 ```
 
-```python
-s = "Python syntax highlighting"
-print s
-```
 
-```
-No language indicated, so no syntax highlighting.
-But let's throw in a <b>tag</b>.
-```
+In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.
 
-<div class="divider"></div>
+#### You might want a sub-subheading (h4)
 
-## Table
+In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.
 
-### Table 1: With Alignment
+In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+#### But it's probably overkill (h4)
 
-### Table 2: With Typography Elements
+In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.
 
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
+##### Could be a smaller sub-heading, `pacman` (h5)
 
-<div class="divider"></div>
+In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.
 
-## Horizontal Line
+###### Small yet significant sub-heading  (h6)
 
-The HTML `<hr>` element is for creating a "thematic break" between paragraph-level elements. In markdown, you can create a `<hr>` with any of the following:
+In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.
 
-* `___`: three consecutive underscores
-* `---`: three consecutive dashes
-* `***`: three consecutive asterisks
+### Oh hai, an unordered list!!
 
-renders to:
+In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.
 
-___
+- First item, yo
+- Second item, dawg
+- Third item, what what?!
+- Fourth item, fo sheezy my neezy
 
----
+### Oh hai, an ordered list!!
 
-***
+In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.
 
-<div class="divider"></div>
+1. First item, yo
+2. Second item, dawg
+3. Third item, what what?!
+4. Fourth item, fo sheezy my neezy
 
-## Media
 
-### YouTube Embedded Iframe
 
-<div class="video-container"><iframe src="https://www.youtube.com/embed/n1a7o44WxNo" frameborder="0" allowfullscreen></iframe></div>
+## Headings are cool! (h2)
 
-### Image
+Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.
 
-![Minion](http://octodex.github.com/images/minion.png)
+Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.
 
----
-Footnote:
+Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc.
 
-[^1]: 1: Footnote number one yeah baby!
+### Tables
 
-[^2]: 2: A footnote you can link to - [click here!](#)
+Title 1               | Title 2               | Title 3               | Title 4
+--------------------- | --------------------- | --------------------- | ---------------------
+lorem                 | lorem ipsum           | lorem ipsum dolor     | lorem ipsum dolor sit
+lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit
+lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit
+lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit | lorem ipsum dolor sit
+
+
+Title 1 | Title 2 | Title 3 | Title 4
+--- | --- | --- | ---
+lorem | lorem ipsum | lorem ipsum dolor | lorem ipsum dolor sit
+lorem ipsum dolor sit amet | lorem ipsum dolor sit amet consectetur | lorem ipsum dolor sit amet | lorem ipsum dolor sit
+lorem ipsum dolor | lorem ipsum | lorem | lorem ipsum
+lorem ipsum dolor | lorem ipsum dolor sit | lorem ipsum dolor sit amet | lorem ipsum dolor sit amet consectetur
