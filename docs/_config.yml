@@ -9,6 +9,6 @@ plugins:
  - jekyll-toc
  
 titles_from_headings:
-  enabled:     true
+  enabled: true
   strip_title: false
-  collections: false
+  collections: true
