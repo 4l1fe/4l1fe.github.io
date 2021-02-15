@@ -1,6 +1,10 @@
 title: 4log
 theme: minima
 show_drafts: true
+list_title:
+
+minima:
+  skin: dark
 
 plugins:
  - jekyll-titles-from-headings
