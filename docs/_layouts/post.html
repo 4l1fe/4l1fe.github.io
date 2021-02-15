@@ -26,10 +26,8 @@ layout: default
       {%- endif -%}</p>
   </header>
   
-  <div id="table-of-contents">
-    {% toc %}
-  </div>
-  
+  {% include toc.html html=content %}
+
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
