@@ -1,7 +1,7 @@
 title: 4log
 theme: minima
 show_drafts: true
-list_title:
+list_title: ""
 
 minima:
   skin: dark
