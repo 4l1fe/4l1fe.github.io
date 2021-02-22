@@ -4,21 +4,22 @@ from typing import List, Tuple
 from xml.dom.minidom import getDOMImplementation
 from string import Template
 from pathlib import Path
-from lxml.etree import Element, tostring
-from lxml.html import fromstring
+from lxml.html import Element, fromstring, builder, tostring
 
 
 BUILD_DIR = Path(__file__).parent
 DOCS_DIR = BUILD_DIR.parent / 'docs'
 ARTICLES_DIR = BUILD_DIR.parent / 'articles'
-BLOG_INDEX_FILE = DOCS_DIR / 'index.html'
+INDEX_FILE = DOCS_DIR / 'index.html'
 ARTICLE_TEMPLATE_FILE = BUILD_DIR / 'article-base.html'
 INDEX_TEMPLATE_FILE = BUILD_DIR / 'index-base.html'
-ARTICLE_TEXT_FILE = 'README.md'
+ARTICLE_MD_FILE = 'README.md'
 ARTICLE_IMG_FILE = 'files/main-section.png'
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 TOC_HEADERS = HEADERS[1:]
 TocType = List[Tuple[int, str]]
+ArticlesData = List[Tuple[str, str]]
+Dom = getDOMImplementation()
 
 
 def _make_header_id(tag_text):
@@ -50,8 +51,7 @@ def extract_toc(html: str) -> TocType:
 
 
 def generate_toc_html(toc: TocType) -> str:
-    dom = getDOMImplementation()
-    doc = dom.createDocument(None, "ul", None)
+    doc = Dom.createDocument(None, "ul", None)
     parent_element = doc.documentElement
     prev_header_level = 2
 
@@ -96,15 +96,13 @@ def update_headers_id_attribute(html: str) -> str:
         if el.tag in HEADERS:
             id_ = _make_header_id(el.text)
             el.insert(0, Element('a', {'id': id_}))
-    html = tostring(root_element, method='html', encoding="utf8").decode()
+    html = tostring(root_element, encoding='unicode')
     html = _wrap_unwrap_fake_tag(html, wrap=False)
     return html
 
 
-def generate_article_html(file_path):
-    with open(file_path) as file:
-        text = file.read()
-    html = commonmark.commonmark(text)
+def generate_article_html(md_text, html_template):
+    html = commonmark.commonmark(md_text)
     # print(html)
 
     content_html = update_headers_id_attribute(html)
@@ -114,22 +112,54 @@ def generate_article_html(file_path):
     # print(toc)
     toc_html = generate_toc_html(toc)
     # print(toc_html)
-
-    with open(ARTICLE_TEMPLATE_FILE.as_posix()) as file:
-        template_text = file.read()
-    html = Template(template_text).substitute({'content': content_html, 'toc': toc_html})
+    html = Template(html_template).substitute({'content': content_html, 'toc': toc_html})
     # print(html)
-
-    with open(BLOG_INDEX_FILE.as_posix(), 'w') as file:
-        file.write(html)
+    return html
 
 
-def generate_index_html():
-    # сканирование
-    pass
+def generate_index_html(articles_data: ArticlesData, html_template):
+    elements = []
+    for data in articles_data:
+        element = builder.DIV(builder.P(data[0]),
+                              builder.P(data[1]),
+                              builder.IMG(src=data[2]))
+        elements.append(element)
+    element = builder.DIV(*elements)
+    articles_html = tostring(element, encoding='unicode')
+    html = Template(html_template).substitute({'articles': articles_html})
+    return html
+
+
+def read_templates() -> (str, str):
+    article_template = ARTICLE_TEMPLATE_FILE.read_text()
+    index_template = INDEX_TEMPLATE_FILE.read_text()
+
+    return index_template, article_template
+
+
+def main():
+    index_template, article_template = read_templates()
+
+    articles_data = []
+    for dir in ARTICLES_DIR.iterdir():
+        article_md_file = dir / ARTICLE_MD_FILE
+        md_text = article_md_file.read_text()
+        article_html = generate_article_html(md_text, article_template)
+        article_html_file = DOCS_DIR / dir.name / f'{dir.name}.html'
+        article_html_file.parent.mkdir(exist_ok=True)
+        article_html_file.write_text(article_html)
+
+        root_element = fromstring(article_html)
+
+        h1_text = root_element.find('.//h1').text
+        paragraph_text = root_element.find('.//p').text
+        articles_data.append((h1_text, paragraph_text))
+
+    index_html = generate_index_html(articles_data, index_template)
+    INDEX_FILE.write_text(index_html)
 
 
 if __name__ == '__main__':
     import sys
     file_path = sys.argv[1]
-    generate_article_html(file_path)
+    main()
