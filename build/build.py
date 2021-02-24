@@ -11,7 +11,8 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 PROJ_DIR = Path(__file__).parent.parent
 BUILD_DIR = PROJ_DIR / 'build'
 DOCS_DIR = PROJ_DIR / 'docs'
-ARTICLES_DIR = PROJ_DIR / 'articles'
+ARTICLES_SOURCE_DIR = PROJ_DIR / 'articles'
+ARTICLES_DOCS_DIR = DOCS_DIR / 'articles'
 TEMPLATES_DIR = BUILD_DIR / 'templates'
 ARTICLE_TEMPLATE_FILE = TEMPLATES_DIR / 'article.jinja'
 INDEX_TEMPLATE_FILE = TEMPLATES_DIR / 'index.jinja'
@@ -141,19 +142,19 @@ def main():
                       autoescape=select_autoescape(['html']))
     env.globals.update(root_link=INDEX_FILE.name)
     articles_data = []
-    for dir in ARTICLES_DIR.iterdir():
-        article_md_file = dir / ARTICLE_MD_FILE
+    for adir in ARTICLES_SOURCE_DIR.iterdir():
+        article_md_file = adir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
         article_html = generate_article_html(md_text, env)
-        article_html_file = DOCS_DIR / dir.relative_to(ARTICLES_DIR) / 'index.html'
-        article_html_file.parent.mkdir(exist_ok=True)
-        article_html_file.write_text(article_html)
+        article_index_file = ARTICLES_DOCS_DIR / adir.name / INDEX_FILE.name
+        article_index_file.parent.mkdir(parents=True, exist_ok=True)
+        article_index_file.write_text(article_html)
 
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
         first_p_text = root_element.find('.//p').text
-        relative_link = article_html_file.relative_to(DOCS_DIR).as_posix()
-        date = dir.name
+        relative_link = article_index_file.relative_to(DOCS_DIR).parent.as_posix()
+        date = adir.name
         adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
                             date=date)
         articles_data.append(adata)
