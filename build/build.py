@@ -24,6 +24,8 @@ TOC_HEADERS = HEADERS[1:]
 TocType = List[Tuple[int, str]]
 
 Dom = getDOMImplementation()
+env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks=True,
+                  autoescape=select_autoescape(['html']))
 
 
 @dataclass
@@ -114,7 +116,7 @@ def update_headers_id_attribute(html: str) -> str:
     return html
 
 
-def generate_article_html(md_text, env):
+def generate_article_html(md_text):
     html = commonmark.commonmark(md_text)
     # print(html)
 
@@ -131,21 +133,18 @@ def generate_article_html(md_text, env):
     return html
 
 
-def generate_index_html(articles_data: List[ArticleData], env):
+def generate_index_html(articles_data: List[ArticleData]):
     template = env.get_template(INDEX_TEMPLATE_FILE.name)
     html = template.render(articles_data=articles_data)
     return html
 
 
 def main():
-    env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks=True,
-                      autoescape=select_autoescape(['html']))
-    env.globals.update(root_link=INDEX_FILE.name)
     articles_data = []
     for adir in ARTICLES_SOURCE_DIR.iterdir():
         article_md_file = adir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
-        article_html = generate_article_html(md_text, env)
+        article_html = generate_article_html(md_text)
         article_index_file = ARTICLES_DOCS_DIR / adir.name / INDEX_FILE.name
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_index_file.write_text(article_html)
@@ -159,7 +158,7 @@ def main():
                             date=date)
         articles_data.append(adata)
 
-    index_html = generate_index_html(articles_data, env)
+    index_html = generate_index_html(articles_data)
     INDEX_FILE.write_text(index_html)
 
 
