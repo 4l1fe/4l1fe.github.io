@@ -2,31 +2,36 @@ import commonmark
 
 from typing import List, Tuple
 from xml.dom.minidom import getDOMImplementation
-from string import Template
+# from string import Template
 from pathlib import Path
 from lxml.html import Element, fromstring, builder, tostring
+from jinja2 import Environment, FileSystemLoader, select_autoescape, Template
 
 
 BUILD_DIR = Path(__file__).parent
 DOCS_DIR = BUILD_DIR.parent / 'docs'
 ARTICLES_DIR = BUILD_DIR.parent / 'articles'
+TEMPLATES_DIR = BUILD_DIR / 'templates'
+ARTICLE_TEMPLATE_FILE = TEMPLATES_DIR / 'article.jinja'
+INDEX_TEMPLATE_FILE = TEMPLATES_DIR / 'index.jinja'
 INDEX_FILE = DOCS_DIR / 'index.html'
-ARTICLE_TEMPLATE_FILE = BUILD_DIR / 'article-base.html'
-INDEX_TEMPLATE_FILE = BUILD_DIR / 'index-base.html'
 ARTICLE_MD_FILE = 'README.md'
 ARTICLE_IMG_FILE = 'files/main-section.png'
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 TOC_HEADERS = HEADERS[1:]
 TocType = List[Tuple[int, str]]
 ArticlesData = List[Tuple[str, str]]
+
 Dom = getDOMImplementation()
+Env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()),
+                  autoescape=select_autoescape(['html', 'xml']))
 
 
 def _make_header_id(tag_text):
     return tag_text.lower().replace(' ', '-')
 
 
-def _wrap_unwrap_fake_tag(text, wrap=True):
+def _wrap_unwrap_fake_tag(text, wrap=True): # todo use lxml.html
     TAG_OPEN = '<FAKETAG>'
     TAG_CLOSE = '</FAKETAG>'
 
@@ -101,7 +106,7 @@ def update_headers_id_attribute(html: str) -> str:
     return html
 
 
-def generate_article_html(md_text, html_template):
+def generate_article_html(md_text):
     html = commonmark.commonmark(md_text)
     # print(html)
 
@@ -112,39 +117,31 @@ def generate_article_html(md_text, html_template):
     # print(toc)
     toc_html = generate_toc_html(toc)
     # print(toc_html)
-    html = Template(html_template).substitute({'content': content_html, 'toc': toc_html})
+    template = Env.get_template(ARTICLE_TEMPLATE_FILE.name)
+    html = template.render(content=content_html, toc=toc_html)
     # print(html)
     return html
 
 
-def generate_index_html(articles_data: ArticlesData, html_template):
+def generate_index_html(articles_data: ArticlesData):
     elements = []
     for data in articles_data:
         element = builder.DIV(builder.P(data[0]),
-                              builder.P(data[1]),
-                              builder.IMG(src=data[2]))
+                              builder.P(data[1]))
         elements.append(element)
     element = builder.DIV(*elements)
-    articles_html = tostring(element, encoding='unicode')
-    html = Template(html_template).substitute({'articles': articles_html})
+    content_html = tostring(element, encoding='unicode')
+    template = Env.get_template(INDEX_TEMPLATE_FILE.name)
+    html = template.render(content=content_html)
     return html
 
 
-def read_templates() -> (str, str):
-    article_template = ARTICLE_TEMPLATE_FILE.read_text()
-    index_template = INDEX_TEMPLATE_FILE.read_text()
-
-    return index_template, article_template
-
-
 def main():
-    index_template, article_template = read_templates()
-
     articles_data = []
     for dir in ARTICLES_DIR.iterdir():
         article_md_file = dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
-        article_html = generate_article_html(md_text, article_template)
+        article_html = generate_article_html(md_text)
         article_html_file = DOCS_DIR / dir.name / f'{dir.name}.html'
         article_html_file.parent.mkdir(exist_ok=True)
         article_html_file.write_text(article_html)
@@ -155,7 +152,7 @@ def main():
         paragraph_text = root_element.find('.//p').text
         articles_data.append((h1_text, paragraph_text))
 
-    index_html = generate_index_html(articles_data, index_template)
+    index_html = generate_index_html(articles_data)
     INDEX_FILE.write_text(index_html)
 
 
