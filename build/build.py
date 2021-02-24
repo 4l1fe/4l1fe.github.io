@@ -2,15 +2,16 @@ import commonmark
 
 from typing import List, Tuple
 from xml.dom.minidom import getDOMImplementation
-# from string import Template
 from pathlib import Path
-from lxml.html import Element, fromstring, builder, tostring
-from jinja2 import Environment, FileSystemLoader, select_autoescape, Template
+from dataclasses import dataclass
+from lxml.html import Element, fromstring, tostring
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-BUILD_DIR = Path(__file__).parent
-DOCS_DIR = BUILD_DIR.parent / 'docs'
-ARTICLES_DIR = BUILD_DIR.parent / 'articles'
+PROJ_DIR = Path(__file__).parent.parent
+BUILD_DIR = PROJ_DIR / 'build'
+DOCS_DIR = PROJ_DIR / 'docs'
+ARTICLES_DIR = PROJ_DIR / 'articles'
 TEMPLATES_DIR = BUILD_DIR / 'templates'
 ARTICLE_TEMPLATE_FILE = TEMPLATES_DIR / 'article.jinja'
 INDEX_TEMPLATE_FILE = TEMPLATES_DIR / 'index.jinja'
@@ -20,11 +21,17 @@ ARTICLE_IMG_FILE = 'files/main-section.png'
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 TOC_HEADERS = HEADERS[1:]
 TocType = List[Tuple[int, str]]
-ArticlesData = List[Tuple[str, str]]
 
 Dom = getDOMImplementation()
-Env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()),
-                  autoescape=select_autoescape(['html', 'xml']))
+
+
+@dataclass
+class ArticleData:
+    title: str
+    relative_link: str
+    paragraph: str
+    date: str
+    img_relative_link: str = None
 
 
 def _make_header_id(tag_text):
@@ -106,7 +113,7 @@ def update_headers_id_attribute(html: str) -> str:
     return html
 
 
-def generate_article_html(md_text):
+def generate_article_html(md_text, env):
     html = commonmark.commonmark(md_text)
     # print(html)
 
@@ -117,42 +124,41 @@ def generate_article_html(md_text):
     # print(toc)
     toc_html = generate_toc_html(toc)
     # print(toc_html)
-    template = Env.get_template(ARTICLE_TEMPLATE_FILE.name)
+    template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
     html = template.render(content=content_html, toc=toc_html)
     # print(html)
     return html
 
 
-def generate_index_html(articles_data: ArticlesData):
-    elements = []
-    for data in articles_data:
-        element = builder.DIV(builder.P(data[0]),
-                              builder.P(data[1]))
-        elements.append(element)
-    element = builder.DIV(*elements)
-    content_html = tostring(element, encoding='unicode')
-    template = Env.get_template(INDEX_TEMPLATE_FILE.name)
-    html = template.render(content=content_html)
+def generate_index_html(articles_data: List[ArticleData], env):
+    template = env.get_template(INDEX_TEMPLATE_FILE.name)
+    html = template.render(articles_data=articles_data)
     return html
 
 
 def main():
+    env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks=True,
+                      autoescape=select_autoescape(['html']))
+    env.globals.update(root_link=INDEX_FILE.name)
     articles_data = []
     for dir in ARTICLES_DIR.iterdir():
         article_md_file = dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
-        article_html = generate_article_html(md_text)
-        article_html_file = DOCS_DIR / dir.name / f'{dir.name}.html'
+        article_html = generate_article_html(md_text, env)
+        article_html_file = DOCS_DIR / dir.relative_to(ARTICLES_DIR) / 'index.html'
         article_html_file.parent.mkdir(exist_ok=True)
         article_html_file.write_text(article_html)
 
         root_element = fromstring(article_html)
+        first_h1_text = root_element.find('.//h1').text
+        first_p_text = root_element.find('.//p').text
+        relative_link = article_html_file.relative_to(DOCS_DIR).as_posix()
+        date = dir.name
+        adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
+                            date=date)
+        articles_data.append(adata)
 
-        h1_text = root_element.find('.//h1').text
-        paragraph_text = root_element.find('.//p').text
-        articles_data.append((h1_text, paragraph_text))
-
-    index_html = generate_index_html(articles_data)
+    index_html = generate_index_html(articles_data, env)
     INDEX_FILE.write_text(index_html)
 
 

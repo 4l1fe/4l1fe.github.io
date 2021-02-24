@@ -2,8 +2,17 @@
 
 {% block content %}
 <div class="row">
+    {% for adata in articles_data %}
     <div id="content" class="col-9">
-        {{ content }}
+            <p class="fw-bold"><a href="{{ adata.relative_link }}">{{ adata.title }}</a></p>
+            <p>{{ adata.paragraph | truncate }}</p>
+        {% if adata.img_relative_link is not none %}
+            <img src="{{ adata.img_relative_link }}" alt="">
+        {% endif %}
     </div>
+    <div class="col-3">
+        {{ adata.date }}
+    </div>
+    {% endfor %}
 </div>
 {% endblock content %}
