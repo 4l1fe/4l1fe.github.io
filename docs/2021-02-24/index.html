@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <style>
+        #toc ul {list-style: none;}
+    </style>
+    <title>ТехнологоблогЪ</title>
+</head>
+<body>
+<nav class="navbar navbar-light bg-white border-bottom border-secondary sticky-top mb-1">
+    <div class="container-fluid d-flex justify-content-center ">
+            <a class="navbar-brand fs-3 text-secondary" href="/index.html">Технологоблог<b>Ъ</b></a>
+            <a class="fs-5 mx-2" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe"><i
+                    class="bi bi-github"></i></a>
+            <a class="fs-5 mx-2" target="_blank" rel="noopener noreferrer"
+               href="https://www.linkedin.com/in/dmitrii-krasnov-410aa956"><i class="bi bi-linkedin"></i></a>
+    </div>
+</nav>
+<div class="container">
+        <div class="row">
+        <div id="content" class="col-lg-9 order-2 order-lg-1">
+            <h1>Рассмотрение абстракций и их взаимодействия в библиотеках встраиваемых БД.<a id="рассмотрение-абстракций-и-их-взаимодействия-в-библиотеках-встраиваемых-бд."></a></h1>
+<p>Прежде всего стоит пояснить, что означает встраиваемая БД и чем они вызывают интерес к рассмотрению, чтобы найти для
+этого время.
+Встраимаевые БД - предоставляющие интерфейс стандартных операций с данными CRUD и поиска по ним, работающие напрямую с файлом на диске, которые встраиваются в процесс выполнения программы, а не выносятся в отдельный.
+Часто возникает желание иметь простейшую архитектуру сервиса или программы, в которой будут отсутствовать избыточные компоненты и межсетевое взаимодействие. Это ощутимо сокращает силы и время на реализацию и поддержку.
+При реализации эксперементальных программ удобно иметь файл с подходящей структурой данных, полученных из опыта.
+Ряд БД базируется на различных алгоритмах.</p>
+<p>Так же надо подчеркнуть, что рассматриваются именно структуры и взаимосвязи, без различных замеров производительности. Интерес именно в</p>
+<h2>Ручная допроверка<a id="ручная-допроверка"></a></h2>
+<p>Используя различные ресурсы(платные и бесплатные) добавить информации о библиотеках(интроспекция кода), напр. график динамики внесения изменений(комитов).</p>
+<h2>Цели.<a id="цели."></a></h2>
+<p><strong>Основной идеей таки является выработака практики общего осмотра устройства, структуры библиотек на примере встраиваемых БД на основе sqlite.</strong></p>
+<p>Процесс пути к пониманию заявленной темы рассмотрения не должен быть сложным,</p>
+<ul>
+<li>Сформировать список рассматриваемых БД.</li>
+<li>Рассмотреть вспомогательные инструменты по анализу исходного кода библиотек.</li>
+<li>Построить диаграммы абстракций.</li>
+<li>Описать преимущества и недостатки по каждой БД.</li>
+</ul>
+<h2>Список БД для рассмотрения.<a id="список-бд-для-рассмотрения."></a></h2>
+<p>В список можно внести огромное кол-во разных вариаций бибиотек: на разных языках, устаревших, в нереализованном состоянии и т.д. Но нужно ограничиться, чтобы сузить его до таковых, которые принесут полезную информацию и могут быть использованы на практике в будущем. А помочь в этом вопросе может личный опыт, знание предметных областей, в которых был он получен, свои идеи, к которым могут быть приложены полученные зания, и, конечно же, интуиция.</p>
+<p>Помимо прочего, библиотеки должны быть написаны на чистом питоне для чтения исходного кода и техничской возможности анализа вспомогательными инструментами. Основной источник для поиска - Github</p>
+<ul>
+<li>4https://dataset.readthedocs.io/en/latest/</li>
+<li>https://tinydb.readthedocs.io/en/latest/</li>
+<li>https://github.com/RaRe-Technologies/sqlitedict</li>
+<li>http://docs.peewee-orm.com/en/latest/peewee/playhouse.html#kv</li>
+<li>http://docs.peewee-orm.com/en/latest/peewee/playhouse.html#dataset</li>
+<li>https://lmdb.readthedocs.io/en/release/</li>
+<li>https://github.com/wbolster/plyvel</li>
+<li>https://github.com/twmht/python-rocksdb <em>based on LevelDB</em></li>
+<li>gdbm</li>
+<li>upscaledb</li>
+<li>http://traildb.io/docs/tutorial/</li>
+</ul>
+<h2>Вспомогательные инструменты.<a id="вспомогательные-инструменты."></a></h2>
+<p>Хорошо было бы опереться на результаты работы инструментов по анализу исходного кода, чтобы иметь больше информации для расширения общего взгляда на вещи и работы с предположениями.</p>
+<p>Полученная вспомогательная информация, впрочем, может быть и бесполезной, что выяснится уже при их практическом примененнии.</p>
+<h3>Pyreverse.<a id="pyreverse."></a></h3>
+<p>https://www.logilab.org/blogentry/6883
+https://pylint.org/</p>
+<blockquote>
+<p>Pyreverse analyses Python code and extracts UML class diagrams and package depenndencies.</p>
+</blockquote>
+<p>Как видно из цитаты, помогает автоматически построить диаграммы классов и импортируемых зависимостей.</p>
+<h3>Pycallgraph.<a id="pycallgraph."></a></h3>
+<p>https://pycallgraph.readthedocs.io/en/master/</p>
+<p>Понятная альтернатива <a href="#pyreverse">pyreverse</a>. Строит граф вызовов указанного исполняемого сценария, поэтому необходимо в нем иметь вызовы, покрывающие по нисходящей(от высокоуровневых выовов к низкоуровневым) наибольшую часть абстракций библиотеки.</p>
+<h3>Sourcegraph.<a id="sourcegraph."></a></h3>
+<p>https://about.sourcegraph.com/</p>
+<p>Не нашел наглядных примеров для понимания, что этот сервис может предоставить.</p>
+<h3>Prospector.<a id="prospector."></a></h3>
+<p>https://github.com/PyCQA/prospector</p>
+<p>Некий аггрегатор анализирующих инструментов. Может дать информацию сразу по многим аспектом. Теоретически выявляет места, на которые сразу стоит обратить внимание.</p>
+<p>Полезно использовать при сравнении полученной информации по множеству библиотек в случае подбора более подходящей под решение.</p>
+<h3>Pylama.<a id="pylama."></a></h3>
+<p>https://github.com/klen/pylama</p>
+<p>Альтернатива <a href="#prospector">prospector</a> менее популярная , судя по показателям в Гитхабе.</p>
+<h3>Vulture.<a id="vulture."></a></h3>
+<p>https://github.com/jendrikseipp/vulture</p>
+<p>Динамический поисковик неиспользуемого кода. Полезно для видения, насколько исходный код бибилиотеки находится в актуальном состоянии, в каких углах запылилась.</p>
+<h3>Поддерживаемый список библиотек по анализу кода.<a id="поддерживаемый-список-библиотек-по-анализу-кода."></a></h3>
+<p>https://github.com/analysis-tools-dev/static-analysis#python</p>
+<p>Может осветить еще потенциальнополезные утилиты или нет. Надо выделить на это отдельное время.</p>
+<h3>Pydeps<a id="pydeps"></a></h3>
+<p>Альтернатива использования  <strong>pyreverse</strong></p>
+<p>https://github.com/thebjorn/pydeps</p>
+<h3>Radon<a id="radon"></a></h3>
+<p>https://radon.readthedocs.io/en/latest/</p>
+<h2>Общая практика рассмотрения.<a id="общая-практика-рассмотрения."></a></h2>
+<p>Список единых операций, выполняемых для получения информации о каждой из библиотек, дающей как бы взгляд со стороны на сложность их внутреннего устройства без погружения в исходный код. Полученные результаты вынесены в отдельную секцию.</p>
+<ul>
+<li>Построение диаграмм взаимосвязей модулей и абстракций.</li>
+<li>Построение графа вызовов базового сценария и упрощенной диаграммы их последовательности:
+<ul>
+<li>Создание БД.</li>
+<li>Запись данных.</li>
+<li>Обновление данных.</li>
+<li>Получение, поиск данных.</li>
+</ul>
+</li>
+</ul>
+<h2>Рассмотрение.<a id="рассмотрение."></a></h2>
+<p>В общем, приминимо к каждой библиотеке будут выполнены идентичиные шаги анализа, а вот сопровождающее описание будет частным и самым ценным в проделанной работе.</p>
+<p>Шаги:</p>
+<ul>
+<li>prospector</li>
+<li>Граф вызовов pycallgraph к минимальному использованию БД, семантически-общий сниппет кода.</li>
+<li>
+</ul>
+<h3>Dataset 1.4.1<a id="dataset-1.4.1"></a></h3>
+<p>Надстройка SQLAlchemy, что сразу говорит о многообразии абстракций, состоящих из двух слоёв: <strong>SQLAlchemy ORM, SQLAlchemy Core</strong>.</p>
+<p>Сама надстройка объявляет 2 основные абстракции: <strong>Database, Table</strong> описанных в 2х модулях суммарно на 1025 строк
+кода, имея, тем самым, низкий порог входа понимания их диаграммы взаимодействия.</p>
+<pre><code>prospector --with-tool vulture
+</code></pre>
+<blockquote>
+<p><a href="files/dataset/prospector.txt">Анализ</a> кода.</p>
+</blockquote>
+<pre><code>from pycallgraph import PyCallGraph
+from pycallgraph.output import GraphvizOutput
+
+import dataset
+
+
+with PyCallGraph(output=GraphvizOutput()):
+    db = dataset.connect('sqlite:///:memory:')
+    table = db['sometable']
+    table.insert(dict(name='John Doe', age=37))
+    table.insert(dict(name='Jane Doe', age=34, gender='female'))
+    john = table.find_one(name='John Doe')
+</code></pre>
+<blockquote>
+<p><a href="files/dataset/pycallgraph.png">Граф</a> вызовов. Содержит очень большой набор вызовов и множества модулей.</p>
+</blockquote>
+<pre><code>pyreverse  -AS -f ALL -o png  venv/lib/python3.7/site-packages/dataset
+</code></pre>
+<blockquote>
+<p>Полученная <a href="files/dataset/classes.png">диаграмма классов</a>. Очень громоздкая диаграмма с большим кол-вом классов и взаимосвязей. Сказывается базирование на sqlalchemy.</p>
+<p><a href="files/dataset/packages.png">Диаграмма связей модулей</a>.</p>
+</blockquote>
+<h3>TinyDB 4.3.0<a id="tinydb-4.3.0"></a></h3>
+<pre><code>prospector --with-tool vulture
+</code></pre>
+<blockquote>
+<p><a href="files/tinydb/prospector.txt">Анализ</a> кода.</p>
+</blockquote>
+<pre><code>from pycallgraph import PyCallGraph
+from pycallgraph.output import GraphvizOutput
+
+from tinydb import TinyDB, Query
+from tinydb.storages import MemoryStorage
+
+
+with PyCallGraph(output=GraphvizOutput()):
+    db = TinyDB(storage=MemoryStorage)
+    User = Query()
+    db.insert({'name': 'John', 'age': 22})
+    db.insert({'name': 'Van', 'car': 'volvo'})
+    db.search(User.name == 'Van')
+</code></pre>
+<blockquote>
+<p><a href="files/tinydb/pycallgraph.png">Граф</a> вызовов. Содержит крошечный набор вызовов.</p>
+</blockquote>
+<pre><code>pyreverse  -AS -f ALL -o png  venv/lib/python3.7/site-packages/tinydb
+</code></pre>
+<blockquote>
+<p>Полученная <a href="files/tinydb/classes.png">диаграмма классов</a>.</p>
+<p><a href="files/tinydb/packages.png">Диаграмма связей модулей</a>.</p>
+</blockquote>
+<h3>Sqlitedict 1.7.0<a id="sqlitedict-1.7.0"></a></h3>
+<ul>
+<li>
+<p>Минимализм, выраженный 1м модулем из 550 строк кода.</p>
+</li>
+<li>
+<p>Всего <u>2 абстракции и 1 основная</u>, т.е. для взаимодействия с данными используется <strong>SqliteDict</strong>, предоставляющий  соответствующий интерфейс, который обращается к кастомному <strong>SqliteMultithread</strong>. Этот объект уже напрямую выполняет операции в БД.</p>
+<pre><code class="language-mermaid">sequenceDiagram
+participant main
+participant SD as calendar:SqliteDict
+participant SMT as connection:SqliteMultithread
+main-&gt;&gt;+SD: calendar["today"]
+SD-&gt;&gt;+SMT: connection.execute(sql)
+Note over SMT: select value from calendar where key=today
+SMT--&gt;&gt;-SD: "day off"
+SD--&gt;&gt;-main: "day off"
+</code></pre>
+</li>
+<li>
+<p>На уровне БД схема таблиц(они же словари) организована наипростейшим образом без возможности кастомизации. <strong>Ключ</strong> объявлен строковым, а <strong>значение</strong> бинарным типами. Таким образом на уровне питона <u>неполностью эмулируются возможности словаря</u>.</p>
+<pre><code>complex_discount = SqliteDict('db.sqlite')
+complex_discount[('pencil', 'case', 'eraser')] = 15
+
+sqlite3.InterfaceError: Error binding parameter 0 - probably unsupported type.
+</code></pre>
+</li>
+<li>
+<p>Автогенерируемый <strong>индекс</strong> по ключу.</p>
+</li>
+<li>
+<p>Поддержка кастомной сериализации значений</p>
+<pre><code>rss = SqliteDict('db.sqlite', encode=xml_encode, decode=xml_decode)
+</code></pre>
+</li>
+<li>
+<p>Поддержка многопоточности.</p>
+<p>Следует отметить, что в данной реализации объект-словарь необходимо разделять между потоками.</p>
+<pre><code>def job(job_results):
+	k, v = fetch()
+	job_results[k] = v
+
+job_results = SqliteDict('db.sqlite')
+
+t1 = Thread(target=job, args=(job_results, ))
+t2 = Thread(target=job, args=(job_results, ))
+</code></pre>
+</li>
+<li>
+<p>Зачем-то оставлен режим создания БД в памяти <code>:memory:</code>. Было бы логичным его убрать для позиционируемой персистентности  словаря.</p>
+</li>
+<li>
+<p>Хороший кандидат для быстрого старта и фокусировки на логике работы с данными, но остается неясность в том, как будет вести себя объект-словарь при различных вариациях параметров <code>autocommit, journal_mode</code>.</p>
+</li>
+</ul>
+<h2>Результаты применения общей практики.<a id="результаты-применения-общей-практики."></a></h2>
+<h3>Dataset.<a id="dataset."></a></h3>
+<h4>Диаграммы.<a id="диаграммы."></a></h4>
+<p><img src="files/dataset/packages.png" alt="packages"></p>
+<p><img src="files/dataset/classes.png" alt="classes"></p>
+<h3>TinyDB.<a id="tinydb."></a></h3>
+<p><img src="files/tinydb/packages.png" alt="packages"></p>
+<p><img src="files/tinydb/classes.png" alt="classes"></p>
+<h3>Sqlitedict<a id="sqlitedict"></a></h3>
+<p><img src="files/sqlitedict/classes.png" alt="classes"></p>
+
+        </div>
+        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+            <ul><li><a href="#ручная-допроверка">Ручная допроверка</a></li><li><a href="#цели.">Цели.</a></li><li><a href="#список-бд-для-рассмотрения.">Список БД для рассмотрения.</a></li><li><a href="#вспомогательные-инструменты.">Вспомогательные инструменты.</a><ul><li><a href="#pyreverse.">Pyreverse.</a></li><li><a href="#pycallgraph.">Pycallgraph.</a></li><li><a href="#sourcegraph.">Sourcegraph.</a></li><li><a href="#prospector.">Prospector.</a></li><li><a href="#pylama.">Pylama.</a></li><li><a href="#vulture.">Vulture.</a></li><li><a href="#поддерживаемый-список-библиотек-по-анализу-кода.">Поддерживаемый список библиотек по анализу кода.</a></li><li><a href="#pydeps">Pydeps</a></li><li><a href="#radon">Radon</a></li></ul></li><li><a href="#общая-практика-рассмотрения.">Общая практика рассмотрения.</a></li><li><a href="#рассмотрение.">Рассмотрение.</a><ul><li><a href="#dataset-1.4.1">Dataset 1.4.1</a></li><li><a href="#tinydb-4.3.0">TinyDB 4.3.0</a></li><li><a href="#sqlitedict-1.7.0">Sqlitedict 1.7.0</a></li></ul></li><li><a href="#результаты-применения-общей-практики.">Результаты применения общей практики.</a><ul><li><a href="#dataset.">Dataset.</a><ul><li><a href="#диаграммы.">Диаграммы.</a></li></ul></li><li><a href="#tinydb.">TinyDB.</a></li><li><a href="#sqlitedict">Sqlitedict</a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
