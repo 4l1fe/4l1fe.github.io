@@ -118,18 +118,13 @@ def update_headers_id_attribute(html: str) -> str:
 
 def generate_article_html(md_text):
     html = commonmark.commonmark(md_text)
-    # print(html)
-
     content_html = update_headers_id_attribute(html)
-    # print(content_html)
 
     toc = extract_toc(content_html)
-    # print(toc)
     toc_html = generate_toc_html(toc)
-    # print(toc_html)
     template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
     html = template.render(content=content_html, toc=toc_html)
-    # print(html)
+
     return html
 
 

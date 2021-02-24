@@ -3,15 +3,13 @@
 {% block content %}
 <div class="row">
     {% for adata in articles_data %}
-    <div id="content" class="col-9">
-            <p class="fw-bold"><a href="{{ adata.relative_link }}">{{ adata.title }}</a></p>
-            <p>{{ adata.paragraph | truncate }}</p>
+    <div id="content" class="col-12 col-lg-9">
+        <p class="float-lg-end text-muted mb-0">{{ adata.date }}</span></p>
+        <p class="mb-0"><strong><a href="{{ adata.relative_link }}">{{ adata.title }}</a></strong></p>
+        <p>{{ adata.paragraph | truncate }}</p>
         {% if adata.img_relative_link is not none %}
             <img src="{{ adata.img_relative_link }}" alt="">
         {% endif %}
-    </div>
-    <div class="col-3">
-        {{ adata.date }}
     </div>
     {% endfor %}
 </div>
