@@ -2,13 +2,23 @@
 
 {% block content %}
 <div class="row">
+    <div id="about" class="col-12 col-lg-9">
+        <h1>О себе</h1>
+        <p>Наблюдаю за происходящим <i class="bi bi-eye-fill"></i>, пью чаёк <i class="bi bi-cup-fill"></i>, познаю <i class="bi bi-vector-pen"></i>.</p>
+        <h3>Контакты</h3>
+        <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <i class="bi bi-github"></i></a>
+           <a class="me-1" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov-410aa956">Linkedin <i class="bi bi-linkedin"></i></a></p>
+
+    </div>
+</div>
+<div class="row">
     {% for adata in articles_data %}
-    <div id="content" class="col-12 col-lg-9">
+    <div id="content" class="col-12 col-lg-9 border-top">
         <p class="float-lg-end text-muted mb-0">{{ adata.date }}</span></p>
-        <p class="mb-0"><strong><a href="{{ adata.relative_link }}">{{ adata.title }}</a></strong></p>
+        <h2><a class="link-dark link-dark-hover" href="{{ adata.relative_link }}">{{ adata.title }}</a></h2>
         <p>{{ adata.paragraph | truncate }}</p>
         {% if adata.img_relative_link is not none %}
-            <img src="{{ adata.img_relative_link }}" alt="">
+        <img src="{{ adata.img_relative_link }}" alt="">
         {% endif %}
     </div>
     {% endfor %}
