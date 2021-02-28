@@ -1,24 +1,17 @@
+import functools
 import commonmark
 
 from typing import List, Tuple
 from xml.dom.minidom import getDOMImplementation
-from pathlib import Path
 from dataclasses import dataclass
-from lxml.html import Element, fromstring, tostring
+from lxml.html import Element, fromstring, tostring as _tostring
+from lxml.html.diff import htmldiff
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from constants import DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, \
+    ARTICLE_TEMPLATE_FILE, INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, PROJ_DIR
+from diff import retrieve_first_version_text
 
 
-PROJ_DIR = Path(__file__).parent.parent
-BUILD_DIR = PROJ_DIR / 'build'
-DOCS_DIR = PROJ_DIR / 'docs'
-ARTICLES_SOURCE_DIR = PROJ_DIR / 'articles'
-ARTICLES_DOCS_DIR = DOCS_DIR / 'articles'
-TEMPLATES_DIR = BUILD_DIR / 'templates'
-ARTICLE_TEMPLATE_FILE = TEMPLATES_DIR / 'article.jinja'
-INDEX_TEMPLATE_FILE = TEMPLATES_DIR / 'index.jinja'
-INDEX_FILE = DOCS_DIR / 'index.html'
-ARTICLE_MD_FILE = 'README.md'
-ARTICLE_IMG_FILE = 'files/main-section.png'
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 TOC_HEADERS = HEADERS[1:]
 TocType = List[Tuple[int, str]]
@@ -26,6 +19,7 @@ TocType = List[Tuple[int, str]]
 Dom = getDOMImplementation()
 env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks=True,
                   autoescape=select_autoescape(['html']))
+tostring = functools.partial(_tostring, encoding='unicode')
 
 
 @dataclass
@@ -111,7 +105,7 @@ def update_headers_id_attribute(html: str) -> str:
         if el.tag in HEADERS:
             id_ = _make_header_id(el.text)
             el.insert(0, Element('a', {'id': id_}))
-    html = tostring(root_element, encoding='unicode')
+    html = tostring(root_element)
     html = _wrap_unwrap_fake_tag(html, wrap=False)
     return html
 
@@ -134,6 +128,16 @@ def generate_index_html(articles_data: List[ArticleData]):
     return html
 
 
+def generate_article_diff_html(current_html, file_path):
+    old_html = retrieve_first_version_text(file_path)
+
+    old_element = fromstring(old_html).find('.//div[@id="content"]')
+    current_element = fromstring(current_html).find('.//div[@id="content"]')
+    diff_html = htmldiff(tostring(old_element), tostring(current_element))
+
+    return diff_html
+
+
 def main():
     articles_data = []
     for adir in ARTICLES_SOURCE_DIR.iterdir():
@@ -143,6 +147,7 @@ def main():
         article_index_file = ARTICLES_DOCS_DIR / adir.name / INDEX_FILE.name
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_index_file.write_text(article_html)
+        diff_html = generate_article_diff_html(article_html, article_index_file.relative_to(PROJ_DIR))
 
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
@@ -158,6 +163,4 @@ def main():
 
 
 if __name__ == '__main__':
-    import sys
-    file_path = sys.argv[1]
     main()
