@@ -8,7 +8,7 @@ from lxml.html import Element, fromstring, tostring as _tostring
 from lxml.html.diff import htmldiff
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from constants import DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, \
-    ARTICLE_TEMPLATE_FILE, INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, PROJ_DIR
+    ARTICLE_TEMPLATE_FILE, INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, PROJ_DIR, DIFF_DIR
 from diff import retrieve_first_version_text
 
 
@@ -26,6 +26,7 @@ tostring = functools.partial(_tostring, encoding='unicode')
 class ArticleData:
     title: str
     relative_link: str
+    relative_diff_link: str
     paragraph: str
     date: str
     img_relative_link: str = None
@@ -119,7 +120,7 @@ def generate_article_html(md_text):
     template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
     html = template.render(content=content_html, toc=toc_html)
 
-    return html
+    return html, toc_html
 
 
 def generate_index_html(articles_data: List[ArticleData]):
@@ -128,14 +129,23 @@ def generate_index_html(articles_data: List[ArticleData]):
     return html
 
 
-def generate_article_diff_html(current_html, file_path):
+def retrieve_article_diff_html(current_html, file_path):
     old_html = retrieve_first_version_text(file_path)
 
     old_element = fromstring(old_html).find('.//div[@id="content"]')
     current_element = fromstring(current_html).find('.//div[@id="content"]')
     diff_html = htmldiff(tostring(old_element), tostring(current_element))
+    diff_html = diff_html[diff_html.find('>')+1:]
+    diff_html = diff_html[:diff_html.rfind('</')]
 
     return diff_html
+
+
+def generate_article_diff_html(content_html, toc_html):
+    template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
+    html = template.render(content=content_html, toc=toc_html)
+
+    return html
 
 
 def main():
@@ -143,19 +153,25 @@ def main():
     for adir in ARTICLES_SOURCE_DIR.iterdir():
         article_md_file = adir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
-        article_html = generate_article_html(md_text)
+        article_html, toc_html = generate_article_html(md_text)
         article_index_file = ARTICLES_DOCS_DIR / adir.name / INDEX_FILE.name
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_index_file.write_text(article_html)
-        diff_html = generate_article_diff_html(article_html, article_index_file.relative_to(PROJ_DIR))
+
+        article_diff_index_file = article_index_file.parent / DIFF_DIR / INDEX_FILE.name
+        article_diff_index_file.parent.mkdir(parents=True, exist_ok=True)
+        diff_html = retrieve_article_diff_html(article_html, article_index_file.relative_to(PROJ_DIR))
+        article_diff_html = generate_article_diff_html(diff_html, toc_html)
+        article_diff_index_file.write_text(article_diff_html)
 
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
         first_p_text = root_element.find('.//p').text
-        relative_link = article_index_file.relative_to(DOCS_DIR).parent.as_posix()
+        relative_link = article_index_file.relative_to(DOCS_DIR).parent
+        relative_diff_link = relative_link / DIFF_DIR
         date = adir.name
         adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
-                            date=date)
+                            date=date, relative_diff_link=relative_diff_link)
         articles_data.append(adata)
 
     index_html = generate_index_html(articles_data)

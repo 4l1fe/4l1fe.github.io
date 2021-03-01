@@ -7,6 +7,7 @@ DOCS_DIR = PROJ_DIR / 'docs'
 ARTICLES_SOURCE_DIR = PROJ_DIR / 'articles'
 ARTICLES_DOCS_DIR = DOCS_DIR / 'articles'
 TEMPLATES_DIR = BUILD_DIR / 'templates'
+DIFF_DIR = Path('diff')
 ARTICLE_TEMPLATE_FILE = TEMPLATES_DIR / 'article.jinja'
 INDEX_TEMPLATE_FILE = TEMPLATES_DIR / 'index.jinja'
 INDEX_FILE = DOCS_DIR / 'index.html'

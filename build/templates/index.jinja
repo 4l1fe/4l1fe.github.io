@@ -14,7 +14,7 @@
 <div class="row">
     {% for adata in articles_data %}
     <div id="content" class="col-12 col-lg-9 border-top">
-        <p class="float-lg-end text-muted mb-0">{{ adata.date }}</span></p>
+        <p class="float-lg-end text-muted mb-0">{{ adata.date }} <a href="{{ adata.relative_diff_link }}"><i class="bi bi-file-diff"></i>Updated</a></p>
         <h2><a class="link-dark link-dark-hover" href="{{ adata.relative_link }}">{{ adata.title }}</a></h2>
         <p>{{ adata.paragraph | truncate }}</p>
         {% if adata.img_relative_link is not none %}
