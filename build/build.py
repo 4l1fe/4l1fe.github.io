@@ -143,7 +143,7 @@ def retrieve_article_diff_html(current_html, file_path):
 
 def generate_article_diff_html(content_html, toc_html):
     template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
-    html = template.render(content=content_html, toc=toc_html)
+    html = template.render(content=content_html, toc=toc_html, diff=True)
 
     return html
 

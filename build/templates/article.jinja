@@ -3,6 +3,15 @@
 {% block content %}
     <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
+            {% if diff %}
+            <div class="alert alert-secondary" role="alert">
+                <h4 class="alert-heading"></p>Страница отображения <i class="bi bi-file-diff"></i>обновлений</h4>
+                <p>
+                    <ins>Добавлено</ins>
+                    <del>Удалено</del>
+                </p>
+            </div>
+            {% endif %}
             {{ content }}
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
