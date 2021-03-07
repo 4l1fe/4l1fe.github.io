@@ -4,12 +4,13 @@ import commonmark
 from typing import List, Tuple
 from xml.dom.minidom import getDOMImplementation
 from dataclasses import dataclass
+from pathlib import Path
 from lxml.html import Element, fromstring, tostring as _tostring
 from lxml.html.diff import htmldiff
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from constants import DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, \
-    ARTICLE_TEMPLATE_FILE, INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, PROJ_DIR, DIFF_DIR
-from diff import retrieve_first_version_text
+    ARTICLE_TEMPLATE_FILE, INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, PROJ_DIR, DIFF_DIR_PREFIX
+from diff import Diff
 
 
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
@@ -29,6 +30,7 @@ class ArticleData:
     relative_diff_link: str
     paragraph: str
     date: str
+    update_date: str
     img_relative_link: str = None
 
 
@@ -129,10 +131,8 @@ def generate_index_html(articles_data: List[ArticleData]):
     return html
 
 
-def retrieve_article_diff_html(current_html, file_path):
-    old_html = retrieve_first_version_text(file_path)
-
-    old_element = fromstring(old_html).find('.//div[@id="content"]')
+def retrieve_article_diff_html(current_html, initial_html):
+    old_element = fromstring(initial_html).find('.//div[@id="content"]')
     current_element = fromstring(current_html).find('.//div[@id="content"]')
     diff_html = htmldiff(tostring(old_element), tostring(current_element))
     diff_html = diff_html[diff_html.find('>')+1:]
@@ -151,6 +151,7 @@ def generate_article_diff_html(content_html, toc_html):
 def main():
     articles_data = []
     for adir in ARTICLES_SOURCE_DIR.iterdir():
+        # Генерация обновленной страницы
         article_md_file = adir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
         article_html, toc_html = generate_article_html(md_text)
@@ -158,20 +159,26 @@ def main():
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_index_file.write_text(article_html)
 
-        article_diff_index_file = article_index_file.parent / DIFF_DIR / INDEX_FILE.name
-        article_diff_index_file.parent.mkdir(parents=True, exist_ok=True)
-        diff_html = retrieve_article_diff_html(article_html, article_index_file.relative_to(PROJ_DIR))
+        # Генерация страницы с разницей
+        diff = Diff(article_index_file.relative_to(PROJ_DIR))
+        initial_article_html = diff.get_first_version_text()
+        diff_html = retrieve_article_diff_html(article_html, initial_article_html)
         article_diff_html = generate_article_diff_html(diff_html, toc_html)
+        diff_update_date = diff.get_update_date()
+        article_diff_dir = Path(DIFF_DIR_PREFIX + diff_update_date)
+        article_diff_index_file = article_index_file.parent / article_diff_dir / INDEX_FILE.name
+        article_diff_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_diff_index_file.write_text(article_diff_html)
 
+        # Создание класса данных по статье для индексной страницы
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
         first_p_text = root_element.find('.//p').text
         relative_link = article_index_file.relative_to(DOCS_DIR).parent
-        relative_diff_link = relative_link / DIFF_DIR
+        relative_diff_link = relative_link / article_diff_dir
         date = adir.name
         adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
-                            date=date, relative_diff_link=relative_diff_link)
+                            date=date, relative_diff_link=relative_diff_link, update_date=diff_update_date)
         articles_data.append(adata)
 
     index_html = generate_index_html(articles_data)
