@@ -2,10 +2,12 @@ import functools
 import shutil
 import commonmark
 
-from typing import List, Tuple
+from typing import List, Tuple, Set
 from xml.dom.minidom import getDOMImplementation
 from dataclasses import dataclass
 from pathlib import Path
+from itertools import islice
+from contextlib import suppress
 from lxml.html import Element, fromstring, tostring as _tostring
 from lxml.html.diff import htmldiff
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -149,6 +151,19 @@ def generate_article_diff_html(content_html, toc_html):
     return html
 
 
+def retrieve_attached_files_links(html) -> Set[str]:
+    element = fromstring(html)
+    files = []
+    for el in element.findall('.//a'):
+        if el.attrib.get('href', '').startswith('files/'):
+            files.append(el.attrib['href'])
+    for el in element.findall('.//img'):
+        if el.attrib.get('src', '').startswith('files/'):
+            files.append(el.attrib['src'])
+
+    return set(files)
+
+
 def main():
     articles_data = []
     for asdir in ARTICLES_SOURCE_DIR.iterdir():
@@ -161,7 +176,7 @@ def main():
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_index_file.write_text(article_html)
 
-        # Генерация страницы с разницей
+        # Генерация каталога разницы
         fdiff = FileDiff(article_index_file.relative_to(PROJ_DIR))
         initial_article_html = fdiff.get_first_version_text()
         diff_html = retrieve_article_diff_html(article_html, initial_article_html)
@@ -170,21 +185,39 @@ def main():
         article_diff_index_file = article_dir / Path(DIFF_DIR_PREFIX + diff_update_date) / INDEX_FILE.name
         article_diff_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_diff_index_file.write_text(article_diff_html)
+
+        # Создание ссылок на прикрепляемые файлы
+        files_pathes = retrieve_attached_files_links(article_html)
+        for fpath in files_pathes:
+            symlink_target = asdir / fpath
+            symlink_file = article_index_file.parent / fpath
+            symlink_file.parent.mkdir(parents=True, exist_ok=True)
+            with suppress(FileExistsError):
+                symlink_file.symlink_to(symlink_target)
+            diff_symlink_file = article_diff_index_file.parent / fpath
+            diff_symlink_file.parent.mkdir(parents=True, exist_ok=True)
+            with suppress(FileExistsError):
+                diff_symlink_file.symlink_to(symlink_target)
+
+        # Очистка файлов устаревшей разницы
         old_diff_dirs = set(article_dir.glob(DIFF_DIR_PREFIX+'*'))
         old_diff_dirs.remove(article_diff_index_file.parent)
         for old_ddir in old_diff_dirs:
             shutil.rmtree(old_ddir)
             print('Removed: ', old_ddir.as_posix())
 
-        # Создание класса данных по статье для индексной страницы
+        # Создание класса данных по статье для индекса блога
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
-        first_p_text = root_element.find('.//p').text
+        first_p_text = list(islice(root_element.iterfind('.//p'), 2))[1].text
+        img_link = root_element.find('.//img').attrib['src']
         relative_link = article_index_file.relative_to(DOCS_DIR).parent
         relative_diff_link = article_diff_index_file.relative_to(DOCS_DIR).parent
+        img_relative_link = relative_link / img_link
         date = asdir.name
         adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
-                            created_date=date, relative_diff_link=relative_diff_link, updated_date=diff_update_date)
+                            created_date=date, relative_diff_link=relative_diff_link,
+                            updated_date=diff_update_date, img_relative_link=img_relative_link)
         articles_data.append(adata)
 
     index_html = generate_index_html(articles_data)
