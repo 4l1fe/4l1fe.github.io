@@ -10,7 +10,7 @@ from lxml.html.diff import htmldiff
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from constants import DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, \
     ARTICLE_TEMPLATE_FILE, INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, PROJ_DIR, DIFF_DIR_PREFIX
-from diff import Diff
+from diff import FileDiff
 
 
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
@@ -160,11 +160,11 @@ def main():
         article_index_file.write_text(article_html)
 
         # Генерация страницы с разницей
-        diff = Diff(article_index_file.relative_to(PROJ_DIR))
-        initial_article_html = diff.get_first_version_text()
+        fdiff = FileDiff(article_index_file.relative_to(PROJ_DIR))
+        initial_article_html = fdiff.get_first_version_text()
         diff_html = retrieve_article_diff_html(article_html, initial_article_html)
         article_diff_html = generate_article_diff_html(diff_html, toc_html)
-        diff_update_date = diff.get_update_date()
+        diff_update_date = fdiff.get_update_date()
         article_diff_dir = Path(DIFF_DIR_PREFIX + diff_update_date)
         article_diff_index_file = article_index_file.parent / article_diff_dir / INDEX_FILE.name
         article_diff_index_file.parent.mkdir(parents=True, exist_ok=True)
