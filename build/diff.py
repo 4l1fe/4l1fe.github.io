@@ -20,7 +20,7 @@ class FileDiff:
         if not self._ref:
             cmd = ADDED_REF_CMD.format(file_path=self.file_path)
             cp = run(cmd, shell=True, capture_output=True, text=True, check=True)
-            self._ref = cp.stdout.split(' ', 1)
+            self._ref = cp.stdout
 
         return self._ref
 
@@ -28,7 +28,7 @@ class FileDiff:
         if not self._author_date:
             cmd = UPDATE_REF_CMD.format(file_path=self.file_path)
             cp = run(cmd, shell=True, capture_output=True, text=True, check=True)
-            author_date = cp.stdout.split(' ', 1)
+            author_date = cp.stdout.splitlines()[0]  # Первый в спике - хронологически последний
             self._author_date = datetime.fromisoformat(author_date).date().isoformat()
 
         return self._author_date

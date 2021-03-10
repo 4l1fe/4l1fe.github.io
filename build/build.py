@@ -1,4 +1,5 @@
 import functools
+import shutil
 import commonmark
 
 from typing import List, Tuple
@@ -29,8 +30,8 @@ class ArticleData:
     relative_link: str
     relative_diff_link: str
     paragraph: str
-    date: str
-    update_date: str
+    created_date: str
+    updated_date: str
     img_relative_link: str = None
 
 
@@ -150,12 +151,13 @@ def generate_article_diff_html(content_html, toc_html):
 
 def main():
     articles_data = []
-    for adir in ARTICLES_SOURCE_DIR.iterdir():
+    for asdir in ARTICLES_SOURCE_DIR.iterdir():
         # Генерация обновленной страницы
-        article_md_file = adir / ARTICLE_MD_FILE
+        article_md_file = asdir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
         article_html, toc_html = generate_article_html(md_text)
-        article_index_file = ARTICLES_DOCS_DIR / adir.name / INDEX_FILE.name
+        article_dir = ARTICLES_DOCS_DIR / asdir.name
+        article_index_file = article_dir / INDEX_FILE.name
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_index_file.write_text(article_html)
 
@@ -165,20 +167,24 @@ def main():
         diff_html = retrieve_article_diff_html(article_html, initial_article_html)
         article_diff_html = generate_article_diff_html(diff_html, toc_html)
         diff_update_date = fdiff.get_update_date()
-        article_diff_dir = Path(DIFF_DIR_PREFIX + diff_update_date)
-        article_diff_index_file = article_index_file.parent / article_diff_dir / INDEX_FILE.name
+        article_diff_index_file = article_dir / Path(DIFF_DIR_PREFIX + diff_update_date) / INDEX_FILE.name
         article_diff_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_diff_index_file.write_text(article_diff_html)
+        old_diff_dirs = set(article_dir.glob(DIFF_DIR_PREFIX+'*'))
+        old_diff_dirs.remove(article_diff_index_file.parent)
+        for old_ddir in old_diff_dirs:
+            shutil.rmtree(old_ddir)
+            print('Removed: ', old_ddir.as_posix())
 
         # Создание класса данных по статье для индексной страницы
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
         first_p_text = root_element.find('.//p').text
         relative_link = article_index_file.relative_to(DOCS_DIR).parent
-        relative_diff_link = relative_link / article_diff_dir
-        date = adir.name
+        relative_diff_link = article_diff_index_file.relative_to(DOCS_DIR).parent
+        date = asdir.name
         adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
-                            date=date, relative_diff_link=relative_diff_link, update_date=diff_update_date)
+                            created_date=date, relative_diff_link=relative_diff_link, updated_date=diff_update_date)
         articles_data.append(adata)
 
     index_html = generate_index_html(articles_data)
