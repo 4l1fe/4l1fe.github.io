@@ -192,15 +192,15 @@ def main():
         for fpath in files_pathes:
             # Жесткие ссылки на исходные файлы
             symlink_target = article_source_dir / fpath
-            symlink_file = article_index_file.parent / fpath
-            symlink_file.parent.mkdir(parents=True, exist_ok=True)
+            hardlink_file = article_index_file.parent / fpath
+            hardlink_file.parent.mkdir(parents=True, exist_ok=True)
             with suppress(FileExistsError):
-                os.link(symlink_target, symlink_file)
+                os.link(symlink_target, hardlink_file)
             # Мягкие ссылки на жетские ссылки
             diff_symlink_file = article_diff_index_file.parent / fpath
             diff_symlink_file.parent.mkdir(parents=True, exist_ok=True)
             with suppress(FileExistsError):
-                diff_symlink_file.symlink_to(symlink_file)
+                diff_symlink_file.symlink_to(os.path.relpath(hardlink_file, start=diff_symlink_file.parent))
 
         # Очистка файлов устаревшей разницы
         old_diff_dirs = set(article_dir.glob(DIFF_DIR_PREFIX+'*'))
