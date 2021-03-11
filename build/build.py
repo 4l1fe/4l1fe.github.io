@@ -213,14 +213,12 @@ def main():
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
         first_p_text = list(islice(root_element.iterfind('.//p'), 2))[1].text
-        img_link = root_element.find('.//img').attrib['src']
         relative_link = article_index_file.relative_to(DOCS_DIR).parent
         relative_diff_link = article_diff_index_file.relative_to(DOCS_DIR).parent
-        img_relative_link = relative_link / img_link
         date = article_source_dir.name
         adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
                             created_date=date, relative_diff_link=relative_diff_link,
-                            updated_date=diff_update_date, img_relative_link=img_relative_link)
+                            updated_date=diff_update_date)
         articles_data.append(adata)
 
     index_html = generate_index_html(articles_data)
