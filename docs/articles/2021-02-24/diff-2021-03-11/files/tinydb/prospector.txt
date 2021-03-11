@@ -1,1 +1,405 @@
-/home/onwer/Projects/Free/Blog/articles/2021-02-24/files/tinydb/prospector.txt
+Messages
+========
+
+__init__.py
+  Line: 1
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not ')')
+  Line: 27
+    pylint: import-error / Unable to import '__init__.queries'
+  Line: 28
+    pylint: import-error / Unable to import '__init__.storages'
+  Line: 29
+    pylint: import-error / Unable to import '__init__.database'
+  Line: 30
+    pylint: import-error / Unable to import '__init__.version'
+    pyflakes: F401 / '.version.__version__' imported but unused (col 1)
+
+database.py
+  Line: 1
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D404 / First word of the docstring should not be `This`
+  Line: 6
+    pylint: relative-beyond-top-level / Attempted relative import beyond top-level package
+  Line: 7
+    pylint: relative-beyond-top-level / Attempted relative import beyond top-level package
+  Line: 8
+    pylint: relative-beyond-top-level / Attempted relative import beyond top-level package
+  Line: 12
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 82
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 94
+    pep257: D105 / Missing docstring in magic method
+  Line: 107
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 131
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 159
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not '*')
+  Line: 172
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not '*')
+  Line: 201
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 210
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 228
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 240
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 247
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 256
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 266
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+
+middlewares.py
+  Line: 1
+    pep257: D205 / 1 blank line required between summary line and description (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not 'r')
+  Line: 8
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 18
+    pep257: D107 / Missing docstring in __init__
+  Line: 23
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 65
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D205 / 1 blank line required between summary line and description (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not 'e')
+  Line: 74
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 85
+    pep257: D107 / Missing docstring in __init__
+  Line: 111
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+
+operations.py
+  Line: 1
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 12
+    vulture: unused-function / Unused function 'delete'
+  Line: 13
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 22
+    vulture: unused-function / Unused function 'add'
+  Line: 23
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 32
+    vulture: unused-function / Unused function 'subtract'
+  Line: 33
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 42
+    pylint: redefined-builtin / Redefining built-in 'set'
+  Line: 43
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 52
+    vulture: unused-function / Unused function 'increment'
+  Line: 53
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 62
+    vulture: unused-function / Unused function 'decrement'
+  Line: 63
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+
+queries.py
+  Line: 1
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D301 / Use r""" if any backslashes in a docstring
+  Line: 22
+    pylint: relative-beyond-top-level / Attempted relative import beyond top-level package
+  Line: 32
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 53
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 98
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 130
+    pep257: D107 / Missing docstring in __init__
+  Line: 143
+    pep257: D105 / Missing docstring in magic method
+  Line: 146
+    pep257: D105 / Missing docstring in magic method
+    pylint: useless-super-delegation / Useless super delegation in method '__hash__' (col 4)
+  Line: 149
+    pep257: D105 / Missing docstring in magic method
+  Line: 163
+    pep257: D105 / Missing docstring in magic method
+  Line: 172
+    pep257: D205 / 1 blank line required between summary line and description (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not 'y')
+  Line: 195
+    pylint: unnecessary-lambda / Lambda may not be necessary (col 12)
+  Line: 200
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 213
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 226
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 239
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 252
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 265
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 278
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 289
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D301 / Use r""" if any backslashes in a docstring
+  Line: 306
+    pep257: D205 / 1 blank line required between summary line and description (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D301 / Use r""" if any backslashes in a docstring
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not 'o')
+  Line: 325
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 350
+    pep257: D205 / 1 blank line required between summary line and description (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not ',')
+  Line: 380
+    pylint: unnecessary-lambda / Lambda may not be necessary (col 12)
+  Line: 385
+    pep257: D205 / 1 blank line required between summary line and description (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not ',')
+  Line: 413
+    pylint: unnecessary-lambda / Lambda may not be necessary (col 12)
+  Line: 418
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 431
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 443
+    vulture: unused-function / Unused function 'where'
+  Line: 444
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not '`')
+
+storages.py
+  Line: 1
+    pep257: D205 / 1 blank line required between summary line and description (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not 'd')
+  Line: 16
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 36
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 48
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 60
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 71
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 75
+    pylint: unnecessary-pass / Unnecessary pass statement (col 8)
+  Line: 79
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 84
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 116
+    pylint: no-else-return / Unnecessary "else" after "return" (col 8)
+  Line: 150
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 155
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+
+table.py
+  Line: 1
+    pep257: D205 / 1 blank line required between summary line and description (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not 'g')
+    pep257: D404 / First word of the docstring should not be `This`
+  Line: 19
+    pylint: relative-beyond-top-level / Attempted relative import beyond top-level package
+  Line: 20
+    pylint: relative-beyond-top-level / Attempted relative import beyond top-level package
+  Line: 21
+    pylint: relative-beyond-top-level / Attempted relative import beyond top-level package
+  Line: 27
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 34
+    pep257: D107 / Missing docstring in __init__
+  Line: 40
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 103
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 114
+    pep257: D105 / Missing docstring in magic method
+  Line: 125
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 132
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 138
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 146
+    pylint: isinstance-second-argument-not-valid-type / Second argument of isinstance is not a type (col 15)
+  Line: 176
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 187
+    pylint: isinstance-second-argument-not-valid-type / Second argument of isinstance is not a type (col 23)
+  Line: 205
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 219
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 246
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 257
+    pylint: no-else-return / Unnecessary "elif" after "return" (col 8)
+  Line: 283
+    pep257: D205 / 1 blank line required between summary line and description (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+    pep257: D415 / First line should end with a period, question mark, or exclamation point (not 'r')
+  Line: 292
+    pylint: no-else-return / Unnecessary "elif" after "return" (col 8)
+  Line: 308
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 329
+    pylint: no-else-return / Unnecessary "elif" after "return" (col 8)
+  Line: 399
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 446
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 472
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 522
+    pylint: function-redefined / function already defined line 488 (col 12)
+  Line: 534
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 545
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 554
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 561
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 581
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 593
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 628
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 659
+    pep257: D202 / No blank lines allowed after function docstring (found 1)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+
+utils.py
+  Line: 1
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 16
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 29
+    pep257: D107 / Missing docstring in __init__
+  Line: 33
+    vulture: unused-property / Unused property 'lru'
+  Line: 44
+    pep257: D105 / Missing docstring in magic method
+  Line: 47
+    pep257: D105 / Missing docstring in magic method
+  Line: 50
+    pep257: D105 / Missing docstring in magic method
+  Line: 53
+    pep257: D105 / Missing docstring in magic method
+  Line: 56
+    pep257: D105 / Missing docstring in magic method
+  Line: 63
+    pep257: D105 / Missing docstring in magic method
+  Line: 91
+    pep257: D203 / 1 blank line required before class docstring (found 0)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 103
+    vulture: unused-variable / Unused variable 'kws'
+  Line: 110
+    vulture: unused-variable / Unused variable 'setdefault'
+  Line: 113
+    vulture: unused-variable / Unused variable 'f'
+  Line: 116
+    vulture: unused-variable / Unused variable 'd'
+  Line: 121
+    pep257: D200 / One-line docstring should fit on one line with quotes (found 3)
+    pep257: D212 / Multi-line docstring summary should start at the first line
+  Line: 124
+    pylint: no-else-return / Unnecessary "elif" after "return" (col 4)
+
+
+
+Check Information
+=================
+         Started: 2020-12-13 03:08:49.179284
+        Finished: 2020-12-13 03:08:51.650811
+      Time Taken: 2.47 seconds
+       Formatter: grouped
+        Profiles: default, no_doc_warnings, no_test_warnings, strictness_medium, strictness_high, strictness_veryhigh, no_member_warnings
+      Strictness: None
+  Libraries Used:
+       Tools Run: dodgy, mccabe, pep257, pep8, profile-validator, pyflakes, pylint, vulture
+  Messages Found: 235

@@ -1,3 +1,4 @@
+import os
 import functools
 import shutil
 import commonmark
@@ -193,11 +194,11 @@ def main():
             symlink_file = article_index_file.parent / fpath
             symlink_file.parent.mkdir(parents=True, exist_ok=True)
             with suppress(FileExistsError):
-                symlink_file.symlink_to(symlink_target)
+                os.link(symlink_target, symlink_file)
             diff_symlink_file = article_diff_index_file.parent / fpath
             diff_symlink_file.parent.mkdir(parents=True, exist_ok=True)
             with suppress(FileExistsError):
-                diff_symlink_file.symlink_to(symlink_target)
+                os.link(symlink_target, diff_symlink_file)
 
         # Очистка файлов устаревшей разницы
         old_diff_dirs = set(article_dir.glob(DIFF_DIR_PREFIX+'*'))
