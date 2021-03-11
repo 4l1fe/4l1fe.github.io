@@ -167,12 +167,12 @@ def retrieve_attached_files_links(html) -> Set[str]:
 
 def main():
     articles_data = []
-    for asdir in ARTICLES_SOURCE_DIR.iterdir():
+    for article_source_dir in ARTICLES_SOURCE_DIR.iterdir():
         # Генерация обновленной страницы
-        article_md_file = asdir / ARTICLE_MD_FILE
+        article_md_file = article_source_dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
         article_html, toc_html = generate_article_html(md_text)
-        article_dir = ARTICLES_DOCS_DIR / asdir.name
+        article_dir = ARTICLES_DOCS_DIR / article_source_dir.name
         article_index_file = article_dir / INDEX_FILE.name
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_index_file.write_text(article_html)
@@ -190,15 +190,17 @@ def main():
         # Создание ссылок на прикрепляемые файлы
         files_pathes = retrieve_attached_files_links(article_html)
         for fpath in files_pathes:
-            symlink_target = asdir / fpath
+            # Жесткие ссылки на исходные файлы
+            symlink_target = article_source_dir / fpath
             symlink_file = article_index_file.parent / fpath
             symlink_file.parent.mkdir(parents=True, exist_ok=True)
             with suppress(FileExistsError):
                 os.link(symlink_target, symlink_file)
+            # Мягкие ссылки на жетские ссылки
             diff_symlink_file = article_diff_index_file.parent / fpath
             diff_symlink_file.parent.mkdir(parents=True, exist_ok=True)
             with suppress(FileExistsError):
-                os.link(symlink_target, diff_symlink_file)
+                diff_symlink_file.symlink_to(symlink_file)
 
         # Очистка файлов устаревшей разницы
         old_diff_dirs = set(article_dir.glob(DIFF_DIR_PREFIX+'*'))
@@ -215,7 +217,7 @@ def main():
         relative_link = article_index_file.relative_to(DOCS_DIR).parent
         relative_diff_link = article_diff_index_file.relative_to(DOCS_DIR).parent
         img_relative_link = relative_link / img_link
-        date = asdir.name
+        date = article_source_dir.name
         adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
                             created_date=date, relative_diff_link=relative_diff_link,
                             updated_date=diff_update_date, img_relative_link=img_relative_link)

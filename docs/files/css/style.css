@@ -1,0 +1,12 @@
+        #about ul, #toc ul {list-style: none; }
+        #toc > ul {position: sticky; top: 70px;}
+        .link-dark-hover:hover{color: #6c757d; }
+        ins {background-color: #20c997;}
+        del {background-color: #d63384;}
+        pre {background-color: #f0f0f0; padding: 1em; color: #970059}
+        img {padding: .25rem;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: .25rem;
+            max-width: 100%;
+            height: auto;}
