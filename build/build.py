@@ -34,7 +34,7 @@ class ArticleData:
     relative_diff_link: str
     paragraph: str
     created_date: str
-    updated_date: str
+    updated_date: str = None
     img_relative_link: str = None
 
 
@@ -215,9 +215,8 @@ def main():
         first_p_text = list(islice(root_element.iterfind('.//p'), 2))[1].text
         relative_link = article_index_file.relative_to(DOCS_DIR).parent
         relative_diff_link = article_diff_index_file.relative_to(DOCS_DIR).parent
-        date = article_source_dir.name
         adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
-                            created_date=date, relative_diff_link=relative_diff_link,
+                            created_date=article_source_dir.name, relative_diff_link=relative_diff_link,
                             updated_date=diff_update_date)
         articles_data.append(adata)
 
