@@ -25,9 +25,9 @@
                         <h1>Рассмотрение абстракций и их взаимодействия библиотек встраиваемых БД<a id="рассмотрение-абстракций-и-их-взаимодействия-библиотек-встраиваемых-бд"></a></h1>
 <p><img src="files/main-section.png" alt="main-section"></p>
 <p>Часто возникает желание иметь простейшую архитектуру сервиса или программы, в которой будут отсутствовать избыточные компоненты и межсетевое взаимодействие. Это ощутимо сокращает силы и время на их реализацию и поддержку. Чтобы придерживаться такого подхода нужно уметь подбирать <strong>подходящие решения</strong>: технологии, библиотеки, программное обеспечение и т.д.</p>
-<p>Подбор может быть достаточно прямолинейным - формирование списка подходящих решений по их применяемой области , но, очевидно, что такой список окажется слишком большим и перенасыщенным. Сегодня век информации и потому <u>её объём вокруг нас огромен, который человек физически не способен усвоить даже за всю жизнь</u>. Осознание этой проблемы объема естесвенным образом приводит к формированию интеллектуального подхода - применения ряда <strong>аналитических практик</strong>, приводящих к сокращению кол-ва информации, способной быть усвоенной человеком в сроки, соответствующие решаемой задачи, и сохранению уровня её качества, релевантности. Т.е. <u>подход, сокращающий список подходящих решений без погружения в исходной код до приемлимого и, в конечном итоге, одного решения</u>.</p>
-<p>В данной статье применяется ряд таких практик, на примере подбора библиотек встраиваемых БД. Как таковая решаемая задача отсутствует, потому нет необходимости придти к выбору одной из них.</p>
-<p>Пару слов о <strong>встраиваемых БД</strong>: при реализации эксперементальных программ удобно иметь файл с подходящей структурой данных для их сохранения и наличия к нему программного интерфейса базовых операций CRUD, поиска, возможно индексации. Приложение практик к ним прольет больше света на выбор оптимального хранения, оперирования данными в описанном случае.</p>
+<p>Подбор может быть достаточно прямолинейным - формирование списка подходящих решений по их применяемой области , но, очевидно, что такой список окажется слишком большим и перенасыщенным. Сегодня век информации и потому её объём вокруг нас огромен, который человек физически не способен усвоить даже за всю жизнь. Осознание этой проблемы объема естесвенным образом приводит к формированию интеллектуального подхода - применения ряда <strong>аналитических практик</strong>, приводящих к сокращению кол-ва информации, способной быть усвоенной человеком в сроки, соответствующие решаемой задачи, и сохранению уровня её качества, релевантности. Т.е. подход, сокращающий список подходящих решений без погружения в исходной код до приемлимого и, в конечном итоге, одного решения.</p>
+<p>В данной статье применяется ряд таких практик, на примере подбора библиотек встраиваемых БД. Как таковая решаемая задача отсутствует, потому необходимости придти к выбору одной из них нету.</p>
+<p>Пару слов о <strong>встраиваемых БД</strong>: при реализации эксперементальных программ удобно иметь файл с подходящей структурой данных для их сохранения и наличия к нему программного интерфейса базовых операций CRUD, поиска, возможно индексации. Приложение к ним практик  прольет на них больше света по выбору оптимального хранения и оперирования данными.</p>
 <h2>Цели<a id="цели"></a></h2>
 <ul>
 <li>Сформировать список библиотек встраиваемых БД для рассмотрения.</li>
@@ -51,7 +51,7 @@
 <li>Построение графа зависимостей модулей.</li>
 <li>Построение диаграммы  классов.</li>
 <li>Вычисление цикломатической сложности.</li>
-<li>Построение графа вызовов базового исполняемого сценария и упрощенной диаграммы их последовательности. Эта практика более близка к реальному использованию библиотеки, т.к. содержит ряд её вызовов, выполнямых повседневно в реальной работе:
+<li>Построение графа вызовов базового <strong>исполняемого сценария</strong> и упрощенной диаграммы их последовательности. Эта практика более близка к реальному использованию библиотеки, т.к. содержит ряд её вызовов, выполнямых повседневно в реальной работе:
 <ul>
 <li>Создание БД.</li>
 <li>Запись данных.</li>
@@ -70,14 +70,17 @@
 <blockquote>
 <p>Pyreverse analyses Python code and extracts UML class diagrams and package depenndencies.</p>
 </blockquote>
-<p>Утилита является частью пакета <strong>pylint</strong>. Как видно из цитаты, помогает автоматически построить диаграммы классов и импортируемых зависимостей. Со второго мы в дальнейшем и будем начинать рассмотрение, т.к. оно является построением наиболее широкой картины того, как БД программно описана, какие верхнеуровневые компоненты содержит и как они взаимосвязаны.</p>
-<p>Построене диаграмм классов даст нам уже более полное видение абстракций, которые содержит БД, и их взаимодействия между собой. При этом утилита позволяет указывать уровень глубины сканирования исходного кода БД.</p>
+<p>Утилита является частью пакета <strong>pylint</strong>. Как видно из цитаты, помогает автоматически построить диаграммы классов. Эти диаграммы дадут нам  видение абстракций, которые содержит БД, и их взаимодействия между собой. При этом утилита позволяет указывать уровень глубины сканирования исходного кода БД.</p>
 <h3>Pycallgraph<a id="pycallgraph"></a></h3>
 <p><a href="https://pycallgraph.readthedocs.io/en/master/">https://pycallgraph.readthedocs.io/en/master/</a></p>
-<p>Понятная альтернатива pyreverse. Строит граф вызовов указанного <strong>исполняемого сценария</strong>, поэтому необходимо в нем иметь вызовы, покрывающие по нисходящей(от высокоуровневых выовов к низкоуровневым) наибольшую часть абстракций библиотеки.</p>
-<h3>UML Sequence diagram<a id="uml-sequence-diagram"></a></h3>
-<blockquote>
-</blockquote>
+<p>Утилита строит граф вызовов указанного исполняемого сценария, поэтому необходимо в нем иметь вызовы оптимального кол-ва <strong>базовых абстракций</strong> библиотеки.</p>
+<h3>Pydeps<a id="pydeps"></a></h3>
+<p><a href="https://github.com/thebjorn/pydeps">https://github.com/thebjorn/pydeps</a>.</p>
+<p>Утилита построения графа зависимостей с генерацией на осное формата <code>.dot</code> программного пакета <a href="http://www.graphviz.org/about/">Graphviz</a>. Изображение графа генерируется разными цветами, логика в этом присутствует, но для нас она значения не имеет, поэтому не стоит обращать на это внимание. Графы являются построением наиболее широкой картины того, как БД программно описана, какие верхнеуровневые компоненты содержит и как они взаимосвязаны.</p>
+<h3>Radon<a id="radon"></a></h3>
+<p><a href="https://radon.readthedocs.io/en/latest/">https://radon.readthedocs.io/en/latest/</a></p>
+<h3>McCabe<a id="mccabe"></a></h3>
+<p>https://github.com/PyCQA/mccabe</p>
 <h3>Prospector<a id="prospector"></a></h3>
 <p><a href="https://github.com/PyCQA/prospector">https://github.com/PyCQA/prospector</a></p>
 <p>Некий аггрегатор анализирующих инструментов. Может дать информацию сразу по многим аспектом. Теоретически выявляет места, на которые сразу стоит обратить внимание.</p>
@@ -87,23 +90,16 @@
 <p>Альтернатива <a href="#prospector">prospector</a> менее популярная , судя по показателям в Гитхабе.</p>
 <h3>Vulture<a id="vulture"></a></h3>
 <p><a href="https://github.com/jendrikseipp/vulture">https://github.com/jendrikseipp/vulture</a></p>
-<p>Динамический поисковик неиспользуемого кода. Полезно для видения, насколько исходный код бибилиотеки находится в актуальном состоянии, в каких углах запылилась.</p>
-<h3>Pydeps<a id="pydeps"></a></h3>
-<p><a href="https://github.com/thebjorn/pydeps">https://github.com/thebjorn/pydeps</a>.</p>
-<p>Альтернатива использования  <strong>pyreverse</strong> для построения графа зависимостей с генерацией на осное формата <code>.dot</code> программного пакета <a href="http://www.graphviz.org/about/">Graphviz</a>. Изображение графа генерируется разными цветами, логика в этом присутствует, но для нас она значения не имеет, поэтому не стоит обращать на это внимание.</p>
-<h3>Radon<a id="radon"></a></h3>
-<p><a href="https://radon.readthedocs.io/en/latest/">https://radon.readthedocs.io/en/latest/</a></p>
-<h3>McCabe<a id="mccabe"></a></h3>
-<p>https://github.com/PyCQA/mccabe</p>
+<p>Динамический поисковик неиспользуемого кода. Полезно для видения, насколько исходный код бибилиотеки находится в актуальном состоянии, в каких углах она запылилась.</p>
 <h2>Рассмотрение<a id="рассмотрение"></a></h2>
 <h3>Построение графа зависимостей<a id="построение-графа-зависимостей"></a></h3>
 <p>На графах не отображаются модули стандартной бибилиотеки, а только лишь внешние зависимости. Сам сканируемый пакет отображается в именованных прямоугольных рамках, очерчивающих его модули, отображаемые окружностями. Внешние зависимости отображаются в виде изображений папок с их именами.</p>
 <p>Такой граф дает хорошее визуальное представление</p>
 <h4>Dataset<a id="dataset"></a></h4>
-<p><code>pydeps --noshow --cluster --keep-target-cluster --rmprefix pydeps. venv/lib/python3.8/site-packages/dataset</code></p>
+<p><code>pydeps --noshow --cluster --keep-target-cluster --rmprefix pydeps. -T png -o deps.png venv/lib/python3.8/site-packages/dataset</code></p>
 <p><img src="files/dataset/deps.png" alt=""></p>
 <h4>TinyDB<a id="tinydb"></a></h4>
-<p><code>pydeps --noshow --cluster --keep-target-cluster --rmprefix tinydb. venv/lib/python3.8/site-packages/tinydb</code></p>
+<p><code>pydeps --noshow --cluster --keep-target-cluster --rmprefix tinydb. -T png -o deps.png venv/lib/python3.8/site-packages/tinydb</code></p>
 <p><img src="files/tinydb/deps.png" alt=""></p>
 <h4>Sqlitedict<a id="sqlitedict"></a></h4>
 <p><img src="files/sqlitedict/deps.png" alt=""></p>
@@ -115,6 +111,27 @@
 <p><img src="files/peewee-kv/edited-deps.png" alt=""></p>
 <p>Как видно <code>kv</code> содержит меньше связей по сравнению с <code>dataset</code>.</p>
 <h3>Построение диаграммы классов<a id="построение-диаграммы-классов"></a></h3>
+<p>В каждой секции будет присутствовать ссылка на исходную диаграмму - большое по размеру изображение, включающее все что нужно и нет, и изображение ограниченное только базовыми абстракциями библиотеки.</p>
+<h4>Dataset<a id="dataset"></a></h4>
+<p><a href="files/dataset/source-classes.png">Полное отображение</a> диаграммы классов для сравнения.</p>
+<p><code>pyreverse -o png venv/lib/python3.8/site-packages/dataset</code></p>
+<p><img src="files/dataset/classes.png" alt=""></p>
+<h4>TinyDB<a id="tinydb"></a></h4>
+<p><code>pyreverse -o png venv/lib/python3.8/site-packages/tinydb</code></p>
+<p><img src="files/tinydb/classes.png" alt=""></p>
+<h4>Sqlitedict<a id="sqlitedict"></a></h4>
+<p><a href="files/sqlitedict/source-classes.png">Полное отображение</a> диаграммы классов для сравнения.</p>
+<p><code>pyreverse -o png venv/lib/python3.8/site-packages/sqlitedict.py</code></p>
+<p><img src="files/sqlitedict/classes.png" alt=""></p>
+<p>Выглядит минималистично, прямо сейчас открывай код и читай, нет нужды в чтении документации. Напрямую работа в с БД происходит только лишь через <code>SqliteDict</code>, вторая добавляет способность многопоточности и не подразумевает прямых вызовов из исполняемого сценария</p>
+<h4>Peewee-kv<a id="peewee-kv"></a></h4>
+<p><a href="files/peewee-kv/source-classes.png">Полное отображение</a> диаграммы классов для сравнения.</p>
+<p><code>pyreverse -o png venv/lib/python3.8/site-packages/playhouse/kv.py</code></p>
+<p><img src="files/peewee-kv/classes.png" alt=""></p>
+<h4>Peewee-dataset<a id="peewee-dataset"></a></h4>
+<p><a href="files/peewee-dataset/source-classes.png">Полное отображение</a> диаграммы классов для сравнения.</p>
+<p><code>pyreverse -o png venv/lib/python3.8/site-packages/playhouse/dataset.p</code></p>
+<p><img src="files/peewee-dataset/classes.png" alt=""></p>
 <h3>Построение графа вызовов<a id="построение-графа-вызовов"></a></h3>
 <h3>Цикломатическая и прочие сложности<a id="цикломатическая-и-прочие-сложности"></a></h3>
 <h3>Заключение<a id="заключение"></a></h3>
@@ -223,34 +240,24 @@ t2 = Thread(target=job, args=(job_results, ))
 <p>Хороший кандидат для быстрого старта и фокусировки на логике работы с данными, но остается неясность в том, как будет вести себя объект-словарь при различных вариациях параметров <code>autocommit, journal_mode</code>.</p>
 </li>
 </ul>
-<h2>Результаты применения общей практики.<a id="результаты-применения-общей-практики."></a></h2>
-<h3>Dataset.<a id="dataset."></a></h3>
-<h4>Диаграммы.<a id="диаграммы."></a></h4>
-<p><img src="files/dataset/packages.png" alt="packages"></p>
-<p><img src="files/dataset/classes.png" alt="classes"></p>
-<h3>TinyDB.<a id="tinydb."></a></h3>
-<p><img src="files/tinydb/packages.png" alt="packages"></p>
-<p><img src="files/tinydb/classes.png" alt="classes"></p>
-<h3>Sqlitedict<a id="sqlitedict"></a></h3>
-<p><img src="files/sqlitedict/classes.png" alt="classes"></p>
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
-            <ul><li><a href="#цели">Цели</a></li><li><a href="#список-бд">Список БД</a></li><li><a href="#список-практик">Список практик</a></li><li><a href="#вспомогательные-инструменты">Вспомогательные инструменты</a><ul><li><a href="#pyreverse">Pyreverse</a></li><li><a href="#pycallgraph">Pycallgraph</a></li><li><a href="#uml-sequence-diagram">UML Sequence diagram</a></li><li><a href="#prospector">Prospector</a></li><li><a href="#pylama">Pylama</a></li><li><a href="#vulture">Vulture</a></li><li><a href="#pydeps">Pydeps</a></li><li><a href="#radon">Radon</a></li><li><a href="#mccabe">McCabe</a></li></ul></li><li><a href="#рассмотрение">Рассмотрение</a><ul><li><a href="#построение-графа-зависимостей">Построение графа зависимостей</a><ul><li><a href="#dataset">Dataset</a></li><li><a href="#tinydb">TinyDB</a></li><li><a href="#sqlitedict">Sqlitedict</a></li><li><a href="#peewee-kv,-peewe-dataset">Peewee-kv, peewe-dataset</a></li></ul></li><li><a href="#построение-диаграммы-классов">Построение диаграммы классов</a></li><li><a href="#построение-графа-вызовов">Построение графа вызовов</a></li><li><a href="#цикломатическая-и-прочие-сложности">Цикломатическая и прочие сложности</a></li><li><a href="#заключение">Заключение</a></li><li><a href="#dataset-1.4.1">Dataset 1.4.1</a></li><li><a href="#tinydb-4.3.0">TinyDB 4.3.0</a></li><li><a href="#sqlitedict-1.7.0">Sqlitedict 1.7.0</a></li></ul></li><li><a href="#результаты-применения-общей-практики.">Результаты применения общей практики.</a><ul><li><a href="#dataset.">Dataset.</a><ul><li><a href="#диаграммы.">Диаграммы.</a></li></ul></li><li><a href="#tinydb.">TinyDB.</a></li><li><a href="#sqlitedict">Sqlitedict</a></li></ul></li></ul>
+            <ul><li><a href="#цели">Цели</a></li><li><a href="#список-бд">Список БД</a></li><li><a href="#список-практик">Список практик</a></li><li><a href="#вспомогательные-инструменты">Вспомогательные инструменты</a><ul><li><a href="#pyreverse">Pyreverse</a></li><li><a href="#pycallgraph">Pycallgraph</a></li><li><a href="#pydeps">Pydeps</a></li><li><a href="#radon">Radon</a></li><li><a href="#mccabe">McCabe</a></li><li><a href="#prospector">Prospector</a></li><li><a href="#pylama">Pylama</a></li><li><a href="#vulture">Vulture</a></li></ul></li><li><a href="#рассмотрение">Рассмотрение</a><ul><li><a href="#построение-графа-зависимостей">Построение графа зависимостей</a><ul><li><a href="#dataset">Dataset</a></li><li><a href="#tinydb">TinyDB</a></li><li><a href="#sqlitedict">Sqlitedict</a></li><li><a href="#peewee-kv,-peewe-dataset">Peewee-kv, peewe-dataset</a></li></ul></li><li><a href="#построение-диаграммы-классов">Построение диаграммы классов</a><ul><li><a href="#dataset">Dataset</a></li><li><a href="#tinydb">TinyDB</a></li><li><a href="#sqlitedict">Sqlitedict</a></li><li><a href="#peewee-kv">Peewee-kv</a></li><li><a href="#peewee-dataset">Peewee-dataset</a></li></ul></li><li><a href="#построение-графа-вызовов">Построение графа вызовов</a></li><li><a href="#цикломатическая-и-прочие-сложности">Цикломатическая и прочие сложности</a></li><li><a href="#заключение">Заключение</a></li><li><a href="#dataset-1.4.1">Dataset 1.4.1</a></li><li><a href="#tinydb-4.3.0">TinyDB 4.3.0</a></li><li><a href="#sqlitedict-1.7.0">Sqlitedict 1.7.0</a></li></ul></li></ul>
         </div>
     </div>
     <div class="row">
-    <div id="comments" class="col-lg-9">
-        <script src="https://utteranc.es/client.js"
-                repo="4l1fe/4l1fe.github.io"
-                issue-term="pathname"
-                label="comment"
-                theme="github-light"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <div id="comments" class="col-lg-9">
+            <script src="https://utteranc.es/client.js"
+                    repo="4l1fe/4l1fe.github.io"
+                    issue-term="pathname"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
     </div>
-</div>
 </div>
 
 <script src="https://buttons.github.io/buttons.js"></script>
