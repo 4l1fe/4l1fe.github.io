@@ -10,6 +10,7 @@ TEMPLATES_DIR = BUILD_DIR / 'templates'
 ARTICLE_TEMPLATE_FILE = TEMPLATES_DIR / 'article.jinja'
 INDEX_TEMPLATE_FILE = TEMPLATES_DIR / 'index.jinja'
 INDEX_FILE = DOCS_DIR / 'index.html'
+AS_DIRS_IGNORE = {ARTICLES_SOURCE_DIR / 'drafts', }
 ARTICLE_MD_FILE = 'README.md'
 ARTICLE_IMG_FILE = 'files/main-section.png'
 DIFF_DIR_PREFIX = 'diff-'

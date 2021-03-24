@@ -12,8 +12,9 @@ from contextlib import suppress
 from lxml.html import Element, fromstring, tostring as _tostring
 from lxml.html.diff import htmldiff
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from constants import DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, \
-    ARTICLE_TEMPLATE_FILE, INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, PROJ_DIR, DIFF_DIR_PREFIX
+from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
+                       INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, PROJ_DIR, DIFF_DIR_PREFIX,
+                       AS_DIRS_IGNORE)
 from diff import FileDiff
 
 
@@ -165,9 +166,18 @@ def retrieve_attached_files_links(html) -> Set[str]:
     return set(files)
 
 
+class BlogGen:
+
+    @staticmethod
+    def iter_articles_source_dir():
+        for article_source_dir in ARTICLES_SOURCE_DIR.iterdir():
+            if article_source_dir not in AS_DIRS_IGNORE:
+                yield article_source_dir
+
+
 def main():
     articles_data = []
-    for article_source_dir in ARTICLES_SOURCE_DIR.iterdir():
+    for article_source_dir in BlogGen.iter_articles_source_dir():
         # Генерация обновленной страницы
         article_md_file = article_source_dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
