@@ -20,6 +20,7 @@ from diff import FileDiff
 
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 TOC_HEADERS = HEADERS[1:]
+TOC_LOWEST_HLEVEL = 3  # эквивалент <h3>
 TocType = List[Tuple[int, str]]
 
 Dom = getDOMImplementation()
@@ -67,7 +68,7 @@ def extract_toc(html: str) -> TocType:
     return toc
 
 
-def generate_toc_html(toc: TocType) -> str:
+def generate_toc_html(toc: TocType, lowest_header_lvl=TOC_LOWEST_HLEVEL) -> str:
     doc = Dom.createDocument(None, "ul", None)
     parent_element = doc.documentElement
     prev_header_level = 2
@@ -83,6 +84,9 @@ def generate_toc_html(toc: TocType) -> str:
         parent_element.appendChild(li)
 
     for header_level, header_text in toc:
+        if header_level > lowest_header_lvl:
+            continue
+
         if header_level > prev_header_level:
             # создаем вложенный ul
             parent_li = parent_element.childNodes[-1]
