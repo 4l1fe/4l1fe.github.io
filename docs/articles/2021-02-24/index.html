@@ -113,6 +113,7 @@
 <h4>Sqlitedict<a id="sqlitedict"></a></h4>
 <p><img src="files/sqlitedict/deps.png" alt=""></p>
 <p>Как видно эта библиотека не имеет никаких зависимостей и даже не скомпанована как пакет, все абстракции содержатся в одном модуле в 550 строк кода и их всего 2, одна из которых основная, верхнеуровневая. Это сразу знак того, что порог входа по изучению нулевой и сложность в использовании ,можно сказать, отсутствует.</p>
+<p>Казалось бы сказать тут нечего, но это косвенно и обозначает преимущество.</p>
 <h4>Peewee-kv<a id="peewee-kv"></a></h4>
 <p>По факту это два модуля пакета <code>playhouse</code> функционал которых реализован на основе библиотеки <strong>peewee</strong>, поэтому они рассматриваются вместе и сканируются единой командой.</p>
 <pre><code>pydeps --include-missing --max-bacon=1 --noshow --cluster --keep-target-cluster --rmprefix playhouse. -T png -o source-deps.png venv/lib/python3.8/site-packages/playhouse
@@ -127,7 +128,8 @@
 <pre><code>pyreverse -o png venv/lib/python3.8/site-packages/tinydb
 </code></pre>
 <p><img src="files/tinydb/classes.png" alt=""></p>
-<p>Достаточно много классов, потому можно предположить, что библиотека предоствляет возможности расширения своими кастомными классами. Семантичные имена, такие как <code>Middleware, Query, JsonStorage</code>, дают понимание о том что есть некий общий слой обработки, какой-то язык запросов, ну и хранение в конкретном формате <code>json</code>.</p>
+<p>Достаточно много классов, потому можно предположить, что библиотека предоствляет возможности расширения своими кастомными классами, собственно на это указывают <strong>generalization</strong> связи, например <code>Storage &lt;- MemoryStorage</code>.</p>
+<p>Семантичные имена, такие как <code>Middleware, Query, JsonStorage</code>, дают понимание о том что есть некий общий слой обработки, какой-то язык запросов, ну и хранение в конкретном формате <code>json</code>.</p>
 <p>Связи у классов <code>Middleware, Query</code> с иными в диаграмме полностью отсутствуют, а значит для их фактического установления необходимо погружаться в код , либо документацию, что уже требует небольших дополнительных усилий, но небольших, потому что библиотека самодостаточно и все содержит в себе.</p>
 <h4>Sqlitedict<a id="sqlitedict"></a></h4>
 <p><a href="files/sqlitedict/source-classes.png">Полное отображение</a>.</p>
@@ -203,55 +205,10 @@ if __name__ == '__main__':
 <p>Изображение сразу же демонстрирует большую глубину дерева по сравнению с <strong>tinydb, sqlitedict</strong> и малую степень участия в нем верхнеуровневой абстракции <code>kv</code>.</p>
 <h3>Цикломатическая и прочие сложности<a id="цикломатическая-и-прочие-сложности"></a></h3>
 <h2>Заключение<a id="заключение"></a></h2>
-<h3>Sqlitedict 1.7.0<a id="sqlitedict-1.7.0"></a></h3>
-<ul>
-<li>
-<p>Минимализм, выраженный 1м модулем из 550 строк кода.</p>
-</li>
-<li>
-<p>Всего <u>2 абстракции и 1 основная</u>, т.е. для взаимодействия с данными используется <strong>SqliteDict</strong>, предоставляющий  соответствующий интерфейс, который обращается к кастомному <strong>SqliteMultithread</strong>. Этот объект уже напрямую выполняет операции в БД.</p>
-<p><img src="files/sqlitedict/basic-sequence.png" alt="basic-sequence"></p>
-</li>
-<li>
-<p>На уровне БД схема таблиц(они же словари) организована наипростейшим образом без возможности кастомизации. <strong>Ключ</strong> объявлен строковым, а <strong>значение</strong> бинарным типами. Таким образом на уровне питона <u>неполностью эмулируются возможности словаря</u>.</p>
-<pre><code>complex_discount = SqliteDict('db.sqlite')
-complex_discount[('pencil', 'case', 'eraser')] = 15
-
-sqlite3.InterfaceError: Error binding parameter 0 - probably unsupported type.
-</code></pre>
-</li>
-<li>
-<p>Автогенерируемый <strong>индекс</strong> по ключу.</p>
-</li>
-<li>
-<p>Поддержка кастомной сериализации значений</p>
-<pre><code>rss = SqliteDict('db.sqlite', encode=xml_encode, decode=xml_decode)
-</code></pre>
-</li>
-<li>
-<p>Поддержка многопоточности.</p>
-<p>Следует отметить, что в данной реализации объект-словарь необходимо разделять между потоками.</p>
-<pre><code>def job(job_results):
-	k, v = fetch()
-	job_results[k] = v
-
-job_results = SqliteDict('db.sqlite')
-
-t1 = Thread(target=job, args=(job_results, ))
-t2 = Thread(target=job, args=(job_results, ))
-</code></pre>
-</li>
-<li>
-<p>Зачем-то оставлен режим создания БД в памяти <code>:memory:</code>. Было бы логичным его убрать для позиционируемой персистентности  словаря.</p>
-</li>
-<li>
-<p>Хороший кандидат для быстрого старта и фокусировки на логике работы с данными, но остается неясность в том, как будет вести себя объект-словарь при различных вариациях параметров <code>autocommit, journal_mode</code>.</p>
-</li>
-</ul>
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
-            <ul><li><a href="#цели">Цели</a></li><li><a href="#список-бд">Список БД</a></li><li><a href="#список-практик">Список практик</a></li><li><a href="#вспомогательные-инструменты">Вспомогательные инструменты</a><ul><li><a href="#pyreverse">Pyreverse</a></li><li><a href="#pyan">Pyan</a></li><li><a href="#pydeps">Pydeps</a></li><li><a href="#gprof2dot">Gprof2dot</a></li><li><a href="#radon">Radon</a></li><li><a href="#mccabe">McCabe</a></li><li><a href="#prospector">Prospector</a></li><li><a href="#pylama">Pylama</a></li><li><a href="#vulture">Vulture</a></li></ul></li><li><a href="#рассмотрение">Рассмотрение</a><ul><li><a href="#построение-графа-зависимостей">Построение графа зависимостей</a></li><li><a href="#построение-диаграммы-классов">Построение диаграммы классов</a></li><li><a href="#построение-графа-вызовов">Построение графа вызовов</a></li><li><a href="#цикломатическая-и-прочие-сложности">Цикломатическая и прочие сложности</a></li></ul></li><li><a href="#заключение">Заключение</a><ul><li><a href="#sqlitedict-1.7.0">Sqlitedict 1.7.0</a></li></ul></li></ul>
+            <ul><li><a href="#цели">Цели</a></li><li><a href="#список-бд">Список БД</a></li><li><a href="#список-практик">Список практик</a></li><li><a href="#вспомогательные-инструменты">Вспомогательные инструменты</a><ul><li><a href="#pyreverse">Pyreverse</a></li><li><a href="#pyan">Pyan</a></li><li><a href="#pydeps">Pydeps</a></li><li><a href="#gprof2dot">Gprof2dot</a></li><li><a href="#radon">Radon</a></li><li><a href="#mccabe">McCabe</a></li><li><a href="#prospector">Prospector</a></li><li><a href="#pylama">Pylama</a></li><li><a href="#vulture">Vulture</a></li></ul></li><li><a href="#рассмотрение">Рассмотрение</a><ul><li><a href="#построение-графа-зависимостей">Построение графа зависимостей</a></li><li><a href="#построение-диаграммы-классов">Построение диаграммы классов</a></li><li><a href="#построение-графа-вызовов">Построение графа вызовов</a></li><li><a href="#цикломатическая-и-прочие-сложности">Цикломатическая и прочие сложности</a></li></ul></li><li><a href="#заключение">Заключение</a></li></ul>
         </div>
     </div>
     <div class="row">
