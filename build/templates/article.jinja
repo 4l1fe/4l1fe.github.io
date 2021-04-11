@@ -18,6 +18,7 @@
             {{ toc }}
         </div>
     </div>
+    {% if not diff %}
     <div class="row">
         <div id="comments" class="col-lg-9">
             <script src="https://utteranc.es/client.js"
@@ -30,4 +31,5 @@
             </script>
         </div>
     </div>
+    {% endif %}
 {% endblock content %}
