@@ -72,8 +72,6 @@
 <p>Pyreverse analyses Python code and extracts UML class diagrams and package depenndencies.</p>
 </blockquote>
 <p>Утилита является частью пакета <strong>pylint</strong>. Как видно из цитаты, помогает автоматически построить диаграммы классов. Эти диаграммы дадут нам  видение абстракций, которые содержит БД, и их взаимосвязей. При этом утилита позволяет указывать уровень глубины сканирования исходного кода БД.</p>
-<h3>Pyan<a id="pyan"></a></h3>
-<p>https://github.com/davidfraser/pyan</p>
 <h3>Pydeps<a id="pydeps"></a></h3>
 <p><a href="https://github.com/thebjorn/pydeps">https://github.com/thebjorn/pydeps</a>.</p>
 <p>Утилита построения графа зависимостей с генерацией на осное формата <code>.dot</code> программного пакета <a href="http://www.graphviz.org/about/">Graphviz</a>. Изображение графа генерируется разными цветами, логика в этом присутствует, но для нас она значения не имеет, поэтому не стоит обращать на это внимание. Графы являются построением наиболее широкой картины того, как БД программно описана, какие верхнеуровневые компоненты содержит и как они взаимосвязаны.</p>
@@ -203,12 +201,22 @@ if __name__ == '__main__':
 <p><a href="files/peewee-kv/basic-scenario.png">Полный граф</a></p>
 <p><img src="files/peewee-kv/basic-scenario-edited.png" alt=""></p>
 <p>Изображение сразу же демонстрирует большую глубину дерева по сравнению с <strong>tinydb, sqlitedict</strong> и малую степень участия в нем верхнеуровневой абстракции <code>kv</code>.</p>
-<h3>Цикломатическая и прочие сложности<a id="цикломатическая-и-прочие-сложности"></a></h3>
+<h3>Цикломатическая сложность<a id="цикломатическая-сложность"></a></h3>
+<h4>TinyDB<a id="tinydb"></a></h4>
+<pre><code>radon cc -s --md --show-closures ../venv/lib/python3.8/site-packages/tinydb
+</code></pre>
+<h4>Sqlitedict<a id="sqlitedict"></a></h4>
+<pre><code>radon cc -s --md --show-closures ../venv/lib/python3.8/site-packages/sqlitedict.py
+</code></pre>
+<h4>Peewee-kv<a id="peewee-kv"></a></h4>
+<pre><code>radon cc -s --md --total-average ../venv/lib/python3.8/site-packages/playhouse/kv.py
+</code></pre>
+<h3>Halstead замеры<a id="halstead-замеры"></a></h3>
 <h2>Заключение<a id="заключение"></a></h2>
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
-            <ul><li><a href="#цели">Цели</a></li><li><a href="#список-бд">Список БД</a></li><li><a href="#список-практик">Список практик</a></li><li><a href="#вспомогательные-инструменты">Вспомогательные инструменты</a><ul><li><a href="#pyreverse">Pyreverse</a></li><li><a href="#pyan">Pyan</a></li><li><a href="#pydeps">Pydeps</a></li><li><a href="#gprof2dot">Gprof2dot</a></li><li><a href="#radon">Radon</a></li><li><a href="#mccabe">McCabe</a></li><li><a href="#prospector">Prospector</a></li><li><a href="#pylama">Pylama</a></li><li><a href="#vulture">Vulture</a></li></ul></li><li><a href="#рассмотрение">Рассмотрение</a><ul><li><a href="#построение-графа-зависимостей">Построение графа зависимостей</a></li><li><a href="#построение-диаграммы-классов">Построение диаграммы классов</a></li><li><a href="#построение-графа-вызовов">Построение графа вызовов</a></li><li><a href="#цикломатическая-и-прочие-сложности">Цикломатическая и прочие сложности</a></li></ul></li><li><a href="#заключение">Заключение</a></li></ul>
+            <ul><li><a href="#цели">Цели</a></li><li><a href="#список-бд">Список БД</a></li><li><a href="#список-практик">Список практик</a></li><li><a href="#вспомогательные-инструменты">Вспомогательные инструменты</a><ul><li><a href="#pyreverse">Pyreverse</a></li><li><a href="#pydeps">Pydeps</a></li><li><a href="#gprof2dot">Gprof2dot</a></li><li><a href="#radon">Radon</a></li><li><a href="#mccabe">McCabe</a></li><li><a href="#prospector">Prospector</a></li><li><a href="#pylama">Pylama</a></li><li><a href="#vulture">Vulture</a></li></ul></li><li><a href="#рассмотрение">Рассмотрение</a><ul><li><a href="#построение-графа-зависимостей">Построение графа зависимостей</a></li><li><a href="#построение-диаграммы-классов">Построение диаграммы классов</a></li><li><a href="#построение-графа-вызовов">Построение графа вызовов</a></li><li><a href="#цикломатическая-сложность">Цикломатическая сложность</a></li><li><a href="#halstead-замеры">Halstead замеры</a></li></ul></li><li><a href="#заключение">Заключение</a></li></ul>
         </div>
     </div>
         <div class="row">
