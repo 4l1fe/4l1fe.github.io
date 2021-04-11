@@ -11,3 +11,13 @@ As a result, things i do are writing articles text, and coding new small feature
 `/build` - folder with the html templates and py files contain custom logic of building static files based on source markdown files i don't track by GIT.
 
 `/docs` - folder which Github Pages deploy on my blog Github subdomain automatically on each commit.
+
+## Features
+
+- Generating an article html from markdown text and media files using `commonmark` and `jinja2`.
+- Generating a blog index page.
+- Generating **TOC**(table of content) from the article html.
+- Linking source media files to the repository ones.
+- Comments [utteranc.es](https://utteranc.es/) attached to the articles.
+- **Diff Page** shows a difference between an initial content of an article and the latest one.
+
