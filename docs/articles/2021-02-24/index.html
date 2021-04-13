@@ -9,6 +9,7 @@
           rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
           crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="/files/css/style.css">
     <title>ТехнологоблогЪ</title>
 </head>
@@ -89,17 +90,7 @@
 </ul>
 </blockquote>
 <h3>McCabe<a id="mccabe"></a></h3>
-<p>https://github.com/PyCQA/mccabe</p>
-<h3>Prospector<a id="prospector"></a></h3>
-<p><a href="https://github.com/PyCQA/prospector">https://github.com/PyCQA/prospector</a></p>
-<p>Некий аггрегатор анализирующих инструментов. Может дать информацию сразу по многим аспектом. Теоретически выявляет места, на которые сразу стоит обратить внимание.</p>
-<p>Полезно использовать при сравнении полученной информации по множеству библиотек в случае подбора более подходящей под решение.</p>
-<h3>Pylama<a id="pylama"></a></h3>
-<p><a href="https://github.com/klen/pylama">https://github.com/klen/pylama</a></p>
-<p>Альтернатива <a href="#prospector">prospector</a> менее популярная , судя по показателям в Гитхабе.</p>
-<h3>Vulture<a id="vulture"></a></h3>
-<p><a href="https://github.com/jendrikseipp/vulture">https://github.com/jendrikseipp/vulture</a></p>
-<p>Динамический поисковик неиспользуемого кода. Полезно для видения, насколько исходный код бибилиотеки находится в актуальном состоянии, в каких углах она запылилась.</p>
+<p>https://github.com/pycqa/mccabe</p>
 <h2>Рассмотрение<a id="рассмотрение"></a></h2>
 <h3>Построение графа зависимостей<a id="построение-графа-зависимостей"></a></h3>
 <p>На графах не отображаются модули стандартной бибилиотеки, а только лишь внешние зависимости. Сам сканируемый пакет отображается в именованных прямоугольных рамках, очерчивающих его модули, отображаемые окружностями. Внешние зависимости отображаются в виде изображений папок с их именами.</p>
@@ -208,6 +199,9 @@ if __name__ == '__main__':
 <h4>Sqlitedict<a id="sqlitedict"></a></h4>
 <pre><code>radon cc -s --md --show-closures ../venv/lib/python3.8/site-packages/sqlitedict.py
 </code></pre>
+<pre><code>python -m mccabe -d venv/lib/python3.8/site-packages/sqlitedict.py &gt; mccabe.dot
+dot -Tpng mccabe.dot -o mccabe.png
+</code></pre>
 <h4>Peewee-kv<a id="peewee-kv"></a></h4>
 <pre><code>radon cc -s --md --total-average ../venv/lib/python3.8/site-packages/playhouse/kv.py
 </code></pre>
@@ -216,7 +210,7 @@ if __name__ == '__main__':
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
-            <ul><li><a href="#цели">Цели</a></li><li><a href="#список-бд">Список БД</a></li><li><a href="#список-практик">Список практик</a></li><li><a href="#вспомогательные-инструменты">Вспомогательные инструменты</a><ul><li><a href="#pyreverse">Pyreverse</a></li><li><a href="#pydeps">Pydeps</a></li><li><a href="#gprof2dot">Gprof2dot</a></li><li><a href="#radon">Radon</a></li><li><a href="#mccabe">McCabe</a></li><li><a href="#prospector">Prospector</a></li><li><a href="#pylama">Pylama</a></li><li><a href="#vulture">Vulture</a></li></ul></li><li><a href="#рассмотрение">Рассмотрение</a><ul><li><a href="#построение-графа-зависимостей">Построение графа зависимостей</a></li><li><a href="#построение-диаграммы-классов">Построение диаграммы классов</a></li><li><a href="#построение-графа-вызовов">Построение графа вызовов</a></li><li><a href="#цикломатическая-сложность">Цикломатическая сложность</a></li><li><a href="#halstead-замеры">Halstead замеры</a></li></ul></li><li><a href="#заключение">Заключение</a></li></ul>
+            <ul><li><a href="#цели">Цели</a></li><li><a href="#список-бд">Список БД</a></li><li><a href="#список-практик">Список практик</a></li><li><a href="#вспомогательные-инструменты">Вспомогательные инструменты</a><ul><li><a href="#pyreverse">Pyreverse</a></li><li><a href="#pydeps">Pydeps</a></li><li><a href="#gprof2dot">Gprof2dot</a></li><li><a href="#radon">Radon</a></li><li><a href="#mccabe">McCabe</a></li></ul></li><li><a href="#рассмотрение">Рассмотрение</a><ul><li><a href="#построение-графа-зависимостей">Построение графа зависимостей</a></li><li><a href="#построение-диаграммы-классов">Построение диаграммы классов</a></li><li><a href="#построение-графа-вызовов">Построение графа вызовов</a></li><li><a href="#цикломатическая-сложность">Цикломатическая сложность</a></li><li><a href="#halstead-замеры">Halstead замеры</a></li></ul></li><li><a href="#заключение">Заключение</a></li></ul>
         </div>
     </div>
         <div class="row">
