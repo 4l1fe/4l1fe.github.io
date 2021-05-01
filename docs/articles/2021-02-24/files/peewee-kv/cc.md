@@ -1,0 +1,24 @@
+| Filename | Name | Type | Start:End Line | Complexity | Clasification |
+| -------- | ---- | ---- | -------------- | ---------- | ------------- |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.__init__ | M | 25:52 | 6 | B |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.__getitem__ | M | 81:90 | 5 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.pop | M | 159:169 | 3 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue | C | 15:172 | 2 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.query | M | 63:67 | 2 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.convert_expression | M | 69:72 | 2 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.__setitem__ | M | 105:109 | 2 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue._update | M | 127:133 | 2 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue._postgres_update | M | 136:143 | 2 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.get | M | 146:150 | 2 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.setdefault | M | 152:157 | 2 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.create_model | M | 54:61 | 1 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.__contains__ | M | 74:76 | 1 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.__len__ | M | 78:79 | 1 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue._upsert | M | 92:95 | 1 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue._postgres_upsert | M | 98:102 | 1 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.__delitem__ | M | 111:113 | 1 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.__iter__ | M | 115:116 | 1 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.keys | M | 118:119 | 1 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.values | M | 121:122 | 1 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.items | M | 124:125 | 1 | A |
+| venv/lib/python3.8/site-packages/playhouse/kv.py | KeyValue.clear | M | 171:172 | 1 | A |

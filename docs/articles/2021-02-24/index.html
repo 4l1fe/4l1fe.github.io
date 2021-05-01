@@ -79,17 +79,14 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>Утилита построения графа зависимостей с генерацией на осное формата <code>.dot</code> программного пакета <a href="http://www.graphviz.org/about/">Graphviz</a>. Изображение графа генерируется разными цветами, логика в этом присутствует, но для нас она значения не имеет, поэтому не стоит обращать на это внимание. Графы являются построением наиболее широкой картины того, как БД программно описана, какие верхнеуровневые компоненты содержит и как они взаимосвязаны.</p>
 <h3>Gprof2dot<a id="gprof2dot"></a></h3>
 <p>https://github.com/jrfonseca/gprof2dot</p>
-<p>Утилита строит граф вызовов указанного исполняемого сценария, поэтому необходимо в нем иметь вызовы оптимального кол-ва <strong>базовых абстракций</strong> библиотеки. Строится из файла формата <code>.pstats</code> стандартной библиотеки <a href="https://docs.python.org/3/library/profile.html#the-stats-class">Stats</a>. В дополнение к ней нужно иметь предустановленный программный пакет <a href="https://graphviz.org/download/#linux">GraphViz</a> и в частности утилита <code>dot</code>.</p>
+<p>Утилита строит граф вызовов указанного исполняемого сценария, поэтому необходимо в нем иметь вызовы оптимального кол-ва <strong>базовых абстракций</strong> библиотеки. Строится из файла формата <code>.pstats</code> стандартной библиотеки <a href="https://docs.python.org/3/library/profile.html#the-stats-class">Stats</a>. В дополнение к ней нужно иметь предустановленный программный пакет <a href="https://graphviz.org/download/#linux">GraphViz</a> и в частности утилиту <code>dot</code>.</p>
 <h3>Radon<a id="radon"></a></h3>
 <p><a href="https://radon.readthedocs.io/en/latest/">https://radon.readthedocs.io/en/latest/</a></p>
-<p>Интересует возможность расчета метрик(взято из доки)</p>
-<blockquote>
+<p>Утилита сканирует исходный код и выводит показатели следующих характеристик:</p>
 <ul>
 <li>Cyclomatic Complexity (i.e. McCabe’s Complexity)</li>
-<li>Halstead metrics (all of them)</li>
-<li>the Maintainability Index (a Visual Studio metric)</li>
+<li>Halstead metrics</li>
 </ul>
-</blockquote>
 <h3>McCabe<a id="mccabe"></a></h3>
 <p>https://github.com/pycqa/mccabe</p>
 <h2>Рассмотрение<a id="рассмотрение"></a></h2>
@@ -194,18 +191,20 @@ if __name__ == '__main__':
 <p><img src="files/peewee-kv/basic-scenario-edited.png" alt=""></p>
 <p>Изображение сразу же демонстрирует большую глубину дерева по сравнению с <strong>tinydb, sqlitedict</strong> и малую степень участия в нем верхнеуровневой абстракции <code>kv</code>.</p>
 <h3>Цикломатическая сложность<a id="цикломатическая-сложность"></a></h3>
-<h4>TinyDB<a id="tinydb"></a></h4>
-<pre><code>radon cc -s --md --show-closures ../venv/lib/python3.8/site-packages/tinydb
+<p>Для нахождения <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">цикломатической сложности</a> воспользуемся утилитой <strong>radon</strong> и произведем нижеследующий вызов для каждой библиотеки.</p>
+<pre><code>radon cc -s --md venv/lib/python3.8/site-packages/tinydb
 </code></pre>
-<h4>Sqlitedict<a id="sqlitedict"></a></h4>
-<pre><code>radon cc -s --md --show-closures ../venv/lib/python3.8/site-packages/sqlitedict.py
-</code></pre>
+<p>Формат <code>md</code> взят для прощей читаемости и дальнейшей обработки полученных данных. Полученные данные <a href="files/tinydb/cc.md">tiny.md</a>, <a href="files/sqlitedict/cc.md">sqlitedict.md</a>, <a href="files/peewee-kv/cc.md">kv.md</a>.</p>
+<p>Впринципе, данные таблицы уже показывают нам какая библиотека состоит из большего кол-ва проходимых путей управляющим потоком и какое число сложности у каждого из них, чтобы опять же, не углубляясь в детали, увидеть рассматриваемую характеристику. Но такое списочночисловое представление не настолько наглядно при сравнении одновоременно 3х объектов. Для этого надо слить все таблицы в один файл и, прокручивая их, сравнивать количественнокачественные показатели, аналитически их сопоставляя.</p>
+<p>Для большего удобства восприятия полученных значений мы можем построить график с цветовой передачей вышеописанных характеристик на основе табличных файлов с помощью <strong>matplotlib, numpy</strong>. По задумке глубина цвета сразу интуитивно выделит места, требующие внимания.</p>
+<p>Код построения графика <a href="files/cc_ranks.py">cc_ranks.py</a> и само изображение.</p>
+<p><img src="files/CC-chart.png" alt=""></p>
+<p>Как и было задумано, изображение демонстрирует показатели, как объем и цветовой тон, т.е. мы видим без аналитического сопоставления, что по количественному показателю(количество ячеек) доминирует <strong>TinyDB</strong>, а по качественному(глубокие фиолетовые тона) <strong>Sqlitedict</strong>. Цветовая шкала справа имеет максимальное значение <code>20</code> как наибольшую сложность лишь для адаптации к нашим имеющимся значениям, в то время как согласно <a href="https://radon.readthedocs.io/en/latest/commandline.html#the-cc-command">заявленным категориям</a> оно должно быть <code>41+</code>.</p>
+<p>В дополнение мы можем вывести самый сложный метод в <strong>Sqlitedict</strong> и построить его граф потока управления следующими командами:</p>
 <pre><code>python -m mccabe -d venv/lib/python3.8/site-packages/sqlitedict.py &gt; mccabe.dot
 dot -Tpng mccabe.dot -o mccabe.png
 </code></pre>
-<h4>Peewee-kv<a id="peewee-kv"></a></h4>
-<pre><code>radon cc -s --md --total-average ../venv/lib/python3.8/site-packages/playhouse/kv.py
-</code></pre>
+<p>Полученный граф <a href="files/sqlitedict/mccabe.png">mccabe.png</a> , в котором визуально заметен метод <code>SqliteMultithread.run</code>.</p>
 <h3>Halstead замеры<a id="halstead-замеры"></a></h3>
 <h2>Заключение<a id="заключение"></a></h2>
 
