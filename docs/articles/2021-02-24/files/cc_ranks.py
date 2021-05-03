@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
 
@@ -8,16 +9,6 @@ COLOR_MAP_VMAX = 20
 ROWS_COUNT = 5
 FONT_FAMILY = 'Ubuntu mono'
 FONT_WEIGHT = 'bold'
-
-
-def md2lists(text: str):
-    # 'Type' - 3 , 'Complexity' - 5
-    data = text.splitlines()[2:]
-    data = [((l := line.split('|'))[3].strip(), l[5].strip()) for line in data]
-    data.sort(key=lambda el: el[0])
-    types = [d[0] for d in data]
-    complexities = [d[1] for d in data]
-    return types, complexities
 
 
 class ChartData:
@@ -30,17 +21,19 @@ class ChartData:
         self._title_by_name(file)
 
     def _fill_up(self, file):
-        with open(file) as file:
-            text = file.read()
-            self.types, self.complexities = md2lists(text)
-        self._convert(len(self.complexities))
+        df = pd.read_table(file, sep='|', header=0, skiprows=[1], usecols=[3, 5])
+        df.rename(columns=str.strip, inplace=True)
+        df.sort_values(by=['Type'], inplace=True)
+        self.types, self.complexities = df['Type'].values, df['Complexity'].values
+        self._convert()
 
-    def _convert(self, size):
-        quont, rem = divmod(size, ROWS_COUNT)
-        additional = ROWS_COUNT - rem
+    def _convert(self):
+        size = len(self.complexities)
+        quont, reminder = divmod(size, ROWS_COUNT)
+        additional = ROWS_COUNT - reminder
         if additional != 0:
-            self.types = self.types + [''] * additional
-            self.complexities = self.complexities + [0] * additional
+            self.types = np.concatenate((self.types, [''] * additional))
+            self.complexities = np.concatenate((self.complexities, [0] * additional))
             quont += 1
         self.types = np.array(self.types, dtype=np.str_)
         self.complexities = np.array(self.complexities, dtype=np.int8)
@@ -58,7 +51,7 @@ class ChartData:
 
 
 def main():
-    chart_datas = map(ChartData, ('tiny.md', 'sqlitedict.md', 'kv.md'))
+    chart_datas = map(ChartData, ('tinydb/cc.md', 'sqlitedict/cc.md', 'peewee-kv/cc.md'))
     fig, axes = plt.subplots(nrows=3, ncols=1)
 
     for ax, chart_data in zip(axes, chart_datas):
