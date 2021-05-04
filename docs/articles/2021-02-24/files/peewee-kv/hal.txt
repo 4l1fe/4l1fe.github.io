@@ -1,0 +1,13 @@
+/venv/lib/python3.8/site-packages/playhouse/kv.py:
+    h1: 6
+    h2: 19
+    N1: 11
+    N2: 20
+    vocabulary: 25
+    length: 31
+    calculated_length: 96.22039775975506
+    volume: 143.95954188301644
+    difficulty: 3.1578947368421053
+    effort: 454.60907963057826
+    time: 25.25605997947657
+    bugs: 0.04798651396100548

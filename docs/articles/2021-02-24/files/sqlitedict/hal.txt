@@ -1,0 +1,13 @@
+/venv/lib/python3.8/site-packages/sqlitedict.py:
+    h1: 12
+    h2: 111
+    N1: 63
+    N2: 121
+    vocabulary: 123
+    length: 184
+    calculated_length: 797.1997111735157
+    volume: 1277.4226689824202
+    difficulty: 6.54054054054054
+    effort: 8355.034753885018
+    time: 464.16859743805657
+    bugs: 0.4258075563274734
