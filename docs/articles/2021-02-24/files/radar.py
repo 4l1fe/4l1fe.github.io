@@ -38,29 +38,27 @@ fig = make_subplots(rows=2, cols=1, specs=[[{"type": "polar"}],
 
 categories = tuple(el[0] for el in data[0]) + (data[0][0][0], )
 r = tuple(el[1] for el in data[0]) + ( data[0][0][1], )
-sql_sc = go.Scatterpolar(r=r, legendgroup='sql', line=dict(color="#e45756"), theta=categories, fill='toself',
-                         name='Sqlitedict')
+sql_sc = go.Scatterpolar(r=r, legendgroup='sql', line=dict(color="#e45756"), name='Sqlitedict')
 fig.add_trace(sql_sc, row=1, col=1)
 sql_sc.update(showlegend=False)
 fig.add_trace(sql_sc, row=2, col=1)
 
 r = tuple(el[1] for el in data[1]) + (data[1][0][1], )
 r_init = tuple(value for value in r)
-kv_sc_init = go.Scatterpolar(r=r_init, legendgroup='kv', line=dict(color="#eeca3b"), theta=categories,
-                             fill='toself', name='Peewee KV')
+kv_sc_init = go.Scatterpolar(r=r_init, legendgroup='kv', line=dict(color="#eeca3b"), name='Peewee KV')
 r_scaled = tuple(value * PEEWEE_KV_COEF for value in r)
-kv_sc_scaled = go.Scatterpolar(r=r_scaled, legendgroup='kv', line=dict(color="#eeca3b"), theta=categories,
-                               fill='toself', name='Peewee KV', showlegend=False)
+kv_sc_scaled = go.Scatterpolar(r=r_scaled, legendgroup='kv', line=dict(color="#eeca3b"), name='Peewee KV',
+                               showlegend=False)
 fig.add_trace(kv_sc_init, row=1, col=1)
 fig.add_trace(kv_sc_scaled, row=2, col=1)
 
 r = tuple(el[1] for el in data[2]) + (data[2][0][1],)
-tiny_sc = go.Scatterpolar(r=r, legendgroup='tiny', line=dict(color="#4c78a8"), theta=categories, fill='toself',
-                          name='TinyDB')
+tiny_sc = go.Scatterpolar(r=r, legendgroup='tiny', line=dict(color="#4c78a8"), name='TinyDB')
 fig.add_trace(tiny_sc, row=1, col=1)
 tiny_sc.update(showlegend=False)
 fig.add_trace(tiny_sc, row=2, col=1)
 
+fig.update_traces(mode='lines', theta=categories, fill='toself')
 fig.update_layout(
     polar=dict(
         radialaxis=dict(
