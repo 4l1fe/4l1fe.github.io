@@ -62,7 +62,7 @@ def extract_toc(html: str) -> TocType:
     for el in root_element:
         if any(el.tag == tag for tag in TOC_HEADERS):
             header_level = int(el.tag[1])
-            header_text = el.text
+            header_text = el.text.strip()
             toc.append((header_level, header_text))
 
     return toc
@@ -111,29 +111,6 @@ def generate_toc_html(toc: TocType, lowest_header_lvl=TOC_LOWEST_HLEVEL) -> str:
     return doc.documentElement.toxml()
 
 
-def update_headers_id_attribute(html: str) -> str:
-    root_element = fromstring(_wrap_unwrap_fake_tag(html))
-    for el in root_element:
-        if el.tag in HEADERS:
-            id_ = _make_header_id(el.text)
-            el.insert(0, Element('a', {'id': id_}))
-    html = tostring(root_element)
-    html = _wrap_unwrap_fake_tag(html, wrap=False)
-    return html
-
-
-def generate_article_html(md_text):
-    html = commonmark.commonmark(md_text)
-    content_html = update_headers_id_attribute(html)
-
-    toc = extract_toc(content_html)
-    toc_html = generate_toc_html(toc)
-    template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
-    html = template.render(content=content_html, toc=toc_html)
-
-    return html, toc_html
-
-
 def generate_index_html(articles_data: List[ArticleData]):
     template = env.get_template(INDEX_TEMPLATE_FILE.name)
     html = template.render(articles_data=articles_data)
@@ -171,6 +148,14 @@ def retrieve_attached_files_links(html) -> Set[str]:
 
 
 class BlogGen:
+    EXTERNAL_LINK_ICON_CLASS = 'bx:bx-link-external'
+    ANCHOR_LINK_ICON_CLASS = 'majesticons:hashtag-line'
+    EXTENSIONS_ICON_CLASSES_MAP = {'png': 'bi:file-earmark-image',
+                                   'jpg': 'bi:file-earmark-image',
+                                   'jpeg': 'bi:file-earmark-image',
+                                   'txt': 'bi:file-earmark-text',
+                                   'md': 'bi:markdown',
+                                   'py': 'teenyicons:python-outline'}
 
     @staticmethod
     def iter_articles_source_dir():
@@ -178,14 +163,73 @@ class BlogGen:
             if article_source_dir not in AS_DIRS_IGNORE:
                 yield article_source_dir
 
+    @staticmethod
+    def apply_font_icons(html):
+        root = fromstring(html)
+        for element in root.iter('a'):
+            resource = element.attrib.get('href')
+            if not (resource and element.text):  # .text empty in anchors <a>
+                continue
 
-def main():
+            # External link
+            if resource.startswith('http'):
+                icon_class = BlogGen.EXTERNAL_LINK_ICON_CLASS
+            # Anchor
+            elif resource.startswith('#'):
+                icon_class = BlogGen.ANCHOR_LINK_ICON_CLASS
+            # File
+            elif any(map(resource.endswith, BlogGen.EXTENSIONS_ICON_CLASSES_MAP.keys())):
+                extension = resource.rsplit('.', 1)[-1]
+                icon_class = BlogGen.EXTENSIONS_ICON_CLASSES_MAP[extension]
+            else:
+                print('Unknown icon resource ', resource)
+                continue
+
+            # Element prototype
+            span_element = Element('span', attrib={'class': 'iconify', 'data-icon': icon_class})
+            span_element.tail = ' ' + element.text
+            element.text = None
+            element.insert(0, span_element)
+
+        return tostring(root)
+
+    @staticmethod
+    def generate_article_html(md_text, font_icons=False):
+        html = commonmark.commonmark(md_text)
+        content_html = BlogGen.add_headers_anchors(html)
+
+        toc = extract_toc(content_html)
+        toc_html = generate_toc_html(toc)
+        template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
+        content_html = BlogGen.apply_font_icons(content_html) if font_icons else content_html
+        html = template.render(content=content_html, toc=toc_html)
+
+        return html, toc_html
+
+    @staticmethod
+    def add_headers_anchors(html: str) -> str:
+        root_element = fromstring(_wrap_unwrap_fake_tag(html))
+        for element in root_element:
+            if element.tag in HEADERS:
+                id_ = _make_header_id(element.text)
+                a_element = Element('a', {'id': id_, 'href': f'#{id_}'})
+                span_element = Element('span', attrib={'class': 'iconify',
+                                                       'data-icon': BlogGen.ANCHOR_LINK_ICON_CLASS})
+                a_element.append(span_element)
+                element.text += ' '
+                element.insert(0, a_element)
+        html = tostring(root_element)
+        html = _wrap_unwrap_fake_tag(html, wrap=False)
+        return html
+
+
+def main(font_icons=True):
     articles_data = []
     for article_source_dir in BlogGen.iter_articles_source_dir():
         # Генерация обновленной страницы
         article_md_file = article_source_dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
-        article_html, toc_html = generate_article_html(md_text)
+        article_html, toc_html = BlogGen.generate_article_html(md_text, font_icons=font_icons)
         article_dir = ARTICLES_DOCS_DIR / article_source_dir.name
         article_index_file = article_dir / INDEX_FILE.name
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
