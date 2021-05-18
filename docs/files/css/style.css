@@ -1,13 +1,75 @@
 #about ul, #toc ul {list-style: none; }
-#toc > ul {position: sticky; top: 70px;}
+#toc > ul {position: sticky; top: 80px;}
 
-.link-dark-hover:hover{color: #6c757d; }
+a {color: #198754}
+a:hover, a:focus {
+    color: #125A33;
+    text-decoration: underline;
+    text-decoration-line: underline;
+    text-decoration-thickness: initial;
+    text-decoration-style: initial}
+a.link-dark {color: #212529; }
+a.link-dark-hover:hover{color: #6c757d; }
+#toc  a {color: #6c757d;}
+#toc  a:hover {color: #212529;}
 
 ins {background-color: #20c997;}
 del {background-color: #d63384;}
 
-pre {padding: 1em; background-color: #f0f0f0; color: #970059}
-:not(pre) > code {padding-left: 0.5em; padding-right: 0.5em; background-color: #f0f0f0; color: #970059}
+pre {
+    padding: 1em;
+    border-top-color: rgb(222, 226, 230) !important;
+    border-top-style: solid !important;
+    border-top-width: 1px !important;
+    border-right-color: rgb(222, 226, 230) !important;
+    border-right-style: solid !important;
+    border-right-width: 1px !important;
+    border-bottom-color: rgb(222, 226, 230) !important;
+    border-bottom-style: solid !important;
+    border-bottom-width: 1px !important;
+    border-left-color: rgb(222, 226, 230) !important;
+    border-left-style: solid !important;
+    border-left-width: 1px !important;
+    border-image-source: initial !important;
+    border-image-slice: initial !important;
+    border-image-width: initial !important;
+    border-image-outset: initial !important;
+    border-image-repeat: initial !important;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+    border-bottom-left-radius: 0.25rem !important;
+    background-color: #f0f0f0;
+    color: #000000}
+
+:not(pre) > code {
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-top-color: rgb(222, 226, 230) !important;
+    border-top-style: solid !important;
+    border-top-width: 1px !important;
+    border-right-color: rgb(222, 226, 230) !important;
+    border-right-style: solid !important;
+    border-right-width: 1px !important;
+    border-bottom-color: rgb(222, 226, 230) !important;
+    border-bottom-style: solid !important;
+    border-bottom-width: 1px !important;
+    border-left-color: rgb(222, 226, 230) !important;
+    border-left-style: solid !important;
+    border-left-width: 1px !important;
+    border-image-source: initial !important;
+    border-image-slice: initial !important;
+    border-image-width: initial !important;
+    border-image-outset: initial !important;
+    border-image-repeat: initial !important;
+    border-top-left-radius: 0.25rem !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+    border-bottom-left-radius: 0.25rem !important;
+    background-color: #f0f0f0;
+    color: #000000}
 
 img {padding: .25rem;
     background-color: #fff;
