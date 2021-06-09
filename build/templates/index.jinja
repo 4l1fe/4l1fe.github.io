@@ -3,10 +3,10 @@
 {% block content %}
 <div class="row">
     <div id="about" class="col-12 col-lg-9">
-        <h1>О себе</h1>
-        <p>Наблюдаю за происходящим <span class="iconify" data-icon="fa-solid:eye"></span>, пью чаёк <span class="iconify" data-icon="fa:coffee"></span>, познаю <span class="iconify" data-icon="fa-solid:pen-alt"></span>.</p>
-        <h3>Контакты</h3>
-        <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></i></a>
+        <h1>About</h1>
+        <p>Observe existence <span class="iconify" data-icon="fa-solid:eye"></span>, drink tea <span class="iconify" data-icon="fa:coffee"></span>, cognize <span class="iconify" data-icon="fa-solid:pen-alt"></span>.</p>
+        <h2>Contacts</h2>
+        <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a>
            <a class="me-1" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov-410aa956">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a>
            <a class="me-1" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></p>
     </div>
@@ -14,8 +14,8 @@
 <div class="row">
     {% for adata in articles_data %}
     <div id="content" class="col-12 col-lg-9 border-top">
-        <p class="float-lg-end text-muted mb-0">{{ adata.updated_date or adata.created_date }} {% if adata.updated_date %}<a href="{{ adata.relative_diff_link }}"><span class="iconify" data-icon="bi:file-diff"></span>{{ adata.created_date }}</a>{% endif %}</p>
-        <h2><a class="link-dark link-dark-hover" href="{{ adata.relative_link }}">{{ adata.title }}</a></h2>
+        <p class="float-lg-end text-muted mb-0">{{ adata.created_date }}</p>
+        <h3><a class="link-dark link-dark-hover" href="{{ adata.relative_link }}">{{ adata.title }}</a></h3>
         <p>{{ adata.paragraph | truncate }}</p>
     </div>
     {% endfor %}

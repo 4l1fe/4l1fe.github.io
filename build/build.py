@@ -1,21 +1,17 @@
 import os
 import functools
-import shutil
 import commonmark
 
 from typing import List, Tuple, Set
 from xml.dom.minidom import getDOMImplementation
 from dataclasses import dataclass
-from pathlib import Path
 from itertools import islice
 from contextlib import suppress
 from lxml.html import Element, fromstring, tostring as _tostring
 from lxml.html.diff import htmldiff
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
-                       INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, PROJ_DIR, DIFF_DIR_PREFIX,
-                       AS_DIRS_IGNORE)
-from diff import FileDiff
+                       INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE)
 
 
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
@@ -33,10 +29,8 @@ tostring = functools.partial(_tostring, encoding='unicode')
 class ArticleData:
     title: str
     relative_link: str
-    relative_diff_link: str
     paragraph: str
     created_date: str
-    updated_date: str = None
     img_relative_link: str = None
 
 
@@ -165,7 +159,7 @@ class BlogGen:
 
     @staticmethod
     def apply_font_icons(html):
-        root = fromstring(html)
+        root = fromstring(_wrap_unwrap_fake_tag(html))
         for element in root.iter('a'):
             resource = element.attrib.get('href')
             if not (resource and element.text):  # .text empty in anchors <a>
@@ -190,8 +184,9 @@ class BlogGen:
             span_element.tail = ' ' + element.text
             element.text = None
             element.insert(0, span_element)
-
-        return tostring(root)
+        html = tostring(root)
+        html = _wrap_unwrap_fake_tag(html, wrap=False)
+        return html
 
     @staticmethod
     def generate_article_html(md_text, font_icons=False):
@@ -225,7 +220,7 @@ class BlogGen:
 
 def main(font_icons=True):
     articles_data = []
-    for article_source_dir in BlogGen.iter_articles_source_dir():
+    for article_source_dir in reversed(tuple(BlogGen.iter_articles_source_dir())):
         # Генерация обновленной страницы
         article_md_file = article_source_dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
@@ -235,47 +230,23 @@ def main(font_icons=True):
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_index_file.write_text(article_html)
 
-        # Генерация каталога разницы
-        fdiff = FileDiff(article_index_file.relative_to(PROJ_DIR))
-        initial_article_html = fdiff.get_first_version_text()
-        diff_html = retrieve_article_diff_html(article_html, initial_article_html)
-        article_diff_html = generate_article_diff_html(diff_html, toc_html)
-        diff_update_date = fdiff.get_update_date()
-        article_diff_index_file = article_dir / Path(DIFF_DIR_PREFIX + diff_update_date) / INDEX_FILE.name
-        article_diff_index_file.parent.mkdir(parents=True, exist_ok=True)
-        article_diff_index_file.write_text(article_diff_html)
-
         # Создание ссылок на прикрепляемые файлы
         files_pathes = retrieve_attached_files_links(article_html)
         for fpath in files_pathes:
             # Жесткие ссылки на исходные файлы
-            symlink_target = article_source_dir / fpath
+            target = article_source_dir / fpath
             hardlink_file = article_index_file.parent / fpath
             hardlink_file.parent.mkdir(parents=True, exist_ok=True)
             with suppress(FileExistsError):
-                os.link(symlink_target, hardlink_file)
-            # Мягкие ссылки на жетские ссылки
-            diff_symlink_file = article_diff_index_file.parent / fpath
-            diff_symlink_file.parent.mkdir(parents=True, exist_ok=True)
-            with suppress(FileExistsError):
-                diff_symlink_file.symlink_to(os.path.relpath(hardlink_file, start=diff_symlink_file.parent))
-
-        # Очистка файлов устаревшей разницы
-        old_diff_dirs = set(article_dir.glob(DIFF_DIR_PREFIX+'*'))
-        old_diff_dirs.remove(article_diff_index_file.parent)
-        for old_ddir in old_diff_dirs:
-            shutil.rmtree(old_ddir)
-            print('Removed: ', old_ddir.as_posix())
+                os.link(target, hardlink_file)
 
         # Создание класса данных по статье для индекса блога
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
         first_p_text = list(islice(root_element.iterfind('.//p'), 2))[1].text
         relative_link = article_index_file.relative_to(DOCS_DIR).parent
-        relative_diff_link = article_diff_index_file.relative_to(DOCS_DIR).parent
         adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
-                            created_date=article_source_dir.name, relative_diff_link=relative_diff_link,
-                            updated_date=diff_update_date)
+                            created_date=article_source_dir.name)
         articles_data.append(adata)
 
     index_html = generate_index_html(articles_data)

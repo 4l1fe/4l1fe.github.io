@@ -19,5 +19,4 @@ As a result, things i do are writing articles text, and coding new small feature
 - Generating **TOC**(table of content) from the article html.
 - Adding and linking source media files are contained in the article html to the repository ones.
 - Comments [utteranc.es](https://utteranc.es/) attached to the articles.
-- **Diff Page** shows a difference between an initial content of an article and the latest one.
 

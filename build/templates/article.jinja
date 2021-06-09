@@ -3,22 +3,12 @@
 {% block content %}
     <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            {% if diff %}
-            <div class="alert alert-secondary" role="alert">
-                <h4 class="alert-heading"></p>Страница отображения <span class="iconify" data-icon="bi:file-diff"></span>обновлений</h4>
-                <p>
-                    <ins>Добавлено</ins>
-                    <del>Удалено</del>
-                </p>
-            </div>
-            {% endif %}
             {{ content }}
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
             {{ toc }}
         </div>
     </div>
-    {% if not diff %}
     <div class="row">
         <div id="comments" class="col-lg-9">
             <script src="https://utteranc.es/client.js"
@@ -31,5 +21,4 @@
             </script>
         </div>
     </div>
-    {% endif %}
 {% endblock content %}

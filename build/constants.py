@@ -13,4 +13,3 @@ INDEX_FILE = DOCS_DIR / 'index.html'
 AS_DIRS_IGNORE = {ARTICLES_SOURCE_DIR / 'drafts', }
 ARTICLE_MD_FILE = 'README.md'
 ARTICLE_IMG_FILE = 'files/main-section.png'
-DIFF_DIR_PREFIX = 'diff-'

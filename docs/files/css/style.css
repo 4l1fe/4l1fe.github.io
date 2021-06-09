@@ -78,7 +78,7 @@ img {padding: .25rem;
     max-width: 100%;
     height: auto;}
 
-#content > p:nth-child(2) > img {float: right!important;}
+
 
 #content > p > img {
   display: block;

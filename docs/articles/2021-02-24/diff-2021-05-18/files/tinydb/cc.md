@@ -1,1 +1,0 @@
-../../../files/tinydb/cc.md
