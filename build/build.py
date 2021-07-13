@@ -149,7 +149,9 @@ class BlogGen:
                                    'jpeg': 'bi:file-earmark-image',
                                    'txt': 'bi:file-earmark-text',
                                    'md': 'bi:markdown',
-                                   'py': 'teenyicons:python-outline'}
+                                   'py': 'teenyicons:python-outline',
+                                   'gz': 'icomoon-free:file-zip',
+                                   'sql': 'bi:file-earmark-code'}
 
     @staticmethod
     def iter_articles_source_dir():
