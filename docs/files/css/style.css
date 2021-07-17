@@ -1,9 +1,9 @@
 #about ul, #toc ul {list-style: none; }
 #toc > ul {position: sticky; top: 80px;}
 
-a {color: #198754}
+a {color: #920000}
 a:hover, a:focus {
-    color: #125A33;
+    color: #b92929;
     text-decoration: underline;
     text-decoration-line: underline;
     text-decoration-thickness: initial;
@@ -12,9 +12,6 @@ a.link-dark {color: #212529; }
 a.link-dark-hover:hover{color: #6c757d; }
 #toc  a {color: #6c757d;}
 #toc  a:hover {color: #212529;}
-
-ins {background-color: #20c997;}
-del {background-color: #d63384;}
 
 pre {
     padding: 1em;

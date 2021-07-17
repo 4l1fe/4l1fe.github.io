@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="utO5yk8RwIXZ-_rnxq_xpMndgtw0MU_VqtE61lNmjsY" />
+    <link rel="icon" type="image/png" href="/files/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/files/css/style.css">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <title>ТехнологоблогЪ</title>
+</head>
+<body>
+<nav class="navbar navbar-light bg-white border-bottom border-secondary sticky-top mb-1">
+    <div class="container-fluid d-flex justify-content-center ">
+            <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
+            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io/subscription" data-icon="octicon-eye" data-size="large" 
+data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch</a></span>
+            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Star</a></span>
+    </div>
+</nav>
+<div class="container">
+        <div class="row">
+        <div id="content" class="col-lg-9 order-2 order-lg-1">
+            <h1>Columnar DB performance in action. DuckDB <a id="columnar-db-performance-in-action.-duckdb" href="#columnar-db-performance-in-action.-duckdb"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h1>
+<p><img src="files/main-section.png" alt=""></p>
+<p>This article is intended to represent only one simple thing is a fundamental difference between columnar family and standard row-based databases by an example. Roughly speaking, you may need a column-based database if working with a complex OLAP-oriented workload, reading vast data, grouping it, and computing metrics. And doing it you will definitely notice big time consumption. So columnar DB drastically reduces this time.</p>
+<p>As an example has to be simple and easily reproducible we compare columnar <a href="https://duckdb.org"><span class="iconify" data-icon="bx:bx-link-external"></span> DuckDB</a> performance with SQLite as a row-based counterpart.</p>
+<p>You may read the article as a simplified proof of concept.</p>
+<p>ance boost can be reached by storing data on a disk as column values one by one in a case of complex computational queries(OLAP). Such a boost we see on the chart.</p>
+<h2>Steps to do <a id="steps-to-do" href="#steps-to-do"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<ul>
+<li>Fill tables of both databases with random data.</li>
+<li>Emulate an OLAP-workload SQL query.</li>
+<li>Measure time consumption is taken by the query in both cases.</li>
+<li>Visualize performance.</li>
+</ul>
+<h2>Prerequisites <a id="prerequisites" href="#prerequisites"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<p>Simply install following python dependencies <code>pip install duckdb plotly typer</code> and SQLite CLI <code>sudo apt install sqlite3</code>. Along with the python <code>duckdb</code> bindings we will use DuckDB CLI, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v0.2.7/duckdb_cli-linux-amd64.zip"><span class="iconify" data-icon="bx:bx-link-external"></span> v0.2.7-duckdb_cli-linux-amd64.zip</a></p>
+<h2>Fill the databases <a id="fill-the-databases" href="#fill-the-databases"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<p>In order to notice a difference in performance stored data amount should be significantly big therefore we generate random data and write it into the databases.</p>
+<p>Tables' columns are a group of an id field and 3 values' fields. All values are randomly generated integers.</p>
+<p>Table schema:</p>
+<pre><code>random_data(
+    grp UINTEGER,
+    value1 UINTEGER,  
+    value2 UINTEGER,  
+    value3 UINTEGER); 
+</code></pre>
+<p>The scenario <a href="files/database.py"><span class="iconify" data-icon="teenyicons:python-outline"></span> database.py</a> provides the auxiliary commands to prepare an experimental stand. For now, we create the base table in duckdb and run data generation.</p>
+<pre><code>python database.py fill-duckdb --sample-size 1000 --samples-count 10000
+...
+Database random.duckdb is filled up
+</code></pre>
+<p>After a while, as filling 10M records is completed we dump all data to a CSV file and load it into a new SQLite db. You can take the archived 165Mb file <a href="files/random_data.csv.tar.gz"><span class="iconify" data-icon="icomoon-free:file-zip"></span> random_data.csv.tar.gz</a> to pass data generating.</p>
+<p>We get to SQLite db. Dump data from <code>random.duckdb</code> as a CSV file and import it into <code>random.sqlite</code> table with the same schema.</p>
+<pre><code>$ python database.py dump-csv --path dump
+$ python database.py fill-sqlite dump/0_random_data.csv
+Database random.sqlite is filled up
+</code></pre>
+<p>Base tables are filled and we are able to run special SQL query to figure out if its performance differs but having one result only it doesn't reveal us how performance is changing according to data amount.</p>
+<p>For such a purpose to see execution time growth we can split the base tables onto series of incrementally enlarging tables reading data and putting it into a new table.</p>
+<p>Now we create the tables for both databases.</p>
+<pre><code>$ python database.py split-duckdb --tables-count 10
+...
+Table created:  random_data10
+...
+Table filling:   random_data10
+
+$ python database.py split-sqlite --tables-count 10
+...
+Table created:  random_data10
+...
+Table filling:   random_data10
+</code></pre>
+<p>At the moment everything is ready to run the query.</p>
+<h2>Run the query <a id="run-the-query" href="#run-the-query"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<p>As we know, OLAP implies querying a database and compute metrics which can lead to getting insights in business field. Therefore, we emulate it and compute <code>min(), max(), avg(), sum()</code> values on each column. SQL code we run <a href="files/query.sql"><span class="iconify" data-icon="bi:file-earmark-code"></span> query.sql</a>.</p>
+<p>Using shell scripting we organize running the query measuring time in a for loop replacing the base table name with splitted table name.</p>
+<pre><code>$ for i in `seq 1 10`; do \
+sed 's/random_data/random_data'"$i"'/g' query.sql &gt; edited-query.sql; \
+time sqlite3 random.sqlite &lt; edited-query.sql &gt;/dev/null; \
+done
+
+sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  1,42s user 0,04s system 99% cpu 1,464 total
+sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  2,84s user 0,12s system 99% cpu 2,966 total
+sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  4,21s user 0,18s system 99% cpu 4,412 total
+sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  5,75s user 0,22s system 99% cpu 5,971 total
+sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  7,19s user 0,22s system 99% cpu 7,406 total
+sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  8,66s user 0,26s system 99% cpu 8,951 total
+sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  10,07s user 0,37s system 99% cpu 10,459 total
+sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  11,59s user 0,42s system 99% cpu 12,015 total
+sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  13,23s user 0,49s system 99% cpu 13,747 total
+sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  14,52s user 0,58s system 99% cpu 15,126 total
+</code></pre>
+<p>The longest query time is 14.52 seconds which is sensitive for a human perception. What if you run hundreds of such queries? Would you</p>
+<p>Ok, we are at the key point, DuckDB comes into play.</p>
+<pre><code>$ for i in `seq 1 10`; do \
+sed 's/random_data/random_data'"$i"'/g' query.sql &gt; edited-query.sql; \
+time duckdb random.duckdb &lt; edited-query.sql &gt;/dev/null; \
+done
+
+duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,12s user 0,07s system 99% cpu 0,186 total
+duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,21s user 0,02s system 99% cpu 0,226 total
+duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,23s user 0,07s system 99% cpu 0,296 total
+duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,31s user 0,07s system 99% cpu 0,382 total
+duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,36s user 0,07s system 99% cpu 0,431 total
+duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,38s user 0,11s system 99% cpu 0,492 total
+duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,49s user 0,09s system 99% cpu 0,586 total
+duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,53s user 0,10s system 99% cpu 0,630 total
+duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,56s user 0,17s system 99% cpu 0,728 total
+duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,62s user 0,16s system 99% cpu 0,781 total
+</code></pre>
+<p>What would you say? Database fundamental difference is clearly evident. After all executions, DuckDB didn't even exceed 1 second at the same time SQLite exceeded 14 seconds.</p>
+<p>Job is done and it's time to prettify output making each execution time visual.</p>
+<p>**</p>
+<h2>Visualize the results <a id="visualize-the-results" href="#visualize-the-results"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<p>Here we take the result output, convert it to the python lists and build performance chart upon it. The scripts <a href="files/convertation.py"><span class="iconify" data-icon="teenyicons:python-outline"></span> convertation.py</a> and <a href="files/chart.py"><span class="iconify" data-icon="teenyicons:python-outline"></span> chart.py</a> do this job.</p>
+<pre><code>$ python chart.py
+</code></pre>
+<p><img src="files/chart.png" alt=""></p>
+<p>Look at the picture and try to extrapolate the measurements on 100M records and over...</p>
+<h2>Emphasize the concept <a id="emphasize-the-concept" href="#emphasize-the-concept"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<p>Thу experiment represents the main idea only that getting an extreme performance boost can be reached by storing data on a disk as column values one by one in a case of complex computational queries(OLAP). Such a boost we see on the chart.</p>
+<p>Columnize it all.</p>
+
+        </div>
+        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+            <ul><li><a href="#steps-to-do">Steps to do</a></li><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#fill-the-databases">Fill the databases</a></li><li><a href="#run-the-query">Run the query</a></li><li><a href="#visualize-the-results">Visualize the results</a></li><li><a href="#emphasize-the-concept">Emphasize the concept</a></li></ul>
+        </div>
+    </div>
+    <div class="row">
+        <div id="comments" class="col-lg-9">
+            <script src="https://utteranc.es/client.js"
+                    repo="4l1fe/4l1fe.github.io"
+                    issue-term="pathname"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </div>
+</div>
+
+<script src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>
