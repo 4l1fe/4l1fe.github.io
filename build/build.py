@@ -4,14 +4,16 @@ import commonmark
 
 from typing import List, Tuple, Set
 from xml.dom.minidom import getDOMImplementation
-from dataclasses import dataclass
-from itertools import islice
+from dataclasses import dataclass, InitVar
+from itertools import islice, chain
 from contextlib import suppress
+from pathlib import Path
 from lxml.html import Element, fromstring, tostring as _tostring
 from lxml.html.diff import htmldiff
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
-                       INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE)
+                       INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE, GOOGLE_VERF_TOKEN,
+                       SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDR)
 
 
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
@@ -22,16 +24,27 @@ TocType = List[Tuple[int, str]]
 Dom = getDOMImplementation()
 env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks=True,
                   autoescape=select_autoescape(['html']))
+env.globals['google_verification_token'] = GOOGLE_VERF_TOKEN
 tostring = functools.partial(_tostring, encoding='unicode')
 
 
 @dataclass
+class Image:
+    title: str
+    relative_link: Path
+    article_relative_link: InitVar[Path]
+
+    def __post_init__(self, article_relative_link):
+        self.relative_link = article_relative_link.joinpath(self.relative_link)
+
+@dataclass
 class ArticleData:
     title: str
-    relative_link: str
+    relative_link: Path
     paragraph: str
     created_date: str
-    img_relative_link: str = None
+    img_relative_link: Path = None
+    images: Tuple[Image] = ()
 
 
 def _make_header_id(tag_text):
@@ -128,17 +141,24 @@ def generate_article_diff_html(content_html, toc_html):
     return html
 
 
-def retrieve_attached_files_links(html) -> Set[str]:
+def retrieve_attached_files_pathes(html) -> Tuple[Set[str], dict]:
     element = fromstring(html)
-    files = []
+    files, images = set(), dict()
     for el in element.findall('.//a'):
         if el.attrib.get('href', '').startswith('files/'):
-            files.append(el.attrib['href'])
+            files.add(el.attrib['href'])
     for el in element.findall('.//img'):
         if el.attrib.get('src', '').startswith('files/'):
-            files.append(el.attrib['src'])
+            title = el.attrib.get('title', '')
+            images[el.attrib['src']] = title
 
-    return set(files)
+    return files, images
+
+
+def generate_sitemap(site_addr, articles_data: List[ArticleData]):
+    template = env.get_template(SITEMAP_TEMPLATE_FILE.name)
+    xml = template.render(site_addr=site_addr, articles_data=articles_data)
+    return xml
 
 
 class BlogGen:
@@ -154,8 +174,12 @@ class BlogGen:
                                    'sql': 'bi:file-earmark-code'}
 
     @staticmethod
-    def iter_articles_source_dir():
-        for article_source_dir in ARTICLES_SOURCE_DIR.iterdir():
+    def iter_articles_source_dir(reverse=False):
+        iter_dir = ARTICLES_SOURCE_DIR.iterdir()
+        if reverse:
+            iter_dir = reversed(tuple(iter_dir))
+
+        for article_source_dir in iter_dir:
             if article_source_dir not in AS_DIRS_IGNORE:
                 yield article_source_dir
 
@@ -222,7 +246,7 @@ class BlogGen:
 
 def main(font_icons=True):
     articles_data = []
-    for article_source_dir in reversed(tuple(BlogGen.iter_articles_source_dir())):
+    for article_source_dir in BlogGen.iter_articles_source_dir(reverse=True):
         # Генерация обновленной страницы
         article_md_file = article_source_dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
@@ -233,11 +257,11 @@ def main(font_icons=True):
         article_index_file.write_text(article_html)
 
         # Создание ссылок на прикрепляемые файлы
-        files_pathes = retrieve_attached_files_links(article_html)
-        for fpath in files_pathes:
+        files_paths, images = retrieve_attached_files_pathes(article_html)
+        for path in chain(files_paths, images.keys()):
             # Жесткие ссылки на исходные файлы
-            target = article_source_dir / fpath
-            hardlink_file = article_index_file.parent / fpath
+            target = article_source_dir / path
+            hardlink_file = article_index_file.parent / path
             hardlink_file.parent.mkdir(parents=True, exist_ok=True)
             with suppress(FileExistsError):
                 os.link(target, hardlink_file)
@@ -246,13 +270,16 @@ def main(font_icons=True):
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
         first_p_text = list(islice(root_element.iterfind('.//p'), 2))[1].text
-        relative_link = article_index_file.relative_to(DOCS_DIR).parent
-        adata = ArticleData(title=first_h1_text, relative_link=relative_link, paragraph=first_p_text,
-                            created_date=article_source_dir.name)
+        article_relative_link = article_index_file.relative_to(DOCS_DIR).parent
+        images = tuple(Image(title, path, article_relative_link) for path, title in images.items() if title)
+        adata = ArticleData(title=first_h1_text, relative_link=article_relative_link, paragraph=first_p_text,
+                            created_date=article_source_dir.name, images=images)
         articles_data.append(adata)
 
     index_html = generate_index_html(articles_data)
     INDEX_FILE.write_text(index_html)
+    index_html = generate_sitemap(SITE_ADDR, articles_data)
+    SITEMAP_FILE.write_text(index_html)
 
 
 if __name__ == '__main__':

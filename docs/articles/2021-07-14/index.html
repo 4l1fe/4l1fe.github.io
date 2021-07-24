@@ -94,7 +94,7 @@ sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  11,59s user 0,42s sy
 sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  13,23s user 0,49s system 99% cpu 13,747 total
 sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  14,52s user 0,58s system 99% cpu 15,126 total
 </code></pre>
-<p>The longest query time is 14.52 seconds which is sensitive for a human perception. What if you run hundreds of such queries? Would you</p>
+<p>The longest query time is 14.52 seconds which is sensitive for a human perception. What if you run hundreds of such queries?</p>
 <p>Ok, we are at the key point, DuckDB comes into play.</p>
 <pre><code>$ for i in `seq 1 10`; do \
 sed 's/random_data/random_data'"$i"'/g' query.sql &gt; edited-query.sql; \
@@ -114,12 +114,11 @@ duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,62s user 0,16s syst
 </code></pre>
 <p>What would you say? Database fundamental difference is clearly evident. After all executions, DuckDB didn't even exceed 1 second at the same time SQLite exceeded 14 seconds.</p>
 <p>Job is done and it's time to prettify output making each execution time visual.</p>
-<p>**</p>
 <h2>Visualize the results <a id="visualize-the-results" href="#visualize-the-results"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
 <p>Here we take the result output, convert it to the python lists and build performance chart upon it. The scripts <a href="files/convertation.py"><span class="iconify" data-icon="teenyicons:python-outline"></span> convertation.py</a> and <a href="files/chart.py"><span class="iconify" data-icon="teenyicons:python-outline"></span> chart.py</a> do this job.</p>
 <pre><code>$ python chart.py
 </code></pre>
-<p><img src="files/chart.png" alt=""></p>
+<p><img src="files/chart.png" alt="" title="Query execution performance"></p>
 <p>Look at the picture and try to extrapolate the measurements on 100M records and over...</p>
 <h2>Emphasize the concept <a id="emphasize-the-concept" href="#emphasize-the-concept"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
 <p>Thу experiment represents the main idea only that getting an extreme performance boost can be reached by storing data on a disk as column values one by one in a case of complex computational queries(OLAP). Such a boost we see on the chart.</p>
