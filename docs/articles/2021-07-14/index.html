@@ -39,7 +39,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <h2>Prerequisites <a id="prerequisites" href="#prerequisites"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
 <p>Simply install following python dependencies <code>pip install duckdb plotly typer</code> and SQLite CLI <code>sudo apt install sqlite3</code>. Along with the python <code>duckdb</code> bindings we will use DuckDB CLI, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v0.2.7/duckdb_cli-linux-amd64.zip"><span class="iconify" data-icon="bx:bx-link-external"></span> v0.2.7-duckdb_cli-linux-amd64.zip</a></p>
 <h2>Fill the databases <a id="fill-the-databases" href="#fill-the-databases"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
-<p>In order to notice a difference in performance, stored data amount should be significantly big therefore we generate random data and write it into the databases.</p>
+<p>In order to notice a difference in performance, the amount of stored data should be significantly big therefore we generate random data and write it into the databases.</p>
 <p>Tables' columns are a group of an id field and 3 values' fields. All values are randomly generated integers.</p>
 <p>Table schema:</p>
 <pre><code>random_data(
@@ -53,14 +53,14 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 ...
 Database random.duckdb is filled up
 </code></pre>
-<p>After a while, as filling 10M records is completed, we dump all data to a CSV file and load it into a new SQLite db. You can take the archived 165Mb file <a href="files/random_data.csv.tar.gz"><span class="iconify" data-icon="icomoon-free:file-zip"></span> random_data.csv.tar.gz</a> to pass data generating.</p>
+<p>After a while, as the filling 10M records has been completed, we dump all data to a CSV file and load it into a new SQLite db. You can take the archived 165Mb file <a href="files/random_data.csv.tar.gz"><span class="iconify" data-icon="icomoon-free:file-zip"></span> random_data.csv.tar.gz</a> to pass data generating.</p>
 <p>We get to SQLite db. Dump data from <code>random.duckdb</code> as a CSV file and import it into <code>random.sqlite</code> table with the same schema.</p>
 <pre><code>$ python database.py dump-csv --path dump
 $ python database.py fill-sqlite dump/0_random_data.csv
 Database random.sqlite is filled up
 </code></pre>
-<p>Base tables are filled and we are able to run the special SQL query to figure out if its performance differs,  but having one result only, it doesn't reveal us how performance is changing according to data amount.</p>
-<p>For such a purpose to see execution time growth we can split the base tables onto series of incrementally enlarging tables reading data and putting it into a new table.</p>
+<p>Base tables are filled and we are able to run the special SQL query to figure out if its performance differs,  but having one result only, it doesn't reveal to us how performance is changing according to data amount.</p>
+<p>For such a purpose to see execution time growth we can split the base tables into a series of incrementally enlarging tables by reading data and adding it into a new table.</p>
 <p>Now we create the tables for both databases.</p>
 <pre><code>$ python database.py split-duckdb --tables-count 10
 ...
@@ -74,10 +74,10 @@ Table created:  random_data10
 ...
 Table filling:   random_data10
 </code></pre>
-<p>At the moment everything is ready to run the query.</p>
+<p>At the moment, everything is ready to run the query.</p>
 <h2>Run the query <a id="run-the-query" href="#run-the-query"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
-<p>As we know, OLAP implies querying a database and compute metrics which can lead to getting insights in a business field. Therefore, we emulate it and compute <code>min(), max(), avg(), sum()</code> values on each column. SQL code we run <a href="files/query.sql"><span class="iconify" data-icon="bi:file-earmark-code"></span> query.sql</a>.</p>
-<p>Using shell scripting we organize running the query measuring time in a for loop replacing the base table name with the split table name.</p>
+<p>As we know, OLAP implies querying a database and computing metrics which can lead to getting insights about a business field. Therefore, we emulate it and compute <code>min(), max(), avg(), sum()</code> values on each column. SQL code we run <a href="files/query.sql"><span class="iconify" data-icon="bi:file-earmark-code"></span> query.sql</a>.</p>
+<p>By using the shell scripting, we organize running the query measuring time in a for loop replacing the base table name with the split table name.</p>
 <pre><code>$ for i in `seq 1 10`; do \
 sed 's/random_data/random_data'"$i"'/g' query.sql &gt; edited-query.sql; \
 time sqlite3 random.sqlite &lt; edited-query.sql &gt;/dev/null; \
@@ -112,7 +112,7 @@ duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,53s user 0,10s syst
 duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,56s user 0,17s system 99% cpu 0,728 total
 duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,62s user 0,16s system 99% cpu 0,781 total
 </code></pre>
-<p>What would you say? Database fundamental difference is clearly evident. After all executions, DuckDB didn't even exceed 1 second at the same time SQLite exceeded 14 seconds.</p>
+<p>What would you say? Database fundamental difference is clearly evident. After all executions, DuckDB didn't even exceed 1 second. Meanwhile, SQLite exceeded 14 seconds.</p>
 <p>Job is done and it's time to prettify output making each execution time visual.</p>
 <h2>Visualize the results <a id="visualize-the-results" href="#visualize-the-results"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
 <p>Here we take the result output, convert it to the python lists and build the performance chart upon it. The scripts <a href="files/convertation.py"><span class="iconify" data-icon="teenyicons:python-outline"></span> convertation.py</a> and <a href="files/chart.py"><span class="iconify" data-icon="teenyicons:python-outline"></span> chart.py</a> do this job.</p>

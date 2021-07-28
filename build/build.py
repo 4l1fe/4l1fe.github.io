@@ -141,7 +141,7 @@ def generate_article_diff_html(content_html, toc_html):
     return html
 
 
-def retrieve_attached_files_pathes(html) -> Tuple[Set[str], dict]:
+def retrieve_attached_files_paths(html) -> Tuple[Set[str], dict]:
     element = fromstring(html)
     files, images = set(), dict()
     for el in element.findall('.//a'):
@@ -257,7 +257,7 @@ def main(font_icons=True):
         article_index_file.write_text(article_html)
 
         # Создание ссылок на прикрепляемые файлы
-        files_paths, images = retrieve_attached_files_pathes(article_html)
+        files_paths, images = retrieve_attached_files_paths(article_html)
         for path in chain(files_paths, images.keys()):
             # Жесткие ссылки на исходные файлы
             target = article_source_dir / path
