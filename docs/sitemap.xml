@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
-    <loc>https://4l1fe.github.io/articles/2021-07-14</loc>
+    <loc>https://4l1fe.github.io/articles/2021-07-14/</loc>
           <image:image>
         <image:loc>https://4l1fe.github.io/articles/2021-07-14/files/chart.png</image:loc>
         <image:title>Query execution performance</image:title>
       </image:image>
       </url>
     <url>
-    <loc>https://4l1fe.github.io/articles/2021-06-10</loc>
+    <loc>https://4l1fe.github.io/articles/2021-06-10/</loc>
       </url>
     <url>
-    <loc>https://4l1fe.github.io/articles/2021-02-24</loc>
+    <loc>https://4l1fe.github.io/articles/2021-02-24/</loc>
           <image:image>
         <image:loc>https://4l1fe.github.io/articles/2021-02-24/files/tinydb/basic-scenario-edited.png</image:loc>
         <image:title>Call graph</image:title>
