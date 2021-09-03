@@ -15,7 +15,7 @@
     {% for adata in articles_data %}
     <div id="content" class="col-12 col-lg-9 border-top">
         <p class="float-lg-end text-muted mb-0">{{ adata.created_date }}</p>
-        <h3><a class="link-dark link-dark-hover" href="{{ adata.relative_link }}">{{ adata.title }}</a></h3>
+        <h3><a class="link-dark link-dark-hover" href="{{ adata.relative_link | trailing_slash }}">{{ adata.title }}</a></h3>
         <p>{{ adata.paragraph | truncate }}</p>
     </div>
     {% endfor %}

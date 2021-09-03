@@ -21,10 +21,16 @@ TOC_HEADERS = HEADERS[1:]
 TOC_LOWEST_HLEVEL = 3  # эквивалент <h3>
 TocType = List[Tuple[int, str]]
 
+
+def trailing_slash(link: Path) -> str:
+    return link.as_posix() + '/'
+
+
 Dom = getDOMImplementation()
 env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks=True,
                   autoescape=select_autoescape(['html']))
 env.globals['google_verification_token'] = GOOGLE_VERF_TOKEN
+env.filters['trailing_slash'] = trailing_slash
 tostring = functools.partial(_tostring, encoding='unicode')
 
 
