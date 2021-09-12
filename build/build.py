@@ -9,7 +9,6 @@ from itertools import islice, chain
 from contextlib import suppress
 from pathlib import Path
 from lxml.html import Element, fromstring, tostring as _tostring
-from lxml.html.diff import htmldiff
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
                        INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE, GOOGLE_VERF_TOKEN,
@@ -130,23 +129,6 @@ def generate_index_html(articles_data: List[ArticleData]):
     return html
 
 
-def retrieve_article_diff_html(current_html, initial_html):
-    old_element = fromstring(initial_html).find('.//div[@id="content"]')
-    current_element = fromstring(current_html).find('.//div[@id="content"]')
-    diff_html = htmldiff(tostring(old_element), tostring(current_element))
-    diff_html = diff_html[diff_html.find('>')+1:]
-    diff_html = diff_html[:diff_html.rfind('</')]
-
-    return diff_html
-
-
-def generate_article_diff_html(content_html, toc_html):
-    template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
-    html = template.render(content=content_html, toc=toc_html, diff=True)
-
-    return html
-
-
 def retrieve_attached_files_paths(html) -> Tuple[Set[str], dict]:
     element = fromstring(html)
     files, images = set(), dict()
@@ -182,10 +164,8 @@ class BlogGen:
     @staticmethod
     def iter_articles_source_dir(reverse=False):
         iter_dir = ARTICLES_SOURCE_DIR.iterdir()
-        if reverse:
-            iter_dir = reversed(tuple(iter_dir))
 
-        for article_source_dir in iter_dir:
+        for article_source_dir in sorted(iter_dir, reverse=reverse):
             if article_source_dir not in AS_DIRS_IGNORE:
                 yield article_source_dir
 

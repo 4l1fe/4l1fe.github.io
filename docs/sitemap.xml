@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+    <loc>https://4l1fe.github.io/articles/2021-09-09/</loc>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-09-09/files/subsection-done.png</image:loc>
+        <image:title>Subsection done</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-09-09/files/subsection-chart.png</image:loc>
+        <image:title>Subsection stats</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-09-09/files/flow-chart-partial.png</image:loc>
+        <image:title>Flow chart partial</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-09-09/files/flow-chart-endpoint.png</image:loc>
+        <image:title>Flow chart endpoint</image:title>
+      </image:image>
+      </url>
+    <url>
     <loc>https://4l1fe.github.io/articles/2021-07-14/</loc>
           <image:image>
         <image:loc>https://4l1fe.github.io/articles/2021-07-14/files/chart.png</image:loc>
