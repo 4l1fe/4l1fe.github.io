@@ -1,6 +1,7 @@
 import os
 import functools
-import commonmark
+import markdown_it
+import yappi
 
 from typing import List, Tuple, Set
 from xml.dom.minidom import getDOMImplementation
@@ -42,6 +43,7 @@ class Image:
     def __post_init__(self, article_relative_link):
         self.relative_link = article_relative_link.joinpath(self.relative_link)
 
+
 @dataclass
 class ArticleData:
     title: str
@@ -81,7 +83,7 @@ def extract_toc(html: str) -> TocType:
 
 
 def generate_toc_html(toc: TocType, lowest_header_lvl=TOC_LOWEST_HLEVEL) -> str:
-    doc = Dom.createDocument(None, "ul", None)
+    doc = Dom.createDocument(None, "ol", None)
     parent_element = doc.documentElement
     prev_header_level = 2
 
@@ -100,22 +102,22 @@ def generate_toc_html(toc: TocType, lowest_header_lvl=TOC_LOWEST_HLEVEL) -> str:
             continue
 
         if header_level > prev_header_level:
-            # создаем вложенный ul
+            # создаем вложенный ol
             parent_li = parent_element.childNodes[-1]
-            ul = doc.createElement('ul')
-            parent_li.appendChild(ul)
-            parent_element = ul
+            ol = doc.createElement('ol')
+            parent_li.appendChild(ol)
+            parent_element = ol
             _create_li_element(parent_element, header_text)
             pass
         elif header_level == prev_header_level:
-            # добавляем в текущий ul
+            # добавляем в текущий ol
             _create_li_element(parent_element, header_text)
         elif header_level < prev_header_level:
-            # откатываемся к ранее созданному ul
+            # откатываемся к ранее созданному ol
             steps = prev_header_level - header_level
             while steps:
                 parent_element = parent_element.parentNode
-                if parent_element.nodeName == 'ul':
+                if parent_element.nodeName == 'ol':
                     steps -= 1
             _create_li_element(parent_element, header_text)
         prev_header_level = header_level
@@ -202,7 +204,9 @@ class BlogGen:
 
     @staticmethod
     def generate_article_html(md_text, font_icons=False):
-        html = commonmark.commonmark(md_text)
+        parser = markdown_it.MarkdownIt().enable('table')
+        html = parser.render(md_text)
+
         content_html = BlogGen.add_headers_anchors(html)
 
         toc = extract_toc(content_html)

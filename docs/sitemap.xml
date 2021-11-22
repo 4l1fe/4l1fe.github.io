@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+    <loc>https://4l1fe.github.io/articles/2021-11-23/</loc>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Ads-settings.png</image:loc>
+        <image:title>Ads settings</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Cookies-settings.png</image:loc>
+        <image:title>Cookies settings</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Tiles.png</image:loc>
+        <image:title>Tiles</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Stack.png</image:loc>
+        <image:title>Stack</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Pin.png</image:loc>
+        <image:title>Pin</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Blank-page.png</image:loc>
+        <image:title>Blank page</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Actions-off.png</image:loc>
+        <image:title>Page actions off</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Actions-on.png</image:loc>
+        <image:title>Page actions on</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Quick-commands.png</image:loc>
+        <image:title>Quck commands</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Reader-off.png</image:loc>
+        <image:title>Reader view off</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Reader-on.png</image:loc>
+        <image:title>Reader view on</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Sync-desktop.png</image:loc>
+        <image:title>Desktop syncing</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Sync-mobile.jpg</image:loc>
+        <image:title>Mobile syncing</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Gestures.png</image:loc>
+        <image:title>Gestures</image:title>
+      </image:image>
+          <image:image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Gestures-rocker.png</image:loc>
+        <image:title>Rocker</image:title>
+      </image:image>
+      </url>
+    <url>
     <loc>https://4l1fe.github.io/articles/2021-09-09/</loc>
           <image:image>
         <image:loc>https://4l1fe.github.io/articles/2021-09-09/files/subsection-done.png</image:loc>

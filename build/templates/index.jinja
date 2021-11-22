@@ -9,11 +9,16 @@
         <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a>
            <a class="me-1" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov-410aa956">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a>
            <a class="me-1" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></p>
+
     </div>
 </div>
 <div class="row">
+    <div class="col-12 col-lg-9">
+        <h2>Articles</h2>
+<!--        <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="rss">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a></p>-->
+    </div>
     {% for adata in articles_data %}
-    <div id="content" class="col-12 col-lg-9 border-top">
+    <div class="col-12 col-lg-9">
         <p class="float-lg-end text-muted mb-0">{{ adata.created_date }}</p>
         <h3><a class="link-dark link-dark-hover" href="{{ adata.relative_link | trailing_slash }}">{{ adata.title }}</a></h3>
         <p>{{ adata.paragraph | truncate }}</p>
