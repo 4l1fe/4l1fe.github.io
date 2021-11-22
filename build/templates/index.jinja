@@ -15,11 +15,11 @@
 <div class="row">
     <div class="col-12 col-lg-9">
         <h2>Articles</h2>
-<!--        <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="rss">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a></p>-->
+        <p><a class="me-1" href="rss.xml">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a></p>
     </div>
     {% for adata in articles_data %}
     <div class="col-12 col-lg-9">
-        <p class="float-lg-end text-muted mb-0">{{ adata.created_date }}</p>
+        <p class="float-lg-end text-muted mb-0">{{ adata.created_date.strftime('%Y-%m-%d') }}</p>
         <h3><a class="link-dark link-dark-hover" href="{{ adata.relative_link | trailing_slash }}">{{ adata.title }}</a></h3>
         <p>{{ adata.paragraph | truncate }}</p>
     </div>

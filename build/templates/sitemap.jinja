@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  {% for article in articles_data %}
+  {% for adata in articles_data %}
   <url>
-    <loc>{{ site_addr }}/{{ article.relative_link | trailing_slash}}</loc>
-    {% for image in article.images %}
+    <loc>{{ site_addr }}/{{ adata.relative_link | trailing_slash}}</loc>
+    {% for image in adata.images %}
       <image:image>
         <image:loc>{{ site_addr }}/{{ image.relative_link }}</image:loc>
         <image:title>{{ image.title }}</image:title>

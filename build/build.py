@@ -1,7 +1,6 @@
 import os
 import functools
 import markdown_it
-import yappi
 
 from typing import List, Tuple, Set
 from xml.dom.minidom import getDOMImplementation
@@ -11,14 +10,15 @@ from contextlib import suppress
 from pathlib import Path
 from lxml.html import Element, fromstring, tostring as _tostring
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from datetime import datetime
 from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
                        INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE, GOOGLE_VERF_TOKEN,
-                       SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDR)
+                       SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDR, RSS_FILE, RSS_TEMPLATE_FILE)
 
 
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 TOC_HEADERS = HEADERS[1:]
-TOC_LOWEST_HLEVEL = 3  # эквивалент <h3>
+TOC_LOWEST_HEADER = 3  # эквивалент <h3>
 TocType = List[Tuple[int, str]]
 
 
@@ -26,11 +26,17 @@ def trailing_slash(link: Path) -> str:
     return link.as_posix() + '/'
 
 
+def to_rfc822(dt: datetime) -> str:
+    return dt.strftime('%d %b %Y 00:00:00 +0000').lstrip('0')
+
+
 Dom = getDOMImplementation()
 env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks=True,
                   autoescape=select_autoescape(['html']))
 env.globals['google_verification_token'] = GOOGLE_VERF_TOKEN
+env.globals['site_addr'] = SITE_ADDR
 env.filters['trailing_slash'] = trailing_slash
+env.filters['to_rfc822'] = to_rfc822
 tostring = functools.partial(_tostring, encoding='unicode')
 
 
@@ -49,7 +55,7 @@ class ArticleData:
     title: str
     relative_link: Path
     paragraph: str
-    created_date: str
+    created_date: datetime
     img_relative_link: Path = None
     images: Tuple[Image] = ()
 
@@ -82,7 +88,7 @@ def extract_toc(html: str) -> TocType:
     return toc
 
 
-def generate_toc_html(toc: TocType, lowest_header_lvl=TOC_LOWEST_HLEVEL) -> str:
+def generate_toc_html(toc: TocType, lowest_header_lvl=TOC_LOWEST_HEADER) -> str:
     doc = Dom.createDocument(None, "ol", None)
     parent_element = doc.documentElement
     prev_header_level = 2
@@ -145,9 +151,16 @@ def retrieve_attached_files_paths(html) -> Tuple[Set[str], dict]:
     return files, images
 
 
-def generate_sitemap(site_addr, articles_data: List[ArticleData]):
+def generate_sitemap(articles_data: List[ArticleData]):
     template = env.get_template(SITEMAP_TEMPLATE_FILE.name)
-    xml = template.render(site_addr=site_addr, articles_data=articles_data)
+    xml = template.render(articles_data=articles_data)
+    return xml
+
+
+def generate_rss(articles_data: List[ArticleData]):
+    template = env.get_template(RSS_TEMPLATE_FILE.name)
+    pub_date = datetime.now()
+    xml = template.render(pub_date=pub_date, articles_data=articles_data)
     return xml
 
 
@@ -261,15 +274,18 @@ def main(font_icons=True):
         first_h1_text = root_element.find('.//h1').text
         first_p_text = list(islice(root_element.iterfind('.//p'), 2))[1].text
         article_relative_link = article_index_file.relative_to(DOCS_DIR).parent
+        created_date = datetime.strptime(article_source_dir.name, '%Y-%m-%d')
         images = tuple(Image(title, path, article_relative_link) for path, title in images.items() if title)
         adata = ArticleData(title=first_h1_text, relative_link=article_relative_link, paragraph=first_p_text,
-                            created_date=article_source_dir.name, images=images)
+                            created_date=created_date, images=images)
         articles_data.append(adata)
 
     index_html = generate_index_html(articles_data)
     INDEX_FILE.write_text(index_html)
-    index_html = generate_sitemap(SITE_ADDR, articles_data)
-    SITEMAP_FILE.write_text(index_html)
+    sitemap_xml = generate_sitemap(articles_data)
+    SITEMAP_FILE.write_text(sitemap_xml)
+    rss_xml = generate_rss(articles_data)
+    RSS_FILE.write_text(rss_xml)
 
 
 if __name__ == '__main__':
