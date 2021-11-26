@@ -18,4 +18,5 @@ AS_DIRS_IGNORE = {ARTICLES_SOURCE_DIR / 'drafts', }
 ARTICLE_MD_FILE = 'README.md'
 ARTICLE_IMG_FILE = 'files/main-section.png'
 GOOGLE_VERF_TOKEN = 'utO5yk8RwIXZ-_rnxq_xpMndgtw0MU_VqtE61lNmjsY'
-SITE_ADDR = 'https://4l1fe.github.io'
+SITE_NAME = 'ТехнологоблогЪ'
+SITE_ADDRESS = 'https://4l1fe.github.io'

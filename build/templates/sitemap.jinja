@@ -2,10 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   {% for adata in articles_data %}
   <url>
-    <loc>{{ site_addr }}/{{ adata.relative_link | trailing_slash}}</loc>
+    <loc>{{ adata.relative_link | prepend_site_address | trailing_slash}}</loc>
+    <image>
+        <image:loc>{{ adata.img_relative_link | prepend_site_address }}</image:loc>
+    </image>
     {% for image in adata.images %}
       <image:image>
-        <image:loc>{{ site_addr }}/{{ image.relative_link }}</image:loc>
+        <image:loc>{{ image.relative_link | prepend_site_address }}</image:loc>
         <image:title>{{ image.title }}</image:title>
       </image:image>
     {% endfor %}

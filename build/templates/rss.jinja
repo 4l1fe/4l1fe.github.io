@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 	<channel>
-		<title>ТехнологоблогЪ</title>
-		<link>{{ site_addr }}</link>
+		<title>{{ site_name }}</title>
+		<link>{{ site_address }}</link>
 		<description>Observe existence, drink tea, cognize.</description>
 		<pubDate>{{ pub_date | to_rfc822 }}</pubDate>
 		{% for adata in articles_data%}
 		<item>
 			<title>{{ adata.title }}</title>
-			<link>{{ site_addr }}/{{ adata.relative_link | trailing_slash }}</link>
+			<link>{{ adata.relative_link | prepend_site_address | trailing_slash  }}</link>
 			<description>{{ adata.paragraph | truncate }}</description>
 			<pubDate>{{ adata.created_date | to_rfc822 }}</pubDate>
-			<guid>{{ site_addr }}/{{ adata.relative_link | trailing_slash}}</guid>
+			<guid>{{ adata.relative_link | prepend_site_address | trailing_slash }}</guid>
 		</item>
 		{% endfor %}
 		</channel>

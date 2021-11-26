@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
     <loc>https://4l1fe.github.io/articles/2021-11-23/</loc>
+    <image>
+        <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/main-section.png</image:loc>
+    </image>
           <image:image>
         <image:loc>https://4l1fe.github.io/articles/2021-11-23/files/Settings.png</image:loc>
         <image:title>Settings</image:title>
@@ -65,6 +68,9 @@
       </url>
     <url>
     <loc>https://4l1fe.github.io/articles/2021-09-09/</loc>
+    <image>
+        <image:loc>https://4l1fe.github.io/articles/2021-09-09/files/main-section.png</image:loc>
+    </image>
           <image:image>
         <image:loc>https://4l1fe.github.io/articles/2021-09-09/files/subsection-done.png</image:loc>
         <image:title>Subsection done</image:title>
@@ -84,6 +90,9 @@
       </url>
     <url>
     <loc>https://4l1fe.github.io/articles/2021-07-14/</loc>
+    <image>
+        <image:loc>https://4l1fe.github.io/articles/2021-07-14/files/main-section.png</image:loc>
+    </image>
           <image:image>
         <image:loc>https://4l1fe.github.io/articles/2021-07-14/files/chart.png</image:loc>
         <image:title>Query execution performance</image:title>
@@ -91,9 +100,15 @@
       </url>
     <url>
     <loc>https://4l1fe.github.io/articles/2021-06-10/</loc>
+    <image>
+        <image:loc>https://4l1fe.github.io/articles/2021-06-10/files/main-section.png</image:loc>
+    </image>
       </url>
     <url>
     <loc>https://4l1fe.github.io/articles/2021-02-24/</loc>
+    <image>
+        <image:loc>https://4l1fe.github.io/articles/2021-02-24/files/main-section.png</image:loc>
+    </image>
           <image:image>
         <image:loc>https://4l1fe.github.io/articles/2021-02-24/files/tinydb/basic-scenario-edited.png</image:loc>
         <image:title>Call graph</image:title>

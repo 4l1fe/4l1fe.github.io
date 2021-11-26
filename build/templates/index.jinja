@@ -13,16 +13,19 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-12 col-lg-9">
+    <div class="col-12">
         <h2>Articles</h2>
         <p><a class="me-1" href="rss.xml">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a></p>
     </div>
-    {% for adata in articles_data %}
-    <div class="col-12 col-lg-9">
-        <p class="float-lg-end text-muted mb-0">{{ adata.created_date.strftime('%Y-%m-%d') }}</p>
+</div>
+{% for adata in articles_data %}
+<div class="row">
+    <div class="col-lg-9">
         <h3><a class="link-dark link-dark-hover" href="{{ adata.relative_link | trailing_slash }}">{{ adata.title }}</a></h3>
+        <p class="text-muted mb-0"><span class="iconify me-1" data-icon="ic:round-date-range"></span>{{ adata.created_date.strftime('%Y-%m-%d') }}</p>
         <p>{{ adata.paragraph | truncate }}</p>
     </div>
-    {% endfor %}
 </div>
+{% endfor %}
+
 {% endblock content %}
