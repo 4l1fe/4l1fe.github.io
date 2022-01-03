@@ -2,43 +2,43 @@
 <rss version="2.0">
 	<channel>
 		<title>ТехнологоблогЪ</title>
-		<link>https://4l1fe.github.io</link>
+		<link>https://www.4l1fe.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>26 Nov 2021 00:00:00 +0000</pubDate>
+		<pubDate>3 Jan 2022 00:00:00 +0000</pubDate>
 				<item>
 			<title>Beneficial Chrome replacement. Vivaldi </title>
-			<link>https://4l1fe.github.io/articles/2021-11-23/</link>
+			<link>https://www.4l1fe.dev/articles/2021-11-23/</link>
 			<description>I had been using Chrome for a quite long time as many others certainly. That's a good, modern, powerful browser. During usage of it for a job purpose, i found more and more features it's good to have to simplify different operations and keep them...</description>
 			<pubDate>23 Nov 2021 00:00:00 +0000</pubDate>
-			<guid>https://4l1fe.github.io/articles/2021-11-23/</guid>
+			<guid>https://www.4l1fe.dev/articles/2021-11-23/</guid>
 		</item>
 				<item>
 			<title>Laptop bootloading time extreme growth. SystemD </title>
-			<link>https://4l1fe.github.io/articles/2021-09-09/</link>
+			<link>https://www.4l1fe.dev/articles/2021-09-09/</link>
 			<description>If you have Linux installed on your laptop you may once encounter OS is bootloading abnormally slow what is happened in my case and it has taken around 44 seconds where 26 seconds in the userspace level. I've noticed after pressing the power button on...</description>
 			<pubDate>9 Sep 2021 00:00:00 +0000</pubDate>
-			<guid>https://4l1fe.github.io/articles/2021-09-09/</guid>
+			<guid>https://www.4l1fe.dev/articles/2021-09-09/</guid>
 		</item>
 				<item>
 			<title>Columnar DB performance in action. DuckDB </title>
-			<link>https://4l1fe.github.io/articles/2021-07-14/</link>
+			<link>https://www.4l1fe.dev/articles/2021-07-14/</link>
 			<description>This article is intended to represent only one simple thing is a fundamental difference between columnar family and standard row-based databases by an example. Roughly speaking, you may need a column-based database if working with a complex...</description>
 			<pubDate>14 Jul 2021 00:00:00 +0000</pubDate>
-			<guid>https://4l1fe.github.io/articles/2021-07-14/</guid>
+			<guid>https://www.4l1fe.dev/articles/2021-07-14/</guid>
 		</item>
 				<item>
 			<title>Fix ERR_CERT_AUTHORITY_INVALID error python clients get while proxying. Mitmproxy </title>
-			<link>https://4l1fe.github.io/articles/2021-06-10/</link>
+			<link>https://www.4l1fe.dev/articles/2021-06-10/</link>
 			<description>You may find out as me that after proper setting Mitmproxy up python https requests end up with ERR_CERT_AUTHORITY_INVALID error while other http clients are working with no problems. Quite unexpectable, isn't it?</description>
 			<pubDate>10 Jun 2021 00:00:00 +0000</pubDate>
-			<guid>https://4l1fe.github.io/articles/2021-06-10/</guid>
+			<guid>https://www.4l1fe.dev/articles/2021-06-10/</guid>
 		</item>
 				<item>
 			<title>Рассмотрение абстракций, их взаимосвязей и сложности библиотек встраиваемых БД </title>
-			<link>https://4l1fe.github.io/articles/2021-02-24/</link>
+			<link>https://www.4l1fe.dev/articles/2021-02-24/</link>
 			<description>Часто возникает желание иметь простейшую архитектуру сервиса или программы, в которой будут отсутствовать избыточные компоненты и межсетевое взаимодействие. Это ощутимо сокращает силы и время на их реализацию, поддержку и погружение. Чтобы...</description>
 			<pubDate>24 Feb 2021 00:00:00 +0000</pubDate>
-			<guid>https://4l1fe.github.io/articles/2021-02-24/</guid>
+			<guid>https://www.4l1fe.dev/articles/2021-02-24/</guid>
 		</item>
 				</channel>
 	</rss>

@@ -1,3 +1,11 @@
+@font-face {
+  font-family: Terminus;
+  src: url('Terminus.woff2');
+}
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('Roboto-Mono.woff2');
+}
 body {
     font-family: 'Roboto Mono';
 }
@@ -25,16 +33,12 @@ a.link-dark-hover:hover {
 }
 pre {
     padding: 1em;
-    border-top-color: rgb(222, 226, 230) !important;
     border-top-style: solid !important;
     border-top-width: 1px !important;
-    border-right-color: rgb(222, 226, 230) !important;
     border-right-style: solid !important;
     border-right-width: 1px !important;
-    border-bottom-color: rgb(222, 226, 230) !important;
     border-bottom-style: solid !important;
     border-bottom-width: 1px !important;
-    border-left-color: rgb(222, 226, 230) !important;
     border-left-style: solid !important;
     border-left-width: 1px !important;
     border-image-source: initial !important;
@@ -46,10 +50,14 @@ pre {
     border-top-right-radius: 0.25rem !important;
     border-bottom-right-radius: 0.25rem !important;
     border-bottom-left-radius: 0.25rem !important;
-    background-color: #f0f0f0;
-    color: #000000
+    background-color: #000000;
+    color: #ffffff
+}
+pre code {
+    font-family: 'Terminus';
 }
 :not(pre) > code {
+    font-family: 'Terminus';
     padding-top: 0.1em;
     padding-bottom: 0.1em;
     padding-left: 0.5em;
