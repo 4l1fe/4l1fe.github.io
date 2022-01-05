@@ -3,11 +3,18 @@
   src: url('Terminus.woff2');
 }
 @font-face {
-  font-family: 'Roboto Mono';
-  src: url('Roboto-Mono.woff2');
+  font-family: RML;
+  src: url('RobotoMono-Light.woff2');
+}
+@font-face {
+  font-family: RMM';
+  src: url('RobotoMono-Medium.woff2');
 }
 body {
-    font-family: 'Roboto Mono';
+    font-family: 'RML';
+}
+h1,h2,h3,h4,h5 {
+    font-family: 'RMM';
 }
 a {
     color: #920000
@@ -33,23 +40,10 @@ a.link-dark-hover:hover {
 }
 pre {
     padding: 1em;
-    border-top-style: solid !important;
-    border-top-width: 1px !important;
-    border-right-style: solid !important;
-    border-right-width: 1px !important;
-    border-bottom-style: solid !important;
-    border-bottom-width: 1px !important;
-    border-left-style: solid !important;
-    border-left-width: 1px !important;
-    border-image-source: initial !important;
-    border-image-slice: initial !important;
-    border-image-width: initial !important;
-    border-image-outset: initial !important;
-    border-image-repeat: initial !important;
-    border-top-left-radius: 0.25rem !important;
-    border-top-right-radius: 0.25rem !important;
-    border-bottom-right-radius: 0.25rem !important;
-    border-bottom-left-radius: 0.25rem !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-image: initial !important;
+    border-radius: .5rem;
     background-color: #000000;
     color: #ffffff
 }
@@ -58,31 +52,11 @@ pre code {
 }
 :not(pre) > code {
     font-family: 'Terminus';
-    padding-top: 0.1em;
-    padding-bottom: 0.1em;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    border-top-color: rgb(222, 226, 230) !important;
-    border-top-style: solid !important;
-    border-top-width: 1px !important;
-    border-right-color: rgb(222, 226, 230) !important;
-    border-right-style: solid !important;
-    border-right-width: 1px !important;
-    border-bottom-color: rgb(222, 226, 230) !important;
-    border-bottom-style: solid !important;
-    border-bottom-width: 1px !important;
-    border-left-color: rgb(222, 226, 230) !important;
-    border-left-style: solid !important;
-    border-left-width: 1px !important;
-    border-image-source: initial !important;
-    border-image-slice: initial !important;
-    border-image-width: initial !important;
-    border-image-outset: initial !important;
-    border-image-repeat: initial !important;
-    border-top-left-radius: 0.25rem !important;
-    border-top-right-radius: 0.25rem !important;
-    border-bottom-right-radius: 0.25rem !important;
-    border-bottom-left-radius: 0.25rem !important;
+    padding: .1em .5em .1em .5em;
+    border-color: #dee2e6 !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-radius: .25rem;
     background-color: #f0f0f0;
     color: #000000
 }
@@ -90,7 +64,7 @@ img {
     padding: .25rem;
     background-color: #fff;
     border: 1px solid #dee2e6;
-    border-radius: .25rem;
+    border-radius: .5rem;
     max-width: 100%;
     height: auto;
 }
