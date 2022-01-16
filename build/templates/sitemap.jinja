@@ -3,14 +3,14 @@
   {% for adata in articles_data %}
   <url>
     <loc>{{ adata.relative_link | prepend_site_address | trailing_slash}}</loc>
-    <image>
+    <image:image>
         <image:loc>{{ adata.img_relative_link | prepend_site_address }}</image:loc>
-    </image>
+    </image:image>
     {% for image in adata.images %}
-      <image:image>
+    <image:image>
         <image:loc>{{ image.relative_link | prepend_site_address }}</image:loc>
         <image:title>{{ image.title }}</image:title>
-      </image:image>
+    </image:image>
     {% endfor %}
   </url>
   {% endfor %}
