@@ -43,7 +43,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>Возьмем за кол-во три библиотеки, как минимально показательное, учитывая, что полученной информации по ним будет в конечном итоге много.</p>
 <ul>
 <li><a href="https://tinydb.readthedocs.io/en/latest/"><span class="iconify" data-icon="bx:bx-link-external"></span> tinydb</a></li>
-<li><a href="https://github.com/RaRe-Technologies/sqlitedict"><span class="iconify" data-icon="bx:bx-link-external"></span> sqlitedict</a></li>
+<li><a href="https://github.com/RaRe-Technologies/sqlitedict"><span class="iconify" data-icon="codicon:github-inverted"></span> sqlitedict</a></li>
 <li><a href="https://docs.peewee-orm.com/en/latest/peewee/playhouse.html#kv"><span class="iconify" data-icon="bx:bx-link-external"></span> peewee-kv</a></li>
 </ul>
 <h2>Список практик <a id="список-практик" href="#%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
@@ -66,7 +66,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 </ul>
 <h2>Вспомогательные инструменты <a id="вспомогательные-инструменты" href="#%D0%B2%D1%81%D0%BF%D0%BE%D0%BC%D0%BE%D0%B3%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
 <p>Перечислим инструменты с кратким описанием по каждому, чтобы в дальнейшем было понятно, для чего мы их используем и что от них ожидается.</p>
-<p>Ресурс, содержащий поддерживаемый <a href="https://github.com/analysis-tools-dev/static-analysis#python"><span class="iconify" data-icon="bx:bx-link-external"></span> список инструментов</a> по всевозможному анализу кода.</p>
+<p>Ресурс, содержащий поддерживаемый <a href="https://github.com/analysis-tools-dev/static-analysis#python"><span class="iconify" data-icon="codicon:github-inverted"></span> список инструментов</a> по всевозможному анализу кода.</p>
 <h3>Pyreverse <a id="pyreverse" href="#pyreverse"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h3>
 <p><a href="https://www.logilab.org/blogentry/6883"><span class="iconify" data-icon="bx:bx-link-external"></span> https://www.logilab.org/blogentry/6883</a></p>
 <blockquote>
@@ -74,10 +74,10 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 </blockquote>
 <p>Утилита является частью пакета <a href="https://pylint.org"><span class="iconify" data-icon="bx:bx-link-external"></span> pylint</a>. Как видно из цитаты, автоматически строит диаграммы классов. Эти диаграммы дадут нам  видение абстракций, которые содержит БД, и их взаимосвязей. При этом утилита позволяет указывать уровень глубины сканирования исходного кода.</p>
 <h3>Pydeps <a id="pydeps" href="#pydeps"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h3>
-<p><a href="https://github.com/thebjorn/pydeps"><span class="iconify" data-icon="bx:bx-link-external"></span> https://github.com/thebjorn/pydeps</a>.</p>
+<p><a href="https://github.com/thebjorn/pydeps"><span class="iconify" data-icon="codicon:github-inverted"></span> https://github.com/thebjorn/pydeps</a>.</p>
 <p>Утилита построения графа зависимостей с генерацией на осное формата <code>.dot</code> программного пакета <a href="http://www.graphviz.org/about/"><span class="iconify" data-icon="bx:bx-link-external"></span> Graphviz</a>. Изображение графа генерируется разными цветами, логика в этом присутствует, но для нас она значения не имеет, поэтому не стоит обращать на это внимание.</p>
 <h3>Gprof2dot <a id="gprof2dot" href="#gprof2dot"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h3>
-<p><a href="https://github.com/jrfonseca/gprof2dot"><span class="iconify" data-icon="bx:bx-link-external"></span> https://github.com/jrfonseca/gprof2dot</a></p>
+<p><a href="https://github.com/jrfonseca/gprof2dot"><span class="iconify" data-icon="codicon:github-inverted"></span> https://github.com/jrfonseca/gprof2dot</a></p>
 <p>Утилита строит граф вызовов указанного исполняемого сценария, поэтому необходимо в нем иметь вызовы оптимального кол-ва <strong>базовых абстракций</strong> библиотеки. Строится из файла формата <code>.pstats</code> стандартной библиотеки <a href="https://docs.python.org/3/library/profile.html#the-stats-class"><span class="iconify" data-icon="bx:bx-link-external"></span> Stats</a>. В дополнение к ней нужно иметь предустановленный программный пакет <a href="https://graphviz.org/download/#linux"><span class="iconify" data-icon="bx:bx-link-external"></span> GraphViz</a> и в частности утилиту <code>dot</code>.</p>
 <h3>Radon <a id="radon" href="#radon"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h3>
 <p><a href="https://radon.readthedocs.io/en/latest/"><span class="iconify" data-icon="bx:bx-link-external"></span> https://radon.readthedocs.io/en/latest/</a></p>
@@ -87,7 +87,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <li>Halstead metrics</li>
 </ul>
 <h3>McCabe <a id="mccabe" href="#mccabe"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h3>
-<p><a href="https://github.com/pycqa/mccabe"><span class="iconify" data-icon="bx:bx-link-external"></span> https://github.com/pycqa/mccabe</a></p>
+<p><a href="https://github.com/pycqa/mccabe"><span class="iconify" data-icon="codicon:github-inverted"></span> https://github.com/pycqa/mccabe</a></p>
 <p>Утилита в дополнение к <strong>radon</strong> генерирует граф в текстовом формате <code>dot</code> по которому можно сгенерировать отображение его прохождения потоком управления.</p>
 <h2>Рассмотрение <a id="рассмотрение" href="#%D1%80%D0%B0%D1%81%D1%81%D0%BC%D0%BE%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D0%B5"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
 <h3>Построение графа зависимостей <a id="построение-графа-зависимостей" href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B3%D1%80%D0%B0%D1%84%D0%B0-%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B5%D0%B9"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h3>

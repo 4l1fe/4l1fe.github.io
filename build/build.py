@@ -81,6 +81,7 @@ def generate_rss(articles_data: List[ArticleData]):
 
 class HTMLGen:
     EXTERNAL_LINK_ICON_CLASS = 'bx:bx-link-external'
+    EXTERNAL_LINK_GITHUB_ICON_CLASS = 'codicon:github-inverted'
     ANCHOR_LINK_ICON_CLASS = 'majesticons:hashtag-line'
     EXTENSIONS_ICON_CLASSES_MAP = {'png': 'bi:file-earmark-image',
                                    'jpg': 'bi:file-earmark-image',
@@ -135,7 +136,9 @@ class HTMLGen:
                 continue
 
             # External link
-            if resource.startswith('http'):
+            if resource.startswith('https://github.com'):
+                icon_class = HTMLGen.EXTERNAL_LINK_GITHUB_ICON_CLASS
+            elif resource.startswith('http'):
                 icon_class = HTMLGen.EXTERNAL_LINK_ICON_CLASS
             # Anchor
             elif resource.startswith('#'):
