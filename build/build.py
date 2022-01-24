@@ -235,6 +235,7 @@ class HTMLGen:
 
 def main(font_icons=True):
     articles_data = []
+
     for article_source_dir in iter_articles_source_dir(reverse=True):
         # Генерация обновленной страницы
         article_md_file = article_source_dir / ARTICLE_MD_FILE
@@ -258,7 +259,7 @@ def main(font_icons=True):
         # Создание класса данных по статье для индекса блога
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
-        first_p_text = list(islice(root_element.iterfind('.//p'), 2))[1].text
+        first_p_text = list(islice(root_element.iterfind('.//p'), 2))[1].text_content()
         article_relative_link = article_index_file.relative_to(DOCS_DIR).parent
         created_date = datetime.strptime(article_source_dir.name, '%Y-%m-%d')
         images = tuple(AttachedImage(title, path, article_relative_link) for path, title in images.items() if title)

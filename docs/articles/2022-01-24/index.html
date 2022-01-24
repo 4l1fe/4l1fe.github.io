@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="utO5yk8RwIXZ-_rnxq_xpMndgtw0MU_VqtE61lNmjsY" />
+    <link rel="icon" type="image/png" href="/files/favicon.png">
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/files/css/style.css">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <title>ТехнологоблогЪ</title>
+</head>
+<body>
+<nav class="navbar navbar-light bg-white border-bottom border-secondary sticky-top mb-1">
+    <div class="container-fluid d-flex justify-content-center ">
+            <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
+            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io/subscription" data-icon="octicon-eye" data-size="large" 
+data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch</a></span>
+            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Star</a></span>
+    </div>
+</nav>
+<div class="container">
+        <div class="row">
+        <div id="content" class="col-lg-9 order-2 order-lg-1">
+            <h1>Simply patch what is unextendable. <a id="simply-patch-what-is-unextendable." href="#simply-patch-what-is-unextendable."><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h1>
+<p><img src="files/main-section.png" alt=""></p>
+<p>An issue, that i can't extend a method <code>__str__</code>, was encountered when i retrieved a list of objects from a third-party service and printed them to see the details, but i got uninformative output. Due to that, i dove into source code to figure out what can i get and came to a point that only <code>tittle, text</code> attributes are printing of those objects and the method can't be extended, as a client library doesn't provide customization and it shouldn't indeed.</p>
+<p>A rough example of objects retrieving.</p>
+<pre><code class="language-python">from client_library import fetch_entities
+
+
+def fecth_print():
+	entities = fetch_entities()
+	print(entities)  #  Print to see the details and examine the entities.
+</code></pre>
+<p>Base class with <code>__str__</code> method the <code>entities</code> are of.</p>
+<pre><code class="language-python">class Note(TopLevelNode):
+    """Represents a Google Keep note."""
+    _TYPE = NodeType.Note
+    def __init__(self, **kwargs):
+		...
+
+    def _get_text_node(self):
+        ...
+
+    @property
+    def text(self):
+        ...
+
+    @text.setter
+    def text(self, value):
+        ...
+        
+    def __str__(self):
+        return '\n'.join([self.title, self.text])
+</code></pre>
+<h2>Solution <a id="solution" href="#solution"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<p>Restriction is clear and what can be done to see more details and which i specifically need. An idea came into my mind, why not to reuse patching technique of a testing practice, <code>unittest.mock</code> is powerful for such a case.</p>
+<p>Things to do are simply define a function of a custom printing objects details and patch the <code>__str__</code> method. So easy and tricky, isn't it?</p>
+<p>Here we go.</p>
+<pre><code class="language-python">from unittest.mock import patch
+from contextlib import AbstractContextManager
+
+
+def node_to_str(self: Note):
+    created = self.timestamps.created.isoformat(sep=' ', timespec='seconds')
+    updated = self.timestamps.updated.isoformat(sep=' ', timespec='seconds')
+    return f'Node&lt;{self.type.value}, "{self.title}", "{self.text}", created="{created}", updated="{updated}"&gt;'
+
+
+class Patch(AbstractContextManager):
+
+    def __enter__(self):
+        self.patchers = []
+        node_str_mock = patch('gkeepapi.node.Note.__str__', node_to_str)
+        self.patchers.append(node_str_mock)
+
+        for p in self.patchers:
+            p.start()
+
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        for p in self.patchers:
+            p.stop()
+</code></pre>
+<p>Function <code>node_to_str</code> is the way i'd like to see the object's details and the <code>Patch</code> context-manager class is a wrapper to apply it gracefully.</p>
+<p>At a final step running code looks very tidy.</p>
+<pre><code class="language-python">from fetchig import fecth_print
+
+
+if __name__ == '__main__':
+	from patching import Patch
+
+	with Patch():
+		fecth_print()
+
+</code></pre>
+<h2>It's a bad approach <a id="it's-a-bad-approach" href="#it's-a-bad-approach"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<p>Goal is reached, code isn't production consequently it's a quite good approach.</p>
+
+        </div>
+        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+            <ol><li><a href="#solution">Solution</a></li><li><a href="#it's-a-bad-approach">It's a bad approach</a></li></ol>
+        </div>
+    </div>
+    <div class="row">
+        <div id="comments" class="col-lg-9">
+            <script src="https://utteranc.es/client.js"
+                    repo="4l1fe/4l1fe.github.io"
+                    issue-term="pathname"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+    </div>
+</div>
+
+<script src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

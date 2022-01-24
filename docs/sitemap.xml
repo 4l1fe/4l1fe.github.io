@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+    <loc>https://www.4l1fe.dev/articles/2022-01-24/</loc>
+    <image:image>
+        <image:loc>https://www.4l1fe.dev/articles/2022-01-24/files/main-section.png</image:loc>
+    </image:image>
+      </url>
+    <url>
     <loc>https://www.4l1fe.dev/articles/2021-11-23/</loc>
     <image:image>
         <image:loc>https://www.4l1fe.dev/articles/2021-11-23/files/main-section.png</image:loc>

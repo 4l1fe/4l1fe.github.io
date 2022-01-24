@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.4l1fe.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>6 Jan 2022 00:00:00 +0000</pubDate>
+		<pubDate>24 Jan 2022 00:00:00 +0000</pubDate>
+				<item>
+			<title>Simply patch what is unextendable. </title>
+			<link>https://www.4l1fe.dev/articles/2022-01-24/</link>
+			<description>An issue, that i can't extend a method __str__, was encountered when i retrieved a list of objects from a third-party service and printed them to see the details, but i got uninformative output. Due to that, i dove into source code to figure out what...</description>
+			<pubDate>24 Jan 2022 00:00:00 +0000</pubDate>
+			<guid>https://www.4l1fe.dev/articles/2022-01-24/</guid>
+		</item>
 				<item>
 			<title>Beneficial Chrome replacement. Vivaldi </title>
 			<link>https://www.4l1fe.dev/articles/2021-11-23/</link>
