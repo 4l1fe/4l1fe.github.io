@@ -29,75 +29,74 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p><img src="files/main-section.png" alt=""></p>
 <p>An issue, that i can't extend a method <code>__str__</code>, was encountered when i retrieved a list of objects from a third-party service and printed them to see the details, but i got uninformative output. Due to that, i dove into source code to figure out what can i get and came to a point that only <code>tittle, text</code> attributes are printing of those objects and the method can't be extended, as a client library doesn't provide customization and it shouldn't indeed.</p>
 <p>A rough example of objects retrieving.</p>
-<pre><code class="language-python">from client_library import fetch_entities
+<pre><code><span style="color: #f92672">from</span> <span style="color: #f8f8f2">client_library</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">fetch_entities</span>
 
 
-def fecth_print():
-	entities = fetch_entities()
-	print(entities)  #  Print to see the details and examine the entities.
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">fecth_print</span><span style="color: #f8f8f2">():</span>
+    <span style="color: #f8f8f2">entities</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fetch_entities()</span>
+    <span style="color: #f8f8f2">print(entities)</span>  <span style="color: #75715e">#  Print to see the details and examine the entities.</span>
 </code></pre>
 <p>Base class with <code>__str__</code> method the <code>entities</code> are of.</p>
-<pre><code class="language-python">class Note(TopLevelNode):
-    """Represents a Google Keep note."""
-    _TYPE = NodeType.Note
-    def __init__(self, **kwargs):
-		...
+<pre><code><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Note</span><span style="color: #f8f8f2">(TopLevelNode):</span>
+    <span style="color: #e6db74">"""Represents a Google Keep note."""</span>
+    <span style="color: #f8f8f2">_TYPE</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">NodeType</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Note</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">kwargs):</span>
+		<span style="color: #f92672">...</span>
 
-    def _get_text_node(self):
-        ...
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">_get_text_node</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #f92672">...</span>
 
-    @property
-    def text(self):
-        ...
+    <span style="color: #a6e22e">@property</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">text</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #f92672">...</span>
 
-    @text.setter
-    def text(self, value):
-        ...
+    <span style="color: #a6e22e">@text</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">setter</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">text</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">value):</span>
+        <span style="color: #f92672">...</span>
         
-    def __str__(self):
-        return '\n'.join([self.title, self.text])
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__str__</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #e6db74">'</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">'</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">join([self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">title,</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">text])</span>
 </code></pre>
 <h2>Solution <a id="solution" href="#solution"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
 <p>Restriction is clear and what can be done to see more details and which i specifically need. An idea came into my mind, why not to reuse patching technique of a testing practice, <code>unittest.mock</code> is powerful for such a case.</p>
 <p>Things to do are simply define a function of a custom printing objects details and patch the <code>__str__</code> method. So easy and tricky, isn't it?</p>
 <p>Here we go.</p>
-<pre><code class="language-python">from unittest.mock import patch
-from contextlib import AbstractContextManager
+<pre><code><span style="color: #f92672">from</span> <span style="color: #f8f8f2">unittest.mock</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">patch</span>
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">contextlib</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">AbstractContextManager</span>
 
 
-def node_to_str(self: Note):
-    created = self.timestamps.created.isoformat(sep=' ', timespec='seconds')
-    updated = self.timestamps.updated.isoformat(sep=' ', timespec='seconds')
-    return f'Node&lt;{self.type.value}, "{self.title}", "{self.text}", created="{created}", updated="{updated}"&gt;'
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">node_to_str</span><span style="color: #f8f8f2">(self:</span> <span style="color: #f8f8f2">Note):</span>
+    <span style="color: #f8f8f2">created</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">timestamps</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">created</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">isoformat(sep</span><span style="color: #f92672">=</span><span style="color: #e6db74">' '</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">timespec</span><span style="color: #f92672">=</span><span style="color: #e6db74">'seconds'</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">updated</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">timestamps</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">updated</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">isoformat(sep</span><span style="color: #f92672">=</span><span style="color: #e6db74">' '</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">timespec</span><span style="color: #f92672">=</span><span style="color: #e6db74">'seconds'</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #e6db74">f'Node&lt;{</span><span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">type</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">value</span><span style="color: #e6db74">}, "{</span><span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">title</span><span style="color: #e6db74">}", "{</span><span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">text</span><span style="color: #e6db74">}", created="{</span><span style="color: #f8f8f2">created</span><span style="color: #e6db74">}", updated="{</span><span style="color: #f8f8f2">updated</span><span style="color: #e6db74">}"&gt;'</span>
 
 
-class Patch(AbstractContextManager):
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Patch</span><span style="color: #f8f8f2">(AbstractContextManager):</span>
 
-    def __enter__(self):
-        self.patchers = []
-        node_str_mock = patch('gkeepapi.node.Note.__str__', node_to_str)
-        self.patchers.append(node_str_mock)
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__enter__</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">patchers</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[]</span>
+        <span style="color: #f8f8f2">node_str_mock</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">patch(</span><span style="color: #e6db74">'gkeepapi.node.Note.__str__'</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">node_to_str)</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">patchers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">append(node_str_mock)</span>
 
-        for p in self.patchers:
-            p.start()
+        <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">p</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">patchers:</span>
+            <span style="color: #f8f8f2">p</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">start()</span>
 
-        return self
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">self</span>
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        for p in self.patchers:
-            p.stop()
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__exit__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">exc_type,</span> <span style="color: #f8f8f2">exc_val,</span> <span style="color: #f8f8f2">exc_tb):</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">p</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">patchers:</span>
+            <span style="color: #f8f8f2">p</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">stop()</span>
 </code></pre>
 <p>Function <code>node_to_str</code> is the way i'd like to see the object's details and the <code>Patch</code> context-manager class is a wrapper to apply it gracefully.</p>
 <p>At a final step running code looks very tidy.</p>
-<pre><code class="language-python">from fetchig import fecth_print
+<pre><code><span style="color: #f92672">from</span> <span style="color: #f8f8f2">fetchig</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">fecth_print</span>
 
 
-if __name__ == '__main__':
-	from patching import Patch
+<span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">__name__</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">'__main__'</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f92672">from</span> <span style="color: #f8f8f2">patching</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">Patch</span>
 
-	with Patch():
-		fecth_print()
-
+    <span style="color: #66d9ef">with</span> <span style="color: #f8f8f2">Patch():</span>
+        <span style="color: #f8f8f2">fecth_print()</span>
 </code></pre>
 <h2>It's a bad approach <a id="it's-a-bad-approach" href="#it's-a-bad-approach"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
 <p>Goal is reached, code isn't production consequently it's a quite good approach.</p>

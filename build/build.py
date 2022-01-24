@@ -1,22 +1,27 @@
 import os
 import functools
-import markdown_it
-
 from typing import List, Tuple, Set
 from xml.dom.minidom import getDOMImplementation
 from dataclasses import dataclass, InitVar
 from itertools import islice, chain
 from contextlib import suppress
 from pathlib import Path
+from datetime import datetime
+
+import markdown_it
 from lxml.html import Element, fromstring, tostring as _tostring
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from datetime import datetime
+from pygments import highlight
+from pygments.lexers.python import PythonLexer
+from pygments.formatters.html import HtmlFormatter
+
 from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
                        INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE, GOOGLE_VERF_TOKEN,
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
                        SITE_NAME)
 from filters import trailing_slash, to_rfc822, prepend_site_address
 from utils import make_header_id, wrap_unwrap_fake_tag
+
 
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 TOC_HEADERS = HEADERS[1:]
@@ -113,7 +118,7 @@ class HTMLGen:
         return files, images
 
     @staticmethod
-    def generate_article_html(md_text, font_icons=False):
+    def generate_article_html(md_text, font_icons=False, highlight=False):
         parser = markdown_it.MarkdownIt().enable('table')
         html = parser.render(md_text)
 
@@ -123,6 +128,7 @@ class HTMLGen:
         toc_html = HTMLGen._generate_toc_html(toc)
         template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
         content_html = HTMLGen._apply_font_icons(content_html) if font_icons else content_html
+        content_html = HTMLGen._apply_highlighting(content_html) if highlight else content_html
         html = template.render(content=content_html, toc=toc_html)
 
         return html, toc_html
@@ -232,6 +238,25 @@ class HTMLGen:
 
         return doc.documentElement.toxml()
 
+    @staticmethod
+    def _apply_highlighting(html: str, style='monokai'):
+        root_element = fromstring(wrap_unwrap_fake_tag(html))
+
+        for pre_el in root_element.iterfind('.//pre'):
+            for code_el in pre_el.iter('code'):
+                if not code_el.attrib.get('class') == 'language-python':
+                    continue
+
+                code = code_el.text
+                code_elements = highlight(code, PythonLexer(), HtmlFormatter(noclasses=True, wrapcode=False, nowrap=True, style=style))
+                code_elements = fromstring(code_elements)
+                code_el.clear()
+                code_el.extend(code_elements)
+
+        html = tostring(root_element)
+        html = wrap_unwrap_fake_tag(html, wrap=False)
+        return html
+
 
 def main(font_icons=True):
     articles_data = []
@@ -240,7 +265,7 @@ def main(font_icons=True):
         # Генерация обновленной страницы
         article_md_file = article_source_dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
-        article_html, toc_html = HTMLGen.generate_article_html(md_text, font_icons=font_icons)
+        article_html, toc_html = HTMLGen.generate_article_html(md_text, font_icons=font_icons, highlight=True)
         article_dir = ARTICLES_DOCS_DIR / article_source_dir.name
         article_index_file = article_dir / INDEX_FILE.name
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
