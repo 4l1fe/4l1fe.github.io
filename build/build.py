@@ -96,6 +96,8 @@ class HTMLGen:
                                    'py': 'teenyicons:python-outline',
                                    'gz': 'icomoon-free:file-zip',
                                    'sql': 'bi:file-earmark-code'}
+    HIGHLIGHTING_STYLE_MAP = {'language-python': 'monokai'}
+    LEXER_MAP = {'language-python': PythonLexer}
 
     @staticmethod
     def generate_index_html(articles_data: List[ArticleData]):
@@ -122,7 +124,7 @@ class HTMLGen:
         parser = markdown_it.MarkdownIt().enable('table')
         html = parser.render(md_text)
 
-        content_html = HTMLGen._add_headers_anchors(html)
+        content_html = HTMLGen._apply_headers_anchors(html)
 
         toc = HTMLGen._extract_toc(content_html)
         toc_html = HTMLGen._generate_toc_html(toc)
@@ -167,7 +169,7 @@ class HTMLGen:
         return html
 
     @staticmethod
-    def _add_headers_anchors(html: str) -> str:
+    def _apply_headers_anchors(html: str) -> str:
         root_element = fromstring(wrap_unwrap_fake_tag(html))
         for element in root_element:
             if element.tag in HEADERS:
@@ -239,16 +241,19 @@ class HTMLGen:
         return doc.documentElement.toxml()
 
     @staticmethod
-    def _apply_highlighting(html: str, style='monokai'):
+    def _apply_highlighting(html: str):
         root_element = fromstring(wrap_unwrap_fake_tag(html))
 
         for pre_el in root_element.iterfind('.//pre'):
             for code_el in pre_el.iter('code'):
-                if not code_el.attrib.get('class') == 'language-python':
+                language = code_el.attrib.get('class')
+                style = HTMLGen.HIGHLIGHTING_STYLE_MAP.get(language)
+                Lexer = HTMLGen.LEXER_MAP.get(language)
+                if not language or not style or not Lexer:
                     continue
 
                 code = code_el.text
-                code_elements = highlight(code, PythonLexer(), HtmlFormatter(noclasses=True, wrapcode=False, nowrap=True, style=style))
+                code_elements = highlight(code, Lexer(), HtmlFormatter(noclasses=True, wrapcode=False, nowrap=True, style=style))
                 code_elements = fromstring(code_elements)
                 code_el.clear()
                 code_el.extend(code_elements)

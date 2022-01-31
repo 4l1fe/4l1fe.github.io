@@ -17,6 +17,9 @@ As a result, things i do are writing articles text, and coding new small feature
 - Generating an article html from markdown text and media files using `commonmark` and `jinja2`.
 - Generating a blog index page.
 - Generating **TOC**(table of content) from the article html.
-- Adding and linking source media files are contained in the article html to the repository ones.
+- Adding anchors.
+- Adding and linking source media files that are contained in article html to the repository.
 - Comments [utteranc.es](https://utteranc.es/) attached to the articles.
+- Files and links icons, optional. Mapping a file extension and [iconify](https://iconify.design) class.
+- Code blocks highlighting, optional. Mapping a language name and [pygments](https://pygments.org/styles/) style.
 
