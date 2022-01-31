@@ -35,6 +35,10 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">fecth_print</span><span style="color: #f8f8f2">():</span>
     <span style="color: #f8f8f2">entities</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fetch_entities()</span>
     <span style="color: #f8f8f2">print(entities)</span>  <span style="color: #75715e">#  Print to see the details and examine the entities.</span>
+    
+<span style="color: #75715e"># Output is minimalistic:</span>
+<span style="color: #75715e"># "Shop, Buy food"</span>
+<span style="color: #75715e"># "Gym, Do squats"</span>
 </code></pre>
 <p>Base class with <code>__str__</code> method the <code>entities</code> are of.</p>
 <pre><code><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Note</span><span style="color: #f8f8f2">(TopLevelNode):</span>
@@ -97,6 +101,10 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 
     <span style="color: #66d9ef">with</span> <span style="color: #f8f8f2">Patch():</span>
         <span style="color: #f8f8f2">fecth_print()</span>
+        
+<span style="color: #75715e"># Output looks better now:</span>
+<span style="color: #75715e"># "Node&lt;1, Shop, Buy food, created=2022-01-24 17:53:56Z, updated=2022-01-24 17:53:56Z&gt;"</span>
+<span style="color: #75715e"># "Node&lt;1, Gym, Do squats, created=2022-01-24 17:53:56Z, updated=2022-01-24 17:53:56Z&gt;"</span>
 </code></pre>
 <h2>It's a bad approach <a id="it's-a-bad-approach" href="#it's-a-bad-approach"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
 <p>Goal is reached, code isn't production consequently it's a quite good approach.</p>
