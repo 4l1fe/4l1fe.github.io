@@ -4,55 +4,55 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.4l1fe.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>20 May 2022 00:00:00 +0000</pubDate>
+		<pubDate>22 May 2022 00:00:00 +0000</pubDate>
 				<item>
 			<title>Drop a cloud disk in favor of storing data on the phone and laptop. FreeFileSync. KDiff3 </title>
-			<link>https://www.4l1fe.dev/articles/2022-05-20/</link>
+			<link>https://www.4l1fe.dev/articles/drop-a-cloud-disk-in-favor-of-storing-data-on-the-phone-and-laptop-freefilesync-kdiff3/</link>
 			<description>Idea to exploit the laptop and phone storages instead of the Google Drive payed plan came up into my mind as i have much free space on them along with not much data in the cloud around 110Gb when laptop total space is 512Gb, phone 256Gb. Also,...</description>
 			<pubDate>20 May 2022 00:00:00 +0000</pubDate>
-			<guid>https://www.4l1fe.dev/articles/2022-05-20/</guid>
+			<guid>https://www.4l1fe.dev/articles/drop-a-cloud-disk-in-favor-of-storing-data-on-the-phone-and-laptop-freefilesync-kdiff3/</guid>
 		</item>
 				<item>
 			<title>Simply patch what is unextendable. </title>
-			<link>https://www.4l1fe.dev/articles/2022-01-24/</link>
+			<link>https://www.4l1fe.dev/articles/simply-patch-what-is-unextendable/</link>
 			<description>An issue, that i can't extend a method __str__, was encountered when i retrieved a list of objects from a third-party service and printed them to see the details, but i got uninformative output. Due to that, i dove into source code to figure out what...</description>
 			<pubDate>24 Jan 2022 00:00:00 +0000</pubDate>
-			<guid>https://www.4l1fe.dev/articles/2022-01-24/</guid>
+			<guid>https://www.4l1fe.dev/articles/simply-patch-what-is-unextendable/</guid>
 		</item>
 				<item>
 			<title>Beneficial Chrome replacement. Vivaldi </title>
-			<link>https://www.4l1fe.dev/articles/2021-11-23/</link>
+			<link>https://www.4l1fe.dev/articles/beneficial-chrome-replacement-vivaldi/</link>
 			<description>I had been using Chrome for a quite long time as many others certainly. That's a good, modern, powerful browser. During usage of it for a job purpose, i found more and more features it's good to have to simplify different operations and keep them...</description>
 			<pubDate>23 Nov 2021 00:00:00 +0000</pubDate>
-			<guid>https://www.4l1fe.dev/articles/2021-11-23/</guid>
+			<guid>https://www.4l1fe.dev/articles/beneficial-chrome-replacement-vivaldi/</guid>
 		</item>
 				<item>
 			<title>Laptop bootloading time extreme growth. SystemD </title>
-			<link>https://www.4l1fe.dev/articles/2021-09-09/</link>
+			<link>https://www.4l1fe.dev/articles/laptop-bootloading-time-extreme-growth-systemd/</link>
 			<description>If you have Linux installed on your laptop you may once encounter OS is bootloading abnormally slow what is happened in my case and it has taken around 44 seconds where 26 seconds in the userspace level. I've noticed after pressing the power button on...</description>
 			<pubDate>9 Sep 2021 00:00:00 +0000</pubDate>
-			<guid>https://www.4l1fe.dev/articles/2021-09-09/</guid>
+			<guid>https://www.4l1fe.dev/articles/laptop-bootloading-time-extreme-growth-systemd/</guid>
 		</item>
 				<item>
 			<title>Columnar DB performance in action. DuckDB </title>
-			<link>https://www.4l1fe.dev/articles/2021-07-14/</link>
+			<link>https://www.4l1fe.dev/articles/columnar-db-performance-in-action-duckdb/</link>
 			<description>This article is intended to represent only one simple thing is a fundamental difference between columnar family and standard row-based databases by an example. Roughly speaking, you may need a column-based database if working with a complex...</description>
 			<pubDate>14 Jul 2021 00:00:00 +0000</pubDate>
-			<guid>https://www.4l1fe.dev/articles/2021-07-14/</guid>
+			<guid>https://www.4l1fe.dev/articles/columnar-db-performance-in-action-duckdb/</guid>
 		</item>
 				<item>
 			<title>Fix ERR_CERT_AUTHORITY_INVALID error python clients get while proxying. Mitmproxy </title>
-			<link>https://www.4l1fe.dev/articles/2021-06-10/</link>
+			<link>https://www.4l1fe.dev/articles/fix-err-cert-authority-invalid-error-python-clients-get-while-proxying-mitmproxy/</link>
 			<description>You may find out as me that after proper setting Mitmproxy up python https requests end up with ERR_CERT_AUTHORITY_INVALID error while other http clients are working with no problems. Quite unexpectable, isn't it?</description>
 			<pubDate>10 Jun 2021 00:00:00 +0000</pubDate>
-			<guid>https://www.4l1fe.dev/articles/2021-06-10/</guid>
+			<guid>https://www.4l1fe.dev/articles/fix-err-cert-authority-invalid-error-python-clients-get-while-proxying-mitmproxy/</guid>
 		</item>
 				<item>
 			<title>Рассмотрение абстракций, их взаимосвязей и сложности библиотек встраиваемых БД </title>
-			<link>https://www.4l1fe.dev/articles/2021-02-24/</link>
+			<link>https://www.4l1fe.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/</link>
 			<description>Часто возникает желание иметь простейшую архитектуру сервиса или программы, в которой будут отсутствовать избыточные компоненты и межсетевое взаимодействие. Это ощутимо сокращает силы и время на их реализацию, поддержку и погружение. Чтобы...</description>
 			<pubDate>24 Feb 2021 00:00:00 +0000</pubDate>
-			<guid>https://www.4l1fe.dev/articles/2021-02-24/</guid>
+			<guid>https://www.4l1fe.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/</guid>
 		</item>
 				</channel>
 	</rss>

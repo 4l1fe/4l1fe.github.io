@@ -14,7 +14,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from pygments import highlight
 from pygments.lexers.python import PythonLexer
 from pygments.formatters.html import HtmlFormatter
-
+from slugify import slugify
 from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
                        INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE, GOOGLE_VERF_TOKEN,
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
@@ -267,7 +267,7 @@ def main(font_icons=True):
     articles_data = []
 
     for article_source_dir in iter_articles_source_dir(reverse=True):
-        # Генерация обновленной страницы
+        # Генерация страницы и запись в файл
         article_md_file = article_source_dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
         article_html, toc_html = HTMLGen.generate_article_html(md_text, font_icons=font_icons, highlight=True)
@@ -290,10 +290,17 @@ def main(font_icons=True):
         root_element = fromstring(article_html)
         first_h1_text = root_element.find('.//h1').text
         first_p_text = list(islice(root_element.iterfind('.//p'), 2))[1].text_content()
+        symlink_name = slugify(first_h1_text)
         article_relative_link = article_index_file.relative_to(DOCS_DIR).parent
+        article_relative_symlink = ARTICLES_DOCS_DIR.joinpath(symlink_name).relative_to(DOCS_DIR)
+        if not article_relative_symlink.is_symlink():
+            # Для файловой системы путь не совпадает, но ссылка по тому же узлу
+            os.symlink(article_relative_link.name,
+                       Path('..') / DOCS_DIR.name / article_relative_symlink,
+                       target_is_directory=True)
         created_date = datetime.strptime(article_source_dir.name, '%Y-%m-%d')
-        images = tuple(AttachedImage(title, path, article_relative_link) for path, title in images.items() if title)
-        adata = ArticleData(title=first_h1_text, relative_link=article_relative_link, paragraph=first_p_text,
+        images = tuple(AttachedImage(title, path, article_relative_symlink) for path, title in images.items() if title)
+        adata = ArticleData(title=first_h1_text, relative_link=article_relative_symlink, paragraph=first_p_text,
                             created_date=created_date, images=images)
         articles_data.append(adata)
 
