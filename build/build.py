@@ -3,7 +3,7 @@ import functools
 from typing import List, Tuple, Set
 from xml.dom.minidom import getDOMImplementation
 from dataclasses import dataclass, InitVar
-from itertools import islice, chain
+from itertools import chain
 from contextlib import suppress
 from pathlib import Path
 from datetime import datetime
@@ -20,8 +20,7 @@ from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLAT
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
                        SITE_NAME)
 from filters import trailing_slash, to_rfc822, prepend_site_address
-from utils import make_header_id, wrap_unwrap_fake_tag
-
+from utils import make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text
 
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 TOC_HEADERS = HEADERS[1:]
@@ -128,10 +127,11 @@ class HTMLGen:
 
         toc = HTMLGen._extract_toc(content_html)
         toc_html = HTMLGen._generate_toc_html(toc)
-        template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
         content_html = HTMLGen._apply_font_icons(content_html) if font_icons else content_html
         content_html = HTMLGen._apply_highlighting(content_html) if highlight else content_html
-        html = template.render(content=content_html, toc=toc_html)
+        root_element = fromstring(content_html)
+        template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
+        html = template.render(content=content_html, toc=toc_html, title=first_h1_text(root_element), description=first_p_text(root_element))
 
         return html, toc_html
 
@@ -288,26 +288,27 @@ def main(font_icons=True):
 
         # Создание класса данных по статье для индекса блога
         root_element = fromstring(article_html)
-        first_h1_text = root_element.find('.//h1').text
-        first_p_text = list(islice(root_element.iterfind('.//p'), 2))[1].text_content()
-        symlink_name = slugify(first_h1_text)
+        symlink_name = slugify(first_h1_text(root_element))
         article_relative_link = article_index_file.relative_to(DOCS_DIR).parent
         article_relative_symlink = ARTICLES_DOCS_DIR.joinpath(symlink_name).relative_to(DOCS_DIR)
-        if not article_relative_symlink.is_symlink():
+        article_relative_symlink_path = Path('..') / DOCS_DIR.name / article_relative_symlink
+        if not article_relative_symlink_path.is_symlink():
             # Для файловой системы путь не совпадает, но ссылка по тому же узлу
             os.symlink(article_relative_link.name,
-                       Path('..') / DOCS_DIR.name / article_relative_symlink,
+                       article_relative_symlink_path,
                        target_is_directory=True)
         created_date = datetime.strptime(article_source_dir.name, '%Y-%m-%d')
         images = tuple(AttachedImage(title, path, article_relative_symlink) for path, title in images.items() if title)
-        adata = ArticleData(title=first_h1_text, relative_link=article_relative_symlink, paragraph=first_p_text,
+        adata = ArticleData(title=first_h1_text(root_element), relative_link=article_relative_symlink, paragraph=first_p_text(root_element),
                             created_date=created_date, images=images)
         articles_data.append(adata)
 
     index_html = HTMLGen.generate_index_html(articles_data)
     INDEX_FILE.write_text(index_html)
+
     sitemap_xml = generate_sitemap(articles_data)
     SITEMAP_FILE.write_text(sitemap_xml)
+
     rss_xml = generate_rss(articles_data)
     RSS_FILE.write_text(rss_xml)
 

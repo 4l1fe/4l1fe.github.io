@@ -1,5 +1,7 @@
 import unicodedata
 import re
+from itertools import islice
+from functools import lru_cache
 
 
 def make_header_id(tag_text):
@@ -23,3 +25,13 @@ def slugify(title):
     value = re.sub(r'[^\w\s-]', '', value.lower())
     value = re.sub(r'[-\s]+', '-', value).strip('-_') 
     return value
+
+
+@lru_cache
+def first_h1_text(element):
+    return element.find('.//h1').text
+
+
+@lru_cache
+def first_p_text(element):
+    return list(islice(element.iterfind('.//p'), 2))[1].text_content()
