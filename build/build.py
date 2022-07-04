@@ -94,7 +94,8 @@ class HTMLGen:
                                    'md': 'bi:markdown',
                                    'py': 'teenyicons:python-outline',
                                    'gz': 'icomoon-free:file-zip',
-                                   'sql': 'bi:file-earmark-code'}
+                                   'sql': 'bi:file-earmark-code',
+                                   'sh': 'bi:terminal'}
     HIGHLIGHTING_STYLE_MAP = {'language-python': 'monokai'}
     LEXER_MAP = {'language-python': PythonLexer}
 
