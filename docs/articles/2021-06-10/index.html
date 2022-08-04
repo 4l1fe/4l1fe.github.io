@@ -23,7 +23,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <div class="container">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1>Fix ERR_CERT_AUTHORITY_INVALID error python clients get while proxying. Mitmproxy <a id="fix-err_cert_authority_invalid-error-python-clients-get-while-proxying.-mitmproxy" href="#fix-err_cert_authority_invalid-error-python-clients-get-while-proxying.-mitmproxy"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h1>
+            <h1>Fix ERR_CERT_AUTHORITY_INVALID error python clients get while proxying. Mitmproxy <a id="fix-err_cert_authority_invalid-error-python-clients-get-while-proxying.-mitmproxy" href="#fix-err_cert_authority_invalid-error-python-clients-get-while-proxying.-mitmproxy"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt=""></p>
 <p>You may find out as me that after proper setting Mitmproxy up python https requests end up with ERR_CERT_AUTHORITY_INVALID error while other http clients are working with no problems. Quite unexpectable, isn't it?</p>
 <p>Let's have a look at the example.</p>
@@ -36,7 +36,7 @@ while doing a GET request to URL: https://github.com/
 </code></pre>
 <p>It happens because <a href="https://github.com/httpie/httpie"><span class="iconify" data-icon="codicon:github-inverted"></span> httpie</a> client internally use <strong>requests</strong> lib and one doesn't see the OS ssl system-wide settings directories. But it is customizable as described in the documentation how <a href="https://docs.python-requests.org/en/master/user/advanced/#ssl-cert-verification"><span class="iconify" data-icon="bx:bx-link-external"></span> to specify manually a cert file</a> which we are using for proxyfying.</p>
 <p>Important remark here is we don't open client's code and add any settings into an http request call as we are <strong>man in the middle</strong> who technically may not have a way to edit the code.</p>
-<h2>Run command with env REQUESTS_CA_BUNDLE for requests based clients <a id="run-command-with-env-requests_ca_bundle-for-requests-based-clients" href="#run-command-with-env-requests_ca_bundle-for-requests-based-clients"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Run command with env REQUESTS_CA_BUNDLE for requests based clients <a id="run-command-with-env-requests_ca_bundle-for-requests-based-clients" href="#run-command-with-env-requests_ca_bundle-for-requests-based-clients"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Armed with the cert file path let's run the same command adding the env <code>REQUESTS_CA_BUNDLE</code>.</p>
 <pre><code>$ HTTPS_PROXY=127.0.0.1:8080 \ 
 REQUESTS_CA_BUNDLE=/usr/local/share/ca-certificates/mitmproxy-ca-cert.crt \ 
@@ -49,7 +49,7 @@ Server: GitHub.com
 ...
 </code></pre>
 <p>Now <code>https</code> client picks up the right cert file and goes through Mitmproxy.</p>
-<h2>Run Mitmproxy passing a custom cert file in <a id="run-mitmproxy-passing-a-custom-cert-file-in" href="#run-mitmproxy-passing-a-custom-cert-file-in"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Run Mitmproxy passing a custom cert file in <a id="run-mitmproxy-passing-a-custom-cert-file-in" href="#run-mitmproxy-passing-a-custom-cert-file-in"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Another way is to figure out what a cert file requests based client use and <a href="https://docs.mitmproxy.org/stable/concepts-certificates/#using-a-custom-server-certificate"><span class="iconify" data-icon="bx:bx-link-external"></span> substitute its path</a> into the command <code>mitmproxy --certs *=&lt;cert-file&gt;</code>.</p>
 <p>So what the cert file is and where? Well, we have general information <strong>requests</strong> deals with two envs <code>REQUESTS_CA_BUNDLE, CURL_CA_BUNDLE</code> and relies on <a href="https://docs.python-requests.org/en/master/user/advanced/#ca-certificates"><span class="iconify" data-icon="bx:bx-link-external"></span> certifi</a> utility to delegate it all the certs searching in a file system stuff.</p>
 <p>Seems the requests source code has to be inspected:</p>
@@ -102,7 +102,7 @@ https: error: SSLError: HTTPSConnectionPool(host='github.com', port=443):
 <p>I've failed and crying .</p>
 </li>
 </ol>
-<h2>Afterwords <a id="afterwords" href="#afterwords"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Afterwords <a id="afterwords" href="#afterwords"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Mitmproxy them all with no pain.</p>
 
         </div>

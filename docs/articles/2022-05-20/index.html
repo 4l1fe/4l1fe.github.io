@@ -23,11 +23,11 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <div class="container">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1>Drop a cloud disk in favor of storing data on the phone and laptop. FreeFileSync. KDiff3 <a id="drop-a-cloud-disk-in-favor-of-storing-data-on-the-phone-and-laptop.-freefilesync.-kdiff3" href="#drop-a-cloud-disk-in-favor-of-storing-data-on-the-phone-and-laptop.-freefilesync.-kdiff3"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h1>
+            <h1>Drop a cloud disk in favor of storing data on the phone and laptop. FreeFileSync. KDiff3 <a id="drop-a-cloud-disk-in-favor-of-storing-data-on-the-phone-and-laptop.-freefilesync.-kdiff3" href="#drop-a-cloud-disk-in-favor-of-storing-data-on-the-phone-and-laptop.-freefilesync.-kdiff3"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.jpg" alt=""></p>
 <p>Idea to exploit the laptop and phone storages instead of the Google Drive payed plan came up into my mind as i have much free space on them along with not much data in the cloud around <strong>110Gb</strong> when laptop total space is <strong>512Gb</strong>, phone <strong>256Gb</strong>. Also, reducing number of nodes in network communication makes working with files more stable and convenient. On the other hand, it will bring me a few difficulties and restrictions, but what are they, will i encounter any blocks making the idea failed?</p>
 <p>I tried to consider all the possible risks and issues of this specific case only.</p>
-<h2>Pros <a id="pros" href="#pros"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Pros <a id="pros" href="#pros"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <ul>
 <li>Data durability. Exploit the capabilities of hardware you own. Devices are often beside to each other.</li>
 <li>Data availability. In comparison to a cloud network isn't a condition. Today at least a phone is always with me therefore a cloud isn't necessarily to have.</li>
@@ -35,7 +35,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <li>Saving money. In long term a cost for a payed plan is significantly big, for example <strong>10$ * 12 month * 20 years</strong> is gonna be <strong>2400$</strong>. Take it into consideration...</li>
 <li>No third party network node. Information exchange between the devices is two-ways direction only.</li>
 </ul>
-<h2>Cons <a id="cons" href="#cons"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Cons <a id="cons" href="#cons"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <ul>
 <li>Manual syncing. Not a big deal, mature software <a href="https://freefilesync.org"><span class="iconify" data-icon="bx:bx-link-external"></span> FreeFileSync</a>, <a href="https://apps.kde.org/kdiff3/"><span class="iconify" data-icon="bx:bx-link-external"></span> KDiff3</a> save my time.</li>
 <li>No automation. If you really need it batch jobs are provided by FreeFileSync.</li>
@@ -43,9 +43,9 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <li>No files history. It's worth to have but only for files are editable intensivelly, source code is tracking by git anyway.</li>
 </ul>
 <p>As it seen cons are in a technical plane when pros comes from more practical, real life usage.</p>
-<h2>Manual syncing <a id="manual-syncing" href="#manual-syncing"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Manual syncing <a id="manual-syncing" href="#manual-syncing"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Overview of how i drilled out and live with the approach storing data on two devices.</p>
-<h3>Establishing a connection <a id="establishing-a-connection" href="#establishing-a-connection"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h3>
+<h3>Establishing a connection <a id="establishing-a-connection" href="#establishing-a-connection"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Foremost, the devices have to establish a connection with each other and there are number of ways to achieve it and start data exchanging. I tried three:</p>
 <ul>
 <li>
@@ -67,11 +67,11 @@ The fastest but complicated to set up. Good to have when you sync many big files
 TARGET                                SOURCE                      FSTYPE     OPTIONS
 /run/user/1000/2b9ed3f350c57a51       kdeconnect@192.168.241.62:/ fuse.sshfs rw,nosuid,nodev,relatime,user_id=1000,group_id=1000
 </code></pre>
-<h3>Syncing in pictures <a id="syncing-in-pictures" href="#syncing-in-pictures"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h3>
+<h3>Syncing in pictures <a id="syncing-in-pictures" href="#syncing-in-pictures"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>As a connection is established a folder from the phone can be found on file system and open to see a difference.</p>
 <p>I chose to use <strong>FreeFileSync</strong> as it turned out very intuitive, detailed and functional. After comparing two folders i'm given a lot of actions where on the left is the laptop folder and on the right it's counterpart.</p>
 <p><img src="files/tools-syncing.png" alt="" title="syncing"></p>
-<h3>Merging in pictures <a id="merging-in-pictures" href="#merging-in-pictures"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h3>
+<h3>Merging in pictures <a id="merging-in-pictures" href="#merging-in-pictures"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>In cases when a file on both sides contains conflicts it has to be solved with merging and for it i use KDiff3. To make it more convenient FreeFileSync lets a user extend property dialog with running a shell command on the selected files. You can select only files you want to merge and quickly get back to a difference general view.</p>
 <p><img src="files/tools-settings.png" alt="" title="settings"></p>
 <p>In the <strong>Tools -&gt; Options</strong> window the command to run KDiff3 is added including string arguments <code>%item_path%, %item_path2%</code>, files on the left and right accordingly.</p>
@@ -79,13 +79,13 @@ TARGET                                SOURCE                      FSTYPE     OPT
 <p>File with conflicts is selected and opening with KDiff3.</p>
 <p><img src="files/tools-merging.png" alt="" title="merge"></p>
 <p>On the picture above the brief view of how KDiff3 works with merging. Three panes to see laptop, phone file states. The third is a merge interface with what a result you will get. After a merge is done a file can be synced overwriting it's counterpart.</p>
-<h3>Alternatives <a id="alternatives" href="#alternatives"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h3>
+<h3>Alternatives <a id="alternatives" href="#alternatives"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Two other programs were pocked in terms of their capability. They are <a href="https://meldmerge.org"><span class="iconify" data-icon="bx:bx-link-external"></span> Meld</a>, <a href="https://www.opbyte.it/grsync/screenshot.html"><span class="iconify" data-icon="bx:bx-link-external"></span> Grsync</a>. Meld is more basic than FreeFileSync but can merge files in the same window not by external program. Grsync is simply GUI of the core Linux utility <strong>rsync</strong>, it's very powerful but complex. Setting up syncing in a way you need takes long time and many experiments.</p>
-<h2>Automatic syncing <a id="automatic-syncing" href="#automatic-syncing"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Automatic syncing <a id="automatic-syncing" href="#automatic-syncing"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Having manual syncing tested FreeFileSync can save the <strong>compare, filter, synchronization settings</strong> as the <strong>batch job</strong> script to run by double click or listening an event and run.</p>
 <p>With the <strong>two ways</strong> sync mode all the added, moved files are syncing automatically in background.</p>
 <p><img src="files/tools-batch-job.png" alt="" title="batch job"></p>
-<h2>Usage experience. It works simply OK <a id="usage-experience.-it-works-simply-ok" href="#usage-experience.-it-works-simply-ok"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Usage experience. It works simply OK <a id="usage-experience.-it-works-simply-ok" href="#usage-experience.-it-works-simply-ok"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The two significant benefits i got are simplicity and money saving. To achieve it i have to pay some effort which is not that big!</p>
 
         </div>

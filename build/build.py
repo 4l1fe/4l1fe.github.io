@@ -86,7 +86,7 @@ def generate_rss(articles_data: List[ArticleData]):
 class HTMLGen:
     EXTERNAL_LINK_ICON_CLASS = 'bx:bx-link-external'
     EXTERNAL_LINK_GITHUB_ICON_CLASS = 'codicon:github-inverted'
-    ANCHOR_LINK_ICON_CLASS = 'majesticons:hashtag-line'
+    ANCHOR_LINK_ICON_CLASS = 'bi:link-45deg'
     EXTENSIONS_ICON_CLASSES_MAP = {'png': 'bi:file-earmark-image',
                                    'jpg': 'bi:file-earmark-image',
                                    'jpeg': 'bi:file-earmark-image',

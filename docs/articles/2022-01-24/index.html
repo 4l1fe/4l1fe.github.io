@@ -23,7 +23,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <div class="container">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1>Simply patch what is unextendable. <a id="simply-patch-what-is-unextendable." href="#simply-patch-what-is-unextendable."><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h1>
+            <h1>Simply patch what is unextendable. <a id="simply-patch-what-is-unextendable." href="#simply-patch-what-is-unextendable."><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt=""></p>
 <p>An issue, that i can't extend a method <code>__str__</code>, was encountered when i retrieved a list of objects from a third-party service and printed them to see the details, but i got uninformative output. Due to that, i dove into source code to figure out what can i get and came to a point that only <code>tittle, text</code> attributes are printing of those objects and the method can't be extended, as a client library doesn't provide customization and it shouldn't indeed.</p>
 <p>A rough example of objects retrieving.</p>
@@ -59,7 +59,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
     <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__str__</span><span style="color: #f8f8f2">(self):</span>
         <span style="color: #66d9ef">return</span> <span style="color: #e6db74">'</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">'</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">join([self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">title,</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">text])</span>
 </code></pre>
-<h2>Solution <a id="solution" href="#solution"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Solution <a id="solution" href="#solution"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Restriction is clear and what can be done to see more details and which i specifically need. An idea came into my mind, why not to reuse patching technique of a testing practice, <code>unittest.mock</code> is powerful for such a case.</p>
 <p>Things to do are simply define a function of a custom printing objects details and patch the <code>__str__</code> method. So easy and tricky, isn't it?</p>
 <p>Here we go.</p>
@@ -104,7 +104,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <span style="color: #75715e"># "Node&lt;1, Shop, Buy food, created=2022-01-24 17:53:56Z, updated=2022-01-24 17:53:56Z&gt;"</span>
 <span style="color: #75715e"># "Node&lt;1, Gym, Do squats, created=2022-01-24 17:53:56Z, updated=2022-01-24 17:53:56Z&gt;"</span>
 </code></pre>
-<h2>It's a bad approach <a id="it's-a-bad-approach" href="#it's-a-bad-approach"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>It's a bad approach <a id="it's-a-bad-approach" href="#it's-a-bad-approach"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Goal is reached, code isn't production consequently it's a quite good approach.</p>
 
         </div>

@@ -23,21 +23,21 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <div class="container">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1>Columnar DB performance in action. DuckDB <a id="columnar-db-performance-in-action.-duckdb" href="#columnar-db-performance-in-action.-duckdb"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h1>
+            <h1>Columnar DB performance in action. DuckDB <a id="columnar-db-performance-in-action.-duckdb" href="#columnar-db-performance-in-action.-duckdb"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt=""></p>
 <p>This article is intended to represent only one simple thing is a fundamental difference between columnar family and standard row-based databases by an example. Roughly speaking, you may need a column-based database if working with a complex OLAP-oriented workload, reading vast data, grouping it, and computing metrics. And doing it you will definitely notice big time consumption. So columnar DB drastically reduces this time.</p>
 <p>As an example has to be simple and easily reproducible we compare columnar <a href="https://duckdb.org"><span class="iconify" data-icon="bx:bx-link-external"></span> DuckDB</a> performance with SQLite as a row-based counterpart.</p>
 <p>You may read the article as a simplified proof of concept.</p>
-<h2>Steps to do <a id="steps-to-do" href="#steps-to-do"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Steps to do <a id="steps-to-do" href="#steps-to-do"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <ul>
 <li>Fill the tables of both databases with random data.</li>
 <li>Emulate an OLAP-workload SQL query.</li>
 <li>Measure how much time is consumed by the query in both cases.</li>
 <li>Visualize performance.</li>
 </ul>
-<h2>Prerequisites <a id="prerequisites" href="#prerequisites"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Prerequisites <a id="prerequisites" href="#prerequisites"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Simply install following python dependencies <code>pip install duckdb plotly typer</code> and SQLite CLI <code>sudo apt install sqlite3</code>. Along with the python <code>duckdb</code> bindings we will use DuckDB CLI, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v0.2.7/duckdb_cli-linux-amd64.zip"><span class="iconify" data-icon="codicon:github-inverted"></span> v0.2.7-duckdb_cli-linux-amd64.zip</a></p>
-<h2>Fill the databases <a id="fill-the-databases" href="#fill-the-databases"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Fill the databases <a id="fill-the-databases" href="#fill-the-databases"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>In order to notice a difference in performance, the amount of stored data should be significantly big therefore we generate random data and write it into the databases.</p>
 <p>Tables' columns are a group of an id field and 3 values' fields. All values are randomly generated integers.</p>
 <p>Table schema:</p>
@@ -74,7 +74,7 @@ Table created:  random_data10
 Table filling:   random_data10
 </code></pre>
 <p>At the moment, everything is ready to run the query.</p>
-<h2>Run the query <a id="run-the-query" href="#run-the-query"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Run the query <a id="run-the-query" href="#run-the-query"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>As we know, OLAP implies querying a database and computing metrics which can lead to getting insights about a business field. Therefore, we emulate it and compute <code>min(), max(), avg(), sum()</code> values on each column. SQL code we run <a href="files/query.sql"><span class="iconify" data-icon="bi:file-earmark-code"></span> query.sql</a>.</p>
 <p>By using the shell scripting, we organize running the query measuring time in a for loop replacing the base table name with the split table name.</p>
 <pre><code>$ for i in `seq 1 10`; do \
@@ -113,13 +113,13 @@ duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,62s user 0,16s syst
 </code></pre>
 <p>What would you say? Database fundamental difference is clearly evident. After all executions, DuckDB didn't even exceed 1 second. Meanwhile, SQLite exceeded 14 seconds.</p>
 <p>Job is done and it's time to prettify output making each execution time visual.</p>
-<h2>Visualize the results <a id="visualize-the-results" href="#visualize-the-results"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Visualize the results <a id="visualize-the-results" href="#visualize-the-results"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Here we take the result output, convert it to the python lists and build the performance chart upon it. The scripts <a href="files/convertation.py"><span class="iconify" data-icon="teenyicons:python-outline"></span> convertation.py</a> and <a href="files/chart.py"><span class="iconify" data-icon="teenyicons:python-outline"></span> chart.py</a> do this job.</p>
 <pre><code>$ python chart.py
 </code></pre>
 <p><img src="files/chart.png" alt="" title="Query execution performance"></p>
 <p>Look at the picture and try to extrapolate the measurements on 100M records and over...</p>
-<h2>Emphasize the concept <a id="emphasize-the-concept" href="#emphasize-the-concept"><span class="iconify" data-icon="majesticons:hashtag-line"></span></a></h2>
+<h2>Emphasize the concept <a id="emphasize-the-concept" href="#emphasize-the-concept"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The experiment represents the main idea that getting an extreme performance boost can be reached by storing data on a disk as column values one by one in a case of complex computational queries(OLAP). Such a boost we see on the chart.</p>
 <p>Columnize it all.</p>
 
