@@ -5,11 +5,19 @@
         <div id="about" class="col-12">
             <h1>About</h1>
             <p>Observe existence <span class="iconify" data-icon="fa-solid:eye"></span>, drink tea <span class="iconify" data-icon="fa:coffee"></span>, cognize <span class="iconify" data-icon="fa-solid:pen-alt"></span>.</p>
-            <h2>Contacts</h2>
-                <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a>
-               <a class="me-1" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov-410aa956">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a>
-               <a class="me-1" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></p>
+	</div>
+    </div>
+    <div class="row">
+        <div id="about" class="col-3">
+            <h2>Profiles</h2>
+                <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a></p>
+                <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a></p>
+                <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></p>
         </div>
+	<div class="col-3">
+	    <h2>Services</h2>
+	    {% if analytics_enabled %}<p><a class="me-1" target="_blank" rel="noopener noreferrer" href="{{ analytics_service_page}}" >Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a></p>{% endif %}
+	</div>
     </div>
     <div class="row">
         <div class="col-12">
