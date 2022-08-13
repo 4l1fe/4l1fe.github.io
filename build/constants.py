@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 
@@ -20,8 +21,8 @@ ARTICLE_IMG_FILE = 'files/main-section.png'
 GOOGLE_VERF_TOKEN = 'utO5yk8RwIXZ-_rnxq_xpMndgtw0MU_VqtE61lNmjsY'
 SITE_NAME = 'ТехнологоблогЪ'
 SITE_ADDRESS = 'https://www.4l1fe.dev'
-ANALYTICS_SERVICE_ADDRESS = "https://analytics.4l1fe.dev:23387"
-ANALYTICS_SERVICE_TOKEN = "216025c7-b209-4e65-83f5-35be37d0604b"
+ANALYTICS_SERVICE_ADDRESS = os.environ.get("ANALYTICS_SERVICE_ADDRESS", "http://127.0.0.1:3000")
+ANALYTICS_SERVICE_TOKEN = os.environ.get("ANALYTICS_SERVICE_TOKEN", "e425b7bc-6ef5-4cb1-af1a-d04b1d7f0844")
 ANALYTICS_SERVICE_JS = ANALYTICS_SERVICE_ADDRESS + "/umami.js"
-ANALYTICS_SERVICE_PAGE = ANALYTICS_SERVICE_ADDRESS + "/share/MwnSQ7JH/4l1fe-dev"
+ANALYTICS_SERVICE_PAGE = ANALYTICS_SERVICE_ADDRESS + os.environ.get("ANALYTICS_SERVICE_PAGE", "/share/85mmF7rx/local")
 

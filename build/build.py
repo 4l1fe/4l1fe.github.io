@@ -7,6 +7,7 @@ from itertools import chain
 from contextlib import suppress
 from pathlib import Path
 from datetime import datetime
+from argparse import ArgumentParser
 
 import markdown_it
 from lxml.html import Element, fromstring, tostring as _tostring
@@ -18,7 +19,8 @@ from slugify import slugify
 from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
                        INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE, GOOGLE_VERF_TOKEN,
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
-                       SITE_NAME, ANALYTICS_SERVICE_ADDRESS, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS, ANALYTICS_SERVICE_PAGE)
+                       SITE_NAME, ANALYTICS_SERVICE_ADDRESS, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS,
+                       ANALYTICS_SERVICE_PAGE)
 from filters import trailing_slash, to_rfc822, prepend_site_address
 from utils import make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text
 
@@ -33,12 +35,11 @@ env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks
                   autoescape=select_autoescape(['html']))
 env.globals['google_verification_token'] = GOOGLE_VERF_TOKEN
 env.globals['site_address'] = SITE_ADDRESS
-env.globals['analytics_enabled'] = True
+env.globals['site_name'] = SITE_NAME
 env.globals['analytics_service_address'] = ANALYTICS_SERVICE_ADDRESS
 env.globals['analytics_service_token'] = ANALYTICS_SERVICE_TOKEN
 env.globals['analytics_service_js'] = ANALYTICS_SERVICE_JS
 env.globals['analytics_service_page'] = ANALYTICS_SERVICE_PAGE
-env.globals['site_name'] = SITE_NAME
 env.filters['trailing_slash'] = trailing_slash
 env.filters['to_rfc822'] = to_rfc822
 env.filters['prepend_site_address'] = prepend_site_address
@@ -126,16 +127,18 @@ class HTMLGen:
         return files, images
 
     @staticmethod
-    def generate_article_html(md_text, font_icons=False, highlight=False):
+    def generate_article_html(md_text, font_icons=False, highlight=False, analytics=False):
+        """Article is two big blocks `toc`, `content`"""
         parser = markdown_it.MarkdownIt().enable('table')
         html = parser.render(md_text)
 
         content_html = HTMLGen._apply_headers_anchors(html)
 
         toc = HTMLGen._extract_toc(content_html)
-        toc_html = HTMLGen._generate_toc_html(toc)
+        toc_html = HTMLGen._generate_toc_html(toc)  # search the anchors
         content_html = HTMLGen._apply_font_icons(content_html) if font_icons else content_html
         content_html = HTMLGen._apply_highlighting(content_html) if highlight else content_html
+        content_html = HTMLGen._apply_analytics_event_type(content_html) if analytics else content_html
         root_element = fromstring(content_html)
         template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
         html = template.render(content=content_html, toc=toc_html, title=first_h1_text(root_element), description=first_p_text(root_element))
@@ -147,10 +150,10 @@ class HTMLGen:
         root = fromstring(wrap_unwrap_fake_tag(html))
         for element in root.iter('a'):
             resource = element.attrib.get('href')
-            if not (resource and element.text):  # .text empty in anchors <a>
+            if not (resource and element.text):  # text is empty in anchors <a>
                 continue
 
-            # External link
+            # external link
             if resource.startswith('https://github.com'):
                 icon_class = HTMLGen.EXTERNAL_LINK_GITHUB_ICON_CLASS
             elif resource.startswith('http'):
@@ -181,7 +184,7 @@ class HTMLGen:
         for element in root_element:
             if element.tag in HEADERS:
                 id_ = make_header_id(element.text)
-                a_element = Element('a', {'id': id_, 'href': f'#{id_}'})
+                a_element = Element('a', attrib={'id': id_, 'href': f'#{id_}'})
                 span_element = Element('span', attrib={'class': 'iconify',
                                                        'data-icon': HTMLGen.ANCHOR_LINK_ICON_CLASS})
                 a_element.append(span_element)
@@ -190,7 +193,23 @@ class HTMLGen:
         html = tostring(root_element)
         html = wrap_unwrap_fake_tag(html, wrap=False)
         return html
+        
+    @staticmethod
+    def _apply_analytics_event_type(html: str) -> str:
+        root_element = fromstring(wrap_unwrap_fake_tag(html))
+        elements = (e for e in root_element.iter('a')
+                    if e.attrib.has_key('href')
+                        and not e.attrib['href'].startswith('#'))  # anchor is ignored
 
+        for element in elements:
+            href = element.attrib['href'].split('://', 1)[-1]  # can be splitted into one
+            event_type = 'umami--click--' + slugify(href)
+            element.classes.add(event_type)
+            
+        html = tostring(root_element)
+        html = wrap_unwrap_fake_tag(html, wrap=False)
+        return html
+        
     @staticmethod
     def _extract_toc(html: str) -> TocType:
         toc = []
@@ -270,14 +289,15 @@ class HTMLGen:
         return html
 
 
-def main(font_icons=True):
+def main(font_icons=True, highlight=True, analytics=False):
+    env.globals['analytics_enabled'] = analytics
     articles_data = []
 
     for article_source_dir in iter_articles_source_dir(reverse=True):
         # Генерация страницы и запись в файл
         article_md_file = article_source_dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
-        article_html, toc_html = HTMLGen.generate_article_html(md_text, font_icons=font_icons, highlight=True)
+        article_html, toc_html = HTMLGen.generate_article_html(md_text, font_icons=font_icons, highlight=highlight, analytics=analytics)
         article_dir = ARTICLES_DOCS_DIR / article_source_dir.name
         article_index_file = article_dir / INDEX_FILE.name
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
@@ -321,4 +341,8 @@ def main(font_icons=True):
 
 
 if __name__ == '__main__':
-    main()
+    parser = ArgumentParser()
+    parser.add_argument('--enable-analytics', action="store_true", help="Write html tags, add css classes. Substitute values from env file")
+    args = parser.parse_args()
+    
+    main(analytics=args.enable_analytics)
