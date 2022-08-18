@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.4l1fe.dev/sitemap.xml
+Sitemap: https://www.kvdm.dev/sitemap.xml
