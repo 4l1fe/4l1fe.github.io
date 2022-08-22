@@ -10,19 +10,19 @@
     <div class="row">
         <div id="about" class="col-lg-3">
             <h2>Profiles</h2>
-                <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a></p>
-                <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a></p>
-                <p><a class="me-1" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></p>
+                <p><a class="me-1 {% if analytics_enabled %}umami--click--profiles-github{% endif %}" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a></p>
+                <p><a class="me-1 {% if analytics_enabled %}umami--click--profiles-linkedin{% endif %}" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a></p>
+                <p><a class="me-1 {% if analytics_enabled %}umami--click--profiles-stackexchange{% endif %}" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></p>
         </div>
 	<div class="col-lg-3">
 	    <h2>Services</h2>
-	    <p><a class="me-1" target="_blank" rel="noopener noreferrer" {% if analytics_enabled %}href="{{ analytics_service_page}}"{% endif %}>Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a></p>
+	    <p><a class="me-1 {% if analytics_enabled %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" {% if analytics_enabled %}href="{{ analytics_service_page}}"{% endif %}>Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a></p>
 	</div>
     </div>
     <div class="row">
         <div class="col-12">
             <h2>Articles</h2>
-            <p><a class="me-1" href="rss.xml">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a></p>
+            <p><a class="me-1 {% if analytics_enabled %}umami--click--articles-subscribe{% endif %}" href="rss.xml">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a></p>
         </div>
     </div>
     {% for adata in articles_data %}

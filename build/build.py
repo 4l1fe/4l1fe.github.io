@@ -20,7 +20,7 @@ from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLAT
                        INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE,
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
                        SITE_NAME, ANALYTICS_SERVICE_ADDRESS, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS,
-                       ANALYTICS_SERVICE_PAGE)
+                       ANALYTICS_SERVICE_PAGE, ANALYTICS_ENABLED_DEFAULT)
 from filters import trailing_slash, to_rfc822, prepend_site_address
 from utils import make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text
 
@@ -35,6 +35,7 @@ env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks
                   autoescape=select_autoescape(['html']))
 env.globals['site_address'] = SITE_ADDRESS
 env.globals['site_name'] = SITE_NAME
+env.globals['analytics_enabled'] = ANALYTICS_ENABLED_DEFAULT
 env.globals['analytics_service_address'] = ANALYTICS_SERVICE_ADDRESS
 env.globals['analytics_service_token'] = ANALYTICS_SERVICE_TOKEN
 env.globals['analytics_service_js'] = ANALYTICS_SERVICE_JS
@@ -112,21 +113,7 @@ class HTMLGen:
         return html
 
     @staticmethod
-    def retrieve_attached_files_paths(html) -> Tuple[Set[str], dict]:
-        element = fromstring(html)
-        files, images = set(), dict()
-        for el in element.findall('.//a'):
-            if el.attrib.get('href', '').startswith('files/'):
-                files.add(el.attrib['href'])
-        for el in element.findall('.//img'):
-            if el.attrib.get('src', '').startswith('files/'):
-                title = el.attrib.get('title', '')
-                images[el.attrib['src']] = title
-
-        return files, images
-
-    @staticmethod
-    def generate_article_html(md_text, font_icons=False, highlight=False, analytics=False):
+    def generate_article_html(md_text, font_icons: bool = False, highlight: bool = False, analytics: bool = ANALYTICS_ENABLED_DEFAULT):
         """Article is two big blocks `toc`, `content`"""
         parser = markdown_it.MarkdownIt().enable('table')
         html = parser.render(md_text)
@@ -143,6 +130,20 @@ class HTMLGen:
         html = template.render(content=content_html, toc=toc_html, title=first_h1_text(root_element), description=first_p_text(root_element))
 
         return html, toc_html
+
+    @staticmethod
+    def retrieve_attached_files_paths(html) -> Tuple[Set[str], dict]:
+        element = fromstring(html)
+        files, images = set(), dict()
+        for el in element.findall('.//a'):
+            if el.attrib.get('href', '').startswith('files/'):
+                files.add(el.attrib['href'])
+        for el in element.findall('.//img'):
+            if el.attrib.get('src', '').startswith('files/'):
+                title = el.attrib.get('title', '')
+                images[el.attrib['src']] = title
+
+        return files, images
 
     @staticmethod
     def _apply_font_icons(html):
@@ -210,6 +211,28 @@ class HTMLGen:
         return html
         
     @staticmethod
+    def _apply_highlighting(html: str):
+        root_element = fromstring(wrap_unwrap_fake_tag(html))
+
+        for pre_el in root_element.iterfind('.//pre'):
+            for code_el in pre_el.iter('code'):
+                language = code_el.attrib.get('class')
+                style = HTMLGen.HIGHLIGHTING_STYLE_MAP.get(language)
+                Lexer = HTMLGen.LEXER_MAP.get(language)
+                if not language or not style or not Lexer:
+                    continue
+
+                code = code_el.text
+                code_elements = highlight(code, Lexer(), HtmlFormatter(noclasses=True, wrapcode=False, nowrap=True, style=style))
+                code_elements = fromstring(code_elements)
+                code_el.clear()
+                code_el.extend(code_elements)
+
+        html = tostring(root_element)
+        html = wrap_unwrap_fake_tag(html, wrap=False)
+        return html
+
+    @staticmethod
     def _extract_toc(html: str) -> TocType:
         toc = []
 
@@ -265,30 +288,8 @@ class HTMLGen:
 
         return doc.documentElement.toxml()
 
-    @staticmethod
-    def _apply_highlighting(html: str):
-        root_element = fromstring(wrap_unwrap_fake_tag(html))
 
-        for pre_el in root_element.iterfind('.//pre'):
-            for code_el in pre_el.iter('code'):
-                language = code_el.attrib.get('class')
-                style = HTMLGen.HIGHLIGHTING_STYLE_MAP.get(language)
-                Lexer = HTMLGen.LEXER_MAP.get(language)
-                if not language or not style or not Lexer:
-                    continue
-
-                code = code_el.text
-                code_elements = highlight(code, Lexer(), HtmlFormatter(noclasses=True, wrapcode=False, nowrap=True, style=style))
-                code_elements = fromstring(code_elements)
-                code_el.clear()
-                code_el.extend(code_elements)
-
-        html = tostring(root_element)
-        html = wrap_unwrap_fake_tag(html, wrap=False)
-        return html
-
-
-def main(font_icons=True, highlight=True, analytics=False):
+def main(font_icons=True, highlight=True, analytics=ANALYTICS_ENABLED_DEFAULT):
     env.globals['analytics_enabled'] = analytics
     articles_data = []
 

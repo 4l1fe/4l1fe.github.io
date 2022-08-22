@@ -21,6 +21,7 @@ ARTICLE_IMG_FILE = 'files/main-section.png'
 SITE_NAME = 'ТехнологоблогЪ'
 SITE_ADDRESS = 'https://www.kvdm.dev'
 
+ANALYTICS_ENABLED_DEFAULT = False
 ANALYTICS_SERVICE_ADDRESS = os.environ.get("ANALYTICS_SERVICE_ADDRESS", "http://127.0.0.1:3000")
 ANALYTICS_SERVICE_TOKEN = os.environ.get("ANALYTICS_SERVICE_TOKEN", "e425b7bc-6ef5-4cb1-af1a-d04b1d7f0844")
 ANALYTICS_SERVICE_JS = ANALYTICS_SERVICE_ADDRESS + "/umami.js"
