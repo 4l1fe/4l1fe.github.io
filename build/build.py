@@ -17,7 +17,7 @@ from pygments.lexers.python import PythonLexer
 from pygments.formatters.html import HtmlFormatter
 from slugify import slugify
 from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
-                       INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE, GOOGLE_VERF_TOKEN,
+                       INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE,
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
                        SITE_NAME, ANALYTICS_SERVICE_ADDRESS, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS,
                        ANALYTICS_SERVICE_PAGE)
@@ -33,7 +33,6 @@ TocType = List[Tuple[int, str]]
 Dom = getDOMImplementation()
 env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks=True,
                   autoescape=select_autoescape(['html']))
-env.globals['google_verification_token'] = GOOGLE_VERF_TOKEN
 env.globals['site_address'] = SITE_ADDRESS
 env.globals['site_name'] = SITE_NAME
 env.globals['analytics_service_address'] = ANALYTICS_SERVICE_ADDRESS

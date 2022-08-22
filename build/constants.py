@@ -18,9 +18,9 @@ RSS_FILE = DOCS_DIR / 'rss.xml'
 AS_DIRS_IGNORE = {ARTICLES_SOURCE_DIR / 'drafts', }
 ARTICLE_MD_FILE = 'README.md'
 ARTICLE_IMG_FILE = 'files/main-section.png'
-GOOGLE_VERF_TOKEN = 'utO5yk8RwIXZ-_rnxq_xpMndgtw0MU_VqtE61lNmjsY'
 SITE_NAME = 'ТехнологоблогЪ'
 SITE_ADDRESS = 'https://www.kvdm.dev'
+
 ANALYTICS_SERVICE_ADDRESS = os.environ.get("ANALYTICS_SERVICE_ADDRESS", "http://127.0.0.1:3000")
 ANALYTICS_SERVICE_TOKEN = os.environ.get("ANALYTICS_SERVICE_TOKEN", "e425b7bc-6ef5-4cb1-af1a-d04b1d7f0844")
 ANALYTICS_SERVICE_JS = ANALYTICS_SERVICE_ADDRESS + "/umami.js"
