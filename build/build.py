@@ -14,6 +14,7 @@ from lxml.html import Element, fromstring, tostring as _tostring
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from pygments import highlight
 from pygments.lexers.python import PythonLexer
+from pygments.lexers.shell import BashSessionLexer
 from pygments.formatters.html import HtmlFormatter
 from slugify import slugify
 from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
@@ -103,8 +104,10 @@ class HTMLGen:
                                    'gz': 'icomoon-free:file-zip',
                                    'sql': 'bi:file-earmark-code',
                                    'sh': 'bi:terminal'}
-    HIGHLIGHTING_STYLE_MAP = {'language-python': 'monokai'}
-    LEXER_MAP = {'language-python': PythonLexer}
+    HIGHLIGHTING_STYLE_MAP = {'language-python': 'monokai',
+                              'language-shell': 'material'}
+    LEXER_MAP = {'language-python': PythonLexer,
+                 'language-shell': BashSessionLexer}
 
     @staticmethod
     def generate_index_html(articles_data: List[ArticleData]):

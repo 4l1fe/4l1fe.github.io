@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>23 Aug 2022 00:00:00 +0000</pubDate>
+		<pubDate>25 Aug 2022 00:00:00 +0000</pubDate>
+				<item>
+			<title>File System based file changes history on snapshots. LVM. ZFS. BTRFS </title>
+			<link>https://www.kvdm.dev/articles/file-system-based-file-changes-history-on-snapshots-lvm-zfs-btrfs/</link>
+			<description>After stopping usage a cloud disk and transferring data to my own devices i step forward and would like to find a solution of storing text file changes history, other files formats aren't considering as they aren't editing by me.</description>
+			<pubDate>25 Aug 2022 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/file-system-based-file-changes-history-on-snapshots-lvm-zfs-btrfs/</guid>
+		</item>
 				<item>
 			<title>Drop a cloud disk in favor of storing data on the phone and laptop. FreeFileSync. KDiff3 </title>
 			<link>https://www.kvdm.dev/articles/drop-a-cloud-disk-in-favor-of-storing-data-on-the-phone-and-laptop-freefilesync-kdiff3/</link>

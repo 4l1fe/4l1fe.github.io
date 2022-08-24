@@ -34,4 +34,5 @@ def first_h1_text(element):
 
 @lru_cache
 def first_p_text(element):
+    """0th element has to be an article image"""
     return list(islice(element.iterfind('.//p'), 2))[1].text_content()
