@@ -17,7 +17,7 @@ from pygments.lexers.python import PythonLexer
 from pygments.lexers.shell import BashSessionLexer
 from pygments.formatters.html import HtmlFormatter
 from slugify import slugify
-from constants import (DOCS_DIR, ARTICLES_SOURCE_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
+from constants import (DOCS_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
                        INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE,
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
                        SITE_NAME, ANALYTICS_SERVICE_ADDRESS, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS,
@@ -70,11 +70,12 @@ class ArticleData:
         self.img_relative_link = self.relative_link.joinpath(self.img_relative_link)
 
 
-def iter_articles_source_dir(reverse=False):
-    iter_dir = ARTICLES_SOURCE_DIR.iterdir()
+def iter_articles_source_dir(articles_dir: Path, reverse=False):
+    ignore_dirs = set(articles_dir / d for d in AS_DIRS_IGNORE)
+    iter_dir = articles_dir.iterdir()
 
     for article_source_dir in sorted(iter_dir, reverse=reverse):
-        if article_source_dir not in AS_DIRS_IGNORE:
+        if article_source_dir not in ignore_dirs:
             yield article_source_dir
 
 
@@ -292,11 +293,11 @@ class HTMLGen:
         return doc.documentElement.toxml()
 
 
-def main(font_icons=True, highlight=True, analytics=ANALYTICS_ENABLED_DEFAULT):
+def main(articles_dir: Path, font_icons=True, highlight=True, analytics=ANALYTICS_ENABLED_DEFAULT):
     env.globals['analytics_enabled'] = analytics
     articles_data = []
 
-    for article_source_dir in iter_articles_source_dir(reverse=True):
+    for article_source_dir in iter_articles_source_dir(articles_dir, reverse=True):
         # Генерация страницы и запись в файл
         article_md_file = article_source_dir / ARTICLE_MD_FILE
         md_text = article_md_file.read_text()
@@ -345,7 +346,8 @@ def main(font_icons=True, highlight=True, analytics=ANALYTICS_ENABLED_DEFAULT):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
+    parser.add_argument('articlesdir', type=Path, help="Path to an articles folder.")
     parser.add_argument('--enable-analytics', action="store_true", help="Write html tags, add css classes. Substitute values from env file")
     args = parser.parse_args()
     
-    main(analytics=args.enable_analytics)
+    main(args.articlesdir, analytics=args.enable_analytics)
