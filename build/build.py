@@ -20,8 +20,9 @@ from slugify import slugify
 from constants import (DOCS_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
                        INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE,
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
-                       SITE_NAME, ANALYTICS_SERVICE_ADDRESS, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS,
-                       ANALYTICS_SERVICE_PAGE, ANALYTICS_ENABLED_DEFAULT)
+                       SITE_NAME, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS,
+                       ANALYTICS_SERVICE_PAGE, ANALYTICS_ENABLED_DEFAULT, MONITORING_ENABLED_DEFAULT,
+                       MONITORING_SERVICE_PAGE)
 from filters import trailing_slash, to_rfc822, prepend_site_address
 from utils import make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text
 
@@ -36,11 +37,12 @@ env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks
                   autoescape=select_autoescape(['html']))
 env.globals['site_address'] = SITE_ADDRESS
 env.globals['site_name'] = SITE_NAME
-env.globals['analytics_enabled'] = ANALYTICS_ENABLED_DEFAULT
-env.globals['analytics_service_address'] = ANALYTICS_SERVICE_ADDRESS
+# env.globals['analytics_enabled'] = ANALYTICS_ENABLED_DEFAULT
 env.globals['analytics_service_token'] = ANALYTICS_SERVICE_TOKEN
 env.globals['analytics_service_js'] = ANALYTICS_SERVICE_JS
 env.globals['analytics_service_page'] = ANALYTICS_SERVICE_PAGE
+# env.globals['monitoring_enabled'] = MONITORING_ENABLED_DEFAULT
+env.globals['monitoring_service_page'] = MONITORING_SERVICE_PAGE
 env.filters['trailing_slash'] = trailing_slash
 env.filters['to_rfc822'] = to_rfc822
 env.filters['prepend_site_address'] = prepend_site_address
@@ -293,8 +295,10 @@ class HTMLGen:
         return doc.documentElement.toxml()
 
 
-def main(articles_dir: Path, font_icons=True, highlight=True, analytics=ANALYTICS_ENABLED_DEFAULT):
+def main(articles_dir: Path, font_icons=True, highlight=True, analytics=ANALYTICS_ENABLED_DEFAULT,
+         monitoring=MONITORING_ENABLED_DEFAULT):
     env.globals['analytics_enabled'] = analytics
+    env.globals['monitoring_enabled'] = monitoring
     articles_data = []
 
     for article_source_dir in iter_articles_source_dir(articles_dir, reverse=True):
@@ -347,7 +351,8 @@ def main(articles_dir: Path, font_icons=True, highlight=True, analytics=ANALYTIC
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('articlesdir', type=Path, help="Path to an articles folder.")
-    parser.add_argument('--enable-analytics', action="store_true", help="Write html tags, add css classes. Substitute values from env file")
+    parser.add_argument('--enable-analytics', action="store_true", help="Write html tags, add css classes. Substitute values from env file. Enable url.")
+    parser.add_argument('--enable-monitoring', action="store_true", help="Enable url.")
     args = parser.parse_args()
     
-    main(args.articlesdir, analytics=args.enable_analytics)
+    main(args.articlesdir, analytics=args.enable_analytics, monitoring=args.enable_monitoring)
