@@ -107,8 +107,8 @@ class HTMLGen:
                                    'gz': 'icomoon-free:file-zip',
                                    'sql': 'bi:file-earmark-code',
                                    'sh': 'bi:terminal'}
-    HIGHLIGHTING_STYLE_MAP = {'language-python': 'monokai',
-                              'language-shell': 'material'}
+    HIGHLIGHTING_STYLE_MAP = {'language-python': 'friendly',
+                              'language-shell': 'friendly'}
     LEXER_MAP = {'language-python': PythonLexer,
                  'language-shell': BashSessionLexer}
 
@@ -334,8 +334,8 @@ def main(articles_dir: Path, font_icons=True, highlight=True, analytics=ANALYTIC
                        target_is_directory=True)
         created_date = datetime.strptime(article_source_dir.name, '%Y-%m-%d')
         images = tuple(AttachedImage(title, path, article_relative_symlink) for path, title in images.items() if title)
-        adata = ArticleData(title=first_h1_text(root_element), relative_link=article_relative_symlink, paragraph=first_p_text(root_element),
-                            created_date=created_date, images=images)
+        adata = ArticleData(title=first_h1_text(root_element), relative_link=article_relative_symlink,
+                            paragraph=first_p_text(root_element), created_date=created_date, images=images)
         articles_data.append(adata)
 
     index_html = HTMLGen.generate_index_html(articles_data)

@@ -57,12 +57,12 @@
         }
         pre {
             padding: 1em;
+            border-color: #dee2e6 !important;
             border-style: solid !important;
             border-width: 1px !important;
             border-image: initial !important;
             border-radius: .5rem;
-            background-color: #000000;
-            color: #ffffff
+            background-color: #f0f0f0;
         }
         pre code {
             font-family: 'Terminus';
@@ -147,26 +147,26 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p><img src="files/main-section.png" alt=""></p>
 <p>You may find out as me that after proper setting Mitmproxy up python https requests end up with ERR_CERT_AUTHORITY_INVALID error while other http clients are working with no problems. Quite unexpectable, isn't it?</p>
 <p>Let's have a look at the example.</p>
-<pre><code>$ HTTPS_PROXY=127.0.0.1:8080 https github.com
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span><span style="color: #bb60d5">HTTPS_PROXY</span><span style="color: #666666">=</span><span style="color: #40a070">127</span>.0.0.1:8080 https github.com
 
-https: error: SSLError: HTTPSConnectionPool(host='github.com', port=443): 
-Max retries exceeded with url: / 
-(Caused by SSLError(SSLError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:852)'),)) 
-while doing a GET request to URL: https://github.com/
+<span style="color: #888888">https: error: SSLError: HTTPSConnectionPool(host='github.com', port=443): </span>
+<span style="color: #888888">Max retries exceeded with url: / </span>
+<span style="color: #c65d09; font-weight: bold">(Caused by SSLError(SSLError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:852)</span><span style="color: #888888">'),)) </span>
+<span style="color: #888888">while doing a GET request to URL: https://github.com/</span>
 </code></pre>
 <p>It happens because <a href="https://github.com/httpie/httpie" class="umami--click--github-com-httpie-httpie"><span class="iconify" data-icon="codicon:github-inverted"></span> httpie</a> client internally use <strong>requests</strong> lib and one doesn't see the OS ssl system-wide settings directories. But it is customizable as described in the documentation how <a href="https://docs.python-requests.org/en/master/user/advanced/#ssl-cert-verification" class="umami--click--docs-python-requests-org-en-master-user-advanced-ssl-cert-verification"><span class="iconify" data-icon="bx:bx-link-external"></span> to specify manually a cert file</a> which we are using for proxyfying.</p>
 <p>Important remark here is we don't open client's code and add any settings into an http request call as we are <strong>man in the middle</strong> who technically may not have a way to edit the code.</p>
 <h2>Run command with env REQUESTS_CA_BUNDLE for requests based clients <a id="run-command-with-env-requests_ca_bundle-for-requests-based-clients" href="#run-command-with-env-requests_ca_bundle-for-requests-based-clients"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Armed with the cert file path let's run the same command adding the env <code>REQUESTS_CA_BUNDLE</code>.</p>
-<pre><code>$ HTTPS_PROXY=127.0.0.1:8080 \ 
-REQUESTS_CA_BUNDLE=/usr/local/share/ca-certificates/mitmproxy-ca-cert.crt \ 
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span><span style="color: #bb60d5">HTTPS_PROXY</span><span style="color: #666666">=</span><span style="color: #40a070">127</span>.0.0.1:8080 <span style="color: #4070a0; font-weight: bold">\</span>
+<span style="color: #bb60d5">REQUESTS_CA_BUNDLE</span><span style="color: #666666">=</span>/usr/local/share/ca-certificates/mitmproxy-ca-cert.crt <span style="color: #4070a0; font-weight: bold">\</span>
 https github.com
 
-HTTP/1.1 200 OK
-Accept-Ranges: bytes
-Cache-Control: max-age=0, private, must-revalidate
-Server: GitHub.com
-...
+<span style="color: #888888">HTTP/1.1 200 OK</span>
+<span style="color: #888888">Accept-Ranges: bytes</span>
+<span style="color: #888888">Cache-Control: max-age=0, private, must-revalidate</span>
+<span style="color: #888888">Server: GitHub.com</span>
+<span style="color: #888888">...</span>
 </code></pre>
 <p>Now <code>https</code> client picks up the right cert file and goes through Mitmproxy.</p>
 <h2>Run Mitmproxy passing a custom cert file in <a id="run-mitmproxy-passing-a-custom-cert-file-in" href="#run-mitmproxy-passing-a-custom-cert-file-in"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
@@ -176,11 +176,11 @@ Server: GitHub.com
 <ol>
 <li>
 <p>Locate <code>REQUESTS_CA_BUNDLE</code>.</p>
-<pre><code>            # Look for requests environment configuration and be compatible
-            # with cURL.
-            if verify is True or verify is None:
-                verify = (os.environ.get('REQUESTS_CA_BUNDLE') or
-                          os.environ.get('CURL_CA_BUNDLE'))
+<pre><code><span style="color: #60a0b0; font-style: italic"># Look for requests environment configuration and be compatible</span>
+            <span style="color: #60a0b0; font-style: italic"># with cURL.</span>
+            <span style="color: #007020; font-weight: bold">if</span> verify <span style="color: #007020; font-weight: bold">is</span> <span style="color: #007020; font-weight: bold">True</span> <span style="color: #007020; font-weight: bold">or</span> verify <span style="color: #007020; font-weight: bold">is</span> <span style="color: #007020; font-weight: bold">None</span>:
+                verify <span style="color: #666666">=</span> (os<span style="color: #666666">.</span>environ<span style="color: #666666">.</span>get(<span style="color: #4070a0">'REQUESTS_CA_BUNDLE'</span>) <span style="color: #007020; font-weight: bold">or</span>
+                          os<span style="color: #666666">.</span>environ<span style="color: #666666">.</span>get(<span style="color: #4070a0">'CURL_CA_BUNDLE'</span>))
 </code></pre>
 <p>A point here is <code>CURL_CA_BUNDLE</code> may not have a value as <code>REQUESTS_CA_BUNDLE</code> does, that's confusing. But what the information do we can find about the curl env?</p>
 </li>
@@ -191,33 +191,33 @@ Server: GitHub.com
 <li>
 <p>Search for <code>certifi</code> info.</p>
 <p><strong>certs.py</strong></p>
-<pre><code>from certifi import where
+<pre><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">certifi</span> <span style="color: #007020; font-weight: bold">import</span> where
 </code></pre>
 <p><strong>utils.py</strong></p>
-<pre><code>from . import certs
+<pre><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">.</span> <span style="color: #007020; font-weight: bold">import</span> certs
 
-DEFAULT_CA_BUNDLE_PATH = certs.where()
+DEFAULT_CA_BUNDLE_PATH <span style="color: #666666">=</span> certs<span style="color: #666666">.</span>where()
 </code></pre>
 <p>It looks like what we are looking for. Semantic of a constant name makes me want to print a value of <code>DEFAULT_CA_BUNDLE_PATH</code>.</p>
 </li>
 <li>
 <p>Print <code>DEFAULT_CA_BUNDLE_PATH</code>.</p>
-<pre><code>In [1]: import requests
-In [2]: requests.utils.DEFAULT_CA_BUNDLE_PATH
-Out[2]: 'venv/lib/python3.8/site-packages/certifi/cacert.pem'
+<pre><code><span style="color: #40a070">1</span>]: <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">requests</span>
+In [<span style="color: #40a070">2</span>]: requests<span style="color: #666666">.</span>utils<span style="color: #666666">.</span>DEFAULT_CA_BUNDLE_PATH
+Out[<span style="color: #40a070">2</span>]: <span style="color: #4070a0">'venv/lib/python3.8/site-packages/certifi/cacert.pem'</span>
 </code></pre>
 <p>Pretty "appropriate" file i consider. Now we see what we have to substitute in.</p>
 </li>
 <li>
 <p>Substitute and run Mitmproxy</p>
-<pre><code>$ mitmproxy --certs "venv/lib/python3.8/site-packages/certifi/cacert.pem"
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>mitmproxy --certs <span style="color: #4070a0">"venv/lib/python3.8/site-packages/certifi/cacert.pem"</span>
 </code></pre>
-<pre><code>$ HTTPS_PROXY=127.0.0.1:8080 https --headers github.com                                                      git:master*
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span><span style="color: #bb60d5">HTTPS_PROXY</span><span style="color: #666666">=</span><span style="color: #40a070">127</span>.0.0.1:8080 https --headers github.com
 
-https: error: SSLError: HTTPSConnectionPool(host='github.com', port=443):
- Max retries exceeded with url: / 
-(Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:852)'),))
- while doing a GET request to URL: https://github.com/
+<span style="color: #888888">https: error: SSLError: HTTPSConnectionPool(host='github.com', port=443):</span>
+<span style="color: #888888"> Max retries exceeded with url: /</span>
+<span style="color: #c65d09; font-weight: bold">(Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:852)</span><span style="color: #888888">'),))</span>
+<span style="color: #888888"> while doing a GET request to URL: https://github.com/</span>
 </code></pre>
 <p>I've failed and crying .</p>
 </li>

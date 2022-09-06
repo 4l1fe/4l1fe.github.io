@@ -57,12 +57,12 @@
         }
         pre {
             padding: 1em;
+            border-color: #dee2e6 !important;
             border-style: solid !important;
             border-width: 1px !important;
             border-image: initial !important;
             border-radius: .5rem;
-            background-color: #000000;
-            color: #ffffff
+            background-color: #f0f0f0;
         }
         pre code {
             font-family: 'Terminus';
@@ -183,9 +183,9 @@ The fastest but complicated to set up. Good to have when you sync many big files
 </ul>
 <p>I ended up with <strong>hot spot</strong> as it brought me fewer technical problems than the others. Kubuntu, which i use, and Android can create a hot spot connection without installing additional software.</p>
 <p>To figure out where an sshfs' folder is mounted the <code>findmnt</code> command is running:</p>
-<pre><code>❯ findmnt
-TARGET                                SOURCE                      FSTYPE     OPTIONS
-/run/user/1000/2b9ed3f350c57a51       kdeconnect@192.168.241.62:/ fuse.sshfs rw,nosuid,nodev,relatime,user_id=1000,group_id=1000
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>findmnt
+<span style="color: #888888">TARGET                                SOURCE                      FSTYPE     OPTIONS</span>
+<span style="color: #888888">/run/user/1000/2b9ed3f350c57a51       kdeconnect@192.168.241.62:/ fuse.sshfs rw,nosuid,nodev,relatime,user_id=1000,group_id=1000</span>
 </code></pre>
 <h3>Syncing in pictures <a id="syncing-in-pictures" href="#syncing-in-pictures"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>As a connection is established a folder from the phone can be found on file system and open to see a difference.</p>

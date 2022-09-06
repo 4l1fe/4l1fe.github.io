@@ -57,12 +57,12 @@
         }
         pre {
             padding: 1em;
+            border-color: #dee2e6 !important;
             border-style: solid !important;
             border-width: 1px !important;
             border-image: initial !important;
             border-radius: .5rem;
-            background-color: #000000;
-            color: #ffffff
+            background-color: #f0f0f0;
         }
         pre code {
             font-family: 'Terminus';
@@ -152,19 +152,19 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p><img src="files/subsection-progress.png" alt=""></p>
 <p>Obviously, first question appeared in my mind is how to list ran systemd's services during a bootloading phase. You, for sure, will get to the two reports <code>systemd-analyze, systemd-analyze blame</code> as me while answering the question. They display a list of the services, their running time and much more.</p>
 <p>In my case the list was following:</p>
-<pre><code>$ systemd-analyze
-Startup finished in 4.782s (firmware) + 5.726s (loader) + 7.575s (kernel) + 26.033s (userspace) = 44.118s 
-graphical.target reached after 10.685s in userspace
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>systemd-analyze
+<span style="color: #888888">Startup finished in 4.782s (firmware) + 5.726s (loader) + 7.575s (kernel) + 26.033s (userspace) = 44.118s </span>
+<span style="color: #888888">graphical.target reached after 10.685s in userspace</span>
 
-$ systemd-analyze blame
-         10.321s apt-daily.service
-          6.793s NetworkManager-wait-online.service
-          6.591s apt-daily-upgrade.service
-          1.579s docker.service
-          1.569s snapd.service
-          1.501s dev-nvme0n1p3.device
-          1.098s vboxdrv.service
-		  ...
+<span style="color: #c65d09; font-weight: bold">$ </span>systemd-analyze blame
+<span style="color: #888888">         10.321s apt-daily.service</span>
+<span style="color: #888888">          6.793s NetworkManager-wait-online.service</span>
+<span style="color: #888888">          6.591s apt-daily-upgrade.service</span>
+<span style="color: #888888">          1.579s docker.service</span>
+<span style="color: #888888">          1.569s snapd.service</span>
+<span style="color: #888888">          1.501s dev-nvme0n1p3.device</span>
+<span style="color: #888888">          1.098s vboxdrv.service</span>
+<span style="color: #888888">		  ...</span>
 </code></pre>
 <p><em>Output lines are reduced to those are longer than 1 second.</em></p>
 <p>As we see there a few problematic services longer than 6 and 10 seconds along with the shorter ones. It was pretty fast and simple to find it out, no effort at all. I went further asking myself what the couple is   about and how to disable them.</p>
@@ -172,33 +172,33 @@ $ systemd-analyze blame
 <p><img src="files/subsection-done.png" alt="" title="Subsection done"></p>
 <p>What do i thought about each service listed above? <code>dev-nvme0n1p3.device</code> is a necessary physical SSD device and is putted out from consideration. <code>docker.service</code> is required for my job purposes on every day basis so it is left enabled. Next candidates to consider were <code>snapd.service, vboxdrv.service</code>. I don't use neither SnapD nor VirtualBox therefore they were disabled immediately.</p>
 <p>A group of the further candidates was  <code>NetworkManager-wait-online.service, apt-daily.service, apt-daily-upgrade.service</code>, what do they do? Aptish services' function is software update checking and upgrading, but why they do start at the bootloading phase? I googled the subject and ended up with it happens seldom. Seldom? To be more concise, these services are running by <strong>timer units</strong>. This idea i came to by a small research:</p>
-<pre><code>$ systemctl list-unit-files 'apt*'
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>systemctl list-unit-files <span style="color: #4070a0">'apt*'</span>
 
-UNIT FILE                 STATE
-apt-daily-upgrade.service static
-apt-daily.service         static
-apt-daily-upgrade.timer   enabled
-apt-daily.timer           enabled
+<span style="color: #888888">UNIT FILE                 STATE</span>
+<span style="color: #888888">apt-daily-upgrade.service static</span>
+<span style="color: #888888">apt-daily.service         static</span>
+<span style="color: #888888">apt-daily-upgrade.timer   enabled</span>
+<span style="color: #888888">apt-daily.timer           enabled</span>
 </code></pre>
 <p>All the existent units were listed by the name pattern. Here we see two timer and service ones and a big hint to say the timers trigger services. Next step was to display a timer config:</p>
-<pre><code>$ systemctl cat apt-daily.timer
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>systemctl cat apt-daily.timer
 
-# /lib/systemd/system/apt-daily.timer
-[Unit]
-Description=Daily apt download activities
+<span style="color: #c65d09; font-weight: bold"># </span>/lib/systemd/system/apt-daily.timer
+<span style="color: #888888">[Unit]</span>
+<span style="color: #888888">Description=Daily apt download activities</span>
 
-[Timer]
-OnCalendar=*-*-* 6,18:00
-RandomizedDelaySec=12h
-Persistent=true
+<span style="color: #888888">[Timer]</span>
+<span style="color: #888888">OnCalendar=*-*-* 6,18:00</span>
+<span style="color: #888888">RandomizedDelaySec=12h</span>
+<span style="color: #888888">Persistent=true</span>
 
-[Install]
-WantedBy=timers.target
+<span style="color: #888888">[Install]</span>
+<span style="color: #888888">WantedBy=timers.target</span>
 </code></pre>
 <p>Here is an attribute of execution moment, systemd triggers it at <code>OnCalendar=*-*-* 6,18:00</code>, the second service is working by the same mechanic.</p>
 <p>Now  the wait online service, it waits for network manager daemon to get to a connected state and it is quite useless, when i power on the laptop i don't expect any program to request network. Disabled it.</p>
 <p>I filtered out who is who and using the command <code>systemctl mask</code> has done disabling. The command guarantees services don't get awaken by side systemd's units occasionally.</p>
-<pre><code>$ sudo systemctl mask NetworkManager-wait-online.service snapd.service vboxdrv.service
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo systemctl mask NetworkManager-wait-online.service snapd.service vboxdrv.service
 </code></pre>
 <p>The issue is solved, but are the done precautions enough to keep bootloading fast? <strong>Blame report</strong> doesn't contain chronological statistics therefore i won't be able to examine services' running stats to point an anomaly out.</p>
 <h2>Is there chronological statistics <a id="is-there-chronological-statistics" href="#is-there-chronological-statistics"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
