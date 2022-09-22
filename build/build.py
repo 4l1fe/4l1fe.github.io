@@ -17,6 +17,7 @@ from pygments.lexers.python import PythonLexer
 from pygments.lexers.shell import BashSessionLexer
 from pygments.formatters.html import HtmlFormatter
 from slugify import slugify
+
 from constants import (DOCS_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
                        INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE,
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
