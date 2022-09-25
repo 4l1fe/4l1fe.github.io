@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+    <loc>https://www.kvdm.dev/articles/keeping-secrets-as-a-toml-files-graph-visualization-networkx/</loc>
+    <image:image>
+        <image:loc>https://www.kvdm.dev/articles/keeping-secrets-as-a-toml-files-graph-visualization-networkx/files/main-section.png</image:loc>
+    </image:image>
+      </url>
+    <url>
     <loc>https://www.kvdm.dev/articles/file-system-based-file-changes-history-on-snapshots-lvm-zfs-btrfs/</loc>
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/file-system-based-file-changes-history-on-snapshots-lvm-zfs-btrfs/files/main-section.png</image:loc>

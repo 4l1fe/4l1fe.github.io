@@ -15,6 +15,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from pygments import highlight
 from pygments.lexers.python import PythonLexer
 from pygments.lexers.shell import BashSessionLexer
+from pygments.lexers.configs import TOMLLexer
 from pygments.formatters.html import HtmlFormatter
 from slugify import slugify
 
@@ -109,9 +110,11 @@ class HTMLGen:
                                    'sql': 'bi:file-earmark-code',
                                    'sh': 'bi:terminal'}
     HIGHLIGHTING_STYLE_MAP = {'language-python': 'friendly',
-                              'language-shell': 'friendly'}
+                              'language-shell': 'friendly',
+                              'language-toml': 'friendly',}
     LEXER_MAP = {'language-python': PythonLexer,
-                 'language-shell': BashSessionLexer}
+                 'language-shell': BashSessionLexer,
+                 'language-toml': TOMLLexer}
 
     @staticmethod
     def generate_index_html(articles_data: List[ArticleData]):
