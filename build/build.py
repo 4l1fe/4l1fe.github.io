@@ -111,7 +111,7 @@ class HTMLGen:
                                    'sh': 'bi:terminal'}
     HIGHLIGHTING_STYLE_MAP = {'language-python': 'friendly',
                               'language-shell': 'friendly',
-                              'language-toml': 'friendly',}
+                              'language-toml': 'friendly'}
     LEXER_MAP = {'language-python': PythonLexer,
                  'language-shell': BashSessionLexer,
                  'language-toml': TOMLLexer}
@@ -233,10 +233,12 @@ class HTMLGen:
                     continue
 
                 code = code_el.text
-                code_elements = highlight(code, Lexer(), HtmlFormatter(noclasses=True, wrapcode=False, nowrap=True, style=style))
-                code_elements = fromstring(code_elements)
+                code_sub_elements = highlight(code, Lexer(), HtmlFormatter(noclasses=True, wrapcode=False, nowrap=True, style=style))
+                code_sub_elements = fromstring(code_sub_elements)
                 code_el.clear()
-                code_el.extend(code_elements)
+                code_el.extend(code_sub_elements)
+                code_el.text = code_sub_elements.text
+                code_el.tail = code_sub_elements.tail
 
         html = tostring(root_element)
         html = wrap_unwrap_fake_tag(html, wrap=False)
