@@ -4,13 +4,13 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>27 Sep 2022 00:00:00 +0000</pubDate>
+		<pubDate>5 Oct 2022 00:00:00 +0000</pubDate>
 				<item>
-			<title>Keeping secrets as a TOML files graph. Visualization. NetworkX </title>
-			<link>https://www.kvdm.dev/articles/keeping-secrets-as-a-toml-files-graph-visualization-networkx/</link>
-			<description>Some special precautions are taken as these files are secret, they have to contain small portion data and be stored in the different folders. It allows the files to be encrypted by diiferent tools, each one for it's special case, and decrypted as...</description>
-			<pubDate>24 Sep 2022 00:00:00 +0000</pubDate>
-			<guid>https://www.kvdm.dev/articles/keeping-secrets-as-a-toml-files-graph-visualization-networkx/</guid>
+			<title>Storing related accounts data in the TOML files. Visualization. NetworkX graph </title>
+			<link>https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/</link>
+			<description>Until this point, i stored accounts and their secret data in .ini, .csv, .txt, .pem files and etc., for example credentials, access keys, certificates. Many simple things can be described by and stored in those file types, but accounts have been...</description>
+			<pubDate>5 Oct 2022 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/</guid>
 		</item>
 				<item>
 			<title>File System based file changes history on snapshots. LVM. ZFS. BTRFS </title>
