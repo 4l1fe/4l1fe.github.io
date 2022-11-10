@@ -49,7 +49,7 @@
         a.link-dark-hover:hover {
             color: #6c757d;
         }
-        #toc a {
+        #toc, #toc a {
             color: #6c757d;
         }
         #toc a:hover {
@@ -102,7 +102,11 @@
         }
         #toc > ol {
             position: sticky;
-            top: 80px;
+            top: 120px;
+        }
+         #toc > strong {
+            position: sticky;
+            top: 70px;
         }
         #content > p > img {
           display: block;
@@ -495,6 +499,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
+            <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
             <ol><li><a href="#installation">Installation</a></li><li><a href="#test-volumes-setup">Test volumes setup</a></li><li><a href="#snapshots-creation">Snapshots creation</a><ol><li><a href="#performance">Performance</a></li></ol></li><li><a href="#displaying-diff">Displaying diff</a></li><li><a href="#disk-space-usage">Disk space usage</a></li><li><a href="#events-listening">Events listening</a></li><li><a href="#the-winner">The winner</a></li><li><a href="#automation">Automation</a></li></ol>
         </div>
     </div>

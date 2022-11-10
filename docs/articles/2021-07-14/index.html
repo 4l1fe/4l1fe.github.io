@@ -49,7 +49,7 @@
         a.link-dark-hover:hover {
             color: #6c757d;
         }
-        #toc a {
+        #toc, #toc a {
             color: #6c757d;
         }
         #toc a:hover {
@@ -102,7 +102,11 @@
         }
         #toc > ol {
             position: sticky;
-            top: 80px;
+            top: 120px;
+        }
+         #toc > strong {
+            position: sticky;
+            top: 70px;
         }
         #content > p > img {
           display: block;
@@ -242,6 +246,7 @@ sed <span style="color: #4070a0">'s/random_data/random_data'"</span><span style=
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
+            <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
             <ol><li><a href="#steps-to-do">Steps to do</a></li><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#fill-the-databases">Fill the databases</a></li><li><a href="#run-the-query">Run the query</a></li><li><a href="#visualize-the-results">Visualize the results</a></li><li><a href="#emphasize-the-concept">Emphasize the concept</a></li></ol>
         </div>
     </div>

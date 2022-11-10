@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>31 Oct 2022 00:00:00 +0000</pubDate>
+		<pubDate>11 Nov 2022 00:00:00 +0000</pubDate>
+				<item>
+			<title>Getting selected elements by a time series range. Bokeh </title>
+			<link>https://www.kvdm.dev/articles/getting-selected-elements-by-a-time-series-range-bokeh/</link>
+			<description>As a newcomer to Bokeh, i would like to know what the events have to be handled to figure out the selected elements on a  timeseris plot by a range tool to process them further on a server side and what an object receives those events, Plot or RangeTool.</description>
+			<pubDate>10 Nov 2022 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/getting-selected-elements-by-a-time-series-range-bokeh/</guid>
+		</item>
 				<item>
 			<title>Sourcegraph is heavyweight </title>
 			<link>https://www.kvdm.dev/articles/sourcegraph-is-heavyweight/</link>

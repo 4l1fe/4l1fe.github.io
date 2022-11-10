@@ -49,7 +49,7 @@
         a.link-dark-hover:hover {
             color: #6c757d;
         }
-        #toc a {
+        #toc, #toc a {
             color: #6c757d;
         }
         #toc a:hover {
@@ -102,7 +102,11 @@
         }
         #toc > ol {
             position: sticky;
-            top: 80px;
+            top: 120px;
+        }
+         #toc > strong {
+            position: sticky;
+            top: 70px;
         }
         #content > p > img {
           display: block;
@@ -207,6 +211,7 @@ The fastest but complicated to set up. Good to have when you sync many big files
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
+            <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
             <ol><li><a href="#pros">Pros</a></li><li><a href="#cons">Cons</a></li><li><a href="#manual-syncing">Manual syncing</a><ol><li><a href="#establishing-a-connection">Establishing a connection</a></li><li><a href="#syncing-in-pictures">Syncing in pictures</a></li><li><a href="#merging-in-pictures">Merging in pictures</a></li><li><a href="#alternatives">Alternatives</a></li></ol></li><li><a href="#automatic-syncing">Automatic syncing</a></li><li><a href="#usage-experience.-it-works-simply-ok">Usage experience. It works simply OK</a></li></ol>
         </div>
     </div>
