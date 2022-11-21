@@ -20,7 +20,7 @@ from pygments.formatters.html import HtmlFormatter
 from slugify import slugify
 
 from constants import (DOCS_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
-                       INDEX_TEMPLATE_FILE, INDEX_FILE, ARTICLE_MD_FILE, AS_DIRS_IGNORE,
+                       INDEX_TEMPLATE_FILE, INDEX_FILE, AS_DIRS_IGNORE,
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
                        SITE_NAME, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS,
                        ANALYTICS_SERVICE_PAGE, ANALYTICS_ENABLED_DEFAULT, MONITORING_ENABLED_DEFAULT,
@@ -309,7 +309,7 @@ def main(articles_dir: Path, font_icons=True, highlight=True, analytics=ANALYTIC
 
     for article_source_dir in iter_articles_source_dir(articles_dir, reverse=True):
         # Генерация страницы и запись в файл
-        article_md_file = article_source_dir / ARTICLE_MD_FILE
+        article_md_file = next(article_source_dir.glob('*.md'))
         md_text = article_md_file.read_text()
         article_html, toc_html = HTMLGen.generate_article_html(md_text, font_icons=font_icons, highlight=highlight, analytics=analytics)
         article_dir = ARTICLES_DOCS_DIR / article_source_dir.name
