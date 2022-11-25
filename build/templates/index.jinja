@@ -19,12 +19,12 @@
 	<div class="col">
 	    <h2>Live Services</h2>
 	    <ul class="list-unstyled">
-                <li class="mb-2"><a class="me-1 {% if analytics_enabled %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" {% if analytics_enabled %}href="{{ analytics_service_page }}"{% endif %}>Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a>
-                <br><small>Web analytics. Tracking page views and link clicks.</small></li>
-                <li class="mb-2"><a class="me-1 {% if analytics_enabled %}umami--click--services-monitoring{% endif %}" target="_blank" rel="noopener noreferrer" {% if monitoring_enabled %}href="{{ monitoring_service_page }}"{% endif %}>Monitoring <span class="iconify" data-icon="fontisto:area-chart"></span></a>
-                <br><small>Monitoring resources consumed by live service containers.</small></li>
-                <li class="mb-2"><a class="me-1 {% if analytics_enabled %}umami--click--services-statuspage{% endif %}" target="_blank" rel="noopener noreferrer" {% if statuspage_enabled %}href="{{ statuspage_service_page }}"{% endif %}>Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
-                <br><small>Check for the live services are running.</small></li>
+                <li ><a class="{% if analytics_enabled %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" {% if analytics_enabled %}href="{{ analytics_service_page }}"{% endif %}>Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a>
+                <br><small class="text-muted">Web analytics <strong>Umami</strong>. Tracking page views and link clicks.</small></li>
+                <li ><a class="{% if analytics_enabled %}umami--click--services-monitoring{% endif %}" target="_blank" rel="noopener noreferrer" {% if monitoring_enabled %}href="{{ monitoring_service_page }}"{% endif %}>Monitoring <span class="iconify" data-icon="fontisto:area-chart"></span></a>
+                <br><small class="text-muted">Monitoring resources With <strong>Grafana</strong> consumed by live service containers.</small></li>
+                <li ><a class="{% if analytics_enabled %}umami--click--services-statuspage{% endif %}" target="_blank" rel="noopener noreferrer" {% if statuspage_enabled %}href="{{ statuspage_service_page }}"{% endif %}>Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
+                <br><small class="text-muted">Check for the live services are running.</small></li>
             </ul>
 	</div>
     </div>
@@ -47,6 +47,6 @@
             <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>{{ adata.created_date.strftime('%m-%Y') }}</p>
         </div>
     </div>
-{% endfor %}
+    {% endfor %}
 
 {% endblock content %}
