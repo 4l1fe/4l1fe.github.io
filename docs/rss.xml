@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>25 Nov 2022 00:00:00 +0000</pubDate>
+		<pubDate>2 Dec 2022 00:00:00 +0000</pubDate>
+				<item>
+			<title>Derivative table of basic functions. Matplotlib. Visualization </title>
+			<link>https://www.kvdm.dev/articles/derivative-table-of-basic-functions-matplotlib-visualization/</link>
+			<description>During reading math essentials i lacked of imagination about how a derivative of different basic functions looks like. Matplotlib and some python code helped me out. This is my visual cheat sheet table.</description>
+			<pubDate>2 Dec 2022 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/derivative-table-of-basic-functions-matplotlib-visualization/</guid>
+		</item>
 				<item>
 			<title>Getting selected elements by a time series range. Bokeh </title>
 			<link>https://www.kvdm.dev/articles/getting-selected-elements-by-a-time-series-range-bokeh/</link>
