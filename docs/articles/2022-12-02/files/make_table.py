@@ -15,6 +15,7 @@ DERIVATIVE_X_TICKS_COLOR = SECONDARY_COLOR
 TITLE_COLOR = ANNOTATION_COLOR = 'xkcd:grey purple'
 SECONDARY_LINE_WIDTH = 1
 SECONDARY_ALPHA = 0.5
+MARGIN_Y = 0.2
 
 ANN_LIN = r'$f(x)$'
 ANN_QUAD = r'$f(x^2)$'
@@ -30,7 +31,7 @@ spines_style = dict(color=MAIN_COLOR, linewidth=0.5)
 spine_arrow_style = dict(markerfacecolor=MAIN_COLOR, markeredgecolor=MAIN_COLOR, markersize=6)
 ax_patch_style = dict(color='xkcd:light grey', alpha=1)
 ticks_style = dict(color=MAIN_COLOR, labelcolor=MAIN_COLOR)
-title_style = dict(fontsize='x-large', fontweight='medium', fontstyle='italic', color=TITLE_COLOR)
+title_style = dict(fontsize='large', fontweight='medium', fontstyle='italic', color=TITLE_COLOR)
 annotation_style = dict(color=ANNOTATION_COLOR)
 
 # plt.rcParams['text.usetex'] = True
@@ -93,6 +94,9 @@ class Style:
                          verticalalignment='top',
                          **annotation_style)
 
+    def setup_margins(self):
+        self.ax.margins(y=MARGIN_Y)
+
     def setup(self, y_array):
         self.setup_title()
         self.setup_patch()
@@ -100,109 +104,110 @@ class Style:
         self.setup_spines('top', 'right')
         max_y_tick = self.setup_ticks(y_array)
         self.setup_annotation(max_y_tick)
+        self.setup_margins()
         self.setup_arrows()
 
 
 def make_plots():
-    fig = plt.figure()
-    gs = gridspec.GridSpec(8, 2)
+    fig = plt.figure(dpi=150)
     x_array = np.arange(3, 30, 1)
 
     # Lin
-    row_number = 0
-    axes = fig.add_subplot(gs[row_number, FUNCTION_COLUMN])
-    y_array = create_y_array(lin, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, title='Functions', annotation=ANN_LIN).setup( y_array)
+    panes = fig.subfigures(8, 1)
+    pane = panes[0]   
+    func_axes, deriv_axes = pane.subplots(2, 1)
 
-    axes = fig.add_subplot(gs[row_number, DERIVATIVE_COLUMN])
+    y_array = create_y_array(lin, x_array)
+    func_axes.plot(x_array, y_array)
+    Style(func_axes, title=ANN_LIN).setup(y_array)
+
     y_array = create_y_array(derivative, lin, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, title='Derivatives', column=DERIVATIVE_COLUMN).setup( y_array)
+    deriv_axes.plot(x_array, y_array)
+    Style(deriv_axes, column=DERIVATIVE_COLUMN).setup(y_array)
 
     # Quad
-    row_number = 1
-    axes = fig.add_subplot(gs[row_number, FUNCTION_COLUMN])
-    y_array = create_y_array(np.power, x_array, 2)
-    axes.plot(x_array, y_array)
-    Style(axes, annotation=ANN_QUAD).setup( y_array)
+    pane = panes[1]
+    func_axes, deriv_axes = pane.subplots(2, 1)
 
-    axes = fig.add_subplot(gs[1, DERIVATIVE_COLUMN])
+    y_array = create_y_array(np.power, x_array, 2)
+    func_axes.plot(x_array, y_array)
+    Style(func_axes, title=ANN_QUAD).setup(y_array)
+
     y_array = create_y_array(derivative, lambda x: np.power(x, 2), x_array)
-    axes.plot(x_array, y_array,)
-    Style(axes, column=DERIVATIVE_COLUMN).setup( y_array)
+    deriv_axes.plot(x_array, y_array,)
+    Style(deriv_axes, column=DERIVATIVE_COLUMN).setup(y_array)
 
     # Cubic
-    row_number = 2
-    axes = fig.add_subplot(gs[row_number, FUNCTION_COLUMN])
-    y_array = create_y_array(np.power, x_array, 3)
-    axes.plot(x_array, y_array,)
-    Style(axes, annotation=ANN_CUB).setup(y_array)
+    pane = panes[2]
+    func_axes, deriv_axes = pane.subplots(2, 1)
 
-    axes = fig.add_subplot(gs[row_number, DERIVATIVE_COLUMN])
+    y_array = create_y_array(np.power, x_array, 3)
+    func_axes.plot(x_array, y_array,)
+    Style(func_axes, title=ANN_CUB).setup(y_array)
+
     y_array = create_y_array(derivative, lambda x: np.power(x, 3), x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, column=DERIVATIVE_COLUMN).setup(y_array)
+    deriv_axes.plot(x_array, y_array)
+    Style(deriv_axes, column=DERIVATIVE_COLUMN).setup(y_array)
 
     # Exp
-    row_number = 3
-    axes = fig.add_subplot(gs[row_number, FUNCTION_COLUMN])
-    y_array = create_y_array(np.exp, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, annotation=ANN_EXP).setup(y_array)
+    pane = panes[3]
+    func_axes, deriv_axes = pane.subplots(2, 1)
 
-    axes = fig.add_subplot(gs[row_number, DERIVATIVE_COLUMN])
+    y_array = create_y_array(np.exp, x_array)
+    func_axes.plot(x_array, y_array)
+    Style(func_axes, title=ANN_EXP).setup(y_array)
+
     y_array = create_y_array(derivative, np.exp, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, column=DERIVATIVE_COLUMN).setup(y_array)
+    deriv_axes.plot(x_array, y_array)
+    Style(deriv_axes, column=DERIVATIVE_COLUMN).setup(y_array)
 
     # Ln
-    row_number = 4
-    axes = fig.add_subplot(gs[row_number, FUNCTION_COLUMN])
-    y_array = create_y_array(np.log, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, annotation=ANN_LOG).setup(y_array)
+    pane = panes[4]
+    func_axes, deriv_axes = pane.subplots(2, 1)
 
-    axes = fig.add_subplot(gs[row_number, DERIVATIVE_COLUMN])
+    y_array = create_y_array(np.log, x_array)
+    func_axes.plot(x_array, y_array)
+    Style(func_axes, title=ANN_LOG).setup(y_array)
+
     y_array = create_y_array(derivative, np.log, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, column=DERIVATIVE_COLUMN).setup(y_array)
+    deriv_axes.plot(x_array, y_array)
+    Style(deriv_axes, column=DERIVATIVE_COLUMN).setup(y_array)
 
     # Sin
-    row_number = 5
-    axes = fig.add_subplot(gs[row_number, FUNCTION_COLUMN])
-    y_array = create_y_array(np.sin, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, annotation=ANN_SIN).setup(y_array)
+    pane = panes[5]
+    func_axes, deriv_axes = pane.subplots(2, 1)
 
-    axes = fig.add_subplot(gs[row_number, DERIVATIVE_COLUMN])
+    y_array = create_y_array(np.sin, x_array)
+    func_axes.plot(x_array, y_array)
+    Style(func_axes, title=ANN_SIN).setup(y_array)
+
     y_array = create_y_array(derivative, np.sin, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, column=DERIVATIVE_COLUMN).setup(y_array)
+    deriv_axes.plot(x_array, y_array)
+    Style(deriv_axes, column=DERIVATIVE_COLUMN).setup(y_array)
 
     # Cos
-    row_number = 6
-    axes = fig.add_subplot(gs[row_number, FUNCTION_COLUMN])
-    y_array = create_y_array(np.cos, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, annotation=ANN_COS).setup(y_array)
+    pane = panes[6]
+    func_axes, deriv_axes = pane.subplots(2, 1)
 
-    axes = fig.add_subplot(gs[row_number, DERIVATIVE_COLUMN])
+    y_array = create_y_array(np.cos, x_array)
+    func_axes.plot(x_array, y_array)
+    Style(func_axes, title=ANN_COS).setup(y_array)
+
     y_array = create_y_array(derivative, np.cos, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, column=DERIVATIVE_COLUMN).setup(y_array)
+    deriv_axes.plot(x_array, y_array)
+    Style(deriv_axes, column=DERIVATIVE_COLUMN).setup(y_array)
 
     # Tan
-    row_number = 7
-    axes = fig.add_subplot(gs[row_number, FUNCTION_COLUMN])
-    y_array = create_y_array(np.tan, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, annotation=ANN_TAN).setup(y_array)
+    pane = panes[7]
+    func_axes, deriv_axes = pane.subplots(2, 1)
 
-    axes = fig.add_subplot(gs[row_number, DERIVATIVE_COLUMN])
+    y_array = create_y_array(np.tan, x_array)
+    func_axes.plot(x_array, y_array)
+    Style(func_axes, title=ANN_TAN).setup(y_array)
+
     y_array = create_y_array(derivative, np.tan, x_array)
-    axes.plot(x_array, y_array)
-    Style(axes, column=DERIVATIVE_COLUMN).setup(y_array)
+    deriv_axes.plot(x_array, y_array)
+    Style(deriv_axes, column=DERIVATIVE_COLUMN).setup(y_array)
 
     # plt.tight_layout()
     plt.show()
