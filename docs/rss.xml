@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>9 Dec 2022 00:00:00 +0000</pubDate>
+		<pubDate>15 Dec 2022 00:00:00 +0000</pubDate>
+				<item>
+			<title>Colorize printed text to get eyes focused. Termcolor </title>
+			<link>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/</link>
+			<description>Working with  extended file attributes, i have to do many necessary operations. Updating attributes goes through a search by scanning their values, filtering them and then setting new values up.</description>
+			<pubDate>15 Dec 2022 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/</guid>
+		</item>
 				<item>
 			<title>Derivative table of basic functions. Matplotlib. Visualization </title>
 			<link>https://www.kvdm.dev/articles/derivative-table-of-basic-functions-matplotlib-visualization/</link>
