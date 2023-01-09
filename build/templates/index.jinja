@@ -8,33 +8,33 @@
 	</div>
     </div>
     <div class="row">
-	<div class="col-lg-8 bg-light pb-3 me-2">
-            <div class="card text-secondary bg-light border-light">
+	<div id="services" class="col-lg-8 pb-3 me-2 rounded-3">
+            <div class="card border-0">
                 <div class="card-body">
                     <h2 class="card-title mb-0">Live services</h2>
                     <small>Click and test it out</small>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a class="{% if analytics_enabled %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" {% if analytics_enabled %}href="{{ analytics_service_page }}"{% endif %}>Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a>
+                    <li class="list-group-item border-0"><a class="{% if analytics_enabled %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" {% if analytics_enabled %}href="{{ analytics_service_page }}"{% endif %}>Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a>
                     <br><small class="text-dark">Web analytics <strong>Umami</strong>. Tracking page views and link clicks.</small></li>
-                    <li class="list-group-item"><a class="{% if analytics_enabled %}umami--click--services-monitoring{% endif %}" target="_blank" rel="noopener noreferrer" {% if monitoring_enabled %}href="{{ monitoring_service_page }}"{% endif %}>Monitoring <span class="iconify" data-icon="fontisto:area-chart"></span></a>
+                    <li class="list-group-item border-0"><a class="{% if analytics_enabled %}umami--click--services-monitoring{% endif %}" target="_blank" rel="noopener noreferrer" {% if monitoring_enabled %}href="{{ monitoring_service_page }}"{% endif %}>Monitoring <span class="iconify" data-icon="fontisto:area-chart"></span></a>
                     <br><small class="text-dark">Monitoring resources With <strong>Grafana</strong> consumed by live service containers.</small></li>
-                    <li class="list-group-item"><a class="{% if analytics_enabled %}umami--click--services-statuspage{% endif %}" target="_blank" rel="noopener noreferrer" {% if statuspage_enabled %}href="{{ statuspage_service_page }}"{% endif %}>Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
+                    <li class="list-group-item border-0"><a class="{% if analytics_enabled %}umami--click--services-statuspage{% endif %}" target="_blank" rel="noopener noreferrer" {% if statuspage_enabled %}href="{{ statuspage_service_page }}"{% endif %}>Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
                     <br><small class="text-dark">Check for the live services are running.</small></li>
                 </ul>
             </div>
 	</div>
-        <div id="about" class="col-lg-3 bg-light pb-3">
-            <div class="card text-secondary bg-light border-light">
+        <div id="profiles" class="col-lg-3 pb-3 rounded-3">
+            <div class="card border-0">
                 <div class="card-body">
                     <h2 class="card-title mb-0">Profiles</h2>
                     <small>Public info</small>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-github{% endif %}" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a></li>
-                    <li class="list-group-item"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-linkedin{% endif %}" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a></li>
-                    <li class="list-group-item"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-stackexchange{% endif %}" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></li>
-                    <li class="list-group-item"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-telegram{% endif %}" target="_blank" rel="noopener noreferrer" href="https://t.me/kvdm_dev">Telegram <span class="iconify" data-icon="fa:telegram"></span></a></li>
+                    <li class="list-group-item border-0"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-github{% endif %}" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a></li>
+                    <li class="list-group-item border-0"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-linkedin{% endif %}" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a></li>
+                    <li class="list-group-item border-0"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-stackexchange{% endif %}" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></li>
+                    <li class="list-group-item border-0"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-telegram{% endif %}" target="_blank" rel="noopener noreferrer" href="https://t.me/kvdm_dev">Telegram <span class="iconify" data-icon="fa:telegram"></span></a></li>
                 </ul>
             </div>
         </div>             
