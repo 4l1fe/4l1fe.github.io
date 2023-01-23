@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>9 Jan 2023 00:00:00 +0000</pubDate>
+		<pubDate>23 Jan 2023 00:00:00 +0000</pubDate>
+				<item>
+			<title>Data convertion with Redframes and Dataset </title>
+			<link>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/</link>
+			<description>During active development, table schemas change frequently to correspond to up to date application requirements. Relational DBs are not that well at it as a lot of operations have to be made, you know it as migrations. Schemas not change only, but...</description>
+			<pubDate>23 Jan 2023 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/</guid>
+		</item>
 				<item>
 			<title>Colorize printed text to get eyes focused. Termcolor </title>
 			<link>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/</link>

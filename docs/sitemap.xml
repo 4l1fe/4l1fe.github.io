@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+    <loc>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/</loc>
+    <image:image>
+        <image:loc>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/files/main-section.png</image:loc>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/files/data-before.png</image:loc>
+        <image:title>data before</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/files/data-after.png</image:loc>
+        <image:title>data after</image:title>
+    </image:image>
+      </url>
+    <url>
     <loc>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/</loc>
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/files/main-section.png</image:loc>
