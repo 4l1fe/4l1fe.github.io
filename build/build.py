@@ -24,7 +24,8 @@ from constants import (DOCS_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPL
                        SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
                        SITE_NAME, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS,
                        ANALYTICS_SERVICE_PAGE, ANALYTICS_ENABLED_DEFAULT, MONITORING_ENABLED_DEFAULT,
-                       MONITORING_SERVICE_PAGE, STATUSPAGE_ENABLED_DEFAULT, STATUSPAGE_SERVICE_ADDRESS)
+                       MONITORING_SERVICE_PAGE, STATUSPAGE_ENABLED_DEFAULT, STATUSPAGE_SERVICE_ADDRESS,
+                       MEMOCARDS_ENABLED_DEFAULT, MEMOCARDS_SERVICE_ADDRESS)
 from filters import trailing_slash, to_rfc822, prepend_site_address
 from utils import make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text
 
@@ -43,6 +44,7 @@ env.globals['analytics_service_token'] = ANALYTICS_SERVICE_TOKEN
 env.globals['analytics_service_js'] = ANALYTICS_SERVICE_JS
 env.globals['analytics_service_page'] = ANALYTICS_SERVICE_PAGE
 env.globals['monitoring_service_page'] = MONITORING_SERVICE_PAGE
+env.globals['memocards_service_address'] = MEMOCARDS_SERVICE_ADDRESS
 env.globals['statuspage_service_page'] = STATUSPAGE_SERVICE_ADDRESS
 env.filters['trailing_slash'] = trailing_slash
 env.filters['to_rfc822'] = to_rfc822
@@ -300,10 +302,14 @@ class HTMLGen:
         return doc.documentElement.toxml()
 
 
-def main(articles_dir: Path, font_icons=True, highlight=True, analytics=ANALYTICS_ENABLED_DEFAULT,
-         monitoring=MONITORING_ENABLED_DEFAULT, statuspage=STATUSPAGE_ENABLED_DEFAULT):
+def main(articles_dir: Path, font_icons=True, highlight=True,
+         analytics=ANALYTICS_ENABLED_DEFAULT,
+         monitoring=MONITORING_ENABLED_DEFAULT,
+         memocards=MEMOCARDS_ENABLED_DEFAULT,
+         statuspage=STATUSPAGE_ENABLED_DEFAULT):
     env.globals['analytics_enabled'] = analytics
     env.globals['monitoring_enabled'] = monitoring
+    env.globals['memocards_enabled'] = memocards
     env.globals['statuspage_enabled'] = statuspage
     articles_data = []
 
@@ -358,11 +364,13 @@ if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('articlesdir', type=Path, help="Path to an articles folder.")
     parser.add_argument('--enable-analytics', action="store_true", help="Write html tags, add css classes. Substitute values from env file. Enable url.")
-    parser.add_argument('--enable-monitoring', action="store_true", help="Enable url.")
-    parser.add_argument('--enable-statuspage', action="store_true", help="Enable url and add status badges.")
+    parser.add_argument('--enable-monitoring', action="store_true")
+    parser.add_argument('--enable-memocards', action="store_true")
+    parser.add_argument('--enable-statuspage', action="store_true")
     args = parser.parse_args()
     
     main(args.articlesdir,
          analytics=args.enable_analytics,
          monitoring=args.enable_monitoring,
+         memocards=args.enable_memocards,
          statuspage=args.enable_statuspage)
