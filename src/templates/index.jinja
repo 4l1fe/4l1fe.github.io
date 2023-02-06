@@ -7,7 +7,7 @@
             <p>Observe existence <span class="iconify" data-icon="fa-solid:eye"></span>, drink tea <span class="iconify" data-icon="fa:coffee"></span>, experiment <span class="iconify" data-icon="icon-park-solid:experiment"></span>, cognize <span class="iconify" data-icon="fa-solid:pen-alt"></span></p>
 	</div>
     </div>
-    <div class="row">
+    <div class="row mt-2">
 	<div id="services" class="col pb-3 me-2 rounded-3">
             <div class="card border-0">
                 <div class="card-body">
@@ -41,7 +41,7 @@
             </div>
         </div>             
     </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-12">
             <h2 class="d-inline me-2">Articles</h2>
             <a class="me-1 {% if analytics_enabled %}umami--click--articles-subscribe{% endif %}" href="rss.xml">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a>
@@ -54,12 +54,11 @@
     {% for adata in articles_data %}
     <div class="row">
         <div class="col-lg-10">
-            <h5><a class="link-dark link-dark-hover" href="{{ adata.relative_link | trailing_slash }}">{{ adata.title }}</a></h3>
+            <h3 class="fs-5"><a class="link-dark link-dark-hover text-decoration-none" href="{{ adata.relative_link | trailing_slash }}">{{ adata.title }}</a></h3>
         </div>
         <div class="col-lg-2 text-lg-end">
             <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>{{ adata.created_date.strftime('%m-%Y') }}</p>
         </div>
     </div>
     {% endfor %}
-
 {% endblock content %}

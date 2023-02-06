@@ -176,7 +176,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>File events to track.</p>
 </li>
 </ul>
-<h2>Installation <a id="installation" href="#installation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Installation <a id="installation" href="#installation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>LVM is preinstalled in Ubuntu.</p>
 <p>Basically, ZFS has to be compiled from the source code, instead of it installing from the ppa <code>jonathonf/zfs</code> is a faster way.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo add-apt-repository ppa:jonathonf/zfs
@@ -185,7 +185,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>BTRFS is developing by Linux community and included in the standard Ubuntu package repo.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>apt install btrfs-progs
 </code></pre>
-<h2>Test volumes setup <a id="test-volumes-setup" href="#test-volumes-setup"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Test volumes setup <a id="test-volumes-setup" href="#test-volumes-setup"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>First of all, the dedicated logical volumes on an HDD are creating for each file system and then mounting.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>pvcreate /dev/mapper/storagebox
 <span style="color: #c65d09; font-weight: bold">$ </span>vgcreate vgstoragebox /dev/mapper/storagebox
@@ -324,7 +324,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 </code></pre>
 <p>The lvm volume is a confusing tree structure.</p>
 <p>It turned out that keeping the logical volumes and snapshots in a working state is cumbersome. Have to determine a size limit of volume and snapshots to track it doesn't exceed. But what will happen if the limit is exceeded. I don't how to figure it out. For a simple case of having files history LVM is overkill i can conclude right now.</p>
-<h2>Snapshots creation <a id="snapshots-creation" href="#snapshots-creation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Snapshots creation <a id="snapshots-creation" href="#snapshots-creation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>A time measurement scenario is identical to all the tools, within a loop a text document is appending by a text line then a snapshot of the document's directory is taken. The shell scripts for each tool <a href="files/snapit-zfs.sh" class="umami--click--files-snapit-zfs-sh"><span class="iconify" data-icon="bi:terminal"></span> snapit-zfs.sh</a>, <a href="files/snapit-btrfs.sh" class="umami--click--files-snapit-btrfs-sh"><span class="iconify" data-icon="bi:terminal"></span> snapit-btrfs.sh</a>, <a href="files/snapit-lvm.sh" class="umami--click--files-snapit-lvm-sh"><span class="iconify" data-icon="bi:terminal"></span> snapit-lvm.sh</a>.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo ./snapit-zfs.sh <span style="color: #40a070">2</span>&gt;&amp;<span style="color: #40a070">1</span> | tee output-zfs.txt
 <span style="color: #888888">execution time: 0:00.04</span>
@@ -392,13 +392,13 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>A few words here, when i was fixing some issues and came to removing the lvm volumes that process turned out to be very troublesome. It wasn't simply removing snapshots but tinkering with putting all the technical volumes into a ready state for releasing space of the target snapshots. At last, when they were ready, removing was going very slow around <strong>5 sec</strong> per snapshot.</p>
 <p>The log messages <code>WARNING</code> in the output is a consequence of complexity thin pool mechanic. The last log message notifies that a max size limit is reached, only <strong>1508 volumes</strong> can be created with the default settings.</p>
 <p>And again, LVM by it's setting up and snapshot processes is the most complicated tool.</p>
-<h3>Performance <a id="performance" href="#performance"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3">Performance <a id="performance" href="#performance"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Visualize information about how fast each FS is. The chart building script <a href="files/chart.py" class="umami--click--files-chart-py"><span class="iconify" data-icon="teenyicons:python-outline"></span> chart.py</a> reads output in the log files from the previous section <a href="files/output-zfs.txt" class="umami--click--files-output-zfs-txt"><span class="iconify" data-icon="bi:file-earmark-text"></span> output-zfs.txt</a>, <a href="files/output-btrfs.txt" class="umami--click--files-output-btrfs-txt"><span class="iconify" data-icon="bi:file-earmark-text"></span> output-btrfs.txt</a>, <a href="files/output-lvm.txt" class="umami--click--files-output-lvm-txt"><span class="iconify" data-icon="bi:file-earmark-text"></span> output-lvm.txt</a>, parses the text from them and extract execution timestamps.</p>
 <p><img src="files/creation-time-chart.png" alt="" title="snapshots creation time"></p>
 <p>LVM grows linearly while ZFS not obviously grows exponentially. That observation i've got by creating an order of magnitude more than 2000 zfs snapshots during the experiments and saw how an execution becomes slower with each next snapshot.</p>
 <p>BTRFS has constant growth.</p>
 <p>At this point the details have been gotten from the experiments are enough to chose the best deal, which is BTRFS, but extracting some additional information is worth to do as a file system is going to be exploited and it's behavior should be well learnt.</p>
-<h2>Displaying diff <a id="displaying-diff" href="#displaying-diff"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Displaying diff <a id="displaying-diff" href="#displaying-diff"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>ZFS is able to run diff without mounting a snapshot, but doesn't display a content difference only file attributes:</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo zfs diff -F zpool/documents@snap-30 zpool/documents@snap-400
 <span style="color: #888888">M       F       /zpool/documents/zfs-doc.txt`</span>
@@ -435,7 +435,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <span style="color: #888888">line1508                                                      &lt;</span>
 </code></pre>
 <p>Snapshot mounting is a little tricky, as the other functional parts of LVM, why do i have to enable <code>--ignoreactivationskip</code>? I ha</p>
-<h2>Disk space usage <a id="disk-space-usage" href="#disk-space-usage"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Disk space usage <a id="disk-space-usage" href="#disk-space-usage"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>A brief look at disk usage. It is a little unclear to figure out an exact total consumed space as the standard cli commands don't take file systems' specifics into account and the <code>df, du</code> commands don't display an actual usage.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo btrfs filesystem df -h /btrfs
 <span style="color: #888888">Data, single: total=216.00MiB, used=6.90MiB</span>
@@ -480,7 +480,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <span style="color: #888888">zpool/documents                        1.7G  128K  1.7G   1% /zpool/documents</span>
 </code></pre>
 <p>That's not obvious to say which a file system uses a disk space less. BTRFS usage looks bigger on the output.</p>
-<h2>Events listening <a id="events-listening" href="#events-listening"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Events listening <a id="events-listening" href="#events-listening"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The file systems' capabilities of producing events are given a quick check to make sure an automation is implementable as it triggers snapshot command. Two types of the events <code>open, close</code> is enough for a test.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>inotifywait -m --format <span style="color: #4070a0">'%e =&gt; %w%f'</span> -e open -e close /zpool/documents/zfs-doc.txt <span style="color: #4070a0; font-weight: bold">\</span>
                                                         /btrfs/documents/btrfs-doc.txt <span style="color: #4070a0; font-weight: bold">\</span>
@@ -496,17 +496,17 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <span style="color: #888888">CLOSE_NOWRITE,CLOSE =&gt; /lvm-fs/lvm-doc.txt</span>
 </code></pre>
 <p>At this point everything is fine.</p>
-<h2>The winner <a id="the-winner" href="#the-winner"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">The winner <a id="the-winner" href="#the-winner"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>LVM was preferable choice as the only tool is able to accomplish all the things are required for storing file changes history. However, over-complication to prepare the logical pool and volume to create the thin snapshots and execution time is the slowest within the others. While exploiting many difficulties had to be solved in mounting and activating the lvm logic volumes.</p>
 <p>ZFS is a full feature replacement of LVM, in other words stacking the ZFS layers upon an LVM layer is double complication.</p>
 <p>BTRFS is the best choice for my case in terms of speed, installation and simple usage. It worth to mention, this FS has a library to do operation in python, so automatic snapshots creation can be ran on the file events.</p>
-<h2>Automation <a id="automation" href="#automation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Automation <a id="automation" href="#automation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Listen to the file events <a href="https://github.com/chrisjbillington/inotify_simple" class="umami--click--github-com-chrisjbillington-inotify-simple"><span class="iconify" data-icon="codicon:github-inverted"></span> inotify_simple</a> and trigger snapshot creation command <a href="https://github.com/kdave/btrfs-progs/tree/master/libbtrfsutil" class="umami--click--github-com-kdave-btrfs-progs-tree-master-libbtrfsutil"><span class="iconify" data-icon="codicon:github-inverted"></span> python-btrfs-progs</a>. Then wrap it up into a systemd service and run it in background <a href="https://github.com/4l1fe/FileHistorySnaps" class="umami--click--github-com-4l1fe-filehistorysnaps"><span class="iconify" data-icon="codicon:github-inverted"></span> file history snaps</a>.</p>
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
-            <ol><li><a href="#installation">Installation</a></li><li><a href="#test-volumes-setup">Test volumes setup</a></li><li><a href="#snapshots-creation">Snapshots creation</a><ol><li><a href="#performance">Performance</a></li></ol></li><li><a href="#displaying-diff">Displaying diff</a></li><li><a href="#disk-space-usage">Disk space usage</a></li><li><a href="#events-listening">Events listening</a></li><li><a href="#the-winner">The winner</a></li><li><a href="#automation">Automation</a></li></ol>
+            <ol><li><a href="#installation" class="text-decoration-none">Installation</a></li><li><a href="#test-volumes-setup" class="text-decoration-none">Test volumes setup</a></li><li><a href="#snapshots-creation" class="text-decoration-none">Snapshots creation</a><ol><li><a href="#performance" class="text-decoration-none">Performance</a></li></ol></li><li><a href="#displaying-diff" class="text-decoration-none">Displaying diff</a></li><li><a href="#disk-space-usage" class="text-decoration-none">Disk space usage</a></li><li><a href="#events-listening" class="text-decoration-none">Events listening</a></li><li><a href="#the-winner" class="text-decoration-none">The winner</a></li><li><a href="#automation" class="text-decoration-none">Automation</a></li></ol>
         </div>
     </div>
     <div class="row">

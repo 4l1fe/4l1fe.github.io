@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 PROJ_DIR = Path(__file__).parent.parent
-BUILD_DIR = PROJ_DIR / 'build'
+BUILD_DIR = PROJ_DIR / 'src'
 DOCS_DIR = PROJ_DIR / 'docs'
 ARTICLES_DOCS_DIR = DOCS_DIR / 'articles'
 TEMPLATES_DIR = BUILD_DIR / 'templates'

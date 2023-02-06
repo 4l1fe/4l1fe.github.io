@@ -26,7 +26,7 @@ from constants import (DOCS_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPL
                        ANALYTICS_SERVICE_PAGE, ANALYTICS_ENABLED_DEFAULT, MONITORING_ENABLED_DEFAULT,
                        MONITORING_SERVICE_PAGE, STATUSPAGE_ENABLED_DEFAULT, STATUSPAGE_SERVICE_ADDRESS,
                        MEMOCARDS_ENABLED_DEFAULT, MEMOCARDS_SERVICE_ADDRESS)
-from filters import trailing_slash, to_rfc822, prepend_site_address
+from filters import trailing_slash, to_rfc822, prepend_site_address, update_classes
 from utils import make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text
 
 
@@ -49,6 +49,7 @@ env.globals['statuspage_service_page'] = STATUSPAGE_SERVICE_ADDRESS
 env.filters['trailing_slash'] = trailing_slash
 env.filters['to_rfc822'] = to_rfc822
 env.filters['prepend_site_address'] = prepend_site_address
+env.filters['update_classes'] = update_classes
 tostring = functools.partial(_tostring, encoding='unicode')
 
 
@@ -138,7 +139,9 @@ class HTMLGen:
         content_html = HTMLGen._apply_analytics_event_type(content_html) if analytics else content_html
         root_element = fromstring(content_html)
         template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
-        html = template.render(content=content_html, toc=toc_html, title=first_h1_text(root_element), description=first_p_text(root_element))
+        title = first_h1_text(root_element)
+        description = first_p_text(root_element)
+        html = template.render(content=content_html, toc=toc_html, title=title, description=description)
 
         return html, toc_html
 
@@ -210,7 +213,7 @@ class HTMLGen:
         root_element = fromstring(wrap_unwrap_fake_tag(html))
         elements = (e for e in root_element.iter('a')
                     if e.attrib.has_key('href')
-                        and not e.attrib['href'].startswith('#'))  # anchor is ignored
+                    and not e.attrib['href'].startswith('#'))  # anchor is ignored
 
         for element in elements:
             href = element.attrib['href'].split('://', 1)[-1]  # can be splitted into one

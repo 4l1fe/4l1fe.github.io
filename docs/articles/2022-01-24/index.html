@@ -186,7 +186,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
     <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__str__</span>(<span style="color: #007020">self</span>):
         <span style="color: #007020; font-weight: bold">return</span> <span style="color: #4070a0">'</span><span style="color: #4070a0; font-weight: bold">\n</span><span style="color: #4070a0">'</span><span style="color: #666666">.</span>join([<span style="color: #007020">self</span><span style="color: #666666">.</span>title, <span style="color: #007020">self</span><span style="color: #666666">.</span>text])
 </code></pre>
-<h2>Solution <a id="solution" href="#solution"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Solution <a id="solution" href="#solution"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Restriction is clear and what can be done to see more details and which i specifically need. An idea came into my mind, why not to reuse patching technique of a testing practice, <code>unittest.mock</code> is powerful for such a case.</p>
 <p>Things to do are simply define a function of a custom printing objects details and patch the <code>__str__</code> method. So easy and tricky, isn't it?</p>
 <p>Here we go.</p>
@@ -231,13 +231,13 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <span style="color: #60a0b0; font-style: italic"># "Node&lt;1, Shop, Buy food, created=2022-01-24 17:53:56Z, updated=2022-01-24 17:53:56Z&gt;"</span>
 <span style="color: #60a0b0; font-style: italic"># "Node&lt;1, Gym, Do squats, created=2022-01-24 17:53:56Z, updated=2022-01-24 17:53:56Z&gt;"</span>
 </code></pre>
-<h2>It's a bad approach <a id="it's-a-bad-approach" href="#it's-a-bad-approach"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">It's a bad approach <a id="it's-a-bad-approach" href="#it's-a-bad-approach"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Goal is reached, code isn't production consequently it's a quite good approach.</p>
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
-            <ol><li><a href="#solution">Solution</a></li><li><a href="#it's-a-bad-approach">It's a bad approach</a></li></ol>
+            <ol><li><a href="#solution" class="text-decoration-none">Solution</a></li><li><a href="#it's-a-bad-approach" class="text-decoration-none">It's a bad approach</a></li></ol>
         </div>
     </div>
     <div class="row">

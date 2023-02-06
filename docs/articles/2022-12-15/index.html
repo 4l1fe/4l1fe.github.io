@@ -155,7 +155,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>Working with <a href="https://en.wikipedia.org/wiki/Extended_file_attributes#cite_note-1" class="umami--click--en-wikipedia-org-wiki-extended-file-attributes-cite-note-1"><span class="iconify" data-icon="bx:bx-link-external"></span> extended file attributes</a>, i have to do many necessary operations. Updating attributes goes through a search by scanning their values, filtering them and then setting new values up.</p>
 <p>During this process mistakes can be easily made, therefore, a few helpful steps of advanced text printing are worth doing for checking the result is correct.</p>
 <p>Text formatting and colorizing  are good choices for improving understanding of printed initial and final attributes text, <a href="https://github.com/termcolor/termcolor" class="umami--click--github-com-termcolor-termcolor"><span class="iconify" data-icon="codicon:github-inverted"></span> termcolor</a> helps with it.</p>
-<h2>Plain text <a id="plain-text" href="#plain-text"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Plain text <a id="plain-text" href="#plain-text"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>What does printed plain text look like? It's a line that i read and split up on logic parts in mind. When those lines are hundreds such a way of reading frustrates me while scrolling up and down.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python xutils.py rename-tags --from <span style="color: #4070a0">'[n]'</span> --to <span style="color: #4070a0">'[new-t]'</span> files-dir
 </code></pre>
@@ -164,7 +164,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>The first thing i improved is formatting the line as a column with a blank line separator at the bottom.</p>
 <p><img src="files/plain-columns.png" alt=""></p>
 <p>Nice, cluttering is gone, only one thing at a time as a column of the <strong>file name, old attributes, new attributes and separator</strong>.</p>
-<h2>Colored text <a id="colored-text" href="#colored-text"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Colored text <a id="colored-text" href="#colored-text"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The final improvement is colorizing old and new attributes with the <code>colored()</code> function.</p>
 <p><em>Example snippet</em></p>
 <pre><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">termcolor</span> <span style="color: #007020; font-weight: bold">import</span> colored
@@ -193,13 +193,13 @@ on_cyan <span style="color: #666666">=</span> <span style="color: #007020; font-
 </table>
 <p>Colors point my eyes to two lines below a file name to see a difference only and conclude whether renaming is correct.</p>
 <p>Time is payed for colorization small, but effect is big. No complicated libraries are used.</p>
-<h2>Alternatives <a id="alternatives" href="#alternatives"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Alternatives <a id="alternatives" href="#alternatives"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p><strong>Termcolor</strong> is very basic, but simple to use and gives a wide range of flexibility. There are a few others, two of them i'd like to recommend are <a href="https://github.com/tartley/colorama" class="umami--click--github-com-tartley-colorama"><span class="iconify" data-icon="codicon:github-inverted"></span> colorama</a> and <a href="https://github.com/Textualize/rich" class="umami--click--github-com-textualize-rich"><span class="iconify" data-icon="codicon:github-inverted"></span> rich</a> .</p>
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
-            <ol><li><a href="#plain-text">Plain text</a></li><li><a href="#colored-text">Colored text</a></li><li><a href="#alternatives">Alternatives</a></li></ol>
+            <ol><li><a href="#plain-text" class="text-decoration-none">Plain text</a></li><li><a href="#colored-text" class="text-decoration-none">Colored text</a></li><li><a href="#alternatives" class="text-decoration-none">Alternatives</a></li></ol>
         </div>
     </div>
     <div class="row">

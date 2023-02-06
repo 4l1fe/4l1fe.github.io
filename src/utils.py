@@ -9,6 +9,8 @@ def make_header_id(tag_text):
 
 
 def wrap_unwrap_fake_tag(text, wrap=True): # todo use lxml.html
+    """To avoid side effect of automatic wrapping with extra tags"""
+
     TAG_OPEN = '<FAKETAG>'
     TAG_CLOSE = '</FAKETAG>'
 

@@ -3,11 +3,11 @@
 {% block content %}
     <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            {{ content }}
+            {{ content | update_classes('h2, h3, h4, h5, h6', 'mt-5 mb-3') }}
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
-            {{ toc }}
+            {{ toc | update_classes('a', 'text-decoration-none') }}
         </div>
     </div>
     <div class="row">

@@ -163,7 +163,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 </code></pre>
 <p>It happens because <a href="https://github.com/httpie/httpie" class="umami--click--github-com-httpie-httpie"><span class="iconify" data-icon="codicon:github-inverted"></span> httpie</a> client internally use <strong>requests</strong> lib and one doesn't see the OS ssl system-wide settings directories. But it is customizable as described in the documentation how <a href="https://docs.python-requests.org/en/master/user/advanced/#ssl-cert-verification" class="umami--click--docs-python-requests-org-en-master-user-advanced-ssl-cert-verification"><span class="iconify" data-icon="bx:bx-link-external"></span> to specify manually a cert file</a> which we are using for proxyfying.</p>
 <p>Important remark here is we don't open client's code and add any settings into an http request call as we are <strong>man in the middle</strong> who technically may not have a way to edit the code.</p>
-<h2>Run command with env REQUESTS_CA_BUNDLE for requests based clients <a id="run-command-with-env-requests_ca_bundle-for-requests-based-clients" href="#run-command-with-env-requests_ca_bundle-for-requests-based-clients"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Run command with env REQUESTS_CA_BUNDLE for requests based clients <a id="run-command-with-env-requests_ca_bundle-for-requests-based-clients" href="#run-command-with-env-requests_ca_bundle-for-requests-based-clients"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Armed with the cert file path let's run the same command adding the env <code>REQUESTS_CA_BUNDLE</code>.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span><span style="color: #bb60d5">HTTPS_PROXY</span><span style="color: #666666">=</span><span style="color: #40a070">127</span>.0.0.1:8080 <span style="color: #4070a0; font-weight: bold">\</span>
 <span style="color: #bb60d5">REQUESTS_CA_BUNDLE</span><span style="color: #666666">=</span>/usr/local/share/ca-certificates/mitmproxy-ca-cert.crt <span style="color: #4070a0; font-weight: bold">\</span>
@@ -176,7 +176,7 @@ https github.com
 <span style="color: #888888">...</span>
 </code></pre>
 <p>Now <code>https</code> client picks up the right cert file and goes through Mitmproxy.</p>
-<h2>Run Mitmproxy passing a custom cert file in <a id="run-mitmproxy-passing-a-custom-cert-file-in" href="#run-mitmproxy-passing-a-custom-cert-file-in"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Run Mitmproxy passing a custom cert file in <a id="run-mitmproxy-passing-a-custom-cert-file-in" href="#run-mitmproxy-passing-a-custom-cert-file-in"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Another way is to figure out what a cert file requests based client use and <a href="https://docs.mitmproxy.org/stable/concepts-certificates/#using-a-custom-server-certificate" class="umami--click--docs-mitmproxy-org-stable-concepts-certificates-using-a-custom-server-certificate"><span class="iconify" data-icon="bx:bx-link-external"></span> substitute its path</a> into the command <code>mitmproxy --certs *=&lt;cert-file&gt;</code>.</p>
 <p>So what the cert file is and where? Well, we have general information <strong>requests</strong> deals with two envs <code>REQUESTS_CA_BUNDLE, CURL_CA_BUNDLE</code> and relies on <a href="https://docs.python-requests.org/en/master/user/advanced/#ca-certificates" class="umami--click--docs-python-requests-org-en-master-user-advanced-ca-certificates"><span class="iconify" data-icon="bx:bx-link-external"></span> certifi</a> utility to delegate it all the certs searching in a file system stuff.</p>
 <p>Seems the requests source code has to be inspected:</p>
@@ -229,13 +229,13 @@ Out[<span style="color: #40a070">2</span>]: <span style="color: #4070a0">'venv/l
 <p>I've failed and crying .</p>
 </li>
 </ol>
-<h2>Afterwords <a id="afterwords" href="#afterwords"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Afterwords <a id="afterwords" href="#afterwords"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Mitmproxy them all with no pain.</p>
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
-            <ol><li><a href="#run-command-with-env-requests_ca_bundle-for-requests-based-clients">Run command with env REQUESTS_CA_BUNDLE for requests based clients</a></li><li><a href="#run-mitmproxy-passing-a-custom-cert-file-in">Run Mitmproxy passing a custom cert file in</a></li><li><a href="#afterwords">Afterwords</a></li></ol>
+            <ol><li><a href="#run-command-with-env-requests_ca_bundle-for-requests-based-clients" class="text-decoration-none">Run command with env REQUESTS_CA_BUNDLE for requests based clients</a></li><li><a href="#run-mitmproxy-passing-a-custom-cert-file-in" class="text-decoration-none">Run Mitmproxy passing a custom cert file in</a></li><li><a href="#afterwords" class="text-decoration-none">Afterwords</a></li></ol>
         </div>
     </div>
     <div class="row">

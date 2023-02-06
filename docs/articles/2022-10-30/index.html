@@ -153,7 +153,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
             <h1>Sourcegraph is heavyweight <a id="sourcegraph-is-heavyweight" href="#sourcegraph-is-heavyweight"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.jpg" alt=""></p>
 <p>As i don't remember how and where i used technologies in my experience i wondered what profit <a href="https://about.sourcegraph.com" class="umami--click--about-sourcegraph-com"><span class="iconify" data-icon="bx:bx-link-external"></span> Sourcegraph</a> could bring me at searching the code repositories and for potential use in a company. To test it out i chose a <a href="https://docs.sourcegraph.com/admin/deploy/docker-single-container" class="umami--click--docs-sourcegraph-com-admin-deploy-docker-single-container"><span class="iconify" data-icon="bx:bx-link-external"></span> stand-alone server</a> option to run it as a docker container. Setting up didn't take much effort and time. Everything looked well until i figured out how many proccesses are run in the container.</p>
-<h2>Container inspection <a id="container-inspection" href="#container-inspection"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Container inspection <a id="container-inspection" href="#container-inspection"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Command was executed to run a container is basic.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>docker run --publish <span style="color: #40a070">127</span>.0.0.1:7080:7080 --publish <span style="color: #40a070">127</span>.0.0.1:3370:3370 --rm --volume <span style="color: #007020; font-weight: bold">$(</span><span style="color: #007020">pwd</span><span style="color: #007020; font-weight: bold">)</span>/sourcegraph/config:/etc/sourcegraph --volume <span style="color: #007020; font-weight: bold">$(</span><span style="color: #007020">pwd</span><span style="color: #007020; font-weight: bold">)</span>/sourcegraph/data:/var/opt/sourcegraph --name sourcegraph sourcegraph/server:3.43.2
 </code></pre>
@@ -260,7 +260,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <span style="color: #888888">09:30:23                     minio | Terminating minio</span>
 </code></pre>
 <p>Okay, <strong>20 parent processes</strong> per sourcegraph instance. This is a surprising discovery for me, i didn't see any mention of how complex a server instance is while reading the documentation briefly.</p>
-<h2>Resource estimation <a id="resource-estimation" href="#resource-estimation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Resource estimation <a id="resource-estimation" href="#resource-estimation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>What i've seen that is relative to i revealed is you can estimate approximately the resources consumed to deploy a server.</p>
 <p>Here is my calculation in the <a href="https://docs.sourcegraph.com/admin/deploy/resource_estimator" class="umami--click--docs-sourcegraph-com-admin-deploy-resource-estimator"><span class="iconify" data-icon="bx:bx-link-external"></span> resource estimator</a>.</p>
 <p><img src="files/resource-estimation.png" alt=""></p>
@@ -271,7 +271,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <span style="color: #888888">c4f4b9cc5529   sourcegraph   4.25%     887.7MiB / 7.482GiB   11.59%    507kB / 293kB   3.68GB / 145MB   338</span>
 </code></pre>
 <p>I don't know why, but the resource amount is an order of magnitude smaller.</p>
-<h2>CLI Alternative <a id="cli-alternative" href="#cli-alternative"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">CLI Alternative <a id="cli-alternative" href="#cli-alternative"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>That isn't a tool i would take for code search. A proper alternative for my need is <a href="https://github.com/ggreer/the_silver_searcher" class="umami--click--github-com-ggreer-the-silver-searcher"><span class="iconify" data-icon="codicon:github-inverted"></span> the silver searcher</a>, a fast cli tool with a source file and code output.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>ag --group --context<span style="color: #666666">=</span><span style="color: #40a070">5</span> --ignore venv --color --stats aiohttp ~/reposotories
 
@@ -311,14 +311,14 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <span style="color: #888888">2036322849 bytes searched</span>
 <span style="color: #888888">0.656048 seconds</span>
 </code></pre>
-<h2>What do i think? <a id="what-do-i-think?" href="#what-do-i-think?"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">What do i think? <a id="what-do-i-think?" href="#what-do-i-think?"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Certainly, the solution is difficult to learn and expensive to maintain in the case of containing it in a company software stack.</p>
 <p>However, i didn't explore it in depth and would give it a shot to test out all its features. So, if you own hundreds of repos this platform is what you should take a look at.</p>
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
-            <ol><li><a href="#container-inspection">Container inspection</a></li><li><a href="#resource-estimation">Resource estimation</a></li><li><a href="#cli-alternative">CLI Alternative</a></li><li><a href="#what-do-i-think?">What do i think?</a></li></ol>
+            <ol><li><a href="#container-inspection" class="text-decoration-none">Container inspection</a></li><li><a href="#resource-estimation" class="text-decoration-none">Resource estimation</a></li><li><a href="#cli-alternative" class="text-decoration-none">CLI Alternative</a></li><li><a href="#what-do-i-think?" class="text-decoration-none">What do i think?</a></li></ol>
         </div>
     </div>
     <div class="row">
