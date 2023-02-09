@@ -57,10 +57,6 @@
         }
         pre {
             padding: 1em;
-            border-color: #dee2e6 !important;
-            border-style: solid !important;
-            border-width: 1px !important;
-            border-image: initial !important;
             border-radius: .5rem;
             background-color: #f0f0f0;
         }
@@ -70,9 +66,6 @@
         :not(pre) > code {
             font-family: 'Jetbrains';
             padding: .1em .5em .1em .5em;
-            border-color: #dee2e6 !important;
-            border-style: solid !important;
-            border-width: 1px !important;
             border-radius: .25rem;
             background-color: #f0f0f0;
             color: #000000
@@ -118,6 +111,13 @@
         }
         #profiles, #profiles > div {
             background-color: #ededed;
+        }
+        pre::-webkit-scrollbar         {
+          height: 7px; /* for horizontal scrollbars */
+        }
+        pre::-webkit-scrollbar-thumb        {
+          background: #999999;
+          border-radius: .5rem;
         }
     </style>
     <script>
