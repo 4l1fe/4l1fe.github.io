@@ -22,7 +22,7 @@
 				<item>
 			<title>Colorize printed text to get eyes focused. Termcolor </title>
 			<link>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/</link>
-			<description>Working with  extended file attributes, i have to do many necessary operations. Updating attributes goes through a search by scanning their values, filtering them and then setting new values up.</description>
+			<description>Working with extended file attributes , i have to do many necessary operations. Updating attributes goes through a search by scanning their values, filtering them and then setting new values up.</description>
 			<pubDate>15 Dec 2022 00:00:00 +0000</pubDate>
 			<guid>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/</guid>
 		</item>
@@ -36,14 +36,14 @@
 				<item>
 			<title>Getting selected elements by a time series range. Bokeh </title>
 			<link>https://www.kvdm.dev/articles/getting-selected-elements-by-a-time-series-range-bokeh/</link>
-			<description>As a newcomer to Bokeh, i would like to know what the events have to be handled to figure out the selected elements on a  timeseris plot by a range tool to process them further on a server side and what an object receives those events, Plot or RangeTool.</description>
+			<description>As a newcomer to Bokeh, i would like to know what the events have to be handled to figure out the selected elements on a timeseris plot  by a range tool to process them further on a server side and what an object receives those events, Plot or RangeTool.</description>
 			<pubDate>10 Nov 2022 00:00:00 +0000</pubDate>
 			<guid>https://www.kvdm.dev/articles/getting-selected-elements-by-a-time-series-range-bokeh/</guid>
 		</item>
 				<item>
 			<title>Sourcegraph is heavyweight </title>
 			<link>https://www.kvdm.dev/articles/sourcegraph-is-heavyweight/</link>
-			<description>As i don't remember how and where i used technologies in my experience i wondered what profit  Sourcegraph could bring me at searching the code repositories and for potential use in a company. To test it out i chose a  stand-alone server option to run...</description>
+			<description>As i don't remember how and where i used technologies in my experience i wondered what profit Sourcegraph  could bring me at searching the code repositories and for potential use in a company. To test it out i chose a stand-alone server  option to run...</description>
 			<pubDate>30 Oct 2022 00:00:00 +0000</pubDate>
 			<guid>https://www.kvdm.dev/articles/sourcegraph-is-heavyweight/</guid>
 		</item>

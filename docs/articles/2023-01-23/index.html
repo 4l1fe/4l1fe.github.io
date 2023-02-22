@@ -136,7 +136,7 @@
 <p><img src="files/main-section.jpg" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>During active development, table schemas change frequently to correspond to up to date application requirements. Relational DBs are not that well at it as a lot of operations have to be made, you know it as migrations. Schemas not change only, but stored data as well.</p>
 <p>Writing SQL code to get table schemas and data to aactual state is a subject that could be improved and moved to a higher, human friendly level.</p>
-<p>Here i'm going to demonstrate a simple case of how i use the libraries <a href="https://github.com/maxhumber/redframes" class="umami--click--github-com-maxhumber-redframes"><span class="iconify" data-icon="codicon:github-inverted"></span> Redframes</a>, <a href="https://github.com/pudo/dataset" class="umami--click--github-com-pudo-dataset"><span class="iconify" data-icon="codicon:github-inverted"></span> Dataset</a> to transform the data and table and update them with fewer steps than i would make it with raw SQL.</p>
+<p>Here i'm going to demonstrate a simple case of how i use the libraries <a href="https://github.com/maxhumber/redframes" class="umami--click--github-com-maxhumber-redframes">Redframes <span class="iconify" data-icon="codicon:github-inverted"></span></a>, <a href="https://github.com/pudo/dataset" class="umami--click--github-com-pudo-dataset">Dataset <span class="iconify" data-icon="codicon:github-inverted"></span></a> to transform the data and table and update them with fewer steps than i would make it with raw SQL.</p>
 <h2 class="mt-5 mb-3">Tools short description <a id="tools-short-description" href="#tools-short-description"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p><strong>Pandas</strong> is the well known library to work with data, but at particular cases it can be very tricky, unclear and complicated. Redrames is a wrapper that provides you with a set of intuitive, self-descriptive methods to solve problems more verbal but clear and excplicit, you know what i mean.</p>
 <p>Dataset is a good abstraction over a relational DB making interaction with data NoSQL'ish. For example, such operations as creating many columns from a dataset, tables, deleting them are perfomed on the go. The main abstraction here is a dataset, not rows. You query a daset from DB, filter and modify it on an applicatioan level, and write it back. You don't have to pay time for an update query.</p>
@@ -166,7 +166,7 @@
 | labeled     | page           | labeling      |
 | null        | page           | filtering     |
 </code></pre>
-<p><code>event_tracker.emit()</code> creates new fields <code>context_name, context_value</code> on the go by using Dataset, no effort was paid for it. Internally the method <a href="https://dataset.readthedocs.io/en/latest/api.html#dataset.Table.insert" class="umami--click--dataset-readthedocs-io-en-latest-api-html-dataset-table-insert"><span class="iconify" data-icon="bx:bx-link-external"></span> dataset.Table.insert</a> is invoked.</p>
+<p><code>event_tracker.emit()</code> creates new fields <code>context_name, context_value</code> on the go by using Dataset, no effort was paid for it. Internally the method <a href="https://dataset.readthedocs.io/en/latest/api.html#dataset.Table.insert" class="umami--click--dataset-readthedocs-io-en-latest-api-html-dataset-table-insert">dataset.Table.insert <span class="iconify" data-icon="la:external-link-alt"></span></a> is invoked.</p>
 <h2 class="mt-5 mb-3">Solution <a id="solution" href="#solution"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>As of the new event tracking code the table has the following inconsistency:</p>
 <ul>
@@ -225,7 +225,7 @@ db[<span style="color: #4070a0">'card.edit'</span>]<span style="color: #666666">
 <p>Explicitly updated the fields <code> context_name, context_value</code> by matching records in the DB to the dataset ones by <code>id</code> . If <code>datatset_records</code> would contain new fields they were created automatically.</p>
 <h2 class="mt-5 mb-3">Visualize the solution <a id="visualize-the-solution" href="#visualize-the-solution"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>And for a better understanding of what i have done, both datasets values are visualized as pie charts at the before and after states.</p>
-<p>The script to create the plots <a href="files/plots.py" class="umami--click--files-plots-py"><span class="iconify" data-icon="teenyicons:python-outline"></span> plots.py</a></p>
+<p>The script to create the plots <a href="files/plots.py" class="umami--click--files-plots-py">plots.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a></p>
 <table>
 <thead>
 <tr>

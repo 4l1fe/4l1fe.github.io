@@ -99,7 +99,7 @@ def generate_rss(articles_data: List[ArticleData]):
 
 
 class HTMLGen:
-    EXTERNAL_LINK_ICON_CLASS = 'bx:bx-link-external'
+    EXTERNAL_LINK_ICON_CLASS = 'la:external-link-alt'
     EXTERNAL_LINK_GITHUB_ICON_CLASS = 'codicon:github-inverted'
     ANCHOR_LINK_ICON_CLASS = 'bi:link-45deg'
     EXTENSIONS_ICON_CLASSES_MAP = {'png': 'bi:file-earmark-image',
@@ -185,9 +185,8 @@ class HTMLGen:
 
             # Element prototype
             span_element = Element('span', attrib={'class': 'iconify', 'data-icon': icon_class})
-            span_element.tail = ' ' + element.text
-            element.text = None
-            element.insert(0, span_element)
+            element.text +=  ' '  # space before an icon
+            element.append(span_element)
         html = tostring(root)
         html = wrap_unwrap_fake_tag(html, wrap=False)
         return html

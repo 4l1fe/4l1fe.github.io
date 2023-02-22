@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="As i don't remember how and where i used technologies in my experience i wondered what profit  Sourcegraph could bring me at searching the code repositories and for potential use in a company. To test it out i chose a  stand-alone server option to run it as a docker container. Setting up didn't take much effort and time. Everything looked well until i figured out how many proccesses are run in the container.">    <link rel="icon" type="image/png" href="/files/favicon.png">
+    <meta name="description" content="As i don't remember how and where i used technologies in my experience i wondered what profit Sourcegraph  could bring me at searching the code repositories and for potential use in a company. To test it out i chose a stand-alone server  option to run it as a docker container. Setting up didn't take much effort and time. Everything looked well until i figured out how many proccesses are run in the container.">    <link rel="icon" type="image/png" href="/files/favicon.png">
     <link rel="alternate" type="application/rss+xml" href="/rss.xml">
     <style>
          @charset "UTF-8";/*!
@@ -134,7 +134,7 @@
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1>Sourcegraph is heavyweight <a id="sourcegraph-is-heavyweight" href="#sourcegraph-is-heavyweight"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.jpg" alt="" class="d-block mx-auto mw-100 h-100"></p>
-<p>As i don't remember how and where i used technologies in my experience i wondered what profit <a href="https://about.sourcegraph.com" class="umami--click--about-sourcegraph-com"><span class="iconify" data-icon="bx:bx-link-external"></span> Sourcegraph</a> could bring me at searching the code repositories and for potential use in a company. To test it out i chose a <a href="https://docs.sourcegraph.com/admin/deploy/docker-single-container" class="umami--click--docs-sourcegraph-com-admin-deploy-docker-single-container"><span class="iconify" data-icon="bx:bx-link-external"></span> stand-alone server</a> option to run it as a docker container. Setting up didn't take much effort and time. Everything looked well until i figured out how many proccesses are run in the container.</p>
+<p>As i don't remember how and where i used technologies in my experience i wondered what profit <a href="https://about.sourcegraph.com" class="umami--click--about-sourcegraph-com">Sourcegraph <span class="iconify" data-icon="la:external-link-alt"></span></a> could bring me at searching the code repositories and for potential use in a company. To test it out i chose a <a href="https://docs.sourcegraph.com/admin/deploy/docker-single-container" class="umami--click--docs-sourcegraph-com-admin-deploy-docker-single-container">stand-alone server <span class="iconify" data-icon="la:external-link-alt"></span></a> option to run it as a docker container. Setting up didn't take much effort and time. Everything looked well until i figured out how many proccesses are run in the container.</p>
 <h2 class="mt-5 mb-3">Container inspection <a id="container-inspection" href="#container-inspection"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Command was executed to run a container is basic.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>docker run --publish <span style="color: #40a070">127</span>.0.0.1:7080:7080 --publish <span style="color: #40a070">127</span>.0.0.1:3370:3370 --rm --volume <span style="color: #007020; font-weight: bold">$(</span><span style="color: #007020">pwd</span><span style="color: #007020; font-weight: bold">)</span>/sourcegraph/config:/etc/sourcegraph --volume <span style="color: #007020; font-weight: bold">$(</span><span style="color: #007020">pwd</span><span style="color: #007020; font-weight: bold">)</span>/sourcegraph/data:/var/opt/sourcegraph --name sourcegraph sourcegraph/server:3.43.2
@@ -244,7 +244,7 @@
 <p>Okay, <strong>20 parent processes</strong> per sourcegraph instance. This is a surprising discovery for me, i didn't see any mention of how complex a server instance is while reading the documentation briefly.</p>
 <h2 class="mt-5 mb-3">Resource estimation <a id="resource-estimation" href="#resource-estimation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>What i've seen that is relative to i revealed is you can estimate approximately the resources consumed to deploy a server.</p>
-<p>Here is my calculation in the <a href="https://docs.sourcegraph.com/admin/deploy/resource_estimator" class="umami--click--docs-sourcegraph-com-admin-deploy-resource-estimator"><span class="iconify" data-icon="bx:bx-link-external"></span> resource estimator</a>.</p>
+<p>Here is my calculation in the <a href="https://docs.sourcegraph.com/admin/deploy/resource_estimator" class="umami--click--docs-sourcegraph-com-admin-deploy-resource-estimator">resource estimator <span class="iconify" data-icon="la:external-link-alt"></span></a>.</p>
 <p><img src="files/resource-estimation.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Regulating parameters the summary is changed just a bit, for example, there is no difference between 1 user and 100. The total amount is too big to consider Sourcegraph as a code search tool, that's a platform.</p>
 <p>Here is what docker was showing about the resources consumed by the container to compare with the estimated summary.</p>
@@ -254,7 +254,7 @@
 </code></pre>
 <p>I don't know why, but the resource amount is an order of magnitude smaller.</p>
 <h2 class="mt-5 mb-3">CLI Alternative <a id="cli-alternative" href="#cli-alternative"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p>That isn't a tool i would take for code search. A proper alternative for my need is <a href="https://github.com/ggreer/the_silver_searcher" class="umami--click--github-com-ggreer-the-silver-searcher"><span class="iconify" data-icon="codicon:github-inverted"></span> the silver searcher</a>, a fast cli tool with a source file and code output.</p>
+<p>That isn't a tool i would take for code search. A proper alternative for my need is <a href="https://github.com/ggreer/the_silver_searcher" class="umami--click--github-com-ggreer-the-silver-searcher">the silver searcher <span class="iconify" data-icon="codicon:github-inverted"></span></a>, a fast cli tool with a source file and code output.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>ag --group --context<span style="color: #666666">=</span><span style="color: #40a070">5</span> --ignore venv --color --stats aiohttp ~/reposotories
 
 <span style="color: #888888">...</span>

@@ -135,7 +135,7 @@
             <h1>Columnar DB performance in action. DuckDB <a id="columnar-db-performance-in-action.-duckdb" href="#columnar-db-performance-in-action.-duckdb"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>This article is intended to represent only one simple thing is a fundamental difference between columnar family and standard row-based databases by an example. Roughly speaking, you may need a column-based database if working with a complex OLAP-oriented workload, reading vast data, grouping it, and computing metrics. And doing it you will definitely notice big time consumption. So columnar DB drastically reduces this time.</p>
-<p>As an example has to be simple and easily reproducible we compare columnar <a href="https://duckdb.org" class="umami--click--duckdb-org"><span class="iconify" data-icon="bx:bx-link-external"></span> DuckDB</a> performance with SQLite as a row-based counterpart.</p>
+<p>As an example has to be simple and easily reproducible we compare columnar <a href="https://duckdb.org" class="umami--click--duckdb-org">DuckDB <span class="iconify" data-icon="la:external-link-alt"></span></a> performance with SQLite as a row-based counterpart.</p>
 <p>You may read the article as a simplified proof of concept.</p>
 <h2 class="mt-5 mb-3">Steps to do <a id="steps-to-do" href="#steps-to-do"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <ul>
@@ -145,7 +145,7 @@
 <li>Visualize performance.</li>
 </ul>
 <h2 class="mt-5 mb-3">Prerequisites <a id="prerequisites" href="#prerequisites"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p>Simply install following python dependencies <code>pip install duckdb plotly typer</code> and SQLite CLI <code>sudo apt install sqlite3</code>. Along with the python <code>duckdb</code> bindings we will use DuckDB CLI, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v0.2.7/duckdb_cli-linux-amd64.zip" class="umami--click--github-com-duckdb-duckdb-releases-download-v0-2-7-duckdb-cli-linux-amd64-zip"><span class="iconify" data-icon="codicon:github-inverted"></span> v0.2.7-duckdb_cli-linux-amd64.zip</a></p>
+<p>Simply install following python dependencies <code>pip install duckdb plotly typer</code> and SQLite CLI <code>sudo apt install sqlite3</code>. Along with the python <code>duckdb</code> bindings we will use DuckDB CLI, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v0.2.7/duckdb_cli-linux-amd64.zip" class="umami--click--github-com-duckdb-duckdb-releases-download-v0-2-7-duckdb-cli-linux-amd64-zip">v0.2.7-duckdb_cli-linux-amd64.zip <span class="iconify" data-icon="codicon:github-inverted"></span></a></p>
 <h2 class="mt-5 mb-3">Fill the databases <a id="fill-the-databases" href="#fill-the-databases"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>In order to notice a difference in performance, the amount of stored data should be significantly big therefore we generate random data and write it into the databases.</p>
 <p>Tables' columns are a group of an id field and 3 values' fields. All values are randomly generated integers.</p>
@@ -156,12 +156,12 @@
 <span style="color: #888888">    value2 UINTEGER,  </span>
 <span style="color: #888888">    value3 UINTEGER); </span>
 </code></pre>
-<p>The scenario <a href="files/database.py" class="umami--click--files-database-py"><span class="iconify" data-icon="teenyicons:python-outline"></span> database.py</a> provides the auxiliary commands to prepare an experimental stand. For now, we create the base table in duckdb and run data generation.</p>
+<p>The scenario <a href="files/database.py" class="umami--click--files-database-py">database.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a> provides the auxiliary commands to prepare an experimental stand. For now, we create the base table in duckdb and run data generation.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python database.py fill-duckdb --sample-size <span style="color: #40a070">1000</span> --samples-count <span style="color: #40a070">10000</span>
 <span style="color: #888888">...</span>
 <span style="color: #888888">Database random.duckdb is filled up</span>
 </code></pre>
-<p>After a while, as the filling 10M records has been completed, we dump all data to a CSV file and load it into a new SQLite db. You can take the archived 165Mb file <a href="files/random_data.csv.tar.gz" class="umami--click--files-random-data-csv-tar-gz"><span class="iconify" data-icon="icomoon-free:file-zip"></span> random_data.csv.tar.gz</a> to pass data generating.</p>
+<p>After a while, as the filling 10M records has been completed, we dump all data to a CSV file and load it into a new SQLite db. You can take the archived 165Mb file <a href="files/random_data.csv.tar.gz" class="umami--click--files-random-data-csv-tar-gz">random_data.csv.tar.gz <span class="iconify" data-icon="icomoon-free:file-zip"></span></a> to pass data generating.</p>
 <p>We get to SQLite db. Dump data from <code>random.duckdb</code> as a CSV file and import it into <code>random.sqlite</code> table with the same schema.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python database.py dump-csv --path dump
 <span style="color: #c65d09; font-weight: bold">$ </span>python database.py fill-sqlite dump/0_random_data.csv
@@ -184,7 +184,7 @@
 </code></pre>
 <p>At the moment, everything is ready to run the query.</p>
 <h2 class="mt-5 mb-3">Run the query <a id="run-the-query" href="#run-the-query"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p>As we know, OLAP implies querying a database and computing metrics which can lead to getting insights about a business field. Therefore, we emulate it and compute <code>min(), max(), avg(), sum()</code> values on each column. SQL code we run <a href="files/query.sql" class="umami--click--files-query-sql"><span class="iconify" data-icon="bi:file-earmark-code"></span> query.sql</a>.</p>
+<p>As we know, OLAP implies querying a database and computing metrics which can lead to getting insights about a business field. Therefore, we emulate it and compute <code>min(), max(), avg(), sum()</code> values on each column. SQL code we run <a href="files/query.sql" class="umami--click--files-query-sql">query.sql <span class="iconify" data-icon="bi:file-earmark-code"></span></a>.</p>
 <p>By using the shell scripting, we organize running the query measuring time in a for loop replacing the base table name with the split table name.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span><span style="color: #007020; font-weight: bold">for</span> i <span style="color: #007020; font-weight: bold">in</span> <span style="color: #4070a0">`</span>seq <span style="color: #40a070">1</span> <span style="color: #40a070">10</span><span style="color: #4070a0">`</span>; <span style="color: #007020; font-weight: bold">do</span> <span style="color: #4070a0; font-weight: bold">\</span>
 sed <span style="color: #4070a0">'s/random_data/random_data'"</span><span style="color: #bb60d5">$i</span><span style="color: #4070a0">"'/g'</span> query.sql &gt; edited-query.sql; <span style="color: #4070a0; font-weight: bold">\</span>
@@ -223,7 +223,7 @@ sed <span style="color: #4070a0">'s/random_data/random_data'"</span><span style=
 <p>What would you say? Database fundamental difference is clearly evident. After all executions, DuckDB didn't even exceed 1 second. Meanwhile, SQLite exceeded 14 seconds.</p>
 <p>Job is done and it's time to prettify output making each execution time visual.</p>
 <h2 class="mt-5 mb-3">Visualize the results <a id="visualize-the-results" href="#visualize-the-results"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p>Here we take the result output, convert it to the python lists and build the performance chart upon it. The scripts <a href="files/convertation.py" class="umami--click--files-convertation-py"><span class="iconify" data-icon="teenyicons:python-outline"></span> convertation.py</a> and <a href="files/chart.py" class="umami--click--files-chart-py"><span class="iconify" data-icon="teenyicons:python-outline"></span> chart.py</a> do this job.</p>
+<p>Here we take the result output, convert it to the python lists and build the performance chart upon it. The scripts <a href="files/convertation.py" class="umami--click--files-convertation-py">convertation.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a> and <a href="files/chart.py" class="umami--click--files-chart-py">chart.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a> do this job.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python chart.py
 </code></pre>
 <p><img src="files/chart.png" alt="" title="Query execution performance" class="d-block mx-auto mw-100 h-100"></p>
