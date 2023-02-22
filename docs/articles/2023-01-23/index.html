@@ -70,17 +70,6 @@
             background-color: #f0f0f0;
             color: #000000
         }
-        img {
-            padding: .25rem;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: .5rem;
-            max-width: 100%;
-            height: auto;
-        }
-        td > img {
-            border: 0px;
-        }
         table {
             margin-bottom: 1rem;
         }
@@ -101,19 +90,14 @@
             position: sticky;
             top: 70px;
         }
-        #content > p > img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        #services, #services > div {
+       #services, #services > div {
             background-color: #ededed;
         }
         #profiles, #profiles > div {
             background-color: #ededed;
         }
         pre::-webkit-scrollbar         {
-          height: 7px; /* for horizontal scrollbars */
+          height: 5px; /* for horizontal scrollbars */
         }
         pre::-webkit-scrollbar-thumb        {
           background: #999999;
@@ -142,8 +126,6 @@
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
     <div class="container justify-content-center border-bottom border-secondary">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io/subscription" data-icon="octicon-eye" data-size="large" 
-data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch</a></span>
             <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Star</a></span>
     </div>
 </nav>
@@ -151,11 +133,11 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1>Data convertion with Redframes and Dataset <a id="data-convertion-with-redframes-and-dataset" href="#data-convertion-with-redframes-and-dataset"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
-<p><img src="files/main-section.jpg" alt=""></p>
+<p><img src="files/main-section.jpg" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>During active development, table schemas change frequently to correspond to up to date application requirements. Relational DBs are not that well at it as a lot of operations have to be made, you know it as migrations. Schemas not change only, but stored data as well.</p>
 <p>Writing SQL code to get table schemas and data to aactual state is a subject that could be improved and moved to a higher, human friendly level.</p>
 <p>Here i'm going to demonstrate a simple case of how i use the libraries <a href="https://github.com/maxhumber/redframes" class="umami--click--github-com-maxhumber-redframes"><span class="iconify" data-icon="codicon:github-inverted"></span> Redframes</a>, <a href="https://github.com/pudo/dataset" class="umami--click--github-com-pudo-dataset"><span class="iconify" data-icon="codicon:github-inverted"></span> Dataset</a> to transform the data and table and update them with fewer steps than i would make it with raw SQL.</p>
-<h2 class="mt-5 mb-3">Short tools description <a id="short-tools-description" href="#short-tools-description"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="mt-5 mb-3">Tools short description <a id="tools-short-description" href="#tools-short-description"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p><strong>Pandas</strong> is the well known library to work with data, but at particular cases it can be very tricky, unclear and complicated. Redrames is a wrapper that provides you with a set of intuitive, self-descriptive methods to solve problems more verbal but clear and excplicit, you know what i mean.</p>
 <p>Dataset is a good abstraction over a relational DB making interaction with data NoSQL'ish. For example, such operations as creating many columns from a dataset, tables, deleting them are perfomed on the go. The main abstraction here is a dataset, not rows. You query a daset from DB, filter and modify it on an applicatioan level, and write it back. You don't have to pay time for an update query.</p>
 <h2 class="mt-5 mb-3">The Problem <a id="the-problem" href="#the-problem"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
@@ -253,16 +235,16 @@ db[<span style="color: #4070a0">'card.edit'</span>]<span style="color: #666666">
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><img src="files/data-before.png" alt="" title="data before"></td>
-<td style="text-align:center"><img src="files/data-after.png" alt="" title="data after"></td>
+<td style="text-align:center"><img src="files/data-before.png" alt="" title="data before" class="d-block mx-auto mw-100 h-100"></td>
+<td style="text-align:center"><img src="files/data-after.png" alt="" title="data after" class="d-block mx-auto mw-100 h-100"></td>
 </tr>
 </tbody>
 </table>
 
         </div>
-        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+        <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
-            <ol><li><a href="#short-tools-description" class="text-decoration-none">Short tools description</a></li><li><a href="#the-problem" class="text-decoration-none">The Problem</a></li><li><a href="#solution" class="text-decoration-none">Solution</a></li><li><a href="#visualize-the-solution" class="text-decoration-none">Visualize the solution</a></li></ol>
+            <ol><li><a href="#tools-short-description" class="text-decoration-none">Tools short description</a></li><li><a href="#the-problem" class="text-decoration-none">The Problem</a></li><li><a href="#solution" class="text-decoration-none">Solution</a></li><li><a href="#visualize-the-solution" class="text-decoration-none">Visualize the solution</a></li></ol>
         </div>
     </div>
     <div class="row">

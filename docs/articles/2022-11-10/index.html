@@ -70,17 +70,6 @@
             background-color: #f0f0f0;
             color: #000000
         }
-        img {
-            padding: .25rem;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: .5rem;
-            max-width: 100%;
-            height: auto;
-        }
-        td > img {
-            border: 0px;
-        }
         table {
             margin-bottom: 1rem;
         }
@@ -101,19 +90,14 @@
             position: sticky;
             top: 70px;
         }
-        #content > p > img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        #services, #services > div {
+       #services, #services > div {
             background-color: #ededed;
         }
         #profiles, #profiles > div {
             background-color: #ededed;
         }
         pre::-webkit-scrollbar         {
-          height: 7px; /* for horizontal scrollbars */
+          height: 5px; /* for horizontal scrollbars */
         }
         pre::-webkit-scrollbar-thumb        {
           background: #999999;
@@ -142,8 +126,6 @@
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
     <div class="container justify-content-center border-bottom border-secondary">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io/subscription" data-icon="octicon-eye" data-size="large" 
-data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch</a></span>
             <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Star</a></span>
     </div>
 </nav>
@@ -151,7 +133,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1>Getting selected elements by a time series range. Bokeh <a id="getting-selected-elements-by-a-time-series-range.-bokeh" href="#getting-selected-elements-by-a-time-series-range.-bokeh"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
-<p><img src="files/main-section.png" alt=""></p>
+<p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>As a newcomer to Bokeh, i would like to know what the events have to be handled to figure out the selected elements on a <a href="https://docs.bokeh.org/en/latest/docs/user_guide/topics/timeseries.html" class="umami--click--docs-bokeh-org-en-latest-docs-user-guide-topics-timeseries-html"><span class="iconify" data-icon="bx:bx-link-external"></span> timeseris plot</a> by a range tool to process them further on a server side and what an object receives those events, <strong>Plot</strong> or <strong>RangeTool</strong>.</p>
 <p>In the case of using a range tool, elements aren't selected but the start and end of the range dates are, therefore, a final array of them is extracted manually from a data source.</p>
 <p>The Bokeh documentation doesn't answer the questions, so a straight way to get to know it is examining all the events of both objects.</p>
@@ -252,7 +234,7 @@ Event:  MouseMove Data:  (&lt;bokeh.events.MouseMove object at 0x7fc53a492400&gt
 Event:  MouseMove Data:  (&lt;bokeh.events.MouseMove object at 0x7fc53a492b20&gt;,)
 </code></pre>
 <p>While moving a UI selection element to the left on the <code>range_plot</code> the follow events happen:</p>
-<p><img src="files/shift-left.png" alt=""></p>
+<p><img src="files/shift-left.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <pre><code>Event:  Press Data:  (&lt;bokeh.events.Press object at 0x7fc53a492970&gt;,)
 Event:  PanStart Data:  (&lt;bokeh.events.PanStart object at 0x7fc53a492730&gt;,)
 Event:  Pan Data:  (&lt;bokeh.events.Pan object at 0x7fc53a492c10&gt;,)
@@ -302,7 +284,7 @@ Attr: start, old=1204772902054.0552, new=1205382699243.2444
 Attr: end, old=1330312102054.054, new=1330921899243.2432
 </code></pre>
 <p>Check the timestamps whether they match the selection range position on the picture.</p>
-<p><img src="files/shift-right.png" alt=""></p>
+<p><img src="files/shift-right.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <pre><code>In [<span style="color: #40a070">1</span>]: <span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">datetime</span> <span style="color: #007020; font-weight: bold">import</span> datetime
 
 In [<span style="color: #40a070">2</span>]: datetime<span style="color: #666666">.</span>utcfromtimestamp(<span style="color: #40a070">1205382699243</span><span style="color: #666666">/</span><span style="color: #40a070">1000</span>)
@@ -344,7 +326,7 @@ In [<span style="color: #40a070">3</span>]: date_val_filtered <span style="color
 </code></pre>
 
         </div>
-        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+        <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
             <ol><li><a href="#prepare-a-test-stand" class="text-decoration-none">Prepare a test stand</a></li><li><a href="#print-out-events-data" class="text-decoration-none">Print out events data</a><ol><li><a href="#plot-events" class="text-decoration-none">Plot events</a></li><li><a href="#tool-events" class="text-decoration-none">Tool events</a></li><li><a href="#final-selection-computation" class="text-decoration-none">Final selection computation</a></li></ol></li><li><a href="#selected-elemets" class="text-decoration-none">Selected elemets</a></li></ol>
         </div>

@@ -70,17 +70,6 @@
             background-color: #f0f0f0;
             color: #000000
         }
-        img {
-            padding: .25rem;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: .5rem;
-            max-width: 100%;
-            height: auto;
-        }
-        td > img {
-            border: 0px;
-        }
         table {
             margin-bottom: 1rem;
         }
@@ -101,19 +90,14 @@
             position: sticky;
             top: 70px;
         }
-        #content > p > img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        #services, #services > div {
+       #services, #services > div {
             background-color: #ededed;
         }
         #profiles, #profiles > div {
             background-color: #ededed;
         }
         pre::-webkit-scrollbar         {
-          height: 7px; /* for horizontal scrollbars */
+          height: 5px; /* for horizontal scrollbars */
         }
         pre::-webkit-scrollbar-thumb        {
           background: #999999;
@@ -142,8 +126,6 @@
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
     <div class="container justify-content-center border-bottom border-secondary">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io/subscription" data-icon="octicon-eye" data-size="large" 
-data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch</a></span>
             <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Star</a></span>
     </div>
 </nav>
@@ -151,7 +133,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1>Рассмотрение абстракций, их взаимосвязей и сложности библиотек встраиваемых БД <a id="рассмотрение-абстракций,-их-взаимосвязей-и-сложности-библиотек-встраиваемых-бд" href="#%D1%80%D0%B0%D1%81%D1%81%D0%BC%D0%BE%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B0%D0%B1%D1%81%D1%82%D1%80%D0%B0%D0%BA%D1%86%D0%B8%D0%B9,-%D0%B8%D1%85-%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D1%81%D0%B2%D1%8F%D0%B7%D0%B5%D0%B9-%D0%B8-%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA-%D0%B2%D1%81%D1%82%D1%80%D0%B0%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC%D1%8B%D1%85-%D0%B1%D0%B4"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
-<p><img src="files/main-section.png" alt="main-section"></p>
+<p><img src="files/main-section.png" alt="main-section" class="d-block mx-auto mw-100 h-100"></p>
 <p>Часто возникает желание иметь простейшую архитектуру сервиса или программы, в которой будут отсутствовать избыточные компоненты и межсетевое взаимодействие. Это ощутимо сокращает силы и время на их реализацию, поддержку и погружение. Чтобы придерживаться такого подхода нужно уметь подбирать <strong>подходящие технологии и библиотеки</strong>.</p>
 <p>Подбор может быть достаточно прямолинейным - формирование списка подходящих решений по их применяемой области, но, очевидно, что такой список окажется слишком большим и перенасыщенным. Сегодня век информации и потому её объём вокруг нас огромен, который человек физически не способен усвоить даже за всю жизнь, да-да представь себе. Осознание этой проблемы объема естесвенным образом приводит к формированию интеллектуального подхода - применения ряда <strong>аналитических практик</strong>, приводящих к сокращению кол-ва информации, способной быть усвоенной человеком в сроки, соответствующие решаемой задачи, и сохранению уровня её качества, релевантности. Т.е. подход, сокращающий список подходящих решений без погружения в исходной код до приемлимого и, в конечном итоге, одного.</p>
 <p>В данной статье применяется ряд таких практик, на примере подбора библиотек встраиваемых БД. Как таковая решаемая задача отсутствует, потому необходимости придти к выбору одной из них нету.</p>
@@ -221,10 +203,10 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <h4 class="mt-5 mb-3">TinyDB <a id="tinydb" href="#tinydb"><span class="iconify" data-icon="bi:link-45deg"></span></a></h4>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>pydeps --noshow --cluster --keep-target-cluster --rmprefix tinydb. -T png -o deps.png venv/lib/python3.8/site-packages/tinydb
 </code></pre>
-<p><img src="files/tinydb/deps.png" alt=""></p>
+<p><img src="files/tinydb/deps.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Вот первое отображение структуры компонентов из которых собрана библиотека. Слева основной импортируемый модуль, который вбирает функционал остальных, что видно по направленным стрелкам-связям.</p>
 <h4 class="mt-5 mb-3">Sqlitedict <a id="sqlitedict" href="#sqlitedict"><span class="iconify" data-icon="bi:link-45deg"></span></a></h4>
-<p><img src="files/sqlitedict/deps.png" alt=""></p>
+<p><img src="files/sqlitedict/deps.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Библиотека не имеет никаких зависимостей и даже не скомпанована как пакет, все абстракции содержатся в одном модуле в 550 строк кода и их всего 2, одна из которых основная, верхнеуровневая. Это сразу знак того, что порог входа по изучению нулевой.</p>
 <p>Казалось бы сказать тут нечего, но это косвенно и обозначает преимущество.</p>
 <h4 class="mt-5 mb-3">Peewee-kv <a id="peewee-kv" href="#peewee-kv"><span class="iconify" data-icon="bi:link-45deg"></span></a></h4>
@@ -232,14 +214,14 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>pydeps --include-missing --max-bacon<span style="color: #666666">=</span><span style="color: #40a070">1</span> --noshow --cluster --keep-target-cluster --rmprefix playhouse. -T png -o source-deps.png venv/lib/python3.8/site-packages/playhouse
 </code></pre>
 <p>Команда генерирует взаимосвязи модулей из сканируемого пакета которые нас не интересуют. поэтому следующее изображение отредактировано вручную, а вот ссылка на исходное <a href="files/peewee-kv/source-deps.png" class="umami--click--files-peewee-kv-source-deps-png"><span class="iconify" data-icon="bi:file-earmark-image"></span> source-deps.png</a> для сравнения.</p>
-<p><img src="files/peewee-kv/edited-deps.png" alt=""></p>
+<p><img src="files/peewee-kv/edited-deps.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Наш лидер по сложности из 3х, что впринципе и так понятно, зная о том, что это расширение. Тут мы это просто видим, не погружаясь в код.</p>
 <h3 class="mt-5 mb-3">Построение диаграммы классов <a id="построение-диаграммы-классов" href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BE%D0%B2"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>В паре секции присутствует ссылка на исходную диаграмму - большое по размеру изображение, включающее все что нужно и нет, и отредактированное изображение базовых абстракций библиотеки, отображающее интересующую нас суть.</p>
 <h4 class="mt-5 mb-3">TinyDB <a id="tinydb" href="#tinydb"><span class="iconify" data-icon="bi:link-45deg"></span></a></h4>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>pyreverse -o png venv/lib/python3.8/site-packages/tinydb
 </code></pre>
-<p><img src="files/tinydb/classes.png" alt=""></p>
+<p><img src="files/tinydb/classes.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Достаточно много классов, потому можно предположить, что библиотека предоставляет возможности расширения своими кастомными классами, собственно на это указывают <strong>generalization</strong> связи, например <code>Storage &lt;- MemoryStorage</code>.</p>
 <p>Семантичные имена, такие как <code>Middleware, Query, JsonStorage</code>, дают понимание о том что есть некий общий слой обработки, какой-то язык запросов, ну и хранение в конкретном формате <code>json</code>.</p>
 <p>Связи у классов <code>Middleware, Query</code> с иными в диаграмме полностью отсутствуют, а значит для их фактического установления необходимо погружаться в код, либо документацию, что уже требует небольших дополнительных усилий, но небольших, потому что библиотека самодостаточно и все содержит в себе.</p>
@@ -247,14 +229,14 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>pyreverse -o png venv/lib/python3.8/site-packages/sqlitedict.py
 </code></pre>
 <p>Полное отображение <a href="files/sqlitedict/source-classes.png" class="umami--click--files-sqlitedict-source-classes-png"><span class="iconify" data-icon="bi:file-earmark-image"></span> source-classes.png</a>.</p>
-<p><img src="files/sqlitedict/classes.png" alt=""></p>
+<p><img src="files/sqlitedict/classes.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Выглядит минималистично, прямо сейчас открывай код и читай, нет нужды в чтении документации. Напрямую работа с БД происходит только лишь через <code>SqliteDict</code>, вторая добавляет способность многопоточности и не подразумевает прямых обращений к ней из исполняемого сценария.</p>
 <p>Семантика имени <code>SqliteMultithread</code> говорит о способности работы с потоками. Не читая документации мы сразу получили такую информацию о часто интересующем нас вопросе, которую мы не имеем в двух других диаграммах.</p>
 <h4 class="mt-5 mb-3">Peewee-kv <a id="peewee-kv" href="#peewee-kv"><span class="iconify" data-icon="bi:link-45deg"></span></a></h4>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>pyreverse -o png venv/lib/python3.8/site-packages/playhouse/kv.py
 </code></pre>
 <p>Полное отображение <a href="files/peewee-kv/source-classes.png" class="umami--click--files-peewee-kv-source-classes-png"><span class="iconify" data-icon="bi:file-earmark-image"></span> source-classes.png</a>.</p>
-<p><img src="files/peewee-kv/classes.png" alt=""></p>
+<p><img src="files/peewee-kv/classes.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Как и <strong>sqlitedict</strong> имеет минимум абстракций, передающих семантику именами классов и их атрибутов. Не забываем, что изобилие классов исходного кода базовой библиотеки не строилось.</p>
 <h3 class="mt-5 mb-3">Построение графа вызовов <a id="построение-графа-вызовов" href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B3%D1%80%D0%B0%D1%84%D0%B0-%D0%B2%D1%8B%D0%B7%D0%BE%D0%B2%D0%BE%D0%B2"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Граф базового исполняемого сценария, описанного ранее, будет строиться следующими командами исполненными последовательно для каждого отдельно.</p>
@@ -281,7 +263,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
     main()
 </code></pre>
 <p>Полный граф <a href="files/tinydb/basic-scenario.png" class="umami--click--files-tinydb-basic-scenario-png"><span class="iconify" data-icon="bi:file-earmark-image"></span> basic-scenario.png</a></p>
-<p><img src="files/tinydb/basic-scenario-edited.png" alt="" title="Call graph"></p>
+<p><img src="files/tinydb/basic-scenario-edited.png" alt="" title="Call graph" class="d-block mx-auto mw-100 h-100"></p>
 <p>Видно как операции объекта <code>table</code> обращаются к объекту <code>storage</code> и обращение к нему в свою очередь объекта <code>database</code>. Сценарий очень хорошо читается на самом изображении, вплоть до сброса данных на диск, но сопоставив его с изображением диаграммы классов появляется неясность из-за отсутствия абстракций <code>Middleware, Document, Query</code>. Понятно, что они где-то неявно учавствует(как минимум <code>Document, Query</code>) и логически можно установить это место, но хотелось бы это просто видеть.</p>
 <h4 class="mt-5 mb-3">Sqlitedict <a id="sqlitedict" href="#sqlitedict"><span class="iconify" data-icon="bi:link-45deg"></span></a></h4>
 <pre><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">sqlitedict</span> <span style="color: #007020; font-weight: bold">import</span> SqliteDict
@@ -298,7 +280,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
     main()
 </code></pre>
 <p>Полный граф <a href="files/sqlitedict/basic-scenario.png" class="umami--click--files-sqlitedict-basic-scenario-png"><span class="iconify" data-icon="bi:file-earmark-image"></span> basic-scenario.png</a></p>
-<p><img src="files/sqlitedict/basic-scenario-edited.png" alt=""></p>
+<p><img src="files/sqlitedict/basic-scenario-edited.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Явным концептуальным отличием(логика помимо CRUD операций, создания БД) от предшественника является наличие объекта синхронизации потоков <code>queue</code>, т.к. вообще все вызовы <code>execute</code> производятся классом <code>SqliteMultithread</code>. Это мы знаем из соответстующей диаграммы классов, а благодаря графу еще и видим, где это происходит.</p>
 <h4 class="mt-5 mb-3">Peewee-kv <a id="peewee-kv" href="#peewee-kv"><span class="iconify" data-icon="bi:link-45deg"></span></a></h4>
 <pre><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">playhouse.kv</span> <span style="color: #007020; font-weight: bold">import</span> KeyValue
@@ -315,7 +297,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
     main()
 </code></pre>
 <p>Полный граф <a href="files/peewee-kv/basic-scenario.png" class="umami--click--files-peewee-kv-basic-scenario-png"><span class="iconify" data-icon="bi:file-earmark-image"></span> basic-scenario.png</a></p>
-<p><img src="files/peewee-kv/basic-scenario-edited.png" alt=""></p>
+<p><img src="files/peewee-kv/basic-scenario-edited.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Изображение сразу же демонстрирует большую глубину графа вызовов по сравнению с <strong>tinydb, sqlitedict</strong> и малую степень участия в нем верхнеуровневой абстракции <code>kv</code>, т.е. визуально проявляется степень(она же глубина) участия базовой зависимости - <strong>peewee</strong>.</p>
 <p>Отличное раскрывающее дополнение к соответствующим графу зависимостей и диаграмме классов.</p>
 <h3 class="mt-5 mb-3">Построение графика цикломатической сложности <a id="построение-графика-цикломатической-сложности" href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0-%D1%86%D0%B8%D0%BA%D0%BB%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9-%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
@@ -326,7 +308,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>Впринципе, данные таблицы уже показывают нам какая библиотека состоит из большего кол-ва сканируемых классов, методов, функций и число сложности у каждого из них. Этого достаточно, чтобы, опять же, не углубляясь в детали, получить информацию об отличии цикломатических сложностей. Но такое текстовое, табличное представление не настолько наглядно при чтении и сопоставлении одновременно трех таких. Для упрощения этого процесса можно конечно слить все таблицы в один файл и, прокручивая их, сравнивать числовые показатели, аналитически их сопоставляя(что и где больше, насколько хорошо или плохо ли это).</p>
 <p>Но для большего удобства восприятия полученных значений мы можем построить график с их цветовой передачей на основе имеющихся табличных файлов с помощью <strong>matplotlib, numpy</strong>. По задумке глубина цвета(темный тон) на графике сразу интуитивно выделит места, требующие внимания.</p>
 <p>Код построения графика <a href="files/cc_ranks.py" class="umami--click--files-cc-ranks-py"><span class="iconify" data-icon="teenyicons:python-outline"></span> cc_ranks.py</a> и само изображение.</p>
-<p><img src="files/CC-chart.png" alt="" title="Cyclomatic complexity heatmap chart"></p>
+<p><img src="files/CC-chart.png" alt="" title="Cyclomatic complexity heatmap chart" class="d-block mx-auto mw-100 h-100"></p>
 <p>Как и было задумано, изображение демонстрирует такие показатели, как объем и глубина цвета и мы видим без аналитического сопоставления, что по объему(количество ячеек) доминирует <strong>tinydb</strong>, а по глубине цвета(наибольшее значение сложности) <strong>sqlitedict</strong>.</p>
 <p>Цветовая шкала справа имеет максимальное значение <code>20</code> как максимальную сложность лишь для адаптации к нашему конкретному случаю, в то время как согласно <a href="https://radon.readthedocs.io/en/latest/commandline.html#the-cc-command" class="umami--click--radon-readthedocs-io-en-latest-commandline-html-the-cc-command"><span class="iconify" data-icon="bx:bx-link-external"></span> заявленным категориям</a> оно должно быть <code>41+</code>.</p>
 <p>В дополнение мы можем вывести самый сложный метод из <strong>sqlitedict</strong> и построить его граф потока управления следующими командами:</p>
@@ -343,7 +325,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>Пожалуй надо учесть особенность библиотеки <strong>peewee-kv</strong>, что она базируется но мощном ОРМ, и ввести только для неё дополнительный коэфициент, который равен его вероятной сложности, и умножить на него значения всех имеющихся измерений. Для полученных отмасштабированных данных добавим второй график, в котором данные по <strong>sqlitedict, tinydb</strong> будут идентичны первому, тем самым это приблизит наше видение к действительной сложности <strong>peewee-kv</strong>.</p>
 <p>Коэффициент вычислим упрощенным способом, вычислив его из суммарного количества строк исходного кода ОРМ и его расширения, допуская, что рост всех значений измерений пропорционален росту кол-ва строк кода. Итого <code>7747 / 173 = 44.78</code>, коэфициент получается слишком большой. Сократим число до одного порядка, т.к. точное значение знать ненужно, важен лишь факт, что оно значительно больше <code>1</code>, т.е. коэфициент равен числу <code>10</code>.</p>
 <p>Код преобразования полученных данных halstead-измерений и построения графика <a href="files/hal.py" class="umami--click--files-hal-py"><span class="iconify" data-icon="teenyicons:python-outline"></span> hal.py</a>, <a href="files/radar.py" class="umami--click--files-radar-py"><span class="iconify" data-icon="teenyicons:python-outline"></span> radar.py</a>.</p>
-<p><img src="files/summary-chart.png" alt="" title="Summary characteristics radar chart"></p>
+<p><img src="files/summary-chart.png" alt="" title="Summary characteristics radar chart" class="d-block mx-auto mw-100 h-100"></p>
 <p>Формы всех зон покрытия на верхнем графике имеют схожие очертания, иными словами аномальные отличия отсутствуют по каким-либо измерениям, что можно интерпретировать как относительно равную простоту библиотек <strong>sqlitedict, tinydb</strong>. Однако по двум значениям синяя зона наиболее отдалена от красной: <code>h1, CC targets count</code>.</p>
 <p>Для <strong>peewee-kv</strong> идея масштабирования доп. коэфициентом сразу отобразила, что в действительности библиотека является намного сложнее остальных, т.к. зона покрытия желтым цветом на нижнем графике резко расширилась по сравнению с первым и охватила остальные зоны, при этом она была наименьшая на верхнем.</p>
 <h2 class="mt-5 mb-3">Заключение <a id="заключение" href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
@@ -351,7 +333,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>Вообщем, мы не делаем тут выбор, к определенным требованиям свой подходящий кандидат.</p>
 
         </div>
-        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+        <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
             <ol><li><a href="#%D1%86%D0%B5%D0%BB%D0%B8" class="text-decoration-none">Цели</a></li><li><a href="#%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%B1%D0%B4" class="text-decoration-none">Список БД</a></li><li><a href="#%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA" class="text-decoration-none">Список практик</a></li><li><a href="#%D0%B2%D1%81%D0%BF%D0%BE%D0%BC%D0%BE%D0%B3%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%B8%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B" class="text-decoration-none">Вспомогательные инструменты</a><ol><li><a href="#pyreverse" class="text-decoration-none">Pyreverse</a></li><li><a href="#pydeps" class="text-decoration-none">Pydeps</a></li><li><a href="#gprof2dot" class="text-decoration-none">Gprof2dot</a></li><li><a href="#radon" class="text-decoration-none">Radon</a></li><li><a href="#mccabe" class="text-decoration-none">McCabe</a></li></ol></li><li><a href="#%D1%80%D0%B0%D1%81%D1%81%D0%BC%D0%BE%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D0%B5" class="text-decoration-none">Рассмотрение</a><ol><li><a href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B3%D1%80%D0%B0%D1%84%D0%B0-%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B5%D0%B9" class="text-decoration-none">Построение графа зависимостей</a></li><li><a href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BE%D0%B2" class="text-decoration-none">Построение диаграммы классов</a></li><li><a href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B3%D1%80%D0%B0%D1%84%D0%B0-%D0%B2%D1%8B%D0%B7%D0%BE%D0%B2%D0%BE%D0%B2" class="text-decoration-none">Построение графа вызовов</a></li><li><a href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0-%D1%86%D0%B8%D0%BA%D0%BB%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9-%D1%81%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8" class="text-decoration-none">Построение графика цикломатической сложности</a></li><li><a href="#%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0-halstead-%D0%B8%D0%B7%D0%BC%D0%B5%D1%80%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8-%D1%81%D1%83%D0%BC%D0%BC%D0%B0%D1%80%D0%BD%D1%8B%D1%85-%D1%85%D0%B0%D1%80%D0%B0%D0%BA%D1%82%D0%B5%D1%80%D0%B8%D1%81%D1%82%D0%B8%D0%BA" class="text-decoration-none">Построение графика Halstead-измерений и суммарных характеристик</a></li></ol></li><li><a href="#%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5" class="text-decoration-none">Заключение</a></li></ol>
         </div>

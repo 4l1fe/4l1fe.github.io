@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>9 Feb 2023 00:00:00 +0000</pubDate>
+		<pubDate>22 Feb 2023 00:00:00 +0000</pubDate>
+				<item>
+			<title>Telegram Bot as a command interface for Docker Daemon </title>
+			<link>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/</link>
+			<description>The cause enforced me to start searching for an alternative communication channel to ssh for managing my home server is a tunnel agent that is wrapped up in a container. The agent is responsible for keeping a network tunnel established, but from time...</description>
+			<pubDate>23 Feb 2023 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/</guid>
+		</item>
 				<item>
 			<title>Data convertion with Redframes and Dataset </title>
 			<link>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/</link>

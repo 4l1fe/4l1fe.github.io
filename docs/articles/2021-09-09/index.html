@@ -70,17 +70,6 @@
             background-color: #f0f0f0;
             color: #000000
         }
-        img {
-            padding: .25rem;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: .5rem;
-            max-width: 100%;
-            height: auto;
-        }
-        td > img {
-            border: 0px;
-        }
         table {
             margin-bottom: 1rem;
         }
@@ -101,19 +90,14 @@
             position: sticky;
             top: 70px;
         }
-        #content > p > img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        #services, #services > div {
+       #services, #services > div {
             background-color: #ededed;
         }
         #profiles, #profiles > div {
             background-color: #ededed;
         }
         pre::-webkit-scrollbar         {
-          height: 7px; /* for horizontal scrollbars */
+          height: 5px; /* for horizontal scrollbars */
         }
         pre::-webkit-scrollbar-thumb        {
           background: #999999;
@@ -142,8 +126,6 @@
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
     <div class="container justify-content-center border-bottom border-secondary">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io/subscription" data-icon="octicon-eye" data-size="large" 
-data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch</a></span>
             <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Star</a></span>
     </div>
 </nav>
@@ -151,12 +133,12 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1>Laptop bootloading time extreme growth. SystemD <a id="laptop-bootloading-time-extreme-growth.-systemd" href="#laptop-bootloading-time-extreme-growth.-systemd"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
-<p><img src="files/main-section.png" alt=""></p>
+<p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>If you have Linux installed on your laptop you may once encounter OS is bootloading abnormally slow what is happened in my case and it has taken around 44 seconds where 26 seconds in the userspace level. I've noticed after pressing the power button on seating in a cafe that my laptop is showing me a bootloader logo a way too long. That's the starting point i went to figure out what the hell is this and how <strong>SystemD</strong> works as it's responsible for such kind of a job.</p>
 <p>Thanks for this sort of the problems that lead us to dig into the mechanisms our modern low level software is based on. Such a fascinating technical journey <strong>(^o^)</strong></p>
 <p>I suppose you have heard the systemd term and have a general understanding of the <strong>root process</strong> in Linux, it is necessary in terms of who we have to ask for information about bootloading process.</p>
 <h2 class="mt-5 mb-3">What a cause is. How to reveal it <a id="what-a-cause-is.-how-to-reveal-it" href="#what-a-cause-is.-how-to-reveal-it"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p><img src="files/subsection-progress.png" alt=""></p>
+<p><img src="files/subsection-progress.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Obviously, first question appeared in my mind is how to list ran systemd's services during a bootloading phase. You, for sure, will get to the two reports <code>systemd-analyze, systemd-analyze blame</code> as me while answering the question. They display a list of the services, their running time and much more.</p>
 <p>In my case the list was following:</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>systemd-analyze
@@ -176,7 +158,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p><em>Output lines are reduced to those are longer than 1 second.</em></p>
 <p>As we see there a few problematic services longer than 6 and 10 seconds along with the shorter ones. It was pretty fast and simple to find it out, no effort at all. I went further asking myself what the couple is   about and how to disable them.</p>
 <h2 class="mt-5 mb-3">Causes are found. Which ones should be disabled <a id="causes-are-found.-which-ones-should-be-disabled" href="#causes-are-found.-which-ones-should-be-disabled"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p><img src="files/subsection-done.png" alt="" title="Subsection done"></p>
+<p><img src="files/subsection-done.png" alt="" title="Subsection done" class="d-block mx-auto mw-100 h-100"></p>
 <p>What do i thought about each service listed above? <code>dev-nvme0n1p3.device</code> is a necessary physical SSD device and is putted out from consideration. <code>docker.service</code> is required for my job purposes on every day basis so it is left enabled. Next candidates to consider were <code>snapd.service, vboxdrv.service</code>. I don't use neither SnapD nor VirtualBox therefore they were disabled immediately.</p>
 <p>A group of the further candidates was  <code>NetworkManager-wait-online.service, apt-daily.service, apt-daily-upgrade.service</code>, what do they do? Aptish services' function is software update checking and upgrading, but why they do start at the bootloading phase? I googled the subject and ended up with it happens seldom. Seldom? To be more concise, these services are running by <strong>timer units</strong>. This idea i came to by a small research:</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>systemctl list-unit-files <span style="color: #4070a0">'apt*'</span>
@@ -209,21 +191,21 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 </code></pre>
 <p>The issue is solved, but are the done precautions enough to keep bootloading fast? <strong>Blame report</strong> doesn't contain chronological statistics therefore i won't be able to examine services' running stats to point an anomaly out.</p>
 <h2 class="mt-5 mb-3">Is there chronological statistics <a id="is-there-chronological-statistics" href="#is-there-chronological-statistics"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p><img src="files/subsection-chart.png" alt="" title="Subsection stats"></p>
+<p><img src="files/subsection-chart.png" alt="" title="Subsection stats" class="d-block mx-auto mw-100 h-100"></p>
 <p>All the times we get the statistics it is of the latest bootloading. SystemD's documentation doesn't refer to any information about collecting or keeping it in the log files for an example.</p>
 <p>Googling and asking if it is possible to extract chronological data from somewhere didn't put me on a track to discover the issue further. And what can i do? Obviously, to take a look at the source code, that's what i did.</p>
 <p>Source code base is too huge and to start code examintion it needs to have a starting point. In this case it is command <code>systemd-analyze blame</code> string is using to search in the SystemD's repository <a href="https://github.com/systemd/systemd/blob/4b4a8ef7414c53af9b5f99ed80ce658be1c58c59/src/analyze/analyze.c#L1067" class="umami--click--github-com-systemd-systemd-blob-4b4a8ef7414c53af9b5f99ed80ce658be1c58c59-src-analyze-analyze-c-l1067"><span class="iconify" data-icon="codicon:github-inverted"></span> https://github.com/systemd/systemd</a>. Following such a way i got to the starting point definition of the function <code>static int analyze_blame()</code>.</p>
 <p>Have you eve read C code? it takes quite much time. For the simplification purpose i built a flow chart to visualize a path to the endpoints which should help me to answer the question.</p>
 <p>Entire flow chart picture <a href="files/flow-chart-general.png" class="umami--click--files-flow-chart-general-png"><span class="iconify" data-icon="bi:file-earmark-image"></span> flow-chart-general.png</a>, i left it in a rough state as a goal of depicting a calls chain and finding endpoints has been reached. To read all the source code please go to the it's repo. Here is one from the entire picture:</p>
-<p><img src="files/flow-chart-partial.png" alt="" title="Flow chart partial"></p>
+<p><img src="files/flow-chart-partial.png" alt="" title="Flow chart partial" class="d-block mx-auto mw-100 h-100"></p>
 <p><strong>Bold calls' names</strong> are those i unfolded to get to the endpoints, you may open the entire picture to see them but in addition i leave an excerpt contains one here.</p>
-<p><img src="files/flow-chart-endpoint.png" alt="" title="Flow chart endpoint"></p>
+<p><img src="files/flow-chart-endpoint.png" alt="" title="Flow chart endpoint" class="d-block mx-auto mw-100 h-100"></p>
 <p>All the high-level calls lead to systemd api such as <code>sb_bus_message_read()</code>, nothing is between start and end calls gave me an idea about a persistent storage of the statistics. In respect of it i made a conclusion the statistics should be collected manually or i have to continue digging into the <strong>JournalD</strong>'s storage capabilities where the found <code>sd_bus*</code> calls <a href="https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html#Description" class="umami--click--www-freedesktop-org-software-systemd-man-systemd-journald-service-html-description"><span class="iconify" data-icon="bx:bx-link-external"></span> receive data from</a> by <strong>DBus</strong> message protocol.</p>
 <h2 class="mt-5 mb-3">Afterword <a id="afterword" href="#afterword"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Having bootloading time reduced is enough in my case and implementation of a manual statistics collecting is taking too much time for a low priority purpose but it might be useful.</p>
 
         </div>
-        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+        <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
             <ol><li><a href="#what-a-cause-is.-how-to-reveal-it" class="text-decoration-none">What a cause is. How to reveal it</a></li><li><a href="#causes-are-found.-which-ones-should-be-disabled" class="text-decoration-none">Causes are found. Which ones should be disabled</a></li><li><a href="#is-there-chronological-statistics" class="text-decoration-none">Is there chronological statistics</a></li><li><a href="#afterword" class="text-decoration-none">Afterword</a></li></ol>
         </div>

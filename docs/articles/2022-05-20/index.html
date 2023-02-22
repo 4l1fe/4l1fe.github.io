@@ -70,17 +70,6 @@
             background-color: #f0f0f0;
             color: #000000
         }
-        img {
-            padding: .25rem;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: .5rem;
-            max-width: 100%;
-            height: auto;
-        }
-        td > img {
-            border: 0px;
-        }
         table {
             margin-bottom: 1rem;
         }
@@ -101,19 +90,14 @@
             position: sticky;
             top: 70px;
         }
-        #content > p > img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        #services, #services > div {
+       #services, #services > div {
             background-color: #ededed;
         }
         #profiles, #profiles > div {
             background-color: #ededed;
         }
         pre::-webkit-scrollbar         {
-          height: 7px; /* for horizontal scrollbars */
+          height: 5px; /* for horizontal scrollbars */
         }
         pre::-webkit-scrollbar-thumb        {
           background: #999999;
@@ -142,8 +126,6 @@
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
     <div class="container justify-content-center border-bottom border-secondary">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io/subscription" data-icon="octicon-eye" data-size="large" 
-data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch</a></span>
             <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Star</a></span>
     </div>
 </nav>
@@ -151,7 +133,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1>Drop a cloud disk in favor of storing data on the phone and laptop. FreeFileSync. KDiff3 <a id="drop-a-cloud-disk-in-favor-of-storing-data-on-the-phone-and-laptop.-freefilesync.-kdiff3" href="#drop-a-cloud-disk-in-favor-of-storing-data-on-the-phone-and-laptop.-freefilesync.-kdiff3"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
-<p><img src="files/main-section.jpg" alt=""></p>
+<p><img src="files/main-section.jpg" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Idea to exploit the laptop and phone storages instead of the Google Drive payed plan came up into my mind as i have much free space on them along with not much data in the cloud around <strong>110Gb</strong> when laptop total space is <strong>512Gb</strong>, phone <strong>256Gb</strong>. Also, reducing number of nodes in network communication makes working with files more stable and convenient. On the other hand, it will bring me a few difficulties and restrictions, but what are they, will i encounter any blocks making the idea failed?</p>
 <p>I tried to consider all the possible risks and issues of this specific case only.</p>
 <h2 class="mt-5 mb-3">Pros <a id="pros" href="#pros"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
@@ -197,26 +179,26 @@ The fastest but complicated to set up. Good to have when you sync many big files
 <h3 class="mt-5 mb-3">Syncing in pictures <a id="syncing-in-pictures" href="#syncing-in-pictures"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>As a connection is established a folder from the phone can be found on file system and open to see a difference.</p>
 <p>I chose to use <strong>FreeFileSync</strong> as it turned out very intuitive, detailed and functional. After comparing two folders i'm given a lot of actions where on the left is the laptop folder and on the right it's counterpart.</p>
-<p><img src="files/tools-syncing.png" alt="" title="syncing"></p>
+<p><img src="files/tools-syncing.png" alt="" title="syncing" class="d-block mx-auto mw-100 h-100"></p>
 <h3 class="mt-5 mb-3">Merging in pictures <a id="merging-in-pictures" href="#merging-in-pictures"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>In cases when a file on both sides contains conflicts it has to be solved with merging and for it i use KDiff3. To make it more convenient FreeFileSync lets a user extend property dialog with running a shell command on the selected files. You can select only files you want to merge and quickly get back to a difference general view.</p>
-<p><img src="files/tools-settings.png" alt="" title="settings"></p>
+<p><img src="files/tools-settings.png" alt="" title="settings" class="d-block mx-auto mw-100 h-100"></p>
 <p>In the <strong>Tools -&gt; Options</strong> window the command to run KDiff3 is added including string arguments <code>%item_path%, %item_path2%</code>, files on the left and right accordingly.</p>
-<p><img src="files/tools-dialog.png" alt="" title="dialog"></p>
+<p><img src="files/tools-dialog.png" alt="" title="dialog" class="d-block mx-auto mw-100 h-100"></p>
 <p>File with conflicts is selected and opening with KDiff3.</p>
-<p><img src="files/tools-merging.png" alt="" title="merge"></p>
+<p><img src="files/tools-merging.png" alt="" title="merge" class="d-block mx-auto mw-100 h-100"></p>
 <p>On the picture above the brief view of how KDiff3 works with merging. Three panes to see laptop, phone file states. The third is a merge interface with what a result you will get. After a merge is done a file can be synced overwriting it's counterpart.</p>
 <h3 class="mt-5 mb-3">Alternatives <a id="alternatives" href="#alternatives"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Two other programs were pocked in terms of their capability. They are <a href="https://meldmerge.org" class="umami--click--meldmerge-org"><span class="iconify" data-icon="bx:bx-link-external"></span> Meld</a>, <a href="https://www.opbyte.it/grsync/screenshot.html" class="umami--click--www-opbyte-it-grsync-screenshot-html"><span class="iconify" data-icon="bx:bx-link-external"></span> Grsync</a>. Meld is more basic than FreeFileSync but can merge files in the same window not by external program. Grsync is simply GUI of the core Linux utility <strong>rsync</strong>, it's very powerful but complex. Setting up syncing in a way you need takes long time and many experiments.</p>
 <h2 class="mt-5 mb-3">Automatic syncing <a id="automatic-syncing" href="#automatic-syncing"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Having manual syncing tested FreeFileSync can save the <strong>compare, filter, synchronization settings</strong> as the <strong>batch job</strong> script to run by double click or listening an event and run.</p>
 <p>With the <strong>two ways</strong> sync mode all the added, moved files are syncing automatically in background.</p>
-<p><img src="files/tools-batch-job.png" alt="" title="batch job"></p>
+<p><img src="files/tools-batch-job.png" alt="" title="batch job" class="d-block mx-auto mw-100 h-100"></p>
 <h2 class="mt-5 mb-3">Usage experience. It works simply OK <a id="usage-experience.-it-works-simply-ok" href="#usage-experience.-it-works-simply-ok"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The two significant benefits i got are simplicity and money saving. To achieve it i have to pay some effort which is not that big!</p>
 
         </div>
-        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+        <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
             <ol><li><a href="#pros" class="text-decoration-none">Pros</a></li><li><a href="#cons" class="text-decoration-none">Cons</a></li><li><a href="#manual-syncing" class="text-decoration-none">Manual syncing</a><ol><li><a href="#establishing-a-connection" class="text-decoration-none">Establishing a connection</a></li><li><a href="#syncing-in-pictures" class="text-decoration-none">Syncing in pictures</a></li><li><a href="#merging-in-pictures" class="text-decoration-none">Merging in pictures</a></li><li><a href="#alternatives" class="text-decoration-none">Alternatives</a></li></ol></li><li><a href="#automatic-syncing" class="text-decoration-none">Automatic syncing</a></li><li><a href="#usage-experience.-it-works-simply-ok" class="text-decoration-none">Usage experience. It works simply OK</a></li></ol>
         </div>

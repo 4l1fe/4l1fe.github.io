@@ -70,17 +70,6 @@
             background-color: #f0f0f0;
             color: #000000
         }
-        img {
-            padding: .25rem;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: .5rem;
-            max-width: 100%;
-            height: auto;
-        }
-        td > img {
-            border: 0px;
-        }
         table {
             margin-bottom: 1rem;
         }
@@ -101,19 +90,14 @@
             position: sticky;
             top: 70px;
         }
-        #content > p > img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        #services, #services > div {
+       #services, #services > div {
             background-color: #ededed;
         }
         #profiles, #profiles > div {
             background-color: #ededed;
         }
         pre::-webkit-scrollbar         {
-          height: 7px; /* for horizontal scrollbars */
+          height: 5px; /* for horizontal scrollbars */
         }
         pre::-webkit-scrollbar-thumb        {
           background: #999999;
@@ -142,8 +126,6 @@
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
     <div class="container justify-content-center border-bottom border-secondary">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io/subscription" data-icon="octicon-eye" data-size="large" 
-data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch</a></span>
             <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Star</a></span>
     </div>
 </nav>
@@ -151,7 +133,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1>Storing related accounts data in the TOML files. Visualization. NetworkX graph <a id="storing-related-accounts-data-in-the-toml-files.-visualization.-networkx-graph" href="#storing-related-accounts-data-in-the-toml-files.-visualization.-networkx-graph"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
-<p><img src="files/main-section.jpg" alt=""></p>
+<p><img src="files/main-section.jpg" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Until this point, i stored accounts and their secret data in <code>.ini, .csv, .txt, .pem</code> files and etc., for example credentials, access keys, certificates. Many simple things can be described by and stored in those file types, but accounts have been getting more and more interrelated and their secret data changed frequently. In such a case, having some typed data, accounts references and sub-properties becomes a necessity and requires me to take somewhat capable of providing it. <a href="https://toml.io/en/" class="umami--click--toml-io-en"><span class="iconify" data-icon="bx:bx-link-external"></span> TOML</a> is capable of.</p>
 <p>Basically, <code>.toml</code> file is a <strong>tree structure document</strong> that can contain strings, integers, booleans, lists, and dictionaries. All of them extend the capabilities of storing multiple account data of a service in one file. Two other benefits i find very handy about TOML are Python 3.11 includes the <a href="https://docs.python.org/3.11/library/tomllib.html#module-tomllib" class="umami--click--docs-python-org-3-11-library-tomllib-html-module-tomllib"><span class="iconify" data-icon="bx:bx-link-external"></span> toml parser</a> in the standard library and its <a href="https://github.com/toml-lang/toml/blob/main/toml.abnf" class="umami--click--github-com-toml-lang-toml-blob-main-toml-abnf"><span class="iconify" data-icon="codicon:github-inverted"></span> ABNF specification</a> is around <strong>250 lines</strong>.</p>
 <p>Accounts interrelation. That's quite natural when many services are used with multiple accounts. These accounts can arbitrarily relate to each other. With TOML specification a relation could be a key with a string value or list of strings of filenames.</p>
@@ -216,8 +198,8 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><img src="files/plot.png" alt=""></td>
-<td style="text-align:center"><img src="files/plot-relations.png" alt=""></td>
+<td style="text-align:center"><img src="files/plot.png" alt="" class="d-block mx-auto mw-100 h-100"></td>
+<td style="text-align:center"><img src="files/plot-relations.png" alt="" class="d-block mx-auto mw-100 h-100"></td>
 </tr>
 </tbody>
 </table>
@@ -235,8 +217,8 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><img src="files/plot-relations-layout.png" alt=""></td>
-<td style="text-align:center"><img src="files/plot-relations-layout-emphasize.png" alt=""></td>
+<td style="text-align:center"><img src="files/plot-relations-layout.png" alt="" class="d-block mx-auto mw-100 h-100"></td>
+<td style="text-align:center"><img src="files/plot-relations-layout-emphasize.png" alt="" class="d-block mx-auto mw-100 h-100"></td>
 </tr>
 </tbody>
 </table>
@@ -244,7 +226,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 <p>Now, as the nodes look anonymous the picture doesn't tell what that most related account is and a few others. Their names could refine detalization. Displaying the names.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --relations --layout <span style="color: #4070a0">"kamada kawai"</span> --emphasize --names secrets
 </code></pre>
-<p><img src="files/plot-relations-layout-emphasize-names.png" alt=""></p>
+<p><img src="files/plot-relations-layout-emphasize-names.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Nice, it looks much better than text output.</p>
 <h3 class="mt-5 mb-3">Errors output <a id="errors-output" href="#errors-output"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>The final demo step. If i mistype a reference or forget to update the edited ones the checker points it out to me with the text and visual outputs as below.</p>
@@ -255,14 +237,14 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 <span style="color: #888888">[error    ] Reference doesn't exist.       node=PosixPath('secrets/mobile.toml') reference=wrong-acc.toml</span>
 <span style="color: #888888">[error    ] Fail.</span>
 </code></pre>
-<p><img src="files/plot-relations-layout-emphasize-names-errors.png" alt=""></p>
+<p><img src="files/plot-relations-layout-emphasize-names-errors.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Great, eyes now stick to the red dots and fixing the errors displayed is going to be easier.</p>
 <h2 class="mt-5 mb-3">Afterward <a id="afterward" href="#afterward"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Having on hand the checker lets me not keep in mind all the accounts relations and preserve their integrity.</p>
 <p><a href="https://github.com/4l1fe/reference-checker" class="umami--click--github-com-4l1fe-reference-checker"><span class="iconify" data-icon="codicon:github-inverted"></span> Checker</a> repository if you would like to give it a ⭐.</p>
 
         </div>
-        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+        <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
             <ol><li><a href="#references-and-a-checker" class="text-decoration-none">References and a checker</a></li><li><a href="#demonstration" class="text-decoration-none">Demonstration</a><ol><li><a href="#accounts-data-folder" class="text-decoration-none">Accounts data folder</a></li><li><a href="#text-output" class="text-decoration-none">Text output</a></li><li><a href="#visual-graph-output" class="text-decoration-none">Visual graph output</a></li><li><a href="#errors-output" class="text-decoration-none">Errors output</a></li></ol></li><li><a href="#afterward" class="text-decoration-none">Afterward</a></li></ol>
         </div>

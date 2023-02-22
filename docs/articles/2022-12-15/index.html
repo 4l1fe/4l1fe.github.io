@@ -70,17 +70,6 @@
             background-color: #f0f0f0;
             color: #000000
         }
-        img {
-            padding: .25rem;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: .5rem;
-            max-width: 100%;
-            height: auto;
-        }
-        td > img {
-            border: 0px;
-        }
         table {
             margin-bottom: 1rem;
         }
@@ -101,19 +90,14 @@
             position: sticky;
             top: 70px;
         }
-        #content > p > img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        #services, #services > div {
+       #services, #services > div {
             background-color: #ededed;
         }
         #profiles, #profiles > div {
             background-color: #ededed;
         }
         pre::-webkit-scrollbar         {
-          height: 7px; /* for horizontal scrollbars */
+          height: 5px; /* for horizontal scrollbars */
         }
         pre::-webkit-scrollbar-thumb        {
           background: #999999;
@@ -142,8 +126,6 @@
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
     <div class="container justify-content-center border-bottom border-secondary">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io/subscription" data-icon="octicon-eye" data-size="large" 
-data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch</a></span>
             <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Star</a></span>
     </div>
 </nav>
@@ -151,7 +133,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1>Colorize printed text to get eyes focused. Termcolor <a id="colorize-printed-text-to-get-eyes-focused.-termcolor" href="#colorize-printed-text-to-get-eyes-focused.-termcolor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
-<p><img src="files/main-section.png" alt=""></p>
+<p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Working with <a href="https://en.wikipedia.org/wiki/Extended_file_attributes#cite_note-1" class="umami--click--en-wikipedia-org-wiki-extended-file-attributes-cite-note-1"><span class="iconify" data-icon="bx:bx-link-external"></span> extended file attributes</a>, i have to do many necessary operations. Updating attributes goes through a search by scanning their values, filtering them and then setting new values up.</p>
 <p>During this process mistakes can be easily made, therefore, a few helpful steps of advanced text printing are worth doing for checking the result is correct.</p>
 <p>Text formatting and colorizing  are good choices for improving understanding of printed initial and final attributes text, <a href="https://github.com/termcolor/termcolor" class="umami--click--github-com-termcolor-termcolor"><span class="iconify" data-icon="codicon:github-inverted"></span> termcolor</a> helps with it.</p>
@@ -159,10 +141,10 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>What does printed plain text look like? It's a line that i read and split up on logic parts in mind. When those lines are hundreds such a way of reading frustrates me while scrolling up and down.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python xutils.py rename-tags --from <span style="color: #4070a0">'[n]'</span> --to <span style="color: #4070a0">'[new-t]'</span> files-dir
 </code></pre>
-<p><img src="files/plain-lines.png" alt=""></p>
+<p><img src="files/plain-lines.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Where to look at here?</p>
 <p>The first thing i improved is formatting the line as a column with a blank line separator at the bottom.</p>
-<p><img src="files/plain-columns.png" alt=""></p>
+<p><img src="files/plain-columns.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Nice, cluttering is gone, only one thing at a time as a column of the <strong>file name, old attributes, new attributes and separator</strong>.</p>
 <h2 class="mt-5 mb-3">Colored text <a id="colored-text" href="#colored-text"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The final improvement is colorizing old and new attributes with the <code>colored()</code> function.</p>
@@ -186,8 +168,8 @@ on_cyan <span style="color: #666666">=</span> <span style="color: #007020; font-
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><img src="files/plain-columns.png" alt=""></td>
-<td style="text-align:center"><img src="files/colored-columns.png" alt=""></td>
+<td style="text-align:center"><img src="files/plain-columns.png" alt="" class="d-block mx-auto mw-100 h-100"></td>
+<td style="text-align:center"><img src="files/colored-columns.png" alt="" class="d-block mx-auto mw-100 h-100"></td>
 </tr>
 </tbody>
 </table>
@@ -197,7 +179,7 @@ on_cyan <span style="color: #666666">=</span> <span style="color: #007020; font-
 <p><strong>Termcolor</strong> is very basic, but simple to use and gives a wide range of flexibility. There are a few others, two of them i'd like to recommend are <a href="https://github.com/tartley/colorama" class="umami--click--github-com-tartley-colorama"><span class="iconify" data-icon="codicon:github-inverted"></span> colorama</a> and <a href="https://github.com/Textualize/rich" class="umami--click--github-com-textualize-rich"><span class="iconify" data-icon="codicon:github-inverted"></span> rich</a> .</p>
 
         </div>
-        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+        <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
             <ol><li><a href="#plain-text" class="text-decoration-none">Plain text</a></li><li><a href="#colored-text" class="text-decoration-none">Colored text</a></li><li><a href="#alternatives" class="text-decoration-none">Alternatives</a></li></ol>
         </div>

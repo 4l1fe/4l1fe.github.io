@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+    <loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/</loc>
+    <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/main-section.png</image:loc>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/Diagram-Connected.png</image:loc>
+        <image:title>connection established</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/Diagram-Disconnected.png</image:loc>
+        <image:title>connection lost</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/Diagram-ProviderReplacement.png</image:loc>
+        <image:title>provider replacement</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/Diagram-TelegramBot.png</image:loc>
+        <image:title>telegram bot</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/Diagram-TelegramBotCommands.png</image:loc>
+        <image:title>telegram bot commands</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/list-command.png</image:loc>
+        <image:title>list docker command</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/logs-command.png</image:loc>
+        <image:title>logs docker command</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/restart-command.png</image:loc>
+        <image:title>restart docker command</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/menu-commands.png</image:loc>
+        <image:title>telegram chat menu</image:title>
+    </image:image>
+      </url>
+    <url>
     <loc>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/</loc>
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/files/main-section.png</image:loc>

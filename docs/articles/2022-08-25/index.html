@@ -70,17 +70,6 @@
             background-color: #f0f0f0;
             color: #000000
         }
-        img {
-            padding: .25rem;
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: .5rem;
-            max-width: 100%;
-            height: auto;
-        }
-        td > img {
-            border: 0px;
-        }
         table {
             margin-bottom: 1rem;
         }
@@ -101,19 +90,14 @@
             position: sticky;
             top: 70px;
         }
-        #content > p > img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        #services, #services > div {
+       #services, #services > div {
             background-color: #ededed;
         }
         #profiles, #profiles > div {
             background-color: #ededed;
         }
         pre::-webkit-scrollbar         {
-          height: 7px; /* for horizontal scrollbars */
+          height: 5px; /* for horizontal scrollbars */
         }
         pre::-webkit-scrollbar-thumb        {
           background: #999999;
@@ -142,8 +126,6 @@
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
     <div class="container justify-content-center border-bottom border-secondary">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io/subscription" data-icon="octicon-eye" data-size="large" 
-data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch</a></span>
             <span class="mx-2"><a class="github-button mx-2" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Star</a></span>
     </div>
 </nav>
@@ -151,7 +133,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1>File System based file changes history on snapshots. LVM. ZFS. BTRFS <a id="file-system-based-file-changes-history-on-snapshots.-lvm.-zfs.-btrfs" href="#file-system-based-file-changes-history-on-snapshots.-lvm.-zfs.-btrfs"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
-<p><img src="files/main-section.jpg" alt=""></p>
+<p><img src="files/main-section.jpg" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>After stopping usage a cloud disk and transferring data to my own devices i step forward and would like to find a solution of storing text file changes history, other files formats aren't considering as they aren't editing by me.</p>
 <p>A common solution you might think about for such a purpose is tracking files with <strong>GIT</strong>. I can say it's pretty more than working but <u>having and dealing with git's database</u> lead to an automation of many operations types what aren't related to the file changes, i would like to work with files only. Anyway, i checked if there are <strong>FUSE</strong> based git file systems and found a couple of them <a href="https://github.com/AUEB-BALab/RepoFS" class="umami--click--github-com-aueb-balab-repofs"><span class="iconify" data-icon="codicon:github-inverted"></span> RepoFS</a>,  <a href="https://github.com/presslabs/gitfs" class="umami--click--github-com-presslabs-gitfs"><span class="iconify" data-icon="codicon:github-inverted"></span> gitfs</a>,  Great, the file changes are tracking automatically by them. However, <u>git database, branches, a fuse layer make a solution more complicated</u> then i really need, having only <strong>write ahead</strong> changes history. An alternative i actually planed to take a look at is the <strong>LVM</strong> snapshots as i have already had experience of creating them and see a good potential in being helpful of reaching the goal.</p>
 <p>Idea to create the snapshots came into my mind as LVM is a built-in Ubuntu library and my laptop disk is managing by it since the OS installation. Should i jump to a snapshots automation right away? No, it worth to spent some time to search other appropriate libraries that could bring me to a better result. I heard that <strong>ZFS</strong> and <strong>BTRFS</strong> have snapshot feature as well, so they are two other candidates to consider for storing the history.</p>
@@ -345,7 +327,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 </code></pre>
 <p>By default, ZFS doesn't mount all the snapshots to a file system.</p>
 <p>Interesting, the ZFS snapshotting scenario loaded CPU significantly.</p>
-<p><img src="files/zfs-snapshotting-cpu-consumption.png" alt="" title="zfs snapshotting cpu consumption"></p>
+<p><img src="files/zfs-snapshotting-cpu-consumption.png" alt="" title="zfs snapshotting cpu consumption" class="d-block mx-auto mw-100 h-100"></p>
 <p>BTRFS turn.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo btrfs subvolume create /btrfs/snapshots
 <span style="color: #888888">Create subvolume '/btrfs/snapshots'</span>
@@ -394,7 +376,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>And again, LVM by it's setting up and snapshot processes is the most complicated tool.</p>
 <h3 class="mt-5 mb-3">Performance <a id="performance" href="#performance"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Visualize information about how fast each FS is. The chart building script <a href="files/chart.py" class="umami--click--files-chart-py"><span class="iconify" data-icon="teenyicons:python-outline"></span> chart.py</a> reads output in the log files from the previous section <a href="files/output-zfs.txt" class="umami--click--files-output-zfs-txt"><span class="iconify" data-icon="bi:file-earmark-text"></span> output-zfs.txt</a>, <a href="files/output-btrfs.txt" class="umami--click--files-output-btrfs-txt"><span class="iconify" data-icon="bi:file-earmark-text"></span> output-btrfs.txt</a>, <a href="files/output-lvm.txt" class="umami--click--files-output-lvm-txt"><span class="iconify" data-icon="bi:file-earmark-text"></span> output-lvm.txt</a>, parses the text from them and extract execution timestamps.</p>
-<p><img src="files/creation-time-chart.png" alt="" title="snapshots creation time"></p>
+<p><img src="files/creation-time-chart.png" alt="" title="snapshots creation time" class="d-block mx-auto mw-100 h-100"></p>
 <p>LVM grows linearly while ZFS not obviously grows exponentially. That observation i've got by creating an order of magnitude more than 2000 zfs snapshots during the experiments and saw how an execution becomes slower with each next snapshot.</p>
 <p>BTRFS has constant growth.</p>
 <p>At this point the details have been gotten from the experiments are enough to chose the best deal, which is BTRFS, but extracting some additional information is worth to do as a file system is going to be exploited and it's behavior should be well learnt.</p>
@@ -504,7 +486,7 @@ data-show-count="true" aria-label="Watch 4l1fe/4l1fe.github.io on GitHub">Watch<
 <p>Listen to the file events <a href="https://github.com/chrisjbillington/inotify_simple" class="umami--click--github-com-chrisjbillington-inotify-simple"><span class="iconify" data-icon="codicon:github-inverted"></span> inotify_simple</a> and trigger snapshot creation command <a href="https://github.com/kdave/btrfs-progs/tree/master/libbtrfsutil" class="umami--click--github-com-kdave-btrfs-progs-tree-master-libbtrfsutil"><span class="iconify" data-icon="codicon:github-inverted"></span> python-btrfs-progs</a>. Then wrap it up into a systemd service and run it in background <a href="https://github.com/4l1fe/FileHistorySnaps" class="umami--click--github-com-4l1fe-filehistorysnaps"><span class="iconify" data-icon="codicon:github-inverted"></span> file history snaps</a>.</p>
 
         </div>
-        <div id="toc" class="col-lg-3 order-1 order-lg-2">
+        <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5">
             <strong class="d-block py-1 my-2 border-bottom fs-5"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
             <ol><li><a href="#installation" class="text-decoration-none">Installation</a></li><li><a href="#test-volumes-setup" class="text-decoration-none">Test volumes setup</a></li><li><a href="#snapshots-creation" class="text-decoration-none">Snapshots creation</a><ol><li><a href="#performance" class="text-decoration-none">Performance</a></li></ol></li><li><a href="#displaying-diff" class="text-decoration-none">Displaying diff</a></li><li><a href="#disk-space-usage" class="text-decoration-none">Disk space usage</a></li><li><a href="#events-listening" class="text-decoration-none">Events listening</a></li><li><a href="#the-winner" class="text-decoration-none">The winner</a></li><li><a href="#automation" class="text-decoration-none">Automation</a></li></ol>
         </div>
