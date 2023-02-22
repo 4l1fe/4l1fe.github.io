@@ -15,13 +15,13 @@
                     <small>Click and test it out</small>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item border-0"><a class="{% if analytics_enabled %}umami--click--services-memo{% endif %}" target="_blank" rel="noopener noreferrer" {% if memocards_enabled %}href="{{ memocards_service_address }}"{% endif %}>Memo cards <span class="iconify" data-icon="foundation:clipboard-pencil"></span></a>
+                    <li class="list-group-item border-0"><a class="fw-bold {% if analytics_enabled %}umami--click--services-memo{% endif %}" target="_blank" rel="noopener noreferrer" {% if memocards_enabled %}href="{{ memocards_service_address }}"{% endif %}>Memo cards <span class="iconify" data-icon="foundation:clipboard-pencil"></span></a>
                     <br><small class="text-dark">Service helps to memorize and repeat words to enrich a vocubalary.</small></li>
-                    <li class="list-group-item border-0"><a class="{% if analytics_enabled %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" {% if analytics_enabled %}href="{{ analytics_service_page }}"{% endif %}>Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a>
+                    <li class="list-group-item border-0"><a class="fw-bold {% if analytics_enabled %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" {% if analytics_enabled %}href="{{ analytics_service_page }}"{% endif %}>Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a>
                     <br><small class="text-dark">Web analytics <strong>Umami</strong>. Tracking page views and link clicks.</small></li>
-                    <li class="list-group-item border-0"><a class="{% if analytics_enabled %}umami--click--services-monitoring{% endif %}" target="_blank" rel="noopener noreferrer" {% if monitoring_enabled %}href="{{ monitoring_service_page }}"{% endif %}>Monitoring <span class="iconify" data-icon="fontisto:area-chart"></span></a>
+                    <li class="list-group-item border-0"><a class="fw-bold {% if analytics_enabled %}umami--click--services-monitoring{% endif %}" target="_blank" rel="noopener noreferrer" {% if monitoring_enabled %}href="{{ monitoring_service_page }}"{% endif %}>Monitoring <span class="iconify" data-icon="fontisto:area-chart"></span></a>
                     <br><small class="text-dark">Monitoring resources With <strong>Grafana</strong> consumed by live service containers.</small></li>
-                    <li class="list-group-item border-0"><a class="{% if analytics_enabled %}umami--click--services-statuspage{% endif %}" target="_blank" rel="noopener noreferrer" {% if statuspage_enabled %}href="{{ statuspage_service_page }}"{% endif %}>Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
+                    <li class="list-group-item border-0"><a class="fw-bold {% if analytics_enabled %}umami--click--services-statuspage{% endif %}" target="_blank" rel="noopener noreferrer" {% if statuspage_enabled %}href="{{ statuspage_service_page }}"{% endif %}>Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
                     <br><small class="text-dark">Check for the live services are running.</small></li>
                 </ul>
             </div>
