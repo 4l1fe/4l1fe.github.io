@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>22 Feb 2023 00:00:00 +0000</pubDate>
+		<pubDate>12 Mar 2023 00:00:00 +0000</pubDate>
+				<item>
+			<title>Telegram group leaders research. Pandas, Seaborn, Missingno </title>
+			<link>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/</link>
+			<description>Due to i'm a member of a Telegram group chat i'd like to research about the most active users there by plotting them in different perspectives:</description>
+			<pubDate>1 Mar 2023 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/</guid>
+		</item>
 				<item>
 			<title>Telegram Bot as a command interface for Docker Daemon </title>
 			<link>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/</link>

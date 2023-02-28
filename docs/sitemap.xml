@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+    <loc>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/</loc>
+    <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/files/main-section.png</image:loc>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/files/missing-values.png</image:loc>
+        <image:title>missing values</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/files/top10-messages-count.png</image:loc>
+        <image:title>top10 messages count</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/files/top10-messages-count-per-month.png</image:loc>
+        <image:title>top10 messages count per month</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/files/top2-messages-frequency-per-month.png</image:loc>
+        <image:title>top2 messages frequency per month</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/files/top2-messages-frequency-per-month-relative.png</image:loc>
+        <image:title>top2 messages frequency per month relative</image:title>
+    </image:image>
+      </url>
+    <url>
     <loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/</loc>
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/telegram-bot-as-a-command-interface-for-docker-daemon/files/main-section.png</image:loc>
