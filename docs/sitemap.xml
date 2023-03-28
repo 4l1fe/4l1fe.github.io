@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+    <loc>https://www.kvdm.dev/articles/research-moderators-activity-in-the-streamlit-community-dask-pandas-seaborn/</loc>
+    <image:image>
+        <image:loc>https://www.kvdm.dev/articles/research-moderators-activity-in-the-streamlit-community-dask-pandas-seaborn/files/main-section.png</image:loc>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/research-moderators-activity-in-the-streamlit-community-dask-pandas-seaborn/files/moderators-summary.png</image:loc>
+        <image:title>moderators summary</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/research-moderators-activity-in-the-streamlit-community-dask-pandas-seaborn/files/responded-topics-distribution.png</image:loc>
+        <image:title>responded topics distribution</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/research-moderators-activity-in-the-streamlit-community-dask-pandas-seaborn/files/responding-dispersion-statistics.png</image:loc>
+        <image:title>responding dispersion statistics</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/research-moderators-activity-in-the-streamlit-community-dask-pandas-seaborn/files/responding-common-statistics.png</image:loc>
+        <image:title>responding common statistics</image:title>
+    </image:image>
+      </url>
+    <url>
     <loc>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/</loc>
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/files/main-section.png</image:loc>

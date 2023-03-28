@@ -104,6 +104,13 @@
           background: #999999;
           border-radius: .5rem;
         }
+        div.table-responsive::-webkit-scrollbar         {
+          height: 5px; /* for horizontal scrollbars */
+        }
+        div.table-responsive::-webkit-scrollbar-thumb        {
+          background: #999999;
+          border-radius: .5rem;
+        }
     </style>
     <script>
         /**
@@ -124,9 +131,9 @@
 </head>
 <body>
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
-    <div class="container justify-content-center">
+    <div class="container justify-content-end">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub"></a></span>
+            <span class="mx-2"><a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub"></a></span>
     </div>
 </nav>
 <div class="container lh-base fs-5">
@@ -159,7 +166,7 @@ on_cyan <span style="color: #666666">=</span> <span style="color: #007020; font-
 <span style="color: #007020">print</span>(on_blue(tags))
 <span style="color: #007020">print</span>(on_cyan(renamed_tags), end<span style="color: #666666">=</span>DOUBLE_NL)
 </code></pre>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th style="text-align:center">Before</th>
@@ -173,7 +180,7 @@ on_cyan <span style="color: #666666">=</span> <span style="color: #007020; font-
 </tr>
 </tbody>
 </table>
-<p>Colors point my eyes to two lines below a file name to see a difference only and conclude whether renaming is correct.</p>
+</div><p>Colors point my eyes to two lines below a file name to see a difference only and conclude whether renaming is correct.</p>
 <p>Time is payed for colorization small, but effect is big. No complicated libraries are used.</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Alternatives <a id="alternatives" href="#alternatives"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p><strong>Termcolor</strong> is very basic, but simple to use and gives a wide range of flexibility. There are a few others, two of them i'd like to recommend are <a href="https://github.com/tartley/colorama">colorama <span class="iconify" data-icon="codicon:github-inverted"></span></a> and <a href="https://github.com/Textualize/rich">rich <span class="iconify" data-icon="codicon:github-inverted"></span></a> .</p>
@@ -186,7 +193,7 @@ on_cyan <span style="color: #666666">=</span> <span style="color: #007020; font-
     </div>
     <div class="row">
         <div id="star-footer" class="col-lg-9 text-center my-3">
-            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
+            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
             <br>
             <span class="iconify fs-3 my-3 text-secondary" data-icon="bi:box-arrow-in-up"></span>
         </div>

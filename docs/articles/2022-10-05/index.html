@@ -104,6 +104,13 @@
           background: #999999;
           border-radius: .5rem;
         }
+        div.table-responsive::-webkit-scrollbar         {
+          height: 5px; /* for horizontal scrollbars */
+        }
+        div.table-responsive::-webkit-scrollbar-thumb        {
+          background: #999999;
+          border-radius: .5rem;
+        }
     </style>
     <script>
         /**
@@ -124,9 +131,9 @@
 </head>
 <body>
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
-    <div class="container justify-content-center">
+    <div class="container justify-content-end">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub"></a></span>
+            <span class="mx-2"><a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub"></a></span>
     </div>
 </nav>
 <div class="container lh-base fs-5">
@@ -189,7 +196,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot secrets
 <span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --relations secrets
 </code></pre>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th style="text-align:center">Initial</th>
@@ -203,12 +210,12 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </tr>
 </tbody>
 </table>
-<p>Both appearances are chaotic even with the relation edges. Color differs on a file type. Purple is the toml type and the others are cyan. It's clear here to conclude that a node on the bottom right is the most related.</p>
+</div><p>Both appearances are chaotic even with the relation edges. Color differs on a file type. Purple is the toml type and the others are cyan. It's clear here to conclude that a node on the bottom right is the most related.</p>
 <p>The first step depicted how the accounts are interrelated. Next, two improvements are added, the <strong>Kamada Kawai</strong> nodes layout to group them all around the centers and emphasizing by increasing their size.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --realtions --layout <span style="color: #4070a0">"kamada kawai"</span> secrets
 <span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --relations --layout <span style="color: #4070a0">"kamada kawai"</span> --emphasize secrets
 </code></pre>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th style="text-align:center">Layout</th>
@@ -222,7 +229,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </tr>
 </tbody>
 </table>
-<p>Ok, it looks meaningful with the center nodes emphasized, especially on the right picture.</p>
+</div><p>Ok, it looks meaningful with the center nodes emphasized, especially on the right picture.</p>
 <p>Now, as the nodes look anonymous the picture doesn't tell what that most related account is and a few others. Their names could refine detalization. Displaying the names.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --relations --layout <span style="color: #4070a0">"kamada kawai"</span> --emphasize --names secrets
 </code></pre>
@@ -251,7 +258,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
     </div>
     <div class="row">
         <div id="star-footer" class="col-lg-9 text-center my-3">
-            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
+            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
             <br>
             <span class="iconify fs-3 my-3 text-secondary" data-icon="bi:box-arrow-in-up"></span>
         </div>

@@ -8,6 +8,7 @@ from contextlib import suppress
 from pathlib import Path
 from datetime import datetime
 from argparse import ArgumentParser
+from copy import deepcopy
 
 import markdown_it
 from lxml.html import Element, fromstring, tostring as _tostring
@@ -110,7 +111,8 @@ class HTMLGen:
                                    'py': 'teenyicons:python-outline',
                                    'gz': 'icomoon-free:file-zip',
                                    'sql': 'bi:file-earmark-code',
-                                   'sh': 'bi:terminal'}
+                                   'sh': 'bi:terminal',
+                                   'json': 'bi:filetype-json'}
     HIGHLIGHTING_STYLE_MAP = {'language-python': 'friendly',
                               'language-shell': 'friendly',
                               'language-toml': 'friendly'}
@@ -134,6 +136,7 @@ class HTMLGen:
 
         toc = HTMLGen._extract_toc(content_html)
         toc_html = HTMLGen._generate_toc_html(toc)  # search the anchors
+        content_html = HTMLGen._apply_responsive_table(content_html)
         content_html = HTMLGen._apply_font_icons(content_html) if font_icons else content_html
         content_html = HTMLGen._apply_highlighting(content_html) if highlight else content_html
         content_html = HTMLGen._apply_analytics_event_type(content_html) if analytics else content_html
@@ -247,6 +250,24 @@ class HTMLGen:
         html = wrap_unwrap_fake_tag(html, wrap=False)
         return html
 
+    @staticmethod
+    def _apply_responsive_table(html: str):
+        replacing = []
+        root_element = fromstring(wrap_unwrap_fake_tag(html))
+
+        for table_el in root_element.iterfind('.//table'):
+            div_el = Element('div', attrib={'class': 'table-responsive'})
+            div_el.append(deepcopy(table_el))
+            parent_el = table_el.getparent()
+            replacing.append((parent_el, table_el, div_el))
+
+        for parent_el, old_el, new_el in replacing:
+            parent_el.replace(old_el, new_el)
+
+        html = tostring(root_element)
+        html = wrap_unwrap_fake_tag(html, wrap=False)
+        return html
+        
     @staticmethod
     def _extract_toc(html: str) -> TocType:
         toc = []

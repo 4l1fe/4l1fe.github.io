@@ -26,9 +26,7 @@ def prepend_site_address(link: Union[Path, str]) -> str:
 
 
 def update_classes(html: str, selector: str , classes: str) -> str:
-    # import pudb; pudb.set_trace()
-    doc= fromstring(wrap_unwrap_fake_tag(html))
-    # doc = fromstring(html)
+    doc = fromstring(wrap_unwrap_fake_tag(html))
     classes = classes.split(' ')
     for t in doc.cssselect(selector):
         t.classes.update(classes)

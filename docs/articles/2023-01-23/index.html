@@ -104,6 +104,13 @@
           background: #999999;
           border-radius: .5rem;
         }
+        div.table-responsive::-webkit-scrollbar         {
+          height: 5px; /* for horizontal scrollbars */
+        }
+        div.table-responsive::-webkit-scrollbar-thumb        {
+          background: #999999;
+          border-radius: .5rem;
+        }
     </style>
     <script>
         /**
@@ -124,9 +131,9 @@
 </head>
 <body>
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
-    <div class="container justify-content-center">
+    <div class="container justify-content-end">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub"></a></span>
+            <span class="mx-2"><a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub"></a></span>
     </div>
 </nav>
 <div class="container lh-base fs-5">
@@ -226,7 +233,7 @@ db[<span style="color: #4070a0">'card.edit'</span>]<span style="color: #666666">
 <h2 class="display-6 mt-5 mb-3 fw-bold">Visualize the solution <a id="visualize-the-solution" href="#visualize-the-solution"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>And for a better understanding of what i have done, both datasets values are visualized as pie charts at the before and after states.</p>
 <p>The script to create the plots <a href="files/plots.py">plots.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a></p>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th style="text-align:center">Before</th>
@@ -240,7 +247,7 @@ db[<span style="color: #4070a0">'card.edit'</span>]<span style="color: #666666">
 </tr>
 </tbody>
 </table>
-
+</div>
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5 fs-6">
             <strong class="d-block py-1 my-2 border-bottom"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
@@ -249,7 +256,7 @@ db[<span style="color: #4070a0">'card.edit'</span>]<span style="color: #666666">
     </div>
     <div class="row">
         <div id="star-footer" class="col-lg-9 text-center my-3">
-            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
+            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
             <br>
             <span class="iconify fs-3 my-3 text-secondary" data-icon="bi:box-arrow-in-up"></span>
         </div>

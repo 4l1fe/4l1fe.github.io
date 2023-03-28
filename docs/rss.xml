@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>12 Mar 2023 00:00:00 +0000</pubDate>
+		<pubDate>29 Mar 2023 00:00:00 +0000</pubDate>
+				<item>
+			<title>Research moderators activity in the Streamlit community. Dask, Pandas, Seaborn </title>
+			<link>https://www.kvdm.dev/articles/research-moderators-activity-in-the-streamlit-community-dask-pandas-seaborn/</link>
+			<description>I'm curious how well the Streamlit company develops its community . To make it better, a lot of questions from very beginners to advanced users have to be answered or, at least, responded to in a reasonable time. Fortunately, the community forum is...</description>
+			<pubDate>29 Mar 2023 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/research-moderators-activity-in-the-streamlit-community-dask-pandas-seaborn/</guid>
+		</item>
 				<item>
 			<title>Telegram group leaders research. Pandas, Seaborn, Missingno </title>
 			<link>https://www.kvdm.dev/articles/telegram-group-leaders-research-pandas-seaborn-missingno/</link>

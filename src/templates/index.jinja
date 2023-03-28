@@ -22,7 +22,7 @@
                 <br><small class="text-dark">Check for the live services are running.</small></li>
             </ul>
 	</div>
-        <div id="profiles" class="col-lg-4 pb-3 rounded-3">
+        <div id="profiles" class="col-lg-6 pb-3 rounded-3">
             <h2 class="card-title mb-0 fw-bold">Profiles</h2>
             <small>Public info</small>
             <ul class="list-group list-group-flush">
@@ -44,7 +44,7 @@
         </div>
     </div>
     {% for adata in articles_data %}
-    <div class="row row-article">
+    <div class="row row-article mb-2">
         <div class="col-lg-10">
             <h3 class="fs-4 fw-light"><a class="link-dark link-dark-hover text-decoration-none" href="{{ adata.relative_link | trailing_slash }}">{{ adata.title }}</a></h3>
         </div>

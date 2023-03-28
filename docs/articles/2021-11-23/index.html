@@ -104,6 +104,13 @@
           background: #999999;
           border-radius: .5rem;
         }
+        div.table-responsive::-webkit-scrollbar         {
+          height: 5px; /* for horizontal scrollbars */
+        }
+        div.table-responsive::-webkit-scrollbar-thumb        {
+          background: #999999;
+          border-radius: .5rem;
+        }
     </style>
     <script>
         /**
@@ -124,9 +131,9 @@
 </head>
 <body>
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
-    <div class="container justify-content-center">
+    <div class="container justify-content-end">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub"></a></span>
+            <span class="mx-2"><a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub"></a></span>
     </div>
 </nav>
 <div class="container lh-base fs-5">
@@ -163,7 +170,7 @@
 <li><strong>Page Minimap</strong>. General visual representation of an entire page.</li>
 <li>Many others...</li>
 </ul>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th>Original view</th>
@@ -177,12 +184,12 @@
 </tr>
 </tbody>
 </table>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Quick commands Popup <a id="quick-commands-popup" href="#quick-commands-popup"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+</div><h2 class="display-6 mt-5 mb-3 fw-bold">Quick commands Popup <a id="quick-commands-popup" href="#quick-commands-popup"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>That is <strong>all functionalities in one</strong> container. Press <code>F2</code> or <code>Ctrl + E</code> to run a command, <strong>Find in Page</strong> for example. If You are used to using your desktop command pallet, in a KDE desktop it is <code>Ctrl + Space</code> keyboard shortcut, then no explanations are needed. My particular case of its' usage is running a page action, mostly <strong>Filter Invert</strong>.</p>
 <p><img src="files/Quick-commands.png" alt="" title="Quck commands" class="d-block mx-auto mw-100 h-100"></p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Reader view <a id="reader-view" href="#reader-view"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Convert any article page to a unified view, what a vital feature. Take all those bells and whistles to a simple appearance to focus on reading and understanding content. Set up the font size, width, height, and theme.</p>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th>View</th>
@@ -200,9 +207,9 @@
 </tr>
 </tbody>
 </table>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Cross-platform and syncing <a id="cross-platform-and-syncing" href="#cross-platform-and-syncing"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+</div><h2 class="display-6 mt-5 mb-3 fw-bold">Cross-platform and syncing <a id="cross-platform-and-syncing" href="#cross-platform-and-syncing"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>This feature works identically as Chrome's one does. Pay attention to synced data is encrypted!</p>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th>Desktop settings</th>
@@ -216,7 +223,7 @@
 </tr>
 </tbody>
 </table>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Screenshots <a id="screenshots" href="#screenshots"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+</div><h2 class="display-6 mt-5 mb-3 fw-bold">Screenshots <a id="screenshots" href="#screenshots"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Actually, OS has a native screenshot utility but a webpage <u>can't be entirely</u> captured by it. This is where Vivaldi's ability comes to play. If a webpage is very long down Vivaldi save the entire size.</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Mouse gestures <a id="mouse-gestures" href="#mouse-gestures"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Typical operations can be performed by mouse. That's interesting, would you find the operations to delegate them to mouse actions? There is a bunch of ones to assign the gestures to, scroll the list down.</p>
@@ -232,7 +239,7 @@
     </div>
     <div class="row">
         <div id="star-footer" class="col-lg-9 text-center my-3">
-            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
+            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
             <br>
             <span class="iconify fs-3 my-3 text-secondary" data-icon="bi:box-arrow-in-up"></span>
         </div>

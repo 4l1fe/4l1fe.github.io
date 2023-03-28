@@ -104,6 +104,13 @@
           background: #999999;
           border-radius: .5rem;
         }
+        div.table-responsive::-webkit-scrollbar         {
+          height: 5px; /* for horizontal scrollbars */
+        }
+        div.table-responsive::-webkit-scrollbar-thumb        {
+          background: #999999;
+          border-radius: .5rem;
+        }
     </style>
     <script>
         /**
@@ -124,9 +131,9 @@
 </head>
 <body>
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
-    <div class="container justify-content-center">
+    <div class="container justify-content-end">
             <a class="navbar-brand fs-3" href="/">Технологоблог<b>Ъ</b></a>
-            <span class="mx-2"><a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub"></a></span>
+            <span class="mx-2"><a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub"></a></span>
     </div>
 </nav>
 <div class="container lh-base fs-5">
@@ -181,7 +188,7 @@ sample<span style="color: #666666">.</span>loc[<span style="color: #4070a0">'fro
 
 to_md(sample, index<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>)
 </code></pre>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th style="text-align:left"></th>
@@ -219,7 +226,7 @@ to_md(sample, index<span style="color: #666666">=</span><span style="color: #007
 </tr>
 </tbody>
 </table>
-<h3 class="mt-5 mb-3 fw-bold">Types and samples <a id="types-and-samples" href="#types-and-samples"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+</div><h3 class="mt-5 mb-3 fw-bold">Types and samples <a id="types-and-samples" href="#types-and-samples"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <pre><code>columns <span style="color: #666666">=</span> columns<span style="color: #666666">.</span>dtypes
 columns <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>concat([columns, sample], axis<span style="color: #666666">=</span><span style="color: #4070a0">'columns'</span>)
 columns <span style="color: #666666">=</span> columns<span style="color: #666666">.</span>reset_index()
@@ -227,7 +234,7 @@ columns<span style="color: #666666">.</span>columns <span style="color: #666666"
   
 to_md(columns)
 </code></pre>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th style="text-align:left">column_name</th>
@@ -273,7 +280,7 @@ to_md(columns)
 </tr>
 </tbody>
 </table>
-<p>Ok, now we see how data from the exported history looks like.</p>
+</div><p>Ok, now we see how data from the exported history looks like.</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Top10 leaderboard <a id="top10-leaderboard" href="#top10-leaderboard"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The chart displays the overall messages count per user.</p>
 <p>All the charts on the objectives are built upon time and user. So from here on out i'm dealing with three columns <code>date, form, form_id</code>. Give them better names.</p>
@@ -293,7 +300,7 @@ top10_leaders <span style="color: #666666">=</span> top10_leaders<span style="co
 
 to_md(top10_leaders<span style="color: #666666">.</span>sample(<span style="color: #40a070">5</span>))
 </code></pre>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th style="text-align:left">date</th>
@@ -329,7 +336,7 @@ to_md(top10_leaders<span style="color: #666666">.</span>sample(<span style="colo
 </tr>
 </tbody>
 </table>
-<pre><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">seaborn</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">sns</span>
+</div><pre><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">seaborn</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">sns</span>
 
 order <span style="color: #666666">=</span> top10_leaders[<span style="color: #4070a0">'user_name'</span>]<span style="color: #666666">.</span>value_counts()<span style="color: #666666">.</span>index
 sns<span style="color: #666666">.</span>countplot(top10_leaders, y<span style="color: #666666">=</span><span style="color: #4070a0">'user_name'</span>, order<span style="color: #666666">=</span>order, palette<span style="color: #666666">=</span><span style="color: #4070a0">'Paired'</span>)
@@ -362,7 +369,7 @@ top10_leaders[<span style="color: #4070a0">'month'</span>] <span style="color: #
 
 to_md(top10_leaders<span style="color: #666666">.</span>sample(<span style="color: #40a070">5</span>))
 </code></pre>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th style="text-align:left">date</th>
@@ -404,7 +411,7 @@ to_md(top10_leaders<span style="color: #666666">.</span>sample(<span style="colo
 </tr>
 </tbody>
 </table>
-<pre><code>fg <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>catplot(top10_leaders, y<span style="color: #666666">=</span><span style="color: #4070a0">'user_name'</span>, col<span style="color: #666666">=</span><span style="color: #4070a0">'month'</span>, kind<span style="color: #666666">=</span><span style="color: #4070a0">'count'</span>,
+</div><pre><code>fg <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>catplot(top10_leaders, y<span style="color: #666666">=</span><span style="color: #4070a0">'user_name'</span>, col<span style="color: #666666">=</span><span style="color: #4070a0">'month'</span>, kind<span style="color: #666666">=</span><span style="color: #4070a0">'count'</span>,
             order<span style="color: #666666">=</span>order, col_wrap<span style="color: #666666">=</span><span style="color: #40a070">3</span>, palette<span style="color: #666666">=</span><span style="color: #4070a0">'Paired'</span>)
 sns<span style="color: #666666">.</span>set_context({<span style="color: #4070a0">'axes.labelsize'</span>: <span style="color: #4070a0">'medium'</span>})
 fg<span style="color: #666666">.</span>set_axis_labels(<span style="color: #4070a0">""</span>, <span style="color: #4070a0">""</span>)
@@ -432,7 +439,7 @@ top2_leaders <span style="color: #666666">=</span> top10_leaders[top10_leaders[<
 
 to_md(top2_leaders<span style="color: #666666">.</span>sample(<span style="color: #40a070">5</span>))
 </code></pre>
-<table>
+<div class="table-responsive mb-3"><table class="mb-0">
 <thead>
 <tr>
 <th style="text-align:left">date</th>
@@ -480,7 +487,7 @@ to_md(top2_leaders<span style="color: #666666">.</span>sample(<span style="color
 </tr>
 </tbody>
 </table>
-<pre><code>fg <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>displot(data<span style="color: #666666">=</span>top2_leaders, y<span style="color: #666666">=</span><span style="color: #4070a0">'day'</span>, col<span style="color: #666666">=</span><span style="color: #4070a0">'month'</span>, hue<span style="color: #666666">=</span><span style="color: #4070a0">'user_name'</span>, multiple<span style="color: #666666">=</span><span style="color: #4070a0">'stack'</span>, col_wrap<span style="color: #666666">=</span><span style="color: #40a070">3</span>, kind<span style="color: #666666">=</span><span style="color: #4070a0">'hist'</span>, palette<span style="color: #666666">=</span><span style="color: #4070a0">'Paired'</span>)
+</div><pre><code>fg <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>displot(data<span style="color: #666666">=</span>top2_leaders, y<span style="color: #666666">=</span><span style="color: #4070a0">'day'</span>, col<span style="color: #666666">=</span><span style="color: #4070a0">'month'</span>, hue<span style="color: #666666">=</span><span style="color: #4070a0">'user_name'</span>, multiple<span style="color: #666666">=</span><span style="color: #4070a0">'stack'</span>, col_wrap<span style="color: #666666">=</span><span style="color: #40a070">3</span>, kind<span style="color: #666666">=</span><span style="color: #4070a0">'hist'</span>, palette<span style="color: #666666">=</span><span style="color: #4070a0">'Paired'</span>)
 sns<span style="color: #666666">.</span>set_context({<span style="color: #4070a0">'axes.labelsize'</span>: <span style="color: #4070a0">'medium'</span>})
 fg<span style="color: #666666">.</span>set_axis_labels(<span style="color: #4070a0">""</span>, <span style="color: #4070a0">""</span>)
 fg<span style="color: #666666">.</span>set_titles(col_template<span style="color: #666666">=</span><span style="color: #4070a0">"</span><span style="color: #70a0d0; font-style: italic">{col_name}</span><span style="color: #4070a0">"</span>)
@@ -517,7 +524,7 @@ plt<span style="color: #666666">.</span>show()
     </div>
     <div class="row">
         <div id="star-footer" class="col-lg-9 text-center my-3">
-            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
+            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
             <br>
             <span class="iconify fs-3 my-3 text-secondary" data-icon="bi:box-arrow-in-up"></span>
         </div>
