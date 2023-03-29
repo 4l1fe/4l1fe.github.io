@@ -8,20 +8,38 @@
 	</div>
     </div>
     <div class="row mt-2">
+        {% if memocards_enabled or analytics_enabled or monitoring_enabled or statuspage_enabled %}
 	<div id="services" class="col pb-3 me-2 rounded-3">
             <h2 class="card-title mb-0 fw-bold">Live services</h2>
             <small>Click and test it out</small>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item border-0 ps-0"><a class="{% if analytics_enabled %}umami--click--services-memo{% endif %}" target="_blank" rel="noopener noreferrer" {% if memocards_enabled %}href="{{ memocards_service_address }}"{% endif %}>Memo cards <span class="iconify" data-icon="foundation:clipboard-pencil"></span></a>
-                <br><small class="text-dark">Service helps to memorize and repeat words to enrich a vocubalary.</small></li>
-                <li class="list-group-item border-0 ps-0"><a class="{% if analytics_enabled %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" {% if analytics_enabled %}href="{{ analytics_service_page }}"{% endif %}>Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a>
-                <br><small class="text-dark">Web analytics <strong>Umami</strong>. Tracking page views and link clicks.</small></li>
-                <li class="list-group-item border-0 ps-0"><a class="{% if analytics_enabled %}umami--click--services-monitoring{% endif %}" target="_blank" rel="noopener noreferrer" {% if monitoring_enabled %}href="{{ monitoring_service_page }}"{% endif %}>Monitoring <span class="iconify" data-icon="fontisto:area-chart"></span></a>
-                <br><small class="text-dark">Monitoring resources With <strong>Grafana</strong> consumed by live service containers.</small></li>
-                <li class="list-group-item border-0 ps-0"><a class="{% if analytics_enabled %}umami--click--services-statuspage{% endif %}" target="_blank" rel="noopener noreferrer" {% if statuspage_enabled %}href="{{ statuspage_service_page }}"{% endif %}>Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
-                <br><small class="text-dark">Check for the live services are running.</small></li>
+                {% if memocards_enabled %}
+                <li class="list-group-item border-0 ps-0">
+                    <a class="{% if analytics_enabled %}umami--click--services-memo{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ memocards_service_address }}">Memo cards <span class="iconify" data-icon="foundation:clipboard-pencil"></span></a>
+                    <br><small class="text-dark">Service helps to memorize and repeat words to enrich a vocubalary.</small>
+                </li>
+                {% endif %}
+                {% if analytics_enabled %}
+                <li class="list-group-item border-0 ps-0">
+                    <a class="{% if analytics_enabled %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ analytics_service_page }}">Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a>
+                    <br><small class="text-dark">Web analytics <strong>Umami</strong>. Tracking page views and link clicks.</small>
+                </li>
+                {% endif %}
+                {% if monitoring_enabled %}
+                <li class="list-group-item border-0 ps-0">
+                    <a class="{% if analytics_enabled %}umami--click--services-monitoring{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ monitoring_service_page }}">Monitoring <span class="iconify" data-icon="fontisto:area-chart"></span></a>
+                    <br><small class="text-dark">Monitoring resources With <strong>Grafana</strong> consumed by live service containers.</small>
+                </li>
+                {% endif %}
+                {% if statuspage_enabled %}
+                <li class="list-group-item border-0 ps-0">
+                    <a class="{% if analytics_enabled %}umami--click--services-statuspage{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ statuspage_service_page }}">Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
+                    <br><small class="text-dark">Check for the live services are running.</small>
+                </li>
+                {% endif %}
             </ul>
 	</div>
+        {% endif %}
         <div id="profiles" class="col-lg-6 pb-3 rounded-3">
             <h2 class="card-title mb-0 fw-bold">Profiles</h2>
             <small>Public info</small>
