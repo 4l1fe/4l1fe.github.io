@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: https://ogp.me/ns#">
+<html lang="en" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
     <meta property="og:title" content="Storing related accounts data in the TOML files. Visualization. NetworkX graph " />
     <meta property="og:description" content="Until this point, i stored accounts and their secret data in .ini, .csv, .txt, .pem files and etc., for example credentials, access keys, certificates. Many simple things can be described by and stored in those file types, but accounts have been getting more and more interrelated and their secret data changed frequently. In such a case, having some typed data, accounts references and sub-properties becomes a necessity and requires me to take somewhat capable of providing it. TOML  is capable of." />
     <meta property="og:image" content="https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/files/main-section.png" />
-    <meta property="og:article:published_time" content="2022-10-05" />
+    <meta property="article:published_time" content="2022-10-05" />
     <meta name="description" content="Until this point, i stored accounts and their secret data in .ini, .csv, .txt, .pem files and etc., for example credentials, access keys, certificates. Many simple things can be described by and stored in those file types, but accounts have been getting more and more interrelated and their secret data changed frequently. In such a case, having some typed data, accounts references and sub-properties becomes a necessity and requires me to take somewhat capable of providing it. TOML  is capable of.">    <link rel="icon" type="image/png" href="/files/favicon.png">
     <link rel="alternate" type="application/rss+xml" href="/rss.xml">
     <style>
@@ -147,7 +147,7 @@
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1 class="display-5 fw-bold">Storing related accounts data in the TOML files. Visualization. NetworkX graph <a id="storing-related-accounts-data-in-the-toml-files.-visualization.-networkx-graph" href="#storing-related-accounts-data-in-the-toml-files.-visualization.-networkx-graph"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
-<p><img src="files/main-section.jpg" alt="" class="d-block mx-auto mw-100 h-100"></p>
+<p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Until this point, i stored accounts and their secret data in <code>.ini, .csv, .txt, .pem</code> files and etc., for example credentials, access keys, certificates. Many simple things can be described by and stored in those file types, but accounts have been getting more and more interrelated and their secret data changed frequently. In such a case, having some typed data, accounts references and sub-properties becomes a necessity and requires me to take somewhat capable of providing it. <a href="https://toml.io/en/" class="umami--click--toml-io-en">TOML <span class="iconify" data-icon="la:external-link-alt"></span></a> is capable of.</p>
 <p>Basically, <code>.toml</code> file is a <strong>tree structure document</strong> that can contain strings, integers, booleans, lists, and dictionaries. All of them extend the capabilities of storing multiple account data of a service in one file. Two other benefits i find very handy about TOML are Python 3.11 includes the <a href="https://docs.python.org/3.11/library/tomllib.html#module-tomllib" class="umami--click--docs-python-org-3-11-library-tomllib-html-module-tomllib">toml parser <span class="iconify" data-icon="la:external-link-alt"></span></a> in the standard library and its <a href="https://github.com/toml-lang/toml/blob/main/toml.abnf" class="umami--click--github-com-toml-lang-toml-blob-main-toml-abnf">ABNF specification <span class="iconify" data-icon="codicon:github-inverted"></span></a> is around <strong>250 lines</strong>.</p>
 <p>Accounts interrelation. That's quite natural when many services are used with multiple accounts. These accounts can arbitrarily relate to each other. With TOML specification a relation could be a key with a string value or list of strings of filenames.</p>
