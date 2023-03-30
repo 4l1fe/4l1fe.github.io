@@ -4,7 +4,7 @@
   <url>
     <loc>{{ adata.relative_link | prepend_site_address | trailing_slash}}</loc>
     <image:image>
-        <image:loc>{{ adata.img_relative_link | prepend_site_address }}</image:loc>
+        <image:loc>{{ adata.main_img_relative_link | prepend_site_address }}</image:loc>
     </image:image>
     {% for image in adata.images %}
     <image:image>

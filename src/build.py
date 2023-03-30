@@ -70,11 +70,11 @@ class ArticleData:
     relative_link: Path
     paragraph: str
     created_date: datetime
-    img_relative_link: Path = ARTICLE_IMG_FILE
+    main_img_relative_link: Path = ARTICLE_IMG_FILE
     images: Tuple[AttachedImage] = ()
 
     def __post_init__(self):
-        self.img_relative_link = self.relative_link.joinpath(self.img_relative_link)
+        self.main_img_relative_link = self.relative_link.joinpath(self.main_img_relative_link)
 
 
 def iter_articles_source_dir(articles_dir: Path, reverse=False):
@@ -127,7 +127,9 @@ class HTMLGen:
         return html
 
     @staticmethod
-    def generate_article_html(md_text, font_icons: bool = False, highlight: bool = False, analytics: bool = ANALYTICS_ENABLED_DEFAULT):
+    def generate_article_html(md_text,  article_index_file, article_source_dir,
+                              font_icons: bool = False, highlight: bool = False,
+                              analytics: bool = ANALYTICS_ENABLED_DEFAULT,):
         """Article is two big blocks `toc`, `content`"""
         parser = markdown_it.MarkdownIt().enable('table')
         html = parser.render(md_text)
@@ -144,17 +146,23 @@ class HTMLGen:
         template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
         title = first_h1_text(root_element)
         description = first_p_text(root_element)
-        html = template.render(content=content_html, toc=toc_html, title=title, description=description)
+        files_paths, images = HTMLGen.retrieve_attached_files_paths(html)
+        article_data = HTMLGen._make_article_data(content_html, article_index_file, article_source_dir, images)
 
-        return html, toc_html
+        html = template.render(content=content_html, toc=toc_html, title=title,
+                               description=description, article_data=article_data)
+
+        return html, toc_html, article_data, files_paths, images
 
     @staticmethod
     def retrieve_attached_files_paths(html) -> Tuple[Set[str], dict]:
         element = fromstring(html)
         files, images = set(), dict()
+
         for el in element.findall('.//a'):
             if el.attrib.get('href', '').startswith('files/'):
                 files.add(el.attrib['href'])
+
         for el in element.findall('.//img'):
             if el.attrib.get('src', '').startswith('files/'):
                 title = el.attrib.get('title', '')
@@ -267,7 +275,21 @@ class HTMLGen:
         html = tostring(root_element)
         html = wrap_unwrap_fake_tag(html, wrap=False)
         return html
-        
+
+    @staticmethod
+    def _make_article_data(html: str, article_index_file, article_source_dir, images) -> ArticleData:
+        # Создание класса данных по статье для индекса блога
+
+        root_element = fromstring(html)
+        symlink_name = slugify(first_h1_text(root_element))
+        article_relative_symlink = ARTICLES_DOCS_DIR.joinpath(symlink_name).relative_to(DOCS_DIR)
+        created_date = datetime.strptime(article_source_dir.name, '%Y-%m-%d')
+        images = tuple(AttachedImage(title, path, article_relative_symlink) for path, title in images.items() if title)
+        adata = ArticleData(title=first_h1_text(root_element), relative_link=article_relative_symlink,
+                            paragraph=first_p_text(root_element), created_date=created_date, images=images)
+
+        return adata
+
     @staticmethod
     def _extract_toc(html: str) -> TocType:
         toc = []
@@ -340,14 +362,17 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
         # Генерация страницы и запись в файл
         article_md_file = next(article_source_dir.glob('*.md'))
         md_text = article_md_file.read_text()
-        article_html, toc_html = HTMLGen.generate_article_html(md_text, font_icons=font_icons, highlight=highlight, analytics=analytics)
         article_dir = ARTICLES_DOCS_DIR / article_source_dir.name
         article_index_file = article_dir / INDEX_FILE.name
+        data = HTMLGen.generate_article_html(md_text, article_index_file, article_source_dir,
+                                             font_icons=font_icons, highlight=highlight, analytics=analytics)
+        article_html, toc_html, article_data, files_paths, images = data
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_index_file.write_text(article_html)
+        articles_data.append(article_data)
 
         # Создание ссылок на прикрепляемые файлы
-        files_paths, images = HTMLGen.retrieve_attached_files_paths(article_html)
+        # files_paths, images = HTMLGen.retrieve_attached_files_paths(article_html)
         for path in chain(files_paths, images.keys()):
             # Жесткие ссылки на исходные файлы
             target = article_source_dir / path
@@ -357,21 +382,13 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
                 os.link(target, hardlink_file)
 
         # Создание класса данных по статье для индекса блога
-        root_element = fromstring(article_html)
-        symlink_name = slugify(first_h1_text(root_element))
         article_relative_link = article_index_file.relative_to(DOCS_DIR).parent
-        article_relative_symlink = ARTICLES_DOCS_DIR.joinpath(symlink_name).relative_to(DOCS_DIR)
-        article_relative_symlink_path = Path('..') / DOCS_DIR.name / article_relative_symlink
+        article_relative_symlink_path = Path('..') / DOCS_DIR.name / article_data.relative_link
         if not article_relative_symlink_path.is_symlink():
             # Для файловой системы путь не совпадает, но ссылка по тому же узлу
             os.symlink(article_relative_link.name,
                        article_relative_symlink_path,
                        target_is_directory=True)
-        created_date = datetime.strptime(article_source_dir.name, '%Y-%m-%d')
-        images = tuple(AttachedImage(title, path, article_relative_symlink) for path, title in images.items() if title)
-        adata = ArticleData(title=first_h1_text(root_element), relative_link=article_relative_symlink,
-                            paragraph=first_p_text(root_element), created_date=created_date, images=images)
-        articles_data.append(adata)
 
     index_html = HTMLGen.generate_index_html(articles_data)
     INDEX_FILE.write_text(index_html)

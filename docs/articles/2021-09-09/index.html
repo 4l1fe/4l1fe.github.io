@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.kvdm.dev/articles/laptop-bootloading-time-extreme-growth-systemd" />
+    <meta property="og:title" content="Laptop bootloading time extreme growth. SystemD " />
+    <meta property="og:description" content="If you have Linux installed on your laptop you may once encounter OS is bootloading abnormally slow what is happened in my case and it has taken around 44 seconds where 26 seconds in the userspace level. I've noticed after pressing the power button on seating in a cafe that my laptop is showing me a bootloader logo a way too long. That's the starting point i went to figure out what the hell is this and how SystemD works as it's responsible for such kind of a job." />
+    <meta property="og:image" content="https://www.kvdm.dev/articles/laptop-bootloading-time-extreme-growth-systemd/files/main-section.png" />
+    <meta property="og:article:published_time" content="2021-09-09" />
     <meta name="description" content="If you have Linux installed on your laptop you may once encounter OS is bootloading abnormally slow what is happened in my case and it has taken around 44 seconds where 26 seconds in the userspace level. I've noticed after pressing the power button on seating in a cafe that my laptop is showing me a bootloader logo a way too long. That's the starting point i went to figure out what the hell is this and how SystemD works as it's responsible for such kind of a job.">    <link rel="icon" type="image/png" href="/files/favicon.png">
     <link rel="alternate" type="application/rss+xml" href="/rss.xml">
     <style>

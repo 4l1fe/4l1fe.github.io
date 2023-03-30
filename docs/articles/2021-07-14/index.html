@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.kvdm.dev/articles/columnar-db-performance-in-action-duckdb" />
+    <meta property="og:title" content="Columnar DB performance in action. DuckDB " />
+    <meta property="og:description" content="This article is intended to represent only one simple thing is a fundamental difference between columnar family and standard row-based databases by an example. Roughly speaking, you may need a column-based database if working with a complex OLAP-oriented workload, reading vast data, grouping it, and computing metrics. And doing it you will definitely notice big time consumption. So columnar DB drastically reduces this time." />
+    <meta property="og:image" content="https://www.kvdm.dev/articles/columnar-db-performance-in-action-duckdb/files/main-section.png" />
+    <meta property="og:article:published_time" content="2021-07-14" />
     <meta name="description" content="This article is intended to represent only one simple thing is a fundamental difference between columnar family and standard row-based databases by an example. Roughly speaking, you may need a column-based database if working with a complex OLAP-oriented workload, reading vast data, grouping it, and computing metrics. And doing it you will definitely notice big time consumption. So columnar DB drastically reduces this time.">    <link rel="icon" type="image/png" href="/files/favicon.png">
     <link rel="alternate" type="application/rss+xml" href="/rss.xml">
     <style>
