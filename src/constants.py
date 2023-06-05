@@ -19,6 +19,7 @@ ARTICLE_IMG_FILE = 'files/main-section.png'
 SITE_NAME = 'ТехнологоблогЪ'
 SITE_ADDRESS = 'https://www.kvdm.dev'
 
+TRACK_ANALYTICS = False
 ANALYTICS_ENABLED_DEFAULT = False
 ANALYTICS_SERVICE_ADDRESS = os.environ.get("ANALYTICS_SERVICE_ADDRESS", "")
 ANALYTICS_SERVICE_TOKEN = os.environ.get("ANALYTICS_SERVICE_TOKEN", "")

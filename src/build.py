@@ -26,7 +26,7 @@ from constants import (DOCS_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPL
                        SITE_NAME, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS,
                        ANALYTICS_SERVICE_PAGE, ANALYTICS_ENABLED_DEFAULT, MONITORING_ENABLED_DEFAULT,
                        MONITORING_SERVICE_PAGE, STATUSPAGE_ENABLED_DEFAULT, STATUSPAGE_SERVICE_ADDRESS,
-                       MEMOCARDS_ENABLED_DEFAULT, MEMOCARDS_SERVICE_ADDRESS)
+                       MEMOCARDS_ENABLED_DEFAULT, MEMOCARDS_SERVICE_ADDRESS, TRACK_ANALYTICS)
 from filters import trailing_slash, to_rfc822, prepend_site_address, update_classes
 from utils import make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text
 
@@ -129,7 +129,7 @@ class HTMLGen:
     @staticmethod
     def generate_article_html(md_text,  article_index_file, article_source_dir,
                               font_icons: bool = False, highlight: bool = False,
-                              analytics: bool = ANALYTICS_ENABLED_DEFAULT,):
+                              track_analytics: bool = TRACK_ANALYTICS):
         """Article is two big blocks `toc`, `content`"""
         parser = markdown_it.MarkdownIt().enable('table')
         html = parser.render(md_text)
@@ -141,7 +141,7 @@ class HTMLGen:
         content_html = HTMLGen._apply_responsive_table(content_html)
         content_html = HTMLGen._apply_font_icons(content_html) if font_icons else content_html
         content_html = HTMLGen._apply_highlighting(content_html) if highlight else content_html
-        content_html = HTMLGen._apply_analytics_event_type(content_html) if analytics else content_html
+        content_html = HTMLGen._apply_analytics_event_type(content_html) if track_analytics else content_html
         root_element = fromstring(content_html)
         template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
         title = first_h1_text(root_element)
@@ -279,7 +279,6 @@ class HTMLGen:
     @staticmethod
     def _make_article_data(html: str, article_index_file, article_source_dir, images) -> ArticleData:
         # Создание класса данных по статье для индекса блога
-
         root_element = fromstring(html)
         symlink_name = slugify(first_h1_text(root_element))
         article_relative_symlink = ARTICLES_DOCS_DIR.joinpath(symlink_name).relative_to(DOCS_DIR)
@@ -348,10 +347,12 @@ class HTMLGen:
 
 
 def main(articles_dir: Path, font_icons=True, highlight=True,
+         track_analytics=TRACK_ANALYTICS,
          analytics=ANALYTICS_ENABLED_DEFAULT,
          monitoring=MONITORING_ENABLED_DEFAULT,
          memocards=MEMOCARDS_ENABLED_DEFAULT,
          statuspage=STATUSPAGE_ENABLED_DEFAULT):
+    env.globals['track_analytics'] = track_analytics
     env.globals['analytics_enabled'] = analytics
     env.globals['monitoring_enabled'] = monitoring
     env.globals['memocards_enabled'] = memocards
@@ -365,7 +366,8 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
         article_dir = ARTICLES_DOCS_DIR / article_source_dir.name
         article_index_file = article_dir / INDEX_FILE.name
         data = HTMLGen.generate_article_html(md_text, article_index_file, article_source_dir,
-                                             font_icons=font_icons, highlight=highlight, analytics=analytics)
+                                             font_icons=font_icons, highlight=highlight,
+                                             track_analytics=track_analytics)
         article_html, toc_html, article_data, files_paths, images = data
         article_index_file.parent.mkdir(parents=True, exist_ok=True)
         article_index_file.write_text(article_html)
@@ -403,13 +405,15 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('articlesdir', type=Path, help="Path to an articles folder.")
-    parser.add_argument('--enable-analytics', action="store_true", help="Write html tags, add css classes. Substitute values from env file. Enable url.")
+    parser.add_argument('--track-analytics', action="store_true", help="Activate tracking. Write html tags, add css classes. Substitute values from env file. Enable url.")
+    parser.add_argument('--enable-analytics', action="store_true", help="Display a serivice in the list on the index page.")
     parser.add_argument('--enable-monitoring', action="store_true")
     parser.add_argument('--enable-memocards', action="store_true")
     parser.add_argument('--enable-statuspage', action="store_true")
     args = parser.parse_args()
     
     main(args.articlesdir,
+         track_analytics=args.track_analytics,
          analytics=args.enable_analytics,
          monitoring=args.enable_monitoring,
          memocards=args.enable_memocards,

@@ -15,25 +15,25 @@
             <ul class="list-group list-group-flush">
                 {% if memocards_enabled %}
                 <li class="list-group-item border-0 ps-0">
-                    <a class="{% if analytics_enabled %}umami--click--services-memo{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ memocards_service_address }}">Memo cards <span class="iconify" data-icon="foundation:clipboard-pencil"></span></a>
+                    <a class="{% if track_analytics %}umami--click--services-memo{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ memocards_service_address }}">Memo cards <span class="iconify" data-icon="foundation:clipboard-pencil"></span></a>
                     <br><small class="text-dark">Service helps to memorize and repeat words to enrich a vocubalary.</small>
                 </li>
                 {% endif %}
                 {% if analytics_enabled %}
                 <li class="list-group-item border-0 ps-0">
-                    <a class="{% if analytics_enabled %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ analytics_service_page }}">Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a>
+                    <a class="{% if track_analytics %}umami--click--services-analytics{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ analytics_service_page }}">Analytics <span class="iconify" data-icon="fa6-solid:chart-simple"></span></a>
                     <br><small class="text-dark">Web analytics <strong>Umami</strong>. Tracking page views and link clicks.</small>
                 </li>
                 {% endif %}
                 {% if monitoring_enabled %}
                 <li class="list-group-item border-0 ps-0">
-                    <a class="{% if analytics_enabled %}umami--click--services-monitoring{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ monitoring_service_page }}">Monitoring <span class="iconify" data-icon="fontisto:area-chart"></span></a>
+                    <a class="{% if track_analytics %}umami--click--services-monitoring{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ monitoring_service_page }}">Monitoring <span class="iconify" data-icon="fontisto:area-chart"></span></a>
                     <br><small class="text-dark">Monitoring resources With <strong>Grafana</strong> consumed by live service containers.</small>
                 </li>
                 {% endif %}
                 {% if statuspage_enabled %}
                 <li class="list-group-item border-0 ps-0">
-                    <a class="{% if analytics_enabled %}umami--click--services-statuspage{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ statuspage_service_page }}">Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
+                    <a class="{% if track_analytics %}umami--click--services-statuspage{% endif %}" target="_blank" rel="noopener noreferrer" href="{{ statuspage_service_page }}">Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
                     <br><small class="text-dark">Check for the live services are running.</small>
                 </li>
                 {% endif %}
@@ -44,10 +44,10 @@
             <h2 class="card-title mb-0 fw-bold">Profiles</h2>
             <small>Public info</small>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item border-0 ps-0"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-github{% endif %}" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a></li>
-                <li class="list-group-item border-0 ps-0"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-linkedin{% endif %}" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a></li>
-                <li class="list-group-item border-0 ps-0"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-stackexchange{% endif %}" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></li>
-                <li class="list-group-item border-0 ps-0"><a class="me-1 {% if analytics_enabled %}umami--click--profiles-telegram{% endif %}" target="_blank" rel="noopener noreferrer" href="https://t.me/kvdm_dev">Telegram <span class="iconify" data-icon="fa:telegram"></span></a></li>
+                <li class="list-group-item border-0 ps-0"><a class="me-1 {% if track_analytics %}umami--click--profiles-github{% endif %}" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a></li>
+                <li class="list-group-item border-0 ps-0"><a class="me-1 {% if track_analytics %}umami--click--profiles-linkedin{% endif %}" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a></li>
+                <li class="list-group-item border-0 ps-0"><a class="me-1 {% if track_analytics %}umami--click--profiles-stackexchange{% endif %}" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></li>
+                <li class="list-group-item border-0 ps-0"><a class="me-1 {% if track_analytics %}umami--click--profiles-telegram{% endif %}" target="_blank" rel="noopener noreferrer" href="https://t.me/kvdm_dev">Telegram <span class="iconify" data-icon="fa:telegram"></span></a></li>
             </ul>
         </div>
         <div id="photo" class="col-sm-6 col-md-6 col-lg-3 mb-3">
@@ -57,7 +57,7 @@
     <div class="row mt-4">
         <div class="col-12">
             <h2 class="d-inline me-2 fw-bold">Articles</h2>
-            <a class="me-1 {% if analytics_enabled %}umami--click--articles-subscribe{% endif %}" href="rss.xml">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a>
+            <a class="me-1 {% if track_analytics %}umami--click--articles-subscribe{% endif %}" href="rss.xml">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a>
             <ul class="list-inline my-3">
                 <li class="list-inline-item text-muted"><span class="iconify" data-icon="ic:sharp-view-comfy"></span> View</li>
                 <li class="list-inline-item"><a href="">Titles</a></li>
