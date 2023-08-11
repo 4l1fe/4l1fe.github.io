@@ -47,13 +47,13 @@
         }
         h1, h2, h3, h4, h5, h5 {
             font-family: 'NMB';
-            color: #000000;
+            color: #5c5c5c;
         }
         div.row-article h3 {
             font-family: 'NMM';
         }
         a {
-            color: #920000
+            color: #975151
         }
         a:hover, a:focus {
             color: #b92929;
@@ -62,11 +62,14 @@
             text-decoration-thickness: initial;
             text-decoration-style: initial
         }
+        a.header-anchor {
+            visibility: hidden;
+        }
         a.link-dark {
-            color: #212529;
+            color: #5c5c5c;
         }
         a.link-dark-hover:hover {
-            color: #6c757d;
+            color: #212529;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -152,13 +155,13 @@
 <div class="container lh-base fs-5">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1 class="display-5 fw-bold">Storing related accounts data in the TOML files. Visualization. NetworkX graph <a id="storing-related-accounts-data-in-the-toml-files.-visualization.-networkx-graph" href="#storing-related-accounts-data-in-the-toml-files.-visualization.-networkx-graph"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
+            <h1 class="display-5 fw-bold">Storing related accounts data in the TOML files. Visualization. NetworkX graph <a id="storing-related-accounts-data-in-the-toml-files.-visualization.-networkx-graph" href="#storing-related-accounts-data-in-the-toml-files.-visualization.-networkx-graph" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Until this point, i stored accounts and their secret data in <code>.ini, .csv, .txt, .pem</code> files and etc., for example credentials, access keys, certificates. Many simple things can be described by and stored in those file types, but accounts have been getting more and more interrelated and their secret data changed frequently. In such a case, having some typed data, accounts references and sub-properties becomes a necessity and requires me to take somewhat capable of providing it. <a href="https://toml.io/en/" class="umami--click--toml-io-en">TOML <span class="iconify" data-icon="la:external-link-alt"></span></a> is capable of.</p>
 <p>Basically, <code>.toml</code> file is a <strong>tree structure document</strong> that can contain strings, integers, booleans, lists, and dictionaries. All of them extend the capabilities of storing multiple account data of a service in one file. Two other benefits i find very handy about TOML are Python 3.11 includes the <a href="https://docs.python.org/3.11/library/tomllib.html#module-tomllib" class="umami--click--docs-python-org-3-11-library-tomllib-html-module-tomllib">toml parser <span class="iconify" data-icon="la:external-link-alt"></span></a> in the standard library and its <a href="https://github.com/toml-lang/toml/blob/main/toml.abnf" class="umami--click--github-com-toml-lang-toml-blob-main-toml-abnf">ABNF specification <span class="iconify" data-icon="codicon:github-inverted"></span></a> is around <strong>250 lines</strong>.</p>
 <p>Accounts interrelation. That's quite natural when many services are used with multiple accounts. These accounts can arbitrarily relate to each other. With TOML specification a relation could be a key with a string value or list of strings of filenames.</p>
 <p>In regard to all those features, i need some automation to check the relations for integrity and reduce manual check operations, at least. So, here below i share what i've implemented and its demonstration.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">References and a checker <a id="references-and-a-checker" href="#references-and-a-checker"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">References and a checker <a id="references-and-a-checker" href="#references-and-a-checker" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The relations are references to the related files as a string value or a values list. A few minimalistic rules, as a toml file is a tree structure the references can be assigned for each node. Duplications are allowed.</p>
 <p>Here is the <code>.toml</code> sample to depict the idea:</p>
 <pre><code>reference<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">"path/to/email.toml"</span><span style="color: #bbbbbb"></span>
@@ -170,9 +173,9 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>[<span style="color: #4070a0">"path/to/email.toml"</span>]<span style="color: #bbbbbb"></span>
 </code></pre>
 <p>This is the checker <a href="files/references.py" class="umami--click--files-references-py">references.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a>. It scans a folder for the toml files, reads them with <a href="https://github.com/uiri/toml" class="umami--click--github-com-uiri-toml">toml <span class="iconify" data-icon="codicon:github-inverted"></span></a>, follows the references and checks for ref files to exist. Two kinds of commands to run with <a href="https://github.com/tiangolo/typer" class="umami--click--github-com-tiangolo-typer">typer <span class="iconify" data-icon="codicon:github-inverted"></span></a>, a text output for a quick check and a visual output, a <a href="https://github.com/networkx/networkx" class="umami--click--github-com-networkx-networkx">networkx <span class="iconify" data-icon="codicon:github-inverted"></span></a> graph on <a href="https://github.com/matplotlib/matplotlib" class="umami--click--github-com-matplotlib-matplotlib">matplotlib <span class="iconify" data-icon="codicon:github-inverted"></span></a>, to understand the accounts structure and see any issues.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Demonstration <a id="demonstration" href="#demonstration"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Demonstration <a id="demonstration" href="#demonstration" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Steps from the very basic to the point when errors occur.</p>
-<h3 class="mt-5 mb-3 fw-bold">Accounts data folder <a id="accounts-data-folder" href="#accounts-data-folder"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Accounts data folder <a id="accounts-data-folder" href="#accounts-data-folder" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>The tree output of a sample folder with interrelated accounts in the toml files which i scanned by the checker.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>tree secrets
 <span style="color: #888888">secrets</span>
@@ -192,7 +195,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 <span style="color: #888888">├── mobile.toml</span>
 <span style="color: #888888">└── subs.csv</span>
 </code></pre>
-<h3 class="mt-5 mb-3 fw-bold">Text output <a id="text-output" href="#text-output"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Text output <a id="text-output" href="#text-output" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Basically, for fast and regular reference checking a text output is enough to see a current integrity state.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py check secrets
 <span style="color: #888888">[info     ] Reference exists.              node=PosixPath('secrets/acc15.toml') reference=mail.toml</span>
@@ -203,7 +206,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 <span style="color: #888888">[info     ] Success.</span>
 </code></pre>
 <p>It the best case, when the state is fine an output shouldn't be read but signals success.</p>
-<h3 class="mt-5 mb-3 fw-bold">Visual graph output <a id="visual-graph-output" href="#visual-graph-output"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Visual graph output <a id="visual-graph-output" href="#visual-graph-output" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Along with it, a text output isn't good at understanding relations structure while visualizing it as a graph is. Not much interpretation is needed when you see what the nodes are, where, and how connected.</p>
 <p>For a first step, it is worth visualizing the entire picture of the sample folder.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot secrets
@@ -248,7 +251,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </code></pre>
 <p><img src="files/plot-relations-layout-emphasize-names.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Nice, it looks much better than text output.</p>
-<h3 class="mt-5 mb-3 fw-bold">Errors output <a id="errors-output" href="#errors-output"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Errors output <a id="errors-output" href="#errors-output" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>The final demo step. If i mistype a reference or forget to update the edited ones the checker points it out to me with the text and visual outputs as below.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --relations --layout <span style="color: #4070a0">"kamada kawai"</span> --emphasize --names secrets
 
@@ -260,7 +263,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </code></pre>
 <p><img src="files/plot-relations-layout-emphasize-names-errors.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Great, eyes now stick to the red dots and fixing the errors displayed is going to be easier.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Afterward <a id="afterward" href="#afterward"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Afterward <a id="afterward" href="#afterward" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Having on hand the checker lets me not keep in mind all the accounts relations and preserve their integrity.</p>
 <p><a href="https://github.com/4l1fe/reference-checker" class="umami--click--github-com-4l1fe-reference-checker">reference-checker <span class="iconify" data-icon="codicon:github-inverted"></span></a> repository.</p>
 

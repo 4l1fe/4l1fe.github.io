@@ -47,13 +47,13 @@
         }
         h1, h2, h3, h4, h5, h5 {
             font-family: 'NMB';
-            color: #000000;
+            color: #5c5c5c;
         }
         div.row-article h3 {
             font-family: 'NMM';
         }
         a {
-            color: #920000
+            color: #975151
         }
         a:hover, a:focus {
             color: #b92929;
@@ -62,11 +62,14 @@
             text-decoration-thickness: initial;
             text-decoration-style: initial
         }
+        a.header-anchor {
+            visibility: hidden;
+        }
         a.link-dark {
-            color: #212529;
+            color: #5c5c5c;
         }
         a.link-dark-hover:hover {
-            color: #6c757d;
+            color: #212529;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -152,10 +155,10 @@
 <div class="container lh-base fs-5">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1 class="display-5 fw-bold">Sourcegraph is heavyweight <a id="sourcegraph-is-heavyweight" href="#sourcegraph-is-heavyweight"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
+            <h1 class="display-5 fw-bold">Sourcegraph is heavyweight <a id="sourcegraph-is-heavyweight" href="#sourcegraph-is-heavyweight" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>As i don't remember how and where i used technologies in my experience i wondered what profit <a href="https://about.sourcegraph.com" class="umami--click--about-sourcegraph-com">Sourcegraph <span class="iconify" data-icon="la:external-link-alt"></span></a> could bring me at searching the code repositories and for potential use in a company. To test it out i chose a <a href="https://docs.sourcegraph.com/admin/deploy/docker-single-container" class="umami--click--docs-sourcegraph-com-admin-deploy-docker-single-container">stand-alone server <span class="iconify" data-icon="la:external-link-alt"></span></a> option to run it as a docker container. Setting up didn't take much effort and time. Everything looked well until i figured out how many proccesses are run in the container.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Container inspection <a id="container-inspection" href="#container-inspection"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Container inspection <a id="container-inspection" href="#container-inspection" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Command was executed to run a container is basic.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>docker run --publish <span style="color: #40a070">127</span>.0.0.1:7080:7080 --publish <span style="color: #40a070">127</span>.0.0.1:3370:3370 --rm --volume <span style="color: #007020; font-weight: bold">$(</span><span style="color: #007020">pwd</span><span style="color: #007020; font-weight: bold">)</span>/sourcegraph/config:/etc/sourcegraph --volume <span style="color: #007020; font-weight: bold">$(</span><span style="color: #007020">pwd</span><span style="color: #007020; font-weight: bold">)</span>/sourcegraph/data:/var/opt/sourcegraph --name sourcegraph sourcegraph/server:3.43.2
 </code></pre>
@@ -262,7 +265,7 @@
 <span style="color: #888888">09:30:23                     minio | Terminating minio</span>
 </code></pre>
 <p>Okay, <strong>20 parent processes</strong> per sourcegraph instance. This is a surprising discovery for me, i didn't see any mention of how complex a server instance is while reading the documentation briefly.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Resource estimation <a id="resource-estimation" href="#resource-estimation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Resource estimation <a id="resource-estimation" href="#resource-estimation" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>What i've seen that is relative to i revealed is you can estimate approximately the resources consumed to deploy a server.</p>
 <p>Here is my calculation in the <a href="https://docs.sourcegraph.com/admin/deploy/resource_estimator" class="umami--click--docs-sourcegraph-com-admin-deploy-resource-estimator">resource estimator <span class="iconify" data-icon="la:external-link-alt"></span></a>.</p>
 <p><img src="files/resource-estimation.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
@@ -273,7 +276,7 @@
 <span style="color: #888888">c4f4b9cc5529   sourcegraph   4.25%     887.7MiB / 7.482GiB   11.59%    507kB / 293kB   3.68GB / 145MB   338</span>
 </code></pre>
 <p>I don't know why, but the resource amount is an order of magnitude smaller.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">CLI Alternative <a id="cli-alternative" href="#cli-alternative"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">CLI Alternative <a id="cli-alternative" href="#cli-alternative" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>That isn't a tool i would take for code search. A proper alternative for my need is <a href="https://github.com/ggreer/the_silver_searcher" class="umami--click--github-com-ggreer-the-silver-searcher">the silver searcher <span class="iconify" data-icon="codicon:github-inverted"></span></a>, a fast cli tool with a source file and code output.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>ag --group --context<span style="color: #666666">=</span><span style="color: #40a070">5</span> --ignore venv --color --stats aiohttp ~/reposotories
 
@@ -313,7 +316,7 @@
 <span style="color: #888888">2036322849 bytes searched</span>
 <span style="color: #888888">0.656048 seconds</span>
 </code></pre>
-<h2 class="display-6 mt-5 mb-3 fw-bold">What do i think? <a id="what-do-i-think?" href="#what-do-i-think?"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">What do i think? <a id="what-do-i-think?" href="#what-do-i-think?" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Certainly, the solution is difficult to learn and expensive to maintain in the case of containing it in a company software stack.</p>
 <p>However, i didn't explore it in depth and would give it a shot to test out all its features. So, if you own hundreds of repos this platform is what you should take a look at.</p>
 

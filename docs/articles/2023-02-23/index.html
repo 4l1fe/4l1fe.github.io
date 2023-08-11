@@ -47,13 +47,13 @@
         }
         h1, h2, h3, h4, h5, h5 {
             font-family: 'NMB';
-            color: #000000;
+            color: #5c5c5c;
         }
         div.row-article h3 {
             font-family: 'NMM';
         }
         a {
-            color: #920000
+            color: #975151
         }
         a:hover, a:focus {
             color: #b92929;
@@ -62,11 +62,14 @@
             text-decoration-thickness: initial;
             text-decoration-style: initial
         }
+        a.header-anchor {
+            visibility: hidden;
+        }
         a.link-dark {
-            color: #212529;
+            color: #5c5c5c;
         }
         a.link-dark-hover:hover {
-            color: #6c757d;
+            color: #212529;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -152,14 +155,14 @@
 <div class="container lh-base fs-5">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1 class="display-5 fw-bold">Telegram Bot as a command interface for Docker Daemon <a id="telegram-bot-as-a-command-interface-for-docker-daemon" href="#telegram-bot-as-a-command-interface-for-docker-daemon"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
+            <h1 class="display-5 fw-bold">Telegram Bot as a command interface for Docker Daemon <a id="telegram-bot-as-a-command-interface-for-docker-daemon" href="#telegram-bot-as-a-command-interface-for-docker-daemon" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>The cause enforced me to start searching for an alternative communication channel to ssh for managing my home server is a tunnel agent that is wrapped up in a container. The agent is responsible for keeping a network tunnel established, but from time to time disconnects and isn't able to reconnect to a tunnel server. The tunnel exposes a public entry point, a subdomain of a tunnel provider, in the global network to reach the home server behind the NAT.</p>
 <p><img src="files/Diagram-Connected.png" alt="" title="connection established" class="d-block mx-auto mw-100 h-100"></p>
 <p>When the tunnel server is unreachable by the agent for a reason, while it's a vital part of the network access to managing server, the ssh in general and Docker Daemon in particular are unreachable either. In other words, i loose remote control completely.</p>
 <p>The issue isn't that big when i'm within the local network, connect to the server through LAN and restart the tunnel agent to reexpose the entry point. But how to stay connected with the server when the issue occurs?</p>
 <p><img src="files/Diagram-Disconnected.png" alt="" title="connection lost" class="d-block mx-auto mw-100 h-100"></p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Consider other tunnel providers <a id="consider-other-tunnel-providers" href="#consider-other-tunnel-providers"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Consider other tunnel providers <a id="consider-other-tunnel-providers" href="#consider-other-tunnel-providers" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The most straightforward solution is to replace a tunnel provider with a more stable one. Plenty of them can be found, for instance, <a href="https://www.cloudflare.com/products/zero-trust/access/" class="umami--click--www-cloudflare-com-products-zero-trust-access">Cloud Flare Zero Thrust <span class="iconify" data-icon="la:external-link-alt"></span></a>, <a href="https://loophole.cloud" class="umami--click--loophole-cloud">Loophole.cloud <span class="iconify" data-icon="la:external-link-alt"></span></a>. However, some of them are difficult in setting up, some have restrictions now allowing me to implement a custom infrastructure, and after all, i could encounter the same issue in their work.</p>
 <p><img src="files/Diagram-ProviderReplacement.png" alt="" title="provider replacement" class="d-block mx-auto mw-100 h-100"></p>
 <p>An investegation was made to find a good full-fledged replacement and it ended up with i would like to stay with the current <a href="https://playit.gg" class="umami--click--playit-gg">Playit.gg <span class="iconify" data-icon="la:external-link-alt"></span></a> provider. Its functionality is exactly what my needs are:</p>
@@ -173,7 +176,7 @@
 <li>ANYCAST network. Automatic search for a faster network route from a client to an agent.</li>
 </ul>
 <p>All right, what is then i decided to stay with Playit, the problem isn't gone?</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Bot to restart the agent <a id="bot-to-restart-the-agent" href="#bot-to-restart-the-agent"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Bot to restart the agent <a id="bot-to-restart-the-agent" href="#bot-to-restart-the-agent" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Internally, as the agent is wrapped up in a container, docker daemon could restart it automatically when detected the agent process is finished. It doesn't happen, because the process in the container stays working fine, but is logging about not being able to reconnect.</p>
 <p>Such the state has to be detected in other way and restarted. I could make it manually, <a href="https://kvdm.cronitorstatus.com/" class="umami--click--kvdm-cronitorstatus-com">the status page <span class="iconify" data-icon="la:external-link-alt"></span></a> service makes health checks and notifies me when the problem has occurred. Unfortunately, having the remote control completely lost, i'm only able to sadly observe that all my services on the home server are not available from the global network.</p>
 <p>Breath out, if it's not accessible from the global network can it gets restarted from the local network? Yes, the other way is to run a bot in there that <a href="https://core.telegram.org/bots/api#getting-updates" class="umami--click--core-telegram-org-bots-api-getting-updates">polls for commands <span class="iconify" data-icon="la:external-link-alt"></span></a> highly available Telegram Server. Bot proactively requests the server for new commands every few seconds, the global network access is unnecessary. The good thing is that coding and running a bot to restart the agent isn't a difficult objective.</p>
@@ -188,22 +191,22 @@
 <li>Giving the bot access to the docker daemon's unix socket by mounting it to a bot container
 <code>-v /var/run/docker.sock:/var/run/docker.sock</code></li>
 </ul>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Commands <a id="commands" href="#commands"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Commands <a id="commands" href="#commands" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>I figured out that three commands and a few parameters are my bare minimum: list containers, output container's logs, restart a container.</p>
 <p><img src="files/Diagram-TelegramBotCommands.png" alt="" title="telegram bot commands" class="d-block mx-auto mw-100 h-100"></p>
-<h3 class="mt-5 mb-3 fw-bold">Containers list <a id="containers-list" href="#containers-list"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Containers list <a id="containers-list" href="#containers-list" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>To see container names and current statuses.</p>
 <p><img src="files/list-command.png" alt="" title="list docker command" class="d-block mx-auto mw-100 h-100"></p>
-<h3 class="mt-5 mb-3 fw-bold">Container logs <a id="container-logs" href="#container-logs"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Container logs <a id="container-logs" href="#container-logs" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>The logs list serves for the detection of the tunnel agent connection problem.</p>
 <p><img src="files/logs-command.png" alt="" title="logs docker command" class="d-block mx-auto mw-100 h-100"></p>
-<h3 class="mt-5 mb-3 fw-bold">Container restart <a id="container-restart" href="#container-restart"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Container restart <a id="container-restart" href="#container-restart" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>The final command to get the network state back to normal.</p>
 <p><img src="files/restart-command.png" alt="" title="restart docker command" class="d-block mx-auto mw-100 h-100"></p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Commands menu <a id="commands-menu" href="#commands-menu"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Commands menu <a id="commands-menu" href="#commands-menu" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Good to have a commands and their parameters description for later on.</p>
 <p><img src="files/menu-commands.png" alt="" title="telegram chat menu" class="d-block mx-auto mw-100 h-100"></p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Repository <a id="repository" href="#repository"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Repository <a id="repository" href="#repository" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p><a href="https://github.com/4l1fe/tg-docker-command-bot" class="umami--click--github-com-4l1fe-tg-docker-command-bot">tg-docker-command-bot <span class="iconify" data-icon="codicon:github-inverted"></span></a></p>
 
         </div>

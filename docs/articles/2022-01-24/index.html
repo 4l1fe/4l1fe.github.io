@@ -47,13 +47,13 @@
         }
         h1, h2, h3, h4, h5, h5 {
             font-family: 'NMB';
-            color: #000000;
+            color: #5c5c5c;
         }
         div.row-article h3 {
             font-family: 'NMM';
         }
         a {
-            color: #920000
+            color: #975151
         }
         a:hover, a:focus {
             color: #b92929;
@@ -62,11 +62,14 @@
             text-decoration-thickness: initial;
             text-decoration-style: initial
         }
+        a.header-anchor {
+            visibility: hidden;
+        }
         a.link-dark {
-            color: #212529;
+            color: #5c5c5c;
         }
         a.link-dark-hover:hover {
-            color: #6c757d;
+            color: #212529;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -152,7 +155,7 @@
 <div class="container lh-base fs-5">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1 class="display-5 fw-bold">Simply patch what is unextendable. <a id="simply-patch-what-is-unextendable." href="#simply-patch-what-is-unextendable."><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
+            <h1 class="display-5 fw-bold">Simply patch what is unextendable. <a id="simply-patch-what-is-unextendable." href="#simply-patch-what-is-unextendable." class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>An issue, that i can't extend a method <code>__str__</code>, was encountered when i retrieved a list of objects from a third-party service and printed them to see the details, but i got uninformative output. Due to that, i dove into source code to figure out what can i get and came to a point that only <code>tittle, text</code> attributes are printing of those objects and the method can't be extended, as a client library doesn't provide customization and it shouldn't indeed.</p>
 <p>A rough example of objects retrieving.</p>
@@ -188,7 +191,7 @@
     <span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">__str__</span>(<span style="color: #007020">self</span>):
         <span style="color: #007020; font-weight: bold">return</span> <span style="color: #4070a0">'</span><span style="color: #4070a0; font-weight: bold">\n</span><span style="color: #4070a0">'</span><span style="color: #666666">.</span>join([<span style="color: #007020">self</span><span style="color: #666666">.</span>title, <span style="color: #007020">self</span><span style="color: #666666">.</span>text])
 </code></pre>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Solution <a id="solution" href="#solution"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Solution <a id="solution" href="#solution" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Restriction is clear and what can be done to see more details and which i specifically need. An idea came into my mind, why not to reuse patching technique of a testing practice, <code>unittest.mock</code> is powerful for such a case.</p>
 <p>Things to do are simply define a function of a custom printing objects details and patch the <code>__str__</code> method. So easy and tricky, isn't it?</p>
 <p>Here we go.</p>
@@ -233,7 +236,7 @@
 <span style="color: #60a0b0; font-style: italic"># "Node&lt;1, Shop, Buy food, created=2022-01-24 17:53:56Z, updated=2022-01-24 17:53:56Z&gt;"</span>
 <span style="color: #60a0b0; font-style: italic"># "Node&lt;1, Gym, Do squats, created=2022-01-24 17:53:56Z, updated=2022-01-24 17:53:56Z&gt;"</span>
 </code></pre>
-<h2 class="display-6 mt-5 mb-3 fw-bold">It's a bad approach <a id="it's-a-bad-approach" href="#it's-a-bad-approach"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">It's a bad approach <a id="it's-a-bad-approach" href="#it's-a-bad-approach" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Goal is reached, code isn't production consequently it's a quite good approach.</p>
 
         </div>

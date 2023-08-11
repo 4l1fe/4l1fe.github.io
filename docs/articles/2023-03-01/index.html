@@ -47,13 +47,13 @@
         }
         h1, h2, h3, h4, h5, h5 {
             font-family: 'NMB';
-            color: #000000;
+            color: #5c5c5c;
         }
         div.row-article h3 {
             font-family: 'NMM';
         }
         a {
-            color: #920000
+            color: #975151
         }
         a:hover, a:focus {
             color: #b92929;
@@ -62,11 +62,14 @@
             text-decoration-thickness: initial;
             text-decoration-style: initial
         }
+        a.header-anchor {
+            visibility: hidden;
+        }
         a.link-dark {
-            color: #212529;
+            color: #5c5c5c;
         }
         a.link-dark-hover:hover {
-            color: #6c757d;
+            color: #212529;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -152,7 +155,7 @@
 <div class="container lh-base fs-5">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1 class="display-5 fw-bold">Telegram group leaders research. Pandas, Seaborn, Missingno <a id="telegram-group-leaders-research.-pandas,-seaborn,-missingno" href="#telegram-group-leaders-research.-pandas,-seaborn,-missingno"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
+            <h1 class="display-5 fw-bold">Telegram group leaders research. Pandas, Seaborn, Missingno <a id="telegram-group-leaders-research.-pandas,-seaborn,-missingno" href="#telegram-group-leaders-research.-pandas,-seaborn,-missingno" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>Due to i'm a member of a Telegram group chat i'd like to research about the most active users there by plotting them in different perspectives:</p>
 <ul>
@@ -162,7 +165,7 @@
 </ul>
 <p>To calculate it the chat history of almost a half year has been downloaded by the convenient export function. Then explored and prepared data converting its types and dropping unnecessary fields.</p>
 <p><img src="files/history-export.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Prepare exported data <a id="prepare-exported-data" href="#prepare-exported-data"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Prepare exported data <a id="prepare-exported-data" href="#prepare-exported-data" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Read and convert text to a DataFrame.</p>
 <pre><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">json</span>
 <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">pandas</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">pd</span> 
@@ -173,10 +176,10 @@
 jdata <span style="color: #666666">=</span> json<span style="color: #666666">.</span>loads(data)
 messages_df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>json_normalize(jdata[<span style="color: #4070a0">'messages'</span>])
 </code></pre>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Explore data <a id="explore-data" href="#explore-data"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Explore data <a id="explore-data" href="#explore-data" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Make a short general table view of the small data portion.</p>
 <p>Start with filtering out missing data, type conversion and samples.</p>
-<h3 class="mt-5 mb-3 fw-bold">Missing values <a id="missing-values" href="#missing-values"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Missing values <a id="missing-values" href="#missing-values" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>The great utility for this purpose is <a href="https://github.com/ResidentMario/missingno" class="umami--click--github-com-residentmario-missingno">missingno <span class="iconify" data-icon="codicon:github-inverted"></span></a>. It visualizes the missings for you as matrix, bar, heatmap, dendogram.</p>
 <pre><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">matplotlib.pyplot</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">plt</span>
 <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">missingno</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">msno</span>
@@ -186,7 +189,7 @@ msno<span style="color: #666666">.</span>bar(messages_df)
 plt<span style="color: #666666">.</span>show()
 </code></pre>
 <p><img src="files/missing-values.png" alt="png" title="missing values" class="d-block mx-auto mw-100 h-100"></p>
-<h3 class="mt-5 mb-3 fw-bold">Anonymization <a id="anonymization" href="#anonymization"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Anonymization <a id="anonymization" href="#anonymization" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Hide the actual names and IDs faking them with <a href="https://mimesis.name/en/master/" class="umami--click--mimesis-name-en-master">mimesis <span class="iconify" data-icon="la:external-link-alt"></span></a>.</p>
 <p>On the missing data chart, there are only the first 8 columns full of data, therefore the others can be dropped.</p>
 <pre><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">mimesis</span>
@@ -239,7 +242,7 @@ to_md(sample, index<span style="color: #666666">=</span><span style="color: #007
 </tr>
 </tbody>
 </table>
-</div><h3 class="mt-5 mb-3 fw-bold">Types and samples <a id="types-and-samples" href="#types-and-samples"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+</div><h3 class="mt-5 mb-3 fw-bold">Types and samples <a id="types-and-samples" href="#types-and-samples" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <pre><code>columns <span style="color: #666666">=</span> columns<span style="color: #666666">.</span>dtypes
 columns <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>concat([columns, sample], axis<span style="color: #666666">=</span><span style="color: #4070a0">'columns'</span>)
 columns <span style="color: #666666">=</span> columns<span style="color: #666666">.</span>reset_index()
@@ -294,7 +297,7 @@ to_md(columns)
 </tbody>
 </table>
 </div><p>Ok, now we see how data from the exported history looks like.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Top10 leaderboard <a id="top10-leaderboard" href="#top10-leaderboard"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Top10 leaderboard <a id="top10-leaderboard" href="#top10-leaderboard" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The chart displays the overall messages count per user.</p>
 <p>All the charts on the objectives are built upon time and user. So from here on out i'm dealing with three columns <code>date, form, form_id</code>. Give them better names.</p>
 <pre><code>renamed_df <span style="color: #666666">=</span> messages_df[[<span style="color: #4070a0">'date'</span>, <span style="color: #4070a0">'from'</span>, <span style="color: #4070a0">'from_id'</span>]]
@@ -375,7 +378,7 @@ plt<span style="color: #666666">.</span>show()
 </ul>
 <p>The color palette <code>Paired</code> is taken for matching leaders pairwise and keeps it constant further.</p>
 <p>Time to split it up on facets per month.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Top10 leaderboard per month <a id="top10-leaderboard-per-month" href="#top10-leaderboard-per-month"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Top10 leaderboard per month <a id="top10-leaderboard-per-month" href="#top10-leaderboard-per-month" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Add a month column for pointing it to in the Seaborn facet chart method.</p>
 <pre><code>top10_leaders[<span style="color: #4070a0">'date'</span>] <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>to_datetime(top10_leaders[<span style="color: #4070a0">'date'</span>])
 top10_leaders[<span style="color: #4070a0">'month'</span>] <span style="color: #666666">=</span> top10_leaders[<span style="color: #4070a0">'date'</span>]<span style="color: #666666">.</span>dt<span style="color: #666666">.</span>month_name()
@@ -442,7 +445,7 @@ plt<span style="color: #666666">.</span>show()
 <li>The top two's activeness proportion differs month by month.</li>
 <li>The leaders from 3rd are evenly active.</li>
 </ul>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Top2 leaders message frequency per month <a id="top2-leaders-message-frequency-per-month" href="#top2-leaders-message-frequency-per-month"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Top2 leaders message frequency per month <a id="top2-leaders-message-frequency-per-month" href="#top2-leaders-message-frequency-per-month" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The top two messaged more than others, so plotting a distribution could reveal new activity trends. Data of the others are dropped.</p>
 <p>Add a day value for each message to see how it distributes over a month.</p>
 <pre><code>top10_leaders[<span style="color: #4070a0">'day'</span>] <span style="color: #666666">=</span> top10_leaders[<span style="color: #4070a0">'date'</span>]<span style="color: #666666">.</span>dt<span style="color: #666666">.</span>day
@@ -522,7 +525,7 @@ plt<span style="color: #666666">.</span>show()
 </code></pre>
 <p><img src="files/top2-messages-frequency-per-month-relative.png" alt="png" title="top2 messages frequency per month relative" class="d-block mx-auto mw-100 h-100"></p>
 <p>The appearance is intuitive and wordy. The <code>June</code> chart's shape differs significantly.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Afterword <a id="afterword" href="#afterword"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Afterword <a id="afterword" href="#afterword" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Before getting started, i already knew who talks too much and have proved it by making displaying it with all those charts. Along with it, i got a new understanding of:</p>
 <ul>
 <li>the top two's messages ratio</li>

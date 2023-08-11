@@ -47,13 +47,13 @@
         }
         h1, h2, h3, h4, h5, h5 {
             font-family: 'NMB';
-            color: #000000;
+            color: #5c5c5c;
         }
         div.row-article h3 {
             font-family: 'NMM';
         }
         a {
-            color: #920000
+            color: #975151
         }
         a:hover, a:focus {
             color: #b92929;
@@ -62,11 +62,14 @@
             text-decoration-thickness: initial;
             text-decoration-style: initial
         }
+        a.header-anchor {
+            visibility: hidden;
+        }
         a.link-dark {
-            color: #212529;
+            color: #5c5c5c;
         }
         a.link-dark-hover:hover {
-            color: #6c757d;
+            color: #212529;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -152,12 +155,12 @@
 <div class="container lh-base fs-5">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1 class="display-5 fw-bold">Getting selected elements by a time series range. Bokeh <a id="getting-selected-elements-by-a-time-series-range.-bokeh" href="#getting-selected-elements-by-a-time-series-range.-bokeh"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
+            <h1 class="display-5 fw-bold">Getting selected elements by a time series range. Bokeh <a id="getting-selected-elements-by-a-time-series-range.-bokeh" href="#getting-selected-elements-by-a-time-series-range.-bokeh" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>As a newcomer to Bokeh, i would like to know what the events have to be handled to figure out the selected elements on a <a href="https://docs.bokeh.org/en/latest/docs/user_guide/topics/timeseries.html" class="umami--click--docs-bokeh-org-en-latest-docs-user-guide-topics-timeseries-html">timeseris plot <span class="iconify" data-icon="la:external-link-alt"></span></a> by a range tool to process them further on a server side and what an object receives those events, <strong>Plot</strong> or <strong>RangeTool</strong>.</p>
 <p>In the case of using a range tool, elements aren't selected but the start and end of the range dates are, therefore, a final array of them is extracted manually from a data source.</p>
 <p>The Bokeh documentation doesn't answer the questions, so a straight way to get to know it is examining all the events of both objects.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Prepare a test stand <a id="prepare-a-test-stand" href="#prepare-a-test-stand"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Prepare a test stand <a id="prepare-a-test-stand" href="#prepare-a-test-stand" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>First of all, the test stand is run as a server to run python callbacks for handling events. <a href="https://docs.bokeh.org/en/latest/docs/examples/interaction/tools/range_tool.html" class="umami--click--docs-bokeh-org-en-latest-docs-examples-interaction-tools-range-tool-html">The example <span class="iconify" data-icon="la:external-link-alt"></span></a> is taken as a basis to extend.</p>
 <p><em>stand.py</em></p>
 <pre><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">functools</span> <span style="color: #007020; font-weight: bold">import</span> partial
@@ -218,9 +221,9 @@ app <span style="color: #666666">=</span> Application(FunctionHandler(make_doc))
 srv <span style="color: #666666">=</span> Server({<span style="color: #4070a0">'/'</span>: app}, io_loop<span style="color: #666666">=</span>tornado<span style="color: #666666">.</span>ioloop<span style="color: #666666">.</span>IOLoop<span style="color: #666666">.</span>current())
 srv<span style="color: #666666">.</span>run_until_shutdown()
 </code></pre>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Print out events data <a id="print-out-events-data" href="#print-out-events-data"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Print out events data <a id="print-out-events-data" href="#print-out-events-data" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Objects <code>range_plot, range_tool</code> are the targets to examine. Here is a function to assign a callback to the each event of both of them both. A callback prints event data as is to guess what the specific types containing a selected range we are looking for.</p>
-<h3 class="mt-5 mb-3 fw-bold">Plot events <a id="plot-events" href="#plot-events"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Plot events <a id="plot-events" href="#plot-events" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Plot events are assigned by the <code>on_event</code> method, it tracks many <a href="https://docs.bokeh.org/en/latest/docs/reference/events.html#bokeh.events.Rotate" class="umami--click--docs-bokeh-org-en-latest-docs-reference-events-html-bokeh-events-rotate">UI element interations <span class="iconify" data-icon="la:external-link-alt"></span></a> in comparison to <code>on_change</code>, which tracks the object attributes changes.</p>
 <p>During running, a few of the events riase an execption an have to be excluded from a callback list:</p>
 <pre><code>AttributeError: type object 'DocumentEvent' has no attribute 'event_name'
@@ -280,7 +283,7 @@ Event:  RangesUpdate Data: x0=931357440000, x1=1382607360000, y0=-27.58900000000
 Event:  PanEnd Data: x=1259761071764.9924, sx=593.545663356781, y=339.97113540536384, sy=68.16104125976562
 </code></pre>
 <p><code>PanStart.x, PanEnd.x</code> timestamps look accurate in comparison to <code>RangeUpdate.x0, RangeUpdate.x1</code>.</p>
-<h3 class="mt-5 mb-3 fw-bold">Tool events <a id="tool-events" href="#tool-events"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Tool events <a id="tool-events" href="#tool-events" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p><code>range_tool</code> object is not a subclass of the <code>Plot</code> model, but <code>Tool</code> subclass, so  <code>on_change</code> handler is assigned to it. Targets now are two object attributes  <code>range_tool.x_range.start, range_tool.x_range.end</code> on <code>x_range</code> object of class <a href="https://docs.bokeh.org/en/latest/docs/reference/models/ranges.html#bokeh.models.Range1d" class="umami--click--docs-bokeh-org-en-latest-docs-reference-models-ranges-html-bokeh-models-range1d">Range1d <span class="iconify" data-icon="la:external-link-alt"></span></a>.</p>
 <pre><code><span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">on_change_callback</span>(attr, old, new):
     <span style="color: #007020">print</span>(<span style="color: #4070a0">f'Attr: </span><span style="color: #70a0d0; font-style: italic">{</span>attr<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">, old=</span><span style="color: #70a0d0; font-style: italic">{</span>old<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">, new=</span><span style="color: #70a0d0; font-style: italic">{</span>new<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">'</span>)
@@ -313,7 +316,7 @@ Out[<span style="color: #40a070">2</span>]: datetime<span style="color: #666666"
 In [<span style="color: #40a070">3</span>]: datetime<span style="color: #666666">.</span>utcfromtimestamp(<span style="color: #40a070">1330921899243</span><span style="color: #666666">/</span><span style="color: #40a070">1000</span>)
 Out[<span style="color: #40a070">3</span>]: datetime<span style="color: #666666">.</span>datetime(<span style="color: #40a070">2012</span>, <span style="color: #40a070">3</span>, <span style="color: #40a070">5</span>, <span style="color: #40a070">4</span>, <span style="color: #40a070">31</span>, <span style="color: #40a070">39</span>, <span style="color: #40a070">243000</span>)
 </code></pre>
-<h3 class="mt-5 mb-3 fw-bold">Final selection computation <a id="final-selection-computation" href="#final-selection-computation"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Final selection computation <a id="final-selection-computation" href="#final-selection-computation" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Summing up the results of the above exploration, a final selection is easily found by handling the event <code>PanEnd</code> and converting timestamp attributes of the <code>range_tool.x_range</code> object to datetime.</p>
 <pre><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">datetime</span> <span style="color: #007020; font-weight: bold">import</span> datetime
 
@@ -334,7 +337,7 @@ Out[<span style="color: #40a070">3</span>]: datetime<span style="color: #666666"
 <p>Sample output:</p>
 <pre><code>Attrs on PanEnd: start=2007-09-11 16:26:12.324324, end=2011-09-03 16:26:12.324324
 </code></pre>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Selected elemets <a id="selected-elemets" href="#selected-elemets"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Selected elemets <a id="selected-elemets" href="#selected-elemets" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The complete <a href="files/stand.py" class="umami--click--files-stand-py">stand.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a> test stand script.</p>
 <p>With the values returned by the <code>pan_end_callback</code> the data source <code>source</code> can be filtered out to extract elements for further server side processing.</p>
 <pre><code>In [<span style="color: #40a070">1</span>]: date_val <span style="color: #666666">=</span> <span style="color: #007020">zip</span>(source<span style="color: #666666">.</span>data[<span style="color: #4070a0">'date'</span>], source<span style="color: #666666">.</span>data[<span style="color: #4070a0">'close'</span>])

@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://www.kvdm.dev/articles/derivative-table-of-basic-functions-matplotlib-visualization" />
-    <meta property="og:title" content="Derivative table of basic functions. Matplotlib. Visualization " />
-    <meta property="og:description" content="During reading math essentials i lacked of imagination about how a derivative of different basic functions looks like. Matplotlib and some python code helped me out. This is my visual cheat sheet table." />
-    <meta property="og:image" content="https://www.kvdm.dev/articles/derivative-table-of-basic-functions-matplotlib-visualization/files/main-section.png" />
-    <meta property="article:published_time" content="2022-12-02" />
-    <meta name="description" content="During reading math essentials i lacked of imagination about how a derivative of different basic functions looks like. Matplotlib and some python code helped me out. This is my visual cheat sheet table.">    <link rel="icon" type="image/png" href="/files/favicon.png">
+    <meta property="og:url" content="https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk" />
+    <meta property="og:title" content="Explore and visualize the parser events and performance. Pandas. Seaborn. KLib. ADTK " />
+    <meta property="og:description" content="First, i was going to start writing an article about researching Plotly community  and changed my mind after a short while in favor of exploring how a multithreaded parser that i've implemented discourse-parser  for the purpose of  whether getting the community data runs performant. Did it have performance issues? Is a way of data requesting and writing worked as expected due to multithreading? Was parsing completed correctly and had no anomalies?" />
+    <meta property="og:image" content="https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/main-section.png" />
+    <meta property="article:published_time" content="2023-08-10" />
+    <meta name="description" content="First, i was going to start writing an article about researching Plotly community  and changed my mind after a short while in favor of exploring how a multithreaded parser that i've implemented discourse-parser  for the purpose of  whether getting the community data runs performant. Did it have performance issues? Is a way of data requesting and writing worked as expected due to multithreading? Was parsing completed correctly and had no anomalies?">    <link rel="icon" type="image/png" href="/files/favicon.png">
     <link rel="alternate" type="application/rss+xml" href="/rss.xml">
     <style>
          @charset "UTF-8";/*!
@@ -143,7 +143,7 @@
         "use strict";if(void 0===self.Iconify&&(self.Iconify={isReady:!1},self.SimpleSVG=self.Iconify,function(e,t){var i,n,o,r,s,a,c,l,u,d,f,h,p,v,g,b,m,y,w,_,x,O,A,j,I,E,k,C,M,L,S,N,P,T,F,R,D,H,V,G,Q,z,B,q,Y,J,U,W,$,K,X,Z,ee,te,ie,ne,oe,re={config:{},version:"1.0.7"};function se(e,t){var i;return t=t||{bubbles:!1,cancelable:!1,detail:void 0},(i=document.createEvent("CustomEvent")).initCustomEvent(e,t.bubbles,t.cancelable,t.detail),i}function ae(){document.removeEventListener("DOMContentLoaded",ae),window.removeEventListener("load",ae),o.DOMReadyCallback()}function ce(t,i,e){var n=t;if("_"!==t.slice(0,1)){if(void 0===u[t]){if(!e||void 0===u["_"+t])return;n="_"+t}switch(n){case"API":case"SVGAttributes":Object.keys(i).forEach(function(e){null===i[t]?delete u[n][e]:u[n][e]=i[e]});break;default:u[n]=i}}}function le(e,t){return function(e,t){switch(e){case"rotate":return t=parseInt(t),isNaN(t)?null:t;case"width":case"height":case"inlineHeight":case"inlineTop":case"verticalAlign":return t=parseFloat(t),isNaN(t)?null:t;case"vFlip":case"hFlip":return!!t;case"body":case"parent":return"string"==typeof t?t:null}return t}("rotate",e+t)}function ue(e,t){return!!e!=!!t}function de(e){var i=Object.create(null);return(void 0===e._defaults?[e,v]:[e,e._defaults,v]).forEach(function(t){Object.keys(t).forEach(function(e){"object"!=typeof t[e]&&void 0===i[e]&&(i[e]=t[e])})}),void 0===i.inlineTop&&(i.inlineTop=i.top),void 0===i.inlineHeight&&(i.inlineHeight=i.height),void 0===i.verticalAlign&&(i.height%7==0&&i.height%8!=0?i.verticalAlign=-.143:i.verticalAlign=-.125),i}function fe(){return this._icons=Object.create(null),this._aliases=Object.create(null),this._resolved=Object.create(null),this._add=function(e,t,i){var n=e?"_aliases":"_icons";void 0===this._resolved[t.prefix]?(this._resolved[t.prefix]=Object.create(null),this._icons[t.prefix]=Object.create(null),this._aliases[t.prefix]=Object.create(null)):(delete this._icons[t.prefix][t.icon],delete this._aliases[t.prefix][t.icon]),this._resolved[t.prefix][t.icon]=!1,this[n][t.prefix][t.icon]=i},this._resolveIcon=function(e){var t,i,n,o,r,s;if(void 0===this._resolved[e.prefix]||void 0===this._resolved[e.prefix][e.icon])return null;if(!1!==this._resolved[e.prefix][e.icon])return this._resolved[e.prefix][e.icon];if(void 0!==this._icons[e.prefix][e.icon])return this._resolved[e.prefix][e.icon]=de(this._icons[e.prefix][e.icon]);for(i=0,t=this._aliases[e.prefix][e.icon],n=Object.create(null),Object.keys(t).forEach(function(e){"parent"!==e&&(n[e]=t[e])}),o=t.parent;;){if(5<++i||void 0===this._resolved[e.prefix][o])return this._resolved[e.prefix][e.icon]=null;if(r=void 0===this._icons[e.prefix][o],s=this[r?"_aliases":"_icons"][e.prefix][o],Object.keys(s).forEach(function(e){if(void 0!==n[e])switch(e){case"rotate":n[e]=le(n[e],s[e]);break;case"hFlip":case"vFlip":n[e]=ue(n[e],s[e])}else"parent"!==e&&(n[e]=s[e])}),!r)break;o=s.parent}return this._resolved[e.prefix][e.icon]=de(n)},this.addCollection=function(n){var o=this,r=Object.create(null);g.forEach(function(e){void 0!==n[e]?r[e]=n[e]:void 0!==v[e]&&(r[e]=v[e])}),void 0!==n.icons&&Object.keys(n.icons).forEach(function(e){var t=p(e,n.prefix),i=n.icons[e];void 0!==i.body&&(i._defaults=r,o._add(!1,t,i))}),void 0!==n.aliases&&Object.keys(n.aliases).forEach(function(e){var t=p(e,n.prefix),i=n.aliases[e];if(void 0!==i.parent){if(void 0===n.prefix){if(i.parent.slice(0,t.prefix.length)!==t.prefix)return;i.parent=i.parent.slice(t.prefix.length+1)}o._add(!0,t,i)}})},this.addIcon=function(e,t,i){var n=void 0!==t.parent,o=p(e,i);if(n&&void 0===i){if(t.parent.slice(0,o.prefix.length)!==o.prefix)return;t.parent=t.parent.slice(o.prefix.length+1)}this._add(n,o,t)},this.exists=function(e,t){var i=p(e,t);return void 0!==this._resolved[i.prefix]&&void 0!==this._resolved[i.prefix][i.icon]},this.getIcon=function(e,t){var i=p(e,t);return this._resolveIcon(i)},this.copyIcon=function(e,t){var i,n=this.getIcon(e,t);return null===n?null:(i=Object.create(null),Object.keys(n).forEach(function(e){i[e]=n[e]}),i)},this.list=function(e){var i,n;return void 0!==e?void 0===this._resolved[e]?[]:Object.keys(this._resolved[e]):(i=[],n=this._resolved,Object.keys(n).forEach(function(t){i=i.concat(Object.keys(n[t]).map(function(e){return""===t&&-1===e.indexOf("-")?e:t+":"+e}))}),i)},this}function he(){w&&(w=!1,m.scanDOM())}function pe(e,t,i){var n,o,r,s,a;if(1===t)return e;if(i=void 0===i?100:i,"number"==typeof e)return Math.ceil(e*t*i)/i;if("string"!=typeof e)return e;if(null===(n=e.split(A))||!n.length)return e;for(o=[],r=n.shift(),s=j.test(r);;){if(s?(a=parseFloat(r),isNaN(a)?o.push(r):o.push(Math.ceil(a*t*i)/i)):o.push(r),void 0===(r=n.shift()))return o.join("");s=!s}}function ve(e,t,i){var n,o,r;for(n=0;n<t.length;n++)if(void 0!==e[o=t[n]])switch(typeof(r=e[o])){case"boolean":return r;case"number":return!!r;case"string":switch(r.toLowerCase()){case"1":case"true":case o:return!0;case"0":case"false":case"":return!1}}return i}function ge(e,t,i){var n,o;for(n=0;n<t.length;n++)if(void 0!==e[o=t[n]])return e[o];return i}function be(){var s=N.loaderMaxURLSize,o=Object.create(null);function a(e,t){var i,n=o[e];"function"!=typeof n?(n=n.replace("{icons}",t.join(",")),(i=document.createElement("script")).setAttribute("type","text/javascript"),i.setAttribute("src",n),i.setAttribute("async",!0),document.head.appendChild(i)):n.call(L,e,t)}function c(e){var t=void 0===N.API[e]?N.defaultAPI:N.API[e];return"function"==typeof t?(o[e]=t,!1):-1===t.indexOf("{icons}")?(o[e]=t,null):(t=t.replace("{prefix}",e).replace("{callback}","Iconify._loaderCallback"),(o[e]=t).replace("{icons}","").length)}Object.keys(T).forEach(function(i){var n=c(i),o=!1===n,r=[];if(null===n)return a(i,[]),void(F[i]=!0);T[i].forEach(function(e,t){o||(n+=e.length+1,s<=n&&(a(i,r),r=[],n=c(i)+e.length+1)),r.push(e)}),r.length&&a(i,r),F[i]=void 0===F[i]?T[i]:F[i].concat(T[i]),delete T[i]}),D=!1}function me(e,t,i){return i||S.domready||N.loadBeforeDOMReady?(void 0===T[e]||-1===T[e].indexOf(t))&&(void 0===F[e]||!0!==F[e]&&-1===F[e].indexOf(t))&&(void 0===T[e]&&(T[e]=[]),T[e].push(t),D||(D=!0,window.setTimeout(be,0)),1):(o=t,void 0===R[n=e]&&(R[n]=Object.create(null)),R[n][o]=!0,void 0===S._loaderDOMReady&&(S._loaderDOMReady=S.DOMReadyCallback,S.DOMReadyCallback=function(){S._loaderDOMReady(),Object.keys(R).forEach(function(t){Object.keys(R[t]).forEach(function(e){L.iconExists(e,t)||me(t,e,!0)})})}),1);var n,o}function ye(){var e;!1!==U&&U.length?(e=U,U=!1,Q.scanDOM(e)):U=!1}function we(e){e.forEach(function(e){var t;if(!1===U&&(U=[],window.setTimeout(ye,0)),e.addedNodes)for(t=0;t<e.addedNodes.length;t++)U.push(e.addedNodes[t])})}function _e(){q.observe(void 0===z._root?document.querySelector("body"):z._root,W)}function xe(e,t){var i;return"<?"===e.slice(0,2)&&(i=e.indexOf(">"),e=e.slice(i+1)),e=-1!==(i=(e=e.replace("viewbox=","viewBox=").replace("preserveaspectratio=","preserveAspectRatio=")).indexOf("</"))?e.replace("</",t+"</"):e.replace("/>",">"+t+"</svg>")}i=re,"function"!=typeof window.CustomEvent&&(se.prototype=window.Event.prototype,window.CustomEvent=se),i.event=function(e,t){document.dispatchEvent(new CustomEvent(e,t))},n=e,r=(o=re).config,s=null,o.DOMReadyCallback=function(){o.domready=!0,o.nextInitItem()},o.initTimeout=function(e){function t(){if(null!==s){if(!1!==s.callback())return s.stop(),void o.nextInitItem();s.counter++,10!==s.counter&&25!==s.counter||(window.clearInterval(s.id),s.id=window.setInterval(t,10===s.counter?250:1e3))}}null!==s&&s.stop(),s={id:window.setInterval(t,100),counter:0,callback:e,stop:function(){window.clearInterval(s.id),s=null},nextTick:t}},o.domready=!1,o.ready=!1,o.initQueue=[],o.readyQueue=[],o.nextInitItem=function(){var e;if(!o.ready){if(o.initQueue.length)e=o.initQueue.shift();else{if(!o.domready)return void o.initTimeout(function(){return!o.domready&&document.body&&o.scanDOM(),o.domready});if(!o.readyQueue.length)return o.ready=n.isReady=!0,o.event(r._readyEvent),void o.scanDOM();e=o.readyQueue.shift()}!1!==e()&&o.nextInitItem()}},o.addStylesheet=function(e){var t;if(!document.head||!document.body)return!!o.domready||(e||o.initTimeout(o.addStylesheet.bind(null,!0)),!1);try{(t=document.createElement("style")).type="text/css",t.innerHTML="span.iconify, i.iconify, iconify-icon { display: inline-block; width: 1em; }",null!==document.head.firstChild?document.head.insertBefore(t,document.head.firstChild):document.head.appendChild(t)}catch(e){}return!0},o.initQueue.push(o.addStylesheet.bind(null,!1)),n.ready=function(e){n.isReady?window.setTimeout(e):document.addEventListener(r._readyEvent,e)},window.setTimeout(function(){"complete"===document.readyState||"loading"!==document.readyState&&!document.documentElement.doScroll?o.domready=!0:(document.addEventListener("DOMContentLoaded",ae),window.addEventListener("load",ae)),o.nextInitItem()}),(a=re.config).SVGAttributes=Object.create(null),a._imageClass="iconify",a._loadingClass="svg-loading",a._iconAttribute="data-icon",a._rotateAttribute="data-rotate",a._flipAttribute="data-flip",a._inlineModeAttribute="data-inline",a._alignAttribute="data-align",a._appendAttribute="data-icon-append",a._appendedClass="svg-appended",a._readyEvent="IconifyReady",a._webComponentsPolyfill="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.24/webcomponents-lite.min.js",a._classListPolyfill="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20150312/classList.min.js",function(t){t.defaultAPI="https://api.iconify.design/{prefix}.js?icons={icons}",t.API=Object.create(null),t.loaderMaxURLSize=500,t.loadBeforeDOMReady=!(document&&document.body),t._loaderEvent="IconifyAddedIcons",t.sessionStorage=!0;try{t.localStorage=!!(window&&window.localStorage&&window.localStorage.length)}catch(e){t.localStorage=!1}}(re.config),c=e,l=t,u=re.config,c.setConfig=function(e,t){ce(e,t,!1)},c.setCustomAPI=function(e,t){switch(typeof e){case"string":0;break;case"object":if(e instanceof Array){0;break}default:return}e.forEach(function(e){null===t?delete u.API[e]:u.API[e]=t})},c.getConfig=function(e){return void 0===u[e]?void 0===u["_"+e]?null:u["_"+e]:u[e]},["SimpleSVG","Iconify"].forEach(function(e){var t;void 0!==l[e+"Config"]&&"object"==typeof l[e+"Config"]&&(t=l[e+"Config"],Object.keys(t).forEach(function(e){ce(e,t[e],!0)}))}),f=(d=re).config,h=t,d.initQueue.push(function(){var e={observer:!1,classList:!1},t={observer:!1,classList:!1};function i(e){var t;return!e.length||(document.head?((t=document.createElement("script")).setAttribute("src",e),t.setAttribute("type","text/javascript"),document.head.appendChild(t),!0):d.domready)}function n(){if("classList"in document.createElement("div"))return 1;t.classList||(t.classList=i(f._classListPolyfill))}function o(){return h.MutationObserver&&h.WeakMap||t.observer||(t.observer=i(f._webComponentsPolyfill)),1}return e.classList=!n(),e.observer=!o(),!e.classList&&!e.observer||(d.initTimeout(function(){return!(e.observer&&!o()||e.classList&&!n())}),!1)}),re.getPrefix=function(e,t){var i;return"string"==typeof t&&""!==t?{prefix:t,icon:e}:2===(i=e.split(":")).length?{prefix:i[0],icon:i[1]}:1<(i=e.split("-")).length?{prefix:t=i.shift(),icon:i.join("-")}:{prefix:"",icon:e}},p=re.getPrefix,v={left:0,top:0,width:16,height:16,rotate:0,vFlip:!1,hFlip:!1},g=["left","top","width","height","body","rotate","vFlip","hFlip","inlineTop","inlineHeight","verticalAlign"],fe.mergeFlip=ue,fe.mergeRotation=le,fe.blankIcon=function(){return de({body:"",width:16,height:16})},re.Storage=fe,b=e,y=t,w=!1,_=new(m=re).Storage,b.addCollection=function(e,t){_.addCollection(e),w||!0===t||(w=!0,window.setTimeout(he,0))},b.addIcon=function(e,t,i){_.addIcon(e,t),w||!0===i||(w=!0,window.setTimeout(he,0))},b.iconExists=_.exists.bind(_),b.getIcon=_.copyIcon.bind(_),b.listIcons=_.list.bind(_),["SimpleSVG","Iconify"].forEach(function(e){void 0!==y[e+"Preload"]&&y[e+"Preload"]instanceof Array&&y[e+"Preload"].forEach(function(e){"object"==typeof e&&void 0!==e.icons&&b.addCollection(e)})}),x=re.Storage,O=re.config,A=/(-?[0-9.]*[0-9]+[0-9.]*)/g,j=/^-?[0-9.]*[0-9]+[0-9.]*$/g,I=["width","height","inline"],E=["title"],k=0,re.SVG=function(_){return _=_||x.blankIcon(),this.item=_,this.height=function(e,t,i){return void 0===e?t?this.item.inlineHeight:this.item.height:pe(e,(t?this.item.inlineHeight:this.item.height)/this.item.width,i)},this.width=function(e,t,i){return void 0===e?this.item.width:pe(e,this.item.width/(t?this.item.inlineHeight:this.item.height),i)},this.defaultAttributes=function(){return{xmlns:"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","aria-hidden":"true",focusable:"false"}},this.preserveAspectRatio=function(e,t,i){var n="";switch(e){case"left":n+="xMin";break;case"right":n+="xMax";break;default:n+="xMid"}switch(t){case"top":n+="YMin";break;case"bottom":n+="YMax";break;default:n+="YMid"}return n+=!0===i?" slice":" meet"},this.htmlspecialchars=function(e){switch(typeof e){case"boolean":case"number":return e+"";case"string":return e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}return""},this.attributes=function(t){var e,i,n,o,r,s,a,c,l,u,d,f,h,p,v=this,g={horizontal:"center",vertical:"middle",crop:!1},b={rotate:_.rotate,hFlip:_.hFlip,vFlip:_.vFlip},m="",y=this.defaultAttributes(),w=[];if(s=ve(t="object"==typeof t?t:Object.create(null),[O._inlineModeAttribute,"inline"],!0),u=ve(t,[O._appendAttribute],!1),e={left:_.left,top:s?_.inlineTop:_.top,width:_.width,height:s?_.inlineHeight:_.height},"string"==typeof t[O._flipAttribute]&&t[O._flipAttribute].split(/[\s,]+/).forEach(function(e){switch(e=e.toLowerCase()){case"horizontal":b.hFlip=!b.hFlip;break;case"vertical":b.vFlip=!b.vFlip}}),void 0!==t[O._rotateAttribute])if("number"==typeof(c=t[O._rotateAttribute]))b.rotate+=c;else if("string"==typeof c)if(""===(d=c.replace(/^-?[0-9.]*/,"")))c=parseInt(c),isNaN(c)||(b.rotate+=c);else if(d!==c){switch(l=!1,d){case"%":l=25;break;case"deg":l=90}l&&(c=parseInt(c.slice(0,c.length-d.length)),isNaN(c)||(b.rotate+=Math.round(c/l)))}switch(b.hFlip?b.vFlip?b.rotate+=2:(w.push("translate("+(e.width+e.left)+" "+(0-e.top)+")"),w.push("scale(-1 1)"),e.top=e.left=0):b.vFlip&&(w.push("translate("+(0-e.left)+" "+(e.height+e.top)+")"),w.push("scale(1 -1)"),e.top=e.left=0),b.rotate%4){case 1:p=e.height/2+e.top,w.unshift("rotate(90 "+p+" "+p+")"),0===e.left&&0===e.top||(p=e.left,e.left=e.top,e.top=p),e.width!==e.height&&(p=e.width,e.width=e.height,e.height=p);break;case 2:w.unshift("rotate(180 "+(e.width/2+e.left)+" "+(e.height/2+e.top)+")");break;case 3:p=e.width/2+e.left,w.unshift("rotate(-90 "+p+" "+p+")"),0===e.left&&0===e.top||(p=e.left,e.left=e.top,e.top=p),e.width!==e.height&&(p=e.width,e.width=e.height,e.height=p)}return i=ge(t,["data-width","width"],null),n=ge(t,["data-height","height"],null),null===i&&null===n&&(n="1em"),null!==i&&null!==n?(o=i,r=n):null!==i?r=pe(o=i,e.height/e.width):o=pe(r=n,e.width/e.height),!1!==o&&(y.width="auto"===o?e.width:o),!1!==r&&(y.height="auto"===r?e.height:r),s&&0!==_.verticalAlign?m+="vertical-align: "+(h=_.verticalAlign+"em")+";":h="","string"==typeof t[O._alignAttribute]&&t[O._alignAttribute].toLowerCase().split(/[\s,]+/).forEach(function(e){switch(e){case"left":case"right":case"center":g.horizontal=e;break;case"top":case"bottom":case"middle":g.vertical=e;break;case"crop":g.crop=!0;break;case"meet":g.crop=!1}}),m+="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);",y.style=m+(void 0===t.style?"":t.style),y.preserveAspectRatio=this.preserveAspectRatio(g.horizontal,g.vertical,g.crop),y.viewBox=e.left+" "+e.top+" "+e.width+" "+e.height,a=function(i){var e,n,t=/\sid="(\S+)"/g,o=[];function r(e,t,i){for(var n=0;-1!==(n=i.indexOf(e,n));)i=i.slice(0,n)+t+i.slice(n+e.length),n+=t.length;return i}for(;e=t.exec(i);)o.push(e[1]);return o.length&&(n="IconifyId-"+Date.now().toString(16)+"-"+(16777216*Math.random()|0).toString(16)+"-",o.forEach(function(e){var t=n+k;k++,i=r('="'+e+'"','="'+t+'"',i),i=r('="#'+e+'"','="#'+t+'"',i),i=r("(#"+e+")","(#"+t+")",i)})),i}(this.item.body),w.length&&(a='<g transform="'+w.join(" ")+'">'+a+"</g>"),f=Object.create(null),Object.keys(t).forEach(function(e){void 0===y[e]&&(-1!==E.indexOf(e)?a="<"+e+">"+v.htmlspecialchars(t[e])+"</"+e+">"+a:-1===I.indexOf(e)&&(f[e]=t[e]))}),{attributes:y,elementAttributes:f,body:a,append:u,verticalAlign:h}},this},M=(C=re).config._loadingClass,C.newImage=function(e,t,i){return{element:e,icon:t,parser:i,loading:e.classList.contains(M)}},C.parsedImage=function(e,t){return{element:e,icon:t}},C.getImageAttributes=function(t){var e,i,n=Object.create(null);if(!t.element.hasAttributes())return n;for(e=0;e<t.element.attributes.length;e++)i=t.element.attributes[e],n[i.name]=i.value;return t.parser&&void 0!==t.parser.filterAttributes&&(n=t.parser.filterAttributes(t,n)),void 0!==n.class&&(n.class=n.class.split(" ").filter(function(e){return e!==M}),t.parser&&void 0!==t.parser.filterClasses&&(n.class=t.parser.filterClasses(t,n.class)),n.class=n.class.join(" ")),void 0!==t.attributes&&Object.keys(t.attributes).forEach(function(e){n[e]=t.attributes[e]}),n},function(n,f,e){var s=e._imageClass,t=e._loadingClass,i=e._appendedClass,a=e._iconAttribute,o=e._inlineModeAttribute,r=":not(svg):not(."+i+")",c=":not(."+t+")",l="."+t,h={iconify:{selector:"."+s,selectorAll:"."+s+r,selectorNew:"."+s+r+c,selectorLoading:"."+s+r+l,icon:function(e){var t,i=e.getAttribute(a);if("string"==typeof i)return i;for(var n=0;n<e.classList.length;n++)if(5<(t=e.classList[n]).length&&"icon:"===t.slice(0,5))return t.slice(5);return""},filterClasses:function(e,t){var i,n,o;for(n=0;n<t.length;n++)"icon-"===(i=t[n]).slice(0,5)&&2===(i=i.slice(5).split(":")).length&&(o="data-"+i[0],void 0===e.attributes&&(e.attributes=Object.create(null)),e.attributes[o]=i[1]);return t}}},p=Object.keys(h);n.addFinder=function(e,t){void 0===t.selectorAll&&(t.selectorAll=t.selector+r),void 0===t.selectorNew&&(t.selectorNew=t.selector+r+c),void 0===t.selectorLoading&&(t.selectorLoading=t.selector+r+l),h[e]=t,p=Object.keys(h),n.isReady&&n.scanDOM()},n.addTag=function(e,i,t){n.addFinder("tag-"+e,{selector:e,icon:null==t?h.iconify.icon:t,filterAttributes:function(e,t){return void 0===t[o]&&(t[o]=i),t},filterClasses:h.iconify.filterClasses})};try{"object"==typeof Reflect&&"object"==typeof customElements&&Object.setPrototypeOf&&(Object.setPrototypeOf(u.prototype,HTMLElement.prototype),Object.setPrototypeOf(u,HTMLElement),customElements.define("iconify-icon",u))}catch(e){}function u(){return Reflect.construct(HTMLElement,[],u)}n.addTag("iconify-icon",!1),f.findNewImages=function(c,l){var u=[],d=[];return(c=void 0===c?void 0===e._root?document.body:e._root:c)&&p.forEach(function(e){var t,i,n,o,r=h[e],s=!0===l?r.selectorLoading:!1===l?r.selectorNew:r.selectorAll,a=c.querySelectorAll(s);for(t=0;t<a.length;t++)i=a[t],(n=r.icon(i))&&-1===d.indexOf(i)&&(d.push(i),o=f.newImage(i,n,r),u.push(o))}),u},f.findParsedImages=function(e){var t,i,n,o=[],r=e.querySelectorAll("svg."+s);for(t=0;t<r.length;t++)(n=(i=r[t]).getAttribute(a))&&o.push(f.parsedImage(i,n));return o}}(e,re,re.config),L=e,N=(S=re).config,P=t,T=Object.create(null),F=Object.create(null),R=Object.create(null),H={session:!(D=!1),local:!0},V={session:0,local:0},L._loaderCallback=function(i){var n=!1;"object"==typeof i&&(["local","session"].forEach(function(t){var e;if(!n&&H[t]&&N[t+"Storage"]){e=P[t+"Storage"];try{V[t]||e.setItem("iconify-version",S.version),e.setItem("iconify"+V[t],JSON.stringify(i)),n=!0,V[t]++,e.setItem("iconify-count",V[t])}catch(e){H[t]=!1}}}),L.addCollection(i),S.event(N._loaderEvent))},S.loadImage=function(e,t){var i=S.getPrefix(e.icon);return!!L.iconExists(i.icon,i.prefix)||(!1!==t&&me(i.prefix,i.icon,!1)&&e.element.classList.add(N._loadingClass),!1)},L.preloadImages=function(e){var t,i=!1;return e.forEach(function(e){t=S.getPrefix(e),L.iconExists(t.icon,t.prefix)||(me(t.prefix,t.icon,!0),i=!0)}),i},["local","session"].forEach(function(t){var e,i,n;try{if("object"!=typeof(e=P[t+"Storage"]))return void(H[t]=!1);if(e.getItem("iconify-version")!==S.version)return;if("number"!=typeof(n=parseInt(e.getItem("iconify-count")))||isNaN(n))return;for(;;){if(V[t]>=n)return;if("string"!=typeof(i=e.getItem("iconify"+V[t])))return;"object"==typeof(i=JSON.parse(i))&&L.addCollection(i),V[t]++}}catch(e){H[t]=!1}}),G=e,z=(Q=re).config,B=t,Y=0,W={childList:!(U=!1),subtree:!(J=q=null)},G.pauseObserving=function(){null!==q&&(Y||(J=q.takeRecords(),q.disconnect())),Y++},G.resumeObserving=function(){null!==q?Y&&(--Y||(_e(),null!==J&&J.length&&we(J))):Y--},G.isObserverPaused=function(){return null===q||!!Y},Q.readyQueue.push(function(){return q=new B.MutationObserver(we),Y||_e(),!0}),$=e,X=(K=re).config,Z=X._iconAttribute,ee=X._loadingClass,te=X._imageClass,ie=X._appendedClass,K.renderSVG=function(t){var e,i,n,o,r,s,a,c,l,u,d,f=K.getImageAttributes(t),h=$.getIcon(t.icon);for(f[Z]=t.icon,e=new K.SVG(h),n=document.createElement("svg"),r=e.attributes(f),Object.keys(r.attributes).forEach(function(e){if(d=r.attributes[e],"style"!==e||"string"==typeof(d=t.element.getAttribute("style"))&&d.length)try{n.setAttribute(e,d)}catch(e){}}),Object.keys(r.elementAttributes).forEach(function(e){try{(r.append?t.element:n).setAttribute(e,r.elementAttributes[e])}catch(e){}}),t.loading&&(n.classList.remove(ee),r.append&&t.element.classList.remove(ee)),n.classList.add(te),s=xe(n.outerHTML,r.body),(o=document.createElement("span")).innerHTML=s,i=o.childNodes[0],r.append?(t.element.classList.add(ie),t.element.appendChild(i)):(t.element.parentNode.replaceChild(i,t.element),t.element=i),a=i.style,c=t.element.style,r.verticalAlign&&(a.verticalAlign=r.verticalAlign),a.transform="rotate(360deg)",l=0;l<c.length;l++)a[u=c[l]]=c[u];delete t.parser,delete t.loading},$.getSVGObject=function(e,t){return!!$.iconExists(e)&&new K.SVG($.getIcon(e)).attributes(t,!1)},$.getSVG=function(e,t){var i,n;return!1!==(n=$.getSVGObject(e,t))&&(i=document.createElement("svg"),Object.keys(n.attributes).forEach(function(e){try{i.setAttribute(e,n.attributes[e])}catch(e){}}),xe(i.outerHTML,n.body))},ne=e,(oe=re).scanDOM=function(){var t=!1;function e(){oe.findNewImages().forEach(function(e){oe.loadImage(e)&&(t||(t=!0,ne.pauseObserving()),oe.renderSVG(e))})}if(oe.ready)e();else try{e()}catch(e){}t&&ne.resumeObserving()},ne.scanDOM=oe.scanDOM,ne.getVersion=function(){return oe.version}}(self.Iconify,self)),"object"==typeof exports)try{exports.__esModule=!0,exports.default=self.Iconify}catch(e){}
     </script>
         <script async defer data-website-id="44e692db-5276-4f47-9c8a-a5fe8c4184b5" src="https://analytics.kvdm.dev:23387/umami.js"></script>
-        <title>Derivative table of basic functions. Matplotlib. Visualization </title>
+        <title>Explore and visualize the parser events and performance. Pandas. Seaborn. KLib. ADTK </title>
 </head>
 <body>
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
@@ -155,21 +155,648 @@
 <div class="container lh-base fs-5">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1 class="display-5 fw-bold">Derivative table of basic functions. Matplotlib. Visualization <a id="derivative-table-of-basic-functions.-matplotlib.-visualization" href="#derivative-table-of-basic-functions.-matplotlib.-visualization" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
+            <h1 class="display-5 fw-bold">Explore and visualize the parser events and performance. Pandas. Seaborn. KLib. ADTK <a id="explore-and-visualize-the-parser-events-and-performance.-pandas.-seaborn.-klib.-adtk" href="#explore-and-visualize-the-parser-events-and-performance.-pandas.-seaborn.-klib.-adtk" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
-<p>During reading math essentials i lacked of imagination about how a derivative of different basic functions looks like. Matplotlib and some python code helped me out. This is my visual cheat sheet table.</p>
-<p>It's more like an exercise for better memorizing and understanding through practice.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Visual derivative table cheat sheet <a id="visual-derivative-table-cheat-sheet" href="#visual-derivative-table-cheat-sheet" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p>Didn't build many charts with <strong>matplotlib</strong> before, the library isn't for beginners and using OOP concepts is quite difficult with it. At the moment the details on the picture are enough to depict rate change.</p>
-<p>The chart building script <a href="files/make_table.py" class="umami--click--files-make-table-py">make	_table.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a></p>
-<p><img src="files/derivative-table-panes.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Note <a id="note" href="#note" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p>What is really helpful is to see two cases of <strong>exponential</strong> and <strong>tangent</strong> charts. How their velocity, speed, and derivative differs from the others.</p>
+<p>First, i was going to start writing an article about researching Plotly <a href="https://community.plotly.com" class="umami--click--community-plotly-com">community <span class="iconify" data-icon="la:external-link-alt"></span></a> and changed my mind after a short while in favor of exploring how a multithreaded parser that i've implemented <a href="https://github.com/4l1fe/DiscourseParser" class="umami--click--github-com-4l1fe-discourseparser">discourse-parser <span class="iconify" data-icon="codicon:github-inverted"></span></a> for the purpose of  whether getting the community data runs performant. Did it have performance issues? Is a way of data requesting and writing worked as expected due to multithreading? Was parsing completed correctly and had no anomalies?</p>
+<p>While the parser was working it produced a lot of logs, each log record is a specific type of event representing activity a thread is doing at a moment, for example <code>data.get</code> to request a community website. Those log records are the target to explore, visualize, and get insights from. Also, they are time series.</p>
+<p>For a broad view on the concerns the article is split into the following sections:</p>
+<ul>
+<li>Logs Overview.</li>
+<li>Continuous Running Index.</li>
+<li>Events frequency.</li>
+<li>Network Latency Time Series.</li>
+<li>Write on Disk Time Series.</li>
+</ul>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Logs Overview and Sample <a id="logs-overview-and-sample" href="#logs-overview-and-sample" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p>The logs file <a href="files/parser-latest-log.tar.bz2" class="umami--click--files-parser-latest-log-tar-bz2">parser-latest-log.tar.bz2 <span class="iconify" data-icon="icomoon-free:file-zip"></span></a> that is produced by the parser to uncompress and read. Each log record inside is nothing than a json line generated by the <a href="https://www.structlog.org/en/stable/" class="umami--click--www-structlog-org-en-stable">structlog <span class="iconify" data-icon="la:external-link-alt"></span></a> logging library. I like using that lib for events tracking. Let's print a sample of the records.</p>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Dataset</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">tarfile</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">json</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">pandas</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">pd</span>
+
+<span style="color: #007020; font-weight: bold">with</span> tarfile<span style="color: #666666">.</span>open(<span style="color: #4070a0">'files/parser-latest-log.tar.bz2'</span>) <span style="color: #007020; font-weight: bold">as</span> tfile:
+    file <span style="color: #666666">=</span> tfile<span style="color: #666666">.</span>extractfile(<span style="color: #4070a0">'parser-latest-log.txt'</span>)
+    logs_data <span style="color: #666666">=</span> file<span style="color: #666666">.</span>read()<span style="color: #666666">.</span>decode()
+
+json_lines <span style="color: #666666">=</span> [json<span style="color: #666666">.</span>loads(line) <span style="color: #007020; font-weight: bold">for</span> line <span style="color: #007020; font-weight: bold">in</span> logs_data<span style="color: #666666">.</span>splitlines()]
+df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>DataFrame<span style="color: #666666">.</span>from_records(json_lines)
+df[<span style="color: #4070a0">'timestamp'</span>] <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>to_datetime(df[<span style="color: #4070a0">'timestamp'</span>])
+</code></pre>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Table</span>
+df<span style="color: #666666">.</span>sample(<span style="color: #40a070">5</span>)<span style="color: #666666">.</span>to_markdown(index<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)
+</code></pre>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th style="text-align:left">event</th>
+<th style="text-align:left">timestamp</th>
+<th style="text-align:left">thread_name</th>
+<th style="text-align:left">target</th>
+<th style="text-align:left">args</th>
+<th style="text-align:left">path</th>
+<th style="text-align:right">exc_info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">data.get</td>
+<td style="text-align:left">2023-03-12 11:55:59.029086+00:00</td>
+<td style="text-align:left">Consumer-11</td>
+<td style="text-align:left">topic</td>
+<td style="text-align:left">{'page': '68', 'id': 67797}</td>
+<td style="text-align:left">nan</td>
+<td style="text-align:right">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">data.get</td>
+<td style="text-align:left">2023-03-12 12:23:21.008310+00:00</td>
+<td style="text-align:left">Consumer-6</td>
+<td style="text-align:left">topic</td>
+<td style="text-align:left">{'page': '232', 'id': 52642}</td>
+<td style="text-align:left">nan</td>
+<td style="text-align:right">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">data.saved</td>
+<td style="text-align:left">2023-03-12 12:59:10.965976+00:00</td>
+<td style="text-align:left">Consumer-12</td>
+<td style="text-align:left">topic</td>
+<td style="text-align:left">{'page': '447', 'id': 34298}</td>
+<td style="text-align:left">latest/order-created/ascending-False/page-447/topic-34298-2023-03-12T11:44:38+00:00.json</td>
+<td style="text-align:right">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">data.saved</td>
+<td style="text-align:left">2023-03-12 11:59:56.268552+00:00</td>
+<td style="text-align:left">Consumer-2</td>
+<td style="text-align:left">topic</td>
+<td style="text-align:left">{'page': '91', 'id': 65603}</td>
+<td style="text-align:left">latest/order-created/ascending-False/page-91/topic-65603-2023-03-12T11:44:38+00:00.json</td>
+<td style="text-align:right">nan</td>
+</tr>
+<tr>
+<td style="text-align:left">task.get</td>
+<td style="text-align:left">2023-03-12 11:46:53.948818+00:00</td>
+<td style="text-align:left">Producer-2</td>
+<td style="text-align:left">latest</td>
+<td style="text-align:left">nan</td>
+<td style="text-align:left">nan</td>
+<td style="text-align:right">nan</td>
+</tr>
+</tbody>
+</table>
+</div><p>The handy library <a href="https://github.com/akanz1/klib" class="umami--click--github-com-akanz1-klib">klib <span class="iconify" data-icon="codicon:github-inverted"></span></a> brings a brief dataset overview visualizing categories(a few column in the sample table), the most and least frequent value counts, values density per category. There are three categories we need to plot <code>event</code>, <code>thread_name</code>, <code>target</code>. The others <code>args</code>, <code>path</code>, <code>exc_info</code> are for the debugging purpose, <code>timestamp</code> is considered in other sections.</p>
+<pre><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">matplotlib.pyplot</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">plt</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">klib</span>
+
+klib<span style="color: #666666">.</span>cat_plot(df[[<span style="color: #4070a0">'event'</span>, <span style="color: #4070a0">'thread_name'</span>, <span style="color: #4070a0">'target'</span>]])
+plt<span style="color: #666666">.</span>suptitle(<span style="color: #4070a0">''</span>)
+</code></pre>
+<p><img src="files/categories-overview.png" alt="" title="categories overview" class="d-block mx-auto mw-100 h-100"></p>
+<p>As mentioned, there are two bloks representing each column, frequency and density. Density is a bottom block filled in with the thin lines, those lines are the most and least frequent values in the upper block. Zoom in the image to see text details.</p>
+<p>A few interesting facts from the image:</p>
+<ul>
+<li>The <code>event</code>'s most filled the vertical bar with teal color almost full <code>77.0%</code></li>
+<li>While the <code>thread_name</code>'s most are not so frequent within all the category values, its vertical bar contains a lot of white color that means filling in with other values.</li>
+<li>In the <code>target</code> bar only two unique values and the most frequent value <code>topic</code> filled the bar in for <code>93.6%</code></li>
+</ul>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Continuous Running Index <a id="continuous-running-index" href="#continuous-running-index" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p>The index is simply a number that is expected to be constant, doesn't matter what a value is. Constant means there were no interruptions of parser running. The basic way to visualize such the number is just a line, straight line. So, Is that line straight?</p>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Dataset</span>
+threads_df <span style="color: #666666">=</span> df[<span style="color: #666666">~</span>df[<span style="color: #4070a0">'thread_name'</span>]<span style="color: #666666">.</span>str<span style="color: #666666">.</span>startswith(<span style="color: #4070a0">'Main'</span>)]
+
+events_per_min_df <span style="color: #666666">=</span> threads_df<span style="color: #666666">.</span>set_index(<span style="color: #4070a0">'timestamp'</span>)\
+						<span style="color: #666666">.</span>pivot(columns<span style="color: #666666">=</span><span style="color: #4070a0">'event'</span>, values<span style="color: #666666">=</span><span style="color: #4070a0">'event'</span>)\
+						<span style="color: #666666">.</span>resample(<span style="color: #4070a0">'min'</span>)\
+						<span style="color: #666666">.</span>count()\
+						<span style="color: #666666">.</span>loc[:, [<span style="color: #4070a0">'task.get'</span>, <span style="color: #4070a0">'data.get'</span>, <span style="color: #4070a0">'data.received'</span>, <span style="color: #4070a0">'data.saved'</span>]]
+
+ts_diff_df <span style="color: #666666">=</span> events_per_min_df<span style="color: #666666">.</span>reset_index()\
+				<span style="color: #666666">.</span>diff()\
+				<span style="color: #666666">.</span>loc[:, <span style="color: #4070a0">'timestamp'</span>]
+ts_diff_df <span style="color: #666666">=</span> ts_diff_df<span style="color: #666666">.</span>dt<span style="color: #666666">.</span>seconds <span style="color: #666666">/</span> <span style="color: #40a070">60</span>  <span style="color: #60a0b0; font-style: italic"># Convert to minutes</span>
+ts_diff_df<span style="color: #666666">.</span>rename(<span style="color: #4070a0">'Diff in minutes'</span>, inplace<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>)
+</code></pre>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Plot</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">seaborn</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">sns</span>
+
+sns<span style="color: #666666">.</span>set_theme(style<span style="color: #666666">=</span><span style="color: #4070a0">'white'</span>, context<span style="color: #666666">=</span>{<span style="color: #4070a0">'axes.labelsize'</span>: <span style="color: #40a070">16</span>, <span style="color: #4070a0">'axes.titlesize'</span>: <span style="color: #40a070">16</span>, <span style="color: #4070a0">'legend.fontsize'</span>: <span style="color: #40a070">16</span>})
+sns<span style="color: #666666">.</span>set_palette(<span style="color: #4070a0">'pastel'</span>)
+sns<span style="color: #666666">.</span>set_style({<span style="color: #4070a0">'axes.spines.left'</span>: <span style="color: #007020; font-weight: bold">False</span>, <span style="color: #4070a0">'axes.spines.bottom'</span>: <span style="color: #007020; font-weight: bold">False</span>, <span style="color: #4070a0">'axes.spines.right'</span>: <span style="color: #007020; font-weight: bold">False</span>, <span style="color: #4070a0">'axes.spines.top'</span>: <span style="color: #007020; font-weight: bold">False</span>})
+
+line <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>lineplot(data<span style="color: #666666">=</span>ts_diff_df, lw<span style="color: #666666">=</span><span style="color: #40a070">4</span>)
+last_pos <span style="color: #666666">=</span> line<span style="color: #666666">.</span>get_xticks()[<span style="color: #666666">-</span><span style="color: #40a070">2</span>]
+line<span style="color: #666666">.</span>set_xticks([<span style="color: #40a070">1</span>, last_pos],
+                labels<span style="color: #666666">=</span>[events_per_min_df<span style="color: #666666">.</span>index<span style="color: #666666">.</span>min()<span style="color: #666666">.</span>strftime(<span style="color: #4070a0">'%H:%M:%S'</span>),
+                        events_per_min_df<span style="color: #666666">.</span>index<span style="color: #666666">.</span>max()<span style="color: #666666">.</span>strftime(<span style="color: #4070a0">'%H:%M:%S'</span>)])
+line<span style="color: #666666">.</span>figure<span style="color: #666666">.</span>suptitle(<span style="color: #4070a0">'Continuous Index'</span>, size<span style="color: #666666">=</span><span style="color: #40a070">20</span>)
+line<span style="color: #666666">.</span>figure<span style="color: #666666">.</span>subplots_adjust(top<span style="color: #666666">=</span><span style="color: #40a070">.9</span>)
+</code></pre>
+<p><img src="files/continuous-index.png" alt="" title="continuous index" class="d-block mx-auto mw-100 h-100"></p>
+<p>Throughout all the running time<code>Timedelta('0 days 02:20:00')</code> there were no interruptions as the straight line of constant value <code>1</code> means that difference between every consequent ticks is 1 min, no more no less.</p>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Events Frequency <a id="events-frequency" href="#events-frequency" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p><code>event</code> is the most valuable category in a parser work. We can manually count and interpret logs for how many each event type was produced, whom, when, etc. That way works fine if log records are a few, that's not our case. Records are thousands, print the dataset shape <code>df.shape[0]</code> is <code>112880</code>.</p>
+<h3 class="mt-5 mb-3 fw-bold">Frequency Per Target <a id="frequency-per-target" href="#frequency-per-target" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<p>To make a general picture about all the events we can group them up into 5 minutes bins(groups) and split per <code>target</code> to visualize the dataset in different dimensions at the same time. Grouping into small time ranges(bins) with event frequency(count) calculation is being made for having data visualization easy to interpret. So, we will see how often each <code>event</code> type is produced per <code>target</code> within <code>5 min</code> bins.</p>
+<p>Only the events <code>task.get</code>, <code>data.get</code>, <code>data.received</code>, <code>data.saved</code> are left as the rest is about technical tracking and errors. Errors should be considered separately, i've manually checked their count and they are a couple.</p>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Datset</span>
+sub_df <span style="color: #666666">=</span> df<span style="color: #666666">.</span>drop(columns<span style="color: #666666">=</span>[<span style="color: #4070a0">'args'</span>, <span style="color: #4070a0">'path'</span>, <span style="color: #4070a0">'exc_info'</span>])\
+	<span style="color: #666666">.</span>dropna(subset<span style="color: #666666">=</span>[<span style="color: #4070a0">'target'</span>])\
+	<span style="color: #666666">.</span>loc[:, [<span style="color: #4070a0">'timestamp'</span>, <span style="color: #4070a0">'event'</span>, <span style="color: #4070a0">'target'</span>, <span style="color: #4070a0">'thread_name'</span>]]\
+	<span style="color: #666666">.</span>sort_index(axis<span style="color: #666666">=</span><span style="color: #40a070">1</span>)
+
+events_occured_df <span style="color: #666666">=</span> sub_df<span style="color: #666666">.</span>pivot(index<span style="color: #666666">=</span><span style="color: #4070a0">'timestamp'</span>,
+                                 columns<span style="color: #666666">=</span>[<span style="color: #4070a0">'thread_name'</span>, <span style="color: #4070a0">'target'</span>, <span style="color: #4070a0">'event'</span>],
+                                 values<span style="color: #666666">=</span><span style="color: #4070a0">'event'</span>)\
+	<span style="color: #666666">.</span>mask(<span style="color: #007020; font-weight: bold">lambda</span> df: df<span style="color: #666666">.</span>notna(), <span style="color: #40a070">1</span>)\
+	<span style="color: #666666">.</span>fillna(<span style="color: #40a070">0</span>)\
+    <span style="color: #666666">.</span>melt(ignore_index<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)\
+    <span style="color: #666666">.</span>query(<span style="color: #4070a0">'value == 1'</span>)\
+	<span style="color: #666666">.</span>drop(columns<span style="color: #666666">=</span><span style="color: #4070a0">'value'</span>)\
+    <span style="color: #666666">.</span>sort_index()
+
+cut_bins <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>date_range(start<span style="color: #666666">=</span>events_occured_df<span style="color: #666666">.</span>index<span style="color: #666666">.</span>min() , end<span style="color: #666666">=</span>events_occured_df<span style="color: #666666">.</span>index<span style="color: #666666">.</span>max() <span style="color: #666666">+</span> pd<span style="color: #666666">.</span>Timedelta(minutes<span style="color: #666666">=</span><span style="color: #40a070">5</span>), freq<span style="color: #666666">=</span><span style="color: #4070a0">'5min'</span>)
+cut_labels <span style="color: #666666">=</span> <span style="color: #007020">list</span>(<span style="color: #4070a0">f'</span><span style="color: #70a0d0; font-style: italic">{</span>i<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0">th'</span> <span style="color: #007020; font-weight: bold">for</span> i <span style="color: #007020; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #40a070">5</span>, <span style="color: #007020">len</span>(cut_bins) <span style="color: #666666">*</span> <span style="color: #40a070">5</span>, <span style="color: #40a070">5</span>))
+
+events_reduced_df <span style="color: #666666">=</span> events_occured_df[<span style="color: #666666">~</span>events_occured_df[<span style="color: #4070a0">'event'</span>]<span style="color: #666666">.</span>isin([<span style="color: #4070a0">'do'</span>, <span style="color: #4070a0">'done'</span>, <span style="color: #4070a0">'stop.blank'</span>, <span style="color: #4070a0">'error.http'</span>])]
+events_reduced_df<span style="color: #666666">.</span>loc[:, <span style="color: #4070a0">'5min bin'</span>] <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>cut(events_reduced_df<span style="color: #666666">.</span>index, 
+                                              bins<span style="color: #666666">=</span>cut_bins, 
+                                              labels<span style="color: #666666">=</span>cut_labels, 
+                                              include_lowest<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>)
+</code></pre>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Plot</span>
+displot <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>displot(data<span style="color: #666666">=</span>events_reduced_df, 
+                      x<span style="color: #666666">=</span><span style="color: #4070a0">'5min bin'</span>,
+                      hue<span style="color: #666666">=</span><span style="color: #4070a0">'event'</span>,
+                      col<span style="color: #666666">=</span><span style="color: #4070a0">'target'</span>,
+                      row<span style="color: #666666">=</span><span style="color: #4070a0">'event'</span>,
+                      multiple<span style="color: #666666">=</span><span style="color: #4070a0">'stack'</span>)
+loc, labels <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>xticks()
+displot<span style="color: #666666">.</span>set_xticklabels(labels, rotation<span style="color: #666666">=</span><span style="color: #40a070">45</span>)
+displot<span style="color: #666666">.</span>fig<span style="color: #666666">.</span>suptitle(<span style="color: #4070a0">'Events Frequency Over Targets'</span>, size<span style="color: #666666">=</span><span style="color: #40a070">20</span>)
+displot<span style="color: #666666">.</span>fig<span style="color: #666666">.</span>subplots_adjust(top<span style="color: #666666">=</span><span style="color: #40a070">.9</span>)
+</code></pre>
+<p><img src="files/target-events-frequency-per-5-min.png" alt="" title="target events frequency per 5 min" class="d-block mx-auto mw-100 h-100"></p>
+<p>Nice, right away we see:</p>
+<ul>
+<li>That event's amount of the target <code>latest</code> is an order smaller than of <code>topic</code>.</li>
+<li>The event <code>task.get</code> amount is bigger at both targets than other event types, but it's not representative of the plot type. It can be depicted better.</li>
+</ul>
+<p>Visualizing the event amount as a ratio could help with the feeling of how much bigger <code>task.get</code> is.</p>
+<pre><code><span style="color: #007020; font-weight: bold">with</span> sns<span style="color: #666666">.</span>axes_style(<span style="color: #4070a0">'whitegrid'</span>):
+    displot <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>displot(data<span style="color: #666666">=</span>events_reduced_df,
+                          x<span style="color: #666666">=</span>events_reduced_df[<span style="color: #4070a0">'5min bin'</span>]<span style="color: #666666">.</span>apply(<span style="color: #007020; font-weight: bold">lambda</span> val: val<span style="color: #666666">.</span>removesuffix(<span style="color: #4070a0">'th'</span>))\
+                                <span style="color: #666666">.</span>astype(<span style="color: #007020">int</span>)\
+                                <span style="color: #666666">.</span>rename(<span style="color: #4070a0">'5min int bin'</span>),
+                          hue<span style="color: #666666">=</span><span style="color: #4070a0">'event'</span>,
+                          col<span style="color: #666666">=</span><span style="color: #4070a0">'target'</span>,
+                          multiple<span style="color: #666666">=</span><span style="color: #4070a0">'fill'</span>,
+                          kind<span style="color: #666666">=</span><span style="color: #4070a0">'kde'</span>)
+    displot<span style="color: #666666">.</span>fig<span style="color: #666666">.</span>suptitle(<span style="color: #4070a0">'Events Frequency Ratio'</span>, size<span style="color: #666666">=</span><span style="color: #40a070">20</span>)
+    displot<span style="color: #666666">.</span>fig<span style="color: #666666">.</span>subplots_adjust(top<span style="color: #666666">=</span><span style="color: #40a070">.9</span>)
+</code></pre>
+<p><img src="files/target-events-ratio-per-5-min.png" alt="" title="target events ratio per 5 min" class="d-block mx-auto mw-100 h-100"></p>
+<p>Much more clear now:</p>
+<ul>
+<li><code>task.get</code> of the target <code>topic</code> is around <code>1.0 - 0.7</code>, <code>0.3</code> of the whole. It looks balanced.</li>
+<li>While <code>task.get</code> of the target <code>latest</code> is around <code>1.0 - 0.35</code>, <code>0.65</code> is quite big.</li>
+</ul>
+<h3 class="mt-5 mb-3 fw-bold">Frequency Per Thread <a id="frequency-per-thread" href="#frequency-per-thread" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<p>A similar way to the frequency above the dataset is plotted, but a per thread dimension. How often each <code>event</code> type is produced per <code>thread_name</code> within <code>5 min</code> bins.</p>
+<pre><code>displot <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>displot(data<span style="color: #666666">=</span>events_reduced_df, x<span style="color: #666666">=</span><span style="color: #4070a0">'5min bin'</span>, hue<span style="color: #666666">=</span><span style="color: #4070a0">'event'</span>, col<span style="color: #666666">=</span><span style="color: #4070a0">'thread_name'</span>, col_wrap<span style="color: #666666">=</span><span style="color: #40a070">2</span>, multiple<span style="color: #666666">=</span><span style="color: #4070a0">'stack'</span>)
+loc, labels <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>xticks()
+displot<span style="color: #666666">.</span>set_xticklabels(labels, rotation<span style="color: #666666">=</span><span style="color: #40a070">45</span>)
+displot<span style="color: #666666">.</span>fig<span style="color: #666666">.</span>suptitle(<span style="color: #4070a0">'Events Frequency Over Threads'</span>, size<span style="color: #666666">=</span><span style="color: #40a070">20</span>)
+displot<span style="color: #666666">.</span>fig<span style="color: #666666">.</span>subplots_adjust(top<span style="color: #666666">=</span><span style="color: #40a070">.9</span>)
+</code></pre>
+<p><img src="files/thread-events-frequency-per-5-min.png" alt="" title="thread events frequency per 5 min" class="d-block mx-auto mw-100 h-100"></p>
+<p>The picture shows that each thread workload looks the same. That's a good observation, it means the parser was working as expected.</p>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Network Latency Time Series <a id="network-latency-time-series" href="#network-latency-time-series" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p>The network latency is a time delta between the events <code>data.received, data.get</code>. In order to compute all the deltas, the dataset has to be sorted by two columns <code>timestamp, thread_name</code> to avoid misplacing when, for example, event <code>data.get</code> is followed by <code>data.get</code> but of a different thread.</p>
+<p><strong>The valid event order</strong>:</p>
+<ol>
+<li><code>task.get</code></li>
+<li><code>data.get</code></li>
+<li><code>data.received</code></li>
+<li><code>data.saved</code></li>
+</ol>
+<h3 class="mt-5 mb-3 fw-bold">Check the events order validity <a id="check-the-events-order-validity" href="#check-the-events-order-validity" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<p>To check that an order after sorting is valid two columns should be added, the previous and next event. After columns are added, we can match accordingly to <strong>valid event order</strong> above each event with its previous and next to state it is valid in according to.</p>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Dataset</span>
+order_state_df <span style="color: #666666">=</span> events_reduced_df<span style="color: #666666">.</span>reset_index()\
+    <span style="color: #666666">.</span>sort_values([<span style="color: #4070a0">'thread_name'</span>, <span style="color: #4070a0">'timestamp'</span>], ascending<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>)\
+    <span style="color: #666666">.</span>assign(prev_event<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'event'</span>]<span style="color: #666666">.</span>shift(<span style="color: #40a070">1</span>),
+    		next_event<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'event'</span>]<span style="color: #666666">.</span>shift(<span style="color: #666666">-</span><span style="color: #40a070">1</span>))
+</code></pre>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Table</span>
+order_state_df[order_state_df[<span style="color: #4070a0">'thread_name'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'Consumer-1'</span>]\
+	<span style="color: #666666">.</span>iloc[<span style="color: #40a070">10</span>:<span style="color: #40a070">16</span>]\
+	<span style="color: #666666">.</span>loc[:, [<span style="color: #4070a0">'timestamp'</span>, <span style="color: #4070a0">'event'</span>, <span style="color: #4070a0">'prev_event'</span>, <span style="color: #4070a0">'next_event'</span>]]
+</code></pre>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th style="text-align:left">timestamp</th>
+<th style="text-align:left">event</th>
+<th style="text-align:left">prev_event</th>
+<th style="text-align:left">next_event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:48.148145+00:00</td>
+<td style="text-align:left">data.received</td>
+<td style="text-align:left">data.get</td>
+<td style="text-align:left">data.saved</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:48.150142+00:00</td>
+<td style="text-align:left">data.saved</td>
+<td style="text-align:left">data.received</td>
+<td style="text-align:left">task.get</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:48.150436+00:00</td>
+<td style="text-align:left">task.get</td>
+<td style="text-align:left">data.saved</td>
+<td style="text-align:left">data.get</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:48.150829+00:00</td>
+<td style="text-align:left">data.get</td>
+<td style="text-align:left">task.get</td>
+<td style="text-align:left">data.received</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:52.154315+00:00</td>
+<td style="text-align:left">data.received</td>
+<td style="text-align:left">data.get</td>
+<td style="text-align:left">data.saved</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:52.155328+00:00</td>
+<td style="text-align:left">data.saved</td>
+<td style="text-align:left">data.received</td>
+<td style="text-align:left">task.get</td>
+</tr>
+</tbody>
+</table>
+</div><p>The sample looks valid, now define a function with <strong>valid event order</strong> matching assigning results to new column <code>is_valid</code>.</p>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Dataset</span>
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">is_order_valid</span>(series):
+    <span style="color: #007020; font-weight: bold">if</span> series[<span style="color: #4070a0">'event'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'data.get'</span>:
+        <span style="color: #007020; font-weight: bold">return</span> series[<span style="color: #4070a0">'prev_event'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'task.get'</span>
+    <span style="color: #007020; font-weight: bold">if</span> series[<span style="color: #4070a0">'event'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'data.received'</span>:
+        <span style="color: #007020; font-weight: bold">return</span> series[<span style="color: #4070a0">'prev_event'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'data.get'</span>
+    <span style="color: #007020; font-weight: bold">if</span> series[<span style="color: #4070a0">'event'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'data.saved'</span>:
+        <span style="color: #007020; font-weight: bold">return</span> series[<span style="color: #4070a0">'prev_event'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'data.received'</span>         
+    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">None</span>
+
+order_state_df[<span style="color: #4070a0">'is_valid'</span>] <span style="color: #666666">=</span> order_state_df<span style="color: #666666">.</span>apply(is_order_valid, axis<span style="color: #666666">=</span><span style="color: #40a070">1</span>)
+</code></pre>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Table</span>
+order_state_df[[<span style="color: #4070a0">'timestamp'</span>, <span style="color: #4070a0">'event'</span>, <span style="color: #4070a0">'prev_event'</span>, <span style="color: #4070a0">'is_valid'</span>]]<span style="color: #666666">.</span>iloc[<span style="color: #40a070">10</span>:<span style="color: #40a070">16</span>]
+</code></pre>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th style="text-align:left">timestamp</th>
+<th style="text-align:left">event</th>
+<th style="text-align:left">prev_event</th>
+<th style="text-align:left">is_valid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:48.148145+00:00</td>
+<td style="text-align:left">data.received</td>
+<td style="text-align:left">data.get</td>
+<td style="text-align:left">True</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:48.150142+00:00</td>
+<td style="text-align:left">data.saved</td>
+<td style="text-align:left">data.received</td>
+<td style="text-align:left">True</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:48.150436+00:00</td>
+<td style="text-align:left">task.get</td>
+<td style="text-align:left">data.saved</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:48.150829+00:00</td>
+<td style="text-align:left">data.get</td>
+<td style="text-align:left">task.get</td>
+<td style="text-align:left">True</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:52.154315+00:00</td>
+<td style="text-align:left">data.received</td>
+<td style="text-align:left">data.get</td>
+<td style="text-align:left">True</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-03-12 11:44:52.155328+00:00</td>
+<td style="text-align:left">data.saved</td>
+<td style="text-align:left">data.received</td>
+<td style="text-align:left">True</td>
+</tr>
+</tbody>
+</table>
+</div><p><code>is_valid</code> marks rows as a boolean flag. Now we can group the dataset with and without <code>is_valid</code> flag, just to visualize if group counts are different.</p>
+<pre><code><span style="color: #007020; font-weight: bold">with</span> sns<span style="color: #666666">.</span>plotting_context({<span style="color: #4070a0">'ytick.labelsize'</span>: <span style="color: #40a070">16</span>, <span style="color: #4070a0">'xtick.labelsize'</span>: <span style="color: #40a070">0</span>, <span style="color: #4070a0">'xtick.major.width'</span>: <span style="color: #40a070">0</span>,  <span style="color: #4070a0">'axes.labelsize'</span>: <span style="color: #40a070">0</span>}):
+    fig, axes <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>subplots(<span style="color: #40a070">2</span>, <span style="color: #40a070">1</span>, sharey<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)
+    event_counts <span style="color: #666666">=</span> order_state_df[<span style="color: #4070a0">'event'</span>]<span style="color: #666666">.</span>value_counts(dropna<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)\
+    									  <span style="color: #666666">.</span>reset_index()
+    barplot <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>barplot(data<span style="color: #666666">=</span>event_counts,
+						  ax<span style="color: #666666">=</span>axes[<span style="color: #40a070">0</span>],
+                          y<span style="color: #666666">=</span><span style="color: #4070a0">'event'</span>,
+                          x<span style="color: #666666">=</span><span style="color: #4070a0">'count'</span>,
+                          color<span style="color: #666666">=</span>sns<span style="color: #666666">.</span>colors<span style="color: #666666">.</span>xkcd_rgb[<span style="color: #4070a0">'light blue'</span>])
+    axes[<span style="color: #40a070">0</span>]<span style="color: #666666">.</span>title<span style="color: #666666">.</span>set_text(<span style="color: #4070a0">'Unvalidated Event Counts'</span>)
+    <span style="color: #007020; font-weight: bold">for</span> i <span style="color: #007020; font-weight: bold">in</span> barplot<span style="color: #666666">.</span>containers:
+        barplot<span style="color: #666666">.</span>bar_label(i, fontsize<span style="color: #666666">=</span><span style="color: #40a070">16</span>)
+        
+    valid_event_counts <span style="color: #666666">=</span> order_state_df[[<span style="color: #4070a0">'event'</span>, <span style="color: #4070a0">'is_valid'</span>]]\
+    						<span style="color: #666666">.</span>value_counts(dropna<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)\
+    						<span style="color: #666666">.</span>reset_index()\
+                            <span style="color: #666666">.</span>assign(group<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'event'</span>]<span style="color: #666666">.</span>astype(<span style="color: #007020">str</span>) <span style="color: #666666">+</span> <span style="color: #4070a0">' - '</span> <span style="color: #666666">+</span> df[<span style="color: #4070a0">'is_valid'</span>]<span style="color: #666666">.</span>astype(<span style="color: #007020">str</span>))
+    barplot <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>barplot(data<span style="color: #666666">=</span>valid_event_counts,
+                          ax<span style="color: #666666">=</span>axes[<span style="color: #40a070">1</span>],
+                          y<span style="color: #666666">=</span><span style="color: #4070a0">'group'</span>,
+                          x<span style="color: #666666">=</span><span style="color: #4070a0">'count'</span>,
+                          color<span style="color: #666666">=</span>sns<span style="color: #666666">.</span>colors<span style="color: #666666">.</span>xkcd_rgb[<span style="color: #4070a0">'light blue'</span>])
+    axes[<span style="color: #40a070">1</span>]<span style="color: #666666">.</span>title<span style="color: #666666">.</span>set_text(<span style="color: #4070a0">'Validated Event Counts'</span>)
+    <span style="color: #007020; font-weight: bold">for</span> i <span style="color: #007020; font-weight: bold">in</span> barplot<span style="color: #666666">.</span>containers:
+        barplot<span style="color: #666666">.</span>bar_label(i, fontsize<span style="color: #666666">=</span><span style="color: #40a070">16</span>)
+</code></pre>
+<p><img src="files/unvalidated-validated-events.png" alt="" title="unvalidated validated events" class="d-block mx-auto mw-100 h-100"></p>
+<p>Obviously, all the events are valid due to all the counts on the top and bottom charts are equal. Consequently, network latency computing can be done with no data filtering or cleaning. The whole dataset completely match <strong>valid event order</strong>, further computed time deltas are correct.</p>
+<h3 class="mt-5 mb-3 fw-bold">Latency Overall <a id="latency-overall" href="#latency-overall" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<p>Subtract the <code>data.get</code> timestamp from <code>data.received</code> one. For making it, a new column <code>prev_event_timestamp</code> is added that contains timestamps of <code>data.get</code>. Latency are seconds.</p>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Dataset</span>
+latency_diffs <span style="color: #666666">=</span> order_state_df<span style="color: #666666">.</span>assign(prev_event_timestamp<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'timestamp'</span>]<span style="color: #666666">.</span>shift(<span style="color: #40a070">1</span>))\
+                    <span style="color: #666666">.</span>loc[<span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'event'</span>]<span style="color: #666666">==</span><span style="color: #4070a0">'data.received'</span>, :]\
+                    <span style="color: #666666">.</span>loc[<span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'is_valid'</span>] <span style="color: #666666">==</span> <span style="color: #007020; font-weight: bold">True</span>]\
+                    <span style="color: #666666">.</span>assign(latency<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'timestamp'</span>] <span style="color: #666666">-</span> df[<span style="color: #4070a0">'prev_event_timestamp'</span>])\
+                    <span style="color: #666666">.</span>assign(latency_sec<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'latency'</span>]<span style="color: #666666">.</span>dt<span style="color: #666666">.</span>total_seconds())\
+                    <span style="color: #666666">.</span>loc[:, [<span style="color: #4070a0">'timestamp'</span>, <span style="color: #4070a0">'thread_name'</span>, <span style="color: #4070a0">'latency_sec'</span>]]
+</code></pre>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Plot</span>
+latency_diffs<span style="color: #666666">.</span>set_index(<span style="color: #4070a0">'timestamp'</span>)[<span style="color: #4070a0">'latency_sec'</span>]<span style="color: #666666">.</span>plot()
+</code></pre>
+<p><img src="files/latency-timeseries.png" alt="" title="latency time series" class="d-block mx-auto mw-100 h-100"></p>
+<p>Interesting, the average latency lays in between <code>2.5</code> and <code>5.0</code> seconds, at the same time there is plenty of bigger values.</p>
+<p>Plot the latency distribution and see second groups.</p>
+<pre><code><span style="color: #007020; font-weight: bold">with</span> sns<span style="color: #666666">.</span>plotting_context({<span style="color: #4070a0">'xtick.major.width'</span>: <span style="color: #40a070">0</span>,  <span style="color: #4070a0">'axes.labelsize'</span>: <span style="color: #40a070">0</span>}):
+    sns<span style="color: #666666">.</span>histplot(latency_diffs, y<span style="color: #666666">=</span><span style="color: #4070a0">'latency_sec'</span>, color<span style="color: #666666">=</span><span style="color: #4070a0">'tab:red'</span>)
+</code></pre>
+<p><img src="files/latency-distribution.png" alt="" title="latency distribution" class="d-block mx-auto mw-100 h-100"></p>
+<p>Ok, now the picture is more clear. Visually, i would split the distribution in three main groups:</p>
+<ul>
+<li><code>0.0 - 2.5</code></li>
+<li><code>2.5 - 6.0</code></li>
+<li><code>16.0 - 20.0</code></li>
+</ul>
+<p>To prove the assumption i'm binning the data and compare what we see to the exact distribution values per bin.</p>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Table</span>
+latency_bins <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>cut(latency_diffs[<span style="color: #4070a0">'latency_sec'</span>], <span style="color: #40a070">10</span>)\
+	<span style="color: #666666">.</span>value_counts()\
+	<span style="color: #666666">.</span>sort_index()\
+	<span style="color: #666666">.</span>transpose()
+humanized_categories <span style="color: #666666">=</span> [<span style="color: #4070a0">f'</span><span style="color: #70a0d0; font-style: italic">{</span>inv<span style="color: #666666">.</span>left<span style="color: #70a0d0; font-style: italic">:</span><span style="color: #4070a0">.1f</span><span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0"> - </span><span style="color: #70a0d0; font-style: italic">{</span>inv<span style="color: #666666">.</span>right<span style="color: #70a0d0; font-style: italic">:</span><span style="color: #4070a0">.1f</span><span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0"> seconds'</span> 
+                        <span style="color: #007020; font-weight: bold">for</span> inv <span style="color: #007020; font-weight: bold">in</span> latency_bins<span style="color: #666666">.</span>index<span style="color: #666666">.</span>categories]
+latency_bins<span style="color: #666666">.</span>index <span style="color: #666666">=</span> latency_bins<span style="color: #666666">.</span>index<span style="color: #666666">.</span>rename_categories(humanized_categories)
+</code></pre>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th style="text-align:left">latency_sec</th>
+<th style="text-align:right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0.3 - 2.3 seconds</td>
+<td style="text-align:right">5445</td>
+</tr>
+<tr>
+<td style="text-align:left">2.3 - 4.3 seconds</td>
+<td style="text-align:right">19527</td>
+</tr>
+<tr>
+<td style="text-align:left">4.3 - 6.4 seconds</td>
+<td style="text-align:right">583</td>
+</tr>
+<tr>
+<td style="text-align:left">6.4 - 8.4 seconds</td>
+<td style="text-align:right">4</td>
+</tr>
+<tr>
+<td style="text-align:left">8.4 - 10.4 seconds</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:left">10.4 - 12.5 seconds</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:left">12.5 - 14.5 seconds</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:left">14.5 - 16.5 seconds</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:left">16.5 - 18.6 seconds</td>
+<td style="text-align:right">10</td>
+</tr>
+<tr>
+<td style="text-align:left">18.6 - 20.6 seconds</td>
+<td style="text-align:right">408</td>
+</tr>
+</tbody>
+</table>
+</div><p>The exact bin counts(second groups) in the table are quite close to the assumption.</p>
+<p>Now the latency overall statistics are plotted.</p>
+<pre><code><span style="color: #007020; font-weight: bold">with</span> sns<span style="color: #666666">.</span>axes_style(<span style="color: #4070a0">'darkgrid'</span>, {<span style="color: #4070a0">'axes.facecolor'</span>: <span style="color: #4070a0">'.9'</span>}):
+    sns<span style="color: #666666">.</span>boxplot(x<span style="color: #666666">=</span>latency_diffs[<span style="color: #4070a0">'latency_sec'</span>], width<span style="color: #666666">=</span><span style="color: #40a070">0.4</span>)
+</code></pre>
+<p><img src="files/latency-statistics.png" alt="" title="latency statistics" class="d-block mx-auto mw-100 h-100"></p>
+<p>The average <code>latency_diffs['latency_sec'].mean()</code> is <code>3.56</code> seconds, so a network request takes quite long time, therefore, having the parser multithreaded speeds up its performance significantly.</p>
+<p>All would be fine, but i'm not sure that the statistics is correct per thread. Probably, the performance is different in respect of a thread type.</p>
+<h3 class="mt-5 mb-3 fw-bold">Per Thread Latency <a id="per-thread-latency" href="#per-thread-latency" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<p>Now we plot latency per thread and find out differences.</p>
+<pre><code>sns<span style="color: #666666">.</span>relplot(kind<span style="color: #666666">=</span><span style="color: #4070a0">'line'</span>, data<span style="color: #666666">=</span>latency_diffs,
+            x<span style="color: #666666">=</span><span style="color: #4070a0">'timestamp'</span>,
+            y<span style="color: #666666">=</span><span style="color: #4070a0">'latency_sec'</span>,
+            col<span style="color: #666666">=</span><span style="color: #4070a0">'thread_name'</span>,
+            col_wrap<span style="color: #666666">=</span><span style="color: #40a070">2</span>)
+</code></pre>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Attached plot files</span>
+sns<span style="color: #666666">.</span>relplot(kind<span style="color: #666666">=</span><span style="color: #4070a0">'line'</span>, data<span style="color: #666666">=</span>latency_diffs<span style="color: #666666">.</span>loc[<span style="color: #007020; font-weight: bold">lambda</span> s: s[<span style="color: #4070a0">'thread_name'</span>]<span style="color: #666666">.</span>str<span style="color: #666666">.</span>startswith(<span style="color: #4070a0">'Consumer'</span>)], x<span style="color: #666666">=</span><span style="color: #4070a0">'timestamp'</span>, y<span style="color: #666666">=</span><span style="color: #4070a0">'latency_sec'</span>, col<span style="color: #666666">=</span><span style="color: #4070a0">'thread_name'</span>, col_wrap<span style="color: #666666">=</span><span style="color: #40a070">2</span>)
+sns<span style="color: #666666">.</span>relplot(kind<span style="color: #666666">=</span><span style="color: #4070a0">'line'</span>, data<span style="color: #666666">=</span>latency_diffs<span style="color: #666666">.</span>loc[<span style="color: #007020; font-weight: bold">lambda</span> s: s[<span style="color: #4070a0">'thread_name'</span>]<span style="color: #666666">.</span>str<span style="color: #666666">.</span>startswith(<span style="color: #4070a0">'Producer'</span>)], x<span style="color: #666666">=</span><span style="color: #4070a0">'timestamp'</span>, y<span style="color: #666666">=</span><span style="color: #4070a0">'latency_sec'</span>, col<span style="color: #666666">=</span><span style="color: #4070a0">'thread_name'</span>, col_wrap<span style="color: #666666">=</span><span style="color: #40a070">2</span>)    
+</code></pre>
+<p><img src="files/latency-seconds-timeseries-per-thread.png" alt="" title="latency seconds time series per thread" class="d-block mx-auto mw-100 h-100"></p>
+<p>Very interesting, the producers demonstrate a totally different latency pattern to the consumers one. While consumers latency looks very stable with just a few spikes on the picture, the producers shows ups and downs, very volatile latency.</p>
+<p>Along with the common plot, it is worth having separate ones of both thread types for a bigger representation scale <a href="files/latency-seconds-timeseries-per-consumers.png" class="umami--click--files-latency-seconds-timeseries-per-consumers-png">latency-per-consumers.png <span class="iconify" data-icon="bi:file-earmark-image"></span></a>, <a href="files/latency-seconds-timeseries-per-producers.png" class="umami--click--files-latency-seconds-timeseries-per-producers-png">latency-per-producers.png <span class="iconify" data-icon="bi:file-earmark-image"></span></a></p>
+<h3 class="mt-5 mb-3 fw-bold">Per Thread Type Distribution <a id="per-thread-type-distribution" href="#per-thread-type-distribution" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<p>Let's take a look at separate distribution per thread type <code>Consumer</code> and <code>Producer</code>.</p>
+<pre><code>sns<span style="color: #666666">.</span>displot(data<span style="color: #666666">=</span>latency_diffs<span style="color: #666666">.</span>assign(thread_group<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'thread_name'</span>]<span style="color: #666666">.</span>str<span style="color: #666666">.</span>partition(<span style="color: #4070a0">'-'</span>)[<span style="color: #40a070">0</span>]),
+            kind<span style="color: #666666">=</span><span style="color: #4070a0">'hist'</span>,
+            y<span style="color: #666666">=</span><span style="color: #4070a0">'latency_sec'</span>,
+            col<span style="color: #666666">=</span><span style="color: #4070a0">'thread_group'</span>,
+            color<span style="color: #666666">=</span><span style="color: #4070a0">'tab:red'</span>,
+            facet_kws<span style="color: #666666">=</span><span style="color: #007020">dict</span>(sharex<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)
+</code></pre>
+<p><img src="files/latency-per-thread-distribution.png" alt="" title="latency per thread distribution" class="d-block mx-auto mw-100 h-100"></p>
+<p>Splitting the whole dataset into two groups shows us the picture different to the overall distribution:</p>
+<ul>
+<li>The producers wait for a network response either for a few seconds or dozens. Looks very imbalanced.</li>
+<li>While the consumers work mostly at the same pace of a few seconds.</li>
+</ul>
+<h3 class="mt-5 mb-3 fw-bold">Per Thread Type Statistics <a id="per-thread-type-statistics" href="#per-thread-type-statistics" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<pre><code><span style="color: #007020; font-weight: bold">with</span> sns<span style="color: #666666">.</span>axes_style(<span style="color: #4070a0">'darkgrid'</span>, {<span style="color: #4070a0">'axes.facecolor'</span>: <span style="color: #4070a0">'.9'</span>}):
+    sns<span style="color: #666666">.</span>boxplot(x<span style="color: #666666">=</span>latency_diffs<span style="color: #666666">.</span>loc[<span style="color: #007020; font-weight: bold">lambda</span> s: s[<span style="color: #4070a0">'thread_name'</span>]<span style="color: #666666">.</span>str<span style="color: #666666">.</span>startswith(<span style="color: #4070a0">'Consumer'</span>)][<span style="color: #4070a0">'latency_sec'</span>],
+                width<span style="color: #666666">=</span><span style="color: #40a070">0.4</span>, showmeans<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>,
+                meanprops<span style="color: #666666">=</span><span style="color: #007020">dict</span>(markerfacecolor<span style="color: #666666">=</span><span style="color: #4070a0">'tab:red'</span>, markeredgecolor<span style="color: #666666">=</span><span style="color: #4070a0">'tab:red'</span>))
+</code></pre>
+<pre><code><span style="color: #007020; font-weight: bold">with</span> sns<span style="color: #666666">.</span>axes_style(<span style="color: #4070a0">'darkgrid'</span>, {<span style="color: #4070a0">'axes.facecolor'</span>: <span style="color: #4070a0">'.9'</span>}):
+    sns<span style="color: #666666">.</span>boxplot(x<span style="color: #666666">=</span>latency_diffs<span style="color: #666666">.</span>loc[<span style="color: #007020; font-weight: bold">lambda</span> s: s[<span style="color: #4070a0">'thread_name'</span>]<span style="color: #666666">.</span>str<span style="color: #666666">.</span>startswith(<span style="color: #4070a0">'Producer'</span>)][<span style="color: #4070a0">'latency_sec'</span>], width<span style="color: #666666">=</span><span style="color: #40a070">0.4</span>)
+</code></pre>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th style="text-align:center">thread_name</th>
+<th style="text-align:center">Statistics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>Consumer</code></td>
+<td style="text-align:center"><img src="files/latency-consumers-statistics.png" alt="" title="latency consumers statistics" class="d-block mx-auto mw-100 h-100"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Producer</code></td>
+<td style="text-align:center"><img src="files/latency-producers-statistics.png" alt="" title="latency `producers statistics" class="d-block mx-auto mw-100 h-100"></td>
+</tr>
+</tbody>
+</table>
+</div><p>Mean latency time(a red marker on the pictures):</p>
+<ul>
+<li>Of the consumers <code>latency_diffs[latency_diffs['thread_name'].str.startswith('Consumer')]['latency_sec'].mean()</code>, <code>3.34</code> seconds.</li>
+<li>Of the producers <code>9.99</code> seconds.</li>
+</ul>
+<p>So, as we see on all the plots of different metrics data of the producers and consumers has to be examined separately, otherwise, data insights would be distorted.</p>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Disk Writes Time Series <a id="disk-writes-time-series" href="#disk-writes-time-series" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p>After  data has been successfully received, it gets saved on disk. A disk write time partially describes general parser performance as network latency does.</p>
+<p>The same approach of computing time deltas between the events <code>data.received</code> and <code>data.saved</code> to explore write timeseries.</p>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Dataset</span>
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">is_write_valid</span>(series):
+    <span style="color: #007020; font-weight: bold">if</span> series[<span style="color: #4070a0">'event'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'data.saved'</span>:
+        <span style="color: #007020; font-weight: bold">return</span> series[<span style="color: #4070a0">'prev_event'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'data.received'</span> <span style="color: #007020; font-weight: bold">and</span> series[<span style="color: #4070a0">'next_event'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'task.get'</span>
+    <span style="color: #007020; font-weight: bold">return</span> <span style="color: #007020; font-weight: bold">None</span>
+
+order_state_df[<span style="color: #4070a0">'is_write_valid'</span>] <span style="color: #666666">=</span> order_state_df<span style="color: #666666">.</span>apply(is_write_valid, axis<span style="color: #666666">=</span><span style="color: #40a070">1</span>)
+</code></pre>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Table</span>
+order_state_df[[<span style="color: #4070a0">'event'</span>, <span style="color: #4070a0">'is_write_valid'</span>]]\
+	<span style="color: #666666">.</span>loc[<span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'event'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'data.saved'</span>, :]\
+	<span style="color: #666666">.</span>value_counts(dropna<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)\
+	<span style="color: #666666">.</span>reset_index()\
+	<span style="color: #666666">.</span>to_markdown(index<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)
+</code></pre>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th style="text-align:left">event</th>
+<th style="text-align:left">is_write_valid</th>
+<th style="text-align:right"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">data.saved</td>
+<td style="text-align:left">True</td>
+<td style="text-align:right">25977</td>
+</tr>
+</tbody>
+</table>
+</div><p>We see that all the data writes are valid and can be included into timeseries. Let's plot those time deltas per thread as we know from the network latency exploration that workload per a thread type differs a lot.</p>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Dataset</span>
+write_diffs <span style="color: #666666">=</span> order_state_df<span style="color: #666666">.</span>assign(prev_event_timestamp<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'timestamp'</span>]<span style="color: #666666">.</span>shift(<span style="color: #40a070">1</span>))\
+                    <span style="color: #666666">.</span>loc[<span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'event'</span>]<span style="color: #666666">==</span><span style="color: #4070a0">'data.saved'</span>, :]\
+                    <span style="color: #666666">.</span>loc[<span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'is_write_valid'</span>] <span style="color: #666666">==</span> <span style="color: #007020; font-weight: bold">True</span>]\
+                    <span style="color: #666666">.</span>assign(write_time<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'timestamp'</span>] <span style="color: #666666">-</span> df[<span style="color: #4070a0">'prev_event_timestamp'</span>])\
+                    <span style="color: #666666">.</span>assign(write_time_sec<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">lambda</span> df: df[<span style="color: #4070a0">'write_time'</span>]<span style="color: #666666">.</span>dt<span style="color: #666666">.</span>total_seconds())\
+                    <span style="color: #666666">.</span>loc[:, [<span style="color: #4070a0">'timestamp'</span>, <span style="color: #4070a0">'thread_name'</span>, <span style="color: #4070a0">'write_time_sec'</span>]]
+</code></pre>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Plot</span>
+sns<span style="color: #666666">.</span>relplot(kind<span style="color: #666666">=</span><span style="color: #4070a0">'line'</span>, data<span style="color: #666666">=</span>write_diffs, x<span style="color: #666666">=</span><span style="color: #4070a0">'timestamp'</span>, y<span style="color: #666666">=</span><span style="color: #4070a0">'write_time_sec'</span>, col<span style="color: #666666">=</span><span style="color: #4070a0">'thread_name'</span>, col_wrap<span style="color: #666666">=</span><span style="color: #40a070">2</span>)
+</code></pre>
+<p><img src="files/write-seconds-timeseries-per-thread.png" alt="" title="write seconds time series per thread" class="d-block mx-auto mw-100 h-100"></p>
+<ul>
+<li>Obviously, Producers didn't write as intensive as Consumers, the producer lines don't lay high on Y axis.</li>
+<li>Next thing, i see a few patterns in their writeload, the first is the beginning of each chart that looks more dense than the rest, the writes are intensive there.</li>
+<li>The second is at around <code>12:45</code> on the <code>3th, 4th, 6th, 10th, 12th</code> consumer subplots, we see the write spikes, almost a half of Consumers were affected by long write time.</li>
+</ul>
+<h3 class="mt-5 mb-3 fw-bold">Anomalies detection. Quantiles 0.99, 0.95, 0.75 <a id="anomalies-detection.-quantiles-0.99,-0.95,-0.75" href="#anomalies-detection.-quantiles-0.99,-0.95,-0.75" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<p>There are numbers of techniquies to detect the values we should pay attention to. The general and easy one is to find values that are bigger than the <code>99%</code>, <code>95%</code>, <code>75%</code> of others, in other words we visualize here writes that are longer than others in context of a sample statistics, the sample is <code>Consumer-6</code> data writes.</p>
+<p>The full fledged tool to visualize anomalies with a set of different ways and parameters, and very simple at the same time, is <a href="https://github.com/arundo/adtk" class="umami--click--github-com-arundo-adtk">adtk <span class="iconify" data-icon="codicon:github-inverted"></span></a>. Let's take it into action and build those three quantile plots.</p>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Dataset</span>
+<span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">adtk.data</span> <span style="color: #007020; font-weight: bold">import</span> validate_series
+<span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">adtk.detector</span> <span style="color: #007020; font-weight: bold">import</span> QuantileAD
+
+validated_write_diffs <span style="color: #666666">=</span> validate_series(write_diffs<span style="color: #666666">.</span>set_index(<span style="color: #4070a0">'timestamp'</span>))
+cons6_write_sec <span style="color: #666666">=</span> validated_write_diffs[validated_write_diffs[<span style="color: #4070a0">'thread_name'</span>] <span style="color: #666666">==</span> <span style="color: #4070a0">'Consumer-6'</span>]<span style="color: #666666">.</span>loc[:, <span style="color: #4070a0">'write_time_sec'</span>]
+</code></pre>
+<pre><code><span style="color: #60a0b0; font-style: italic"># Plots</span>
+<span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">adtk.visualization</span> <span style="color: #007020; font-weight: bold">import</span> plot <span style="color: #007020; font-weight: bold">as</span> _plot
+
+plot <span style="color: #666666">=</span> <span style="color: #007020; font-weight: bold">lambda</span> series, anomalies: _plot(series, anomaly<span style="color: #666666">=</span>anomalies, ts_linewidth<span style="color: #666666">=</span><span style="color: #40a070">1</span>, ts_markersize<span style="color: #666666">=</span><span style="color: #40a070">2</span>, anomaly_markersize<span style="color: #666666">=</span><span style="color: #40a070">3</span>, anomaly_color<span style="color: #666666">=</span><span style="color: #4070a0">'tab:red'</span>, anomaly_tag<span style="color: #666666">=</span><span style="color: #4070a0">"marker"</span>, legend<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)
+
+anomalies <span style="color: #666666">=</span> QuantileAD(high<span style="color: #666666">=</span><span style="color: #40a070">0.99</span>)<span style="color: #666666">.</span>fit_detect(cons6_write_sec)
+plot(cons6_write_sec, anomalies)
+
+anomalies <span style="color: #666666">=</span> QuantileAD(high<span style="color: #666666">=</span><span style="color: #40a070">0.95</span>)<span style="color: #666666">.</span>fit_detect(cons6_write_sec)
+plot(cons6_write_sec, anomalies)
+
+anomalies <span style="color: #666666">=</span> QuantileAD(high<span style="color: #666666">=</span><span style="color: #40a070">0.75</span>)<span style="color: #666666">.</span>fit_detect(cons6_write_sec)
+plot(cons6_write_sec, anomalies)
+</code></pre>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th>Quantile</th>
+<th>Anomalies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>99</code></td>
+<td><img src="files/anomalies-consumer-quantile-99.png" alt="" title="anomalies consumer quantile 99" class="d-block mx-auto mw-100 h-100"></td>
+</tr>
+<tr>
+<td><code>95</code></td>
+<td><img src="files/anomalies-consumer-quantile-95.png" alt="" title="anomalies consumer quantile 95" class="d-block mx-auto mw-100 h-100"></td>
+</tr>
+<tr>
+<td><code>75</code></td>
+<td><img src="files/anomalies-consumer-quantile-75.png" alt="" title="anomalies consumer quantile 75" class="d-block mx-auto mw-100 h-100"></td>
+</tr>
+</tbody>
+</table>
+</div><p>Visually, i think the case of <code>95%</code> covers all the spikes and it means that we don't need to consider narrowing down to <code>75%</code> as the rest of values looks normal,  only <code>5%</code> of writes take longer time than expected. So, <code>5%</code> is not that part of a whole to pay our time and investigate a reason that affects write time, it lets me say that the parser stays performant and is designed quite good.</p>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Afterword <a id="afterword" href="#afterword" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p>All the considered subjects can be applied to a typical parser as it works with the network resources and disk writes in parallel. In this specific case, i didn't suppose that Producers work will be very volatile.</p>
 
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5 fs-6">
             <strong class="d-block py-1 my-2 border-bottom"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
-            <ol><li><a href="#visual-derivative-table-cheat-sheet" class="text-decoration-none">Visual derivative table cheat sheet</a></li><li><a href="#note" class="text-decoration-none">Note</a></li></ol>
+            <ol><li><a href="#logs-overview-and-sample" class="text-decoration-none">Logs Overview and Sample</a></li><li><a href="#continuous-running-index" class="text-decoration-none">Continuous Running Index</a></li><li><a href="#events-frequency" class="text-decoration-none">Events Frequency</a><ol><li><a href="#frequency-per-target" class="text-decoration-none">Frequency Per Target</a></li><li><a href="#frequency-per-thread" class="text-decoration-none">Frequency Per Thread</a></li></ol></li><li><a href="#network-latency-time-series" class="text-decoration-none">Network Latency Time Series</a><ol><li><a href="#check-the-events-order-validity" class="text-decoration-none">Check the events order validity</a></li><li><a href="#latency-overall" class="text-decoration-none">Latency Overall</a></li><li><a href="#per-thread-latency" class="text-decoration-none">Per Thread Latency</a></li><li><a href="#per-thread-type-distribution" class="text-decoration-none">Per Thread Type Distribution</a></li><li><a href="#per-thread-type-statistics" class="text-decoration-none">Per Thread Type Statistics</a></li></ol></li><li><a href="#disk-writes-time-series" class="text-decoration-none">Disk Writes Time Series</a><ol><li><a href="#anomalies-detection.-quantiles-0.99,-0.95,-0.75" class="text-decoration-none">Anomalies detection. Quantiles 0.99, 0.95, 0.75</a></li></ol></li><li><a href="#afterword" class="text-decoration-none">Afterword</a></li></ol>
         </div>
     </div>
     <div class="row">

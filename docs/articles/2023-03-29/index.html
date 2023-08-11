@@ -47,13 +47,13 @@
         }
         h1, h2, h3, h4, h5, h5 {
             font-family: 'NMB';
-            color: #000000;
+            color: #5c5c5c;
         }
         div.row-article h3 {
             font-family: 'NMM';
         }
         a {
-            color: #920000
+            color: #975151
         }
         a:hover, a:focus {
             color: #b92929;
@@ -62,11 +62,14 @@
             text-decoration-thickness: initial;
             text-decoration-style: initial
         }
+        a.header-anchor {
+            visibility: hidden;
+        }
         a.link-dark {
-            color: #212529;
+            color: #5c5c5c;
         }
         a.link-dark-hover:hover {
-            color: #6c757d;
+            color: #212529;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -152,7 +155,7 @@
 <div class="container lh-base fs-5">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1 class="display-5 fw-bold">Research moderators activity in the Streamlit community. Dask, Pandas, Seaborn <a id="research-moderators-activity-in-the-streamlit-community.-dask,-pandas,-seaborn" href="#research-moderators-activity-in-the-streamlit-community.-dask,-pandas,-seaborn"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
+            <h1 class="display-5 fw-bold">Research moderators activity in the Streamlit community. Dask, Pandas, Seaborn <a id="research-moderators-activity-in-the-streamlit-community.-dask,-pandas,-seaborn" href="#research-moderators-activity-in-the-streamlit-community.-dask,-pandas,-seaborn" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>I'm curious how well the Streamlit company develops its <a href="https://discuss.streamlit.io/" class="umami--click--discuss-streamlit-io">community <span class="iconify" data-icon="la:external-link-alt"></span></a>. To make it better, a lot of questions from very beginners to advanced users have to be answered or, at least, responded to in a reasonable time. Fortunately, the community forum is based on the broadly spread forum engine <a href="https://www.discourse.org" class="umami--click--www-discourse-org">Discourse <span class="iconify" data-icon="la:external-link-alt"></span></a>. The engine exposes <a href="https://docs.discourse.org" class="umami--click--docs-discourse-org">API <span class="iconify" data-icon="la:external-link-alt"></span></a> and all the data can be pulled out from the website to analyze later on for how actively the empowered users(moderators) communicate to people.</p>
 <p>To represent the activity the following subjects are researched:</p>
@@ -171,7 +174,7 @@
 </li>
 </ul>
 <p>To reveal the details about them data, first of all, are collected and then preprocessed into the compact format parquet.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Collect and view data <a id="collect-and-view-data" href="#collect-and-view-data"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Collect and view data <a id="collect-and-view-data" href="#collect-and-view-data" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The two objects are requested from the website topic and post. Topic is nothing than the first post wrapped up with additional information. Both are accessable through the api endpoints:</p>
 <ul>
 <li><code>https://{defaultHost}/latest.json</code></li>
@@ -180,7 +183,7 @@
 <p>The suffix <code>.json</code> of an endpoint says that all the topics and posts you see on a web page are downloaded as json documets, very handy for machine processing. For example, <code>https://discuss.streamlit.io/t/31582.json</code>.</p>
 <p>The whole history of documents has been downloaded by me, not worth to desctibe it here.</p>
 <p>What a file content is, how it looks like?</p>
-<h3 class="mt-5 mb-3 fw-bold">Files overview <a id="files-overview" href="#files-overview"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Files overview <a id="files-overview" href="#files-overview" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>There are thousands of small json files on disk named like <code>topic-4288.json</code>.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>find /collected -name <span style="color: #4070a0">"topic-*"</span> | wc -l
 <span style="color: #888888">25139</span>
@@ -199,7 +202,7 @@
 <span style="color: #888888">        "created_at": "2022-09-22T19:27:47.715Z",</span>
 </code></pre>
 <p><em>The whole file <a href="files/topic-4288.json" class="umami--click--files-topic-4288-json">topic-4288.json <span class="iconify" data-icon="bi:filetype-json"></span></a>.</em></p>
-<h3 class="mt-5 mb-3 fw-bold">Sample overview <a id="sample-overview" href="#sample-overview"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Sample overview <a id="sample-overview" href="#sample-overview" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>What information should be extracted from every single topic? Taking a deeper look.</p>
 <pre><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">json</span>
 <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">pandas</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">pd</span>
@@ -328,9 +331,9 @@ topic_posts_sample <span style="color: #666666">=</span> get_posts(topic, as_df<
 </tbody>
 </table>
 </div><p>Information in the fields <code>topic.id, post.user_id, post.username, post.id, post.created_at, post.post_number, post.staff, post.moderator, post.admin</code> is comprehensive to compute statistics on the subjects.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Preprocess data <a id="preprocess-data" href="#preprocess-data"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Preprocess data <a id="preprocess-data" href="#preprocess-data" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Denormalized json data should be converted to tabular. Here is a phase where <a href="https://www.dask.org" class="umami--click--www-dask-org">Dask <span class="iconify" data-icon="la:external-link-alt"></span></a> is taken to handle multiple files and preprocess them in parallel in a pipeline. The result is saved as the column-oriented data format <a href="https://parquet.apache.org" class="umami--click--parquet-apache-org">Parquet <span class="iconify" data-icon="la:external-link-alt"></span></a>.</p>
-<h3 class="mt-5 mb-3 fw-bold">Run a cluster <a id="run-a-cluster" href="#run-a-cluster"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Run a cluster <a id="run-a-cluster" href="#run-a-cluster" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <pre><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">dask.distributed</span> <span style="color: #007020; font-weight: bold">import</span> Client, LocalCluster
 
 cluster <span style="color: #666666">=</span> LocalCluster(dashboard_address<span style="color: #666666">=</span><span style="color: #4070a0">'127.0.0.1:8787'</span>,
@@ -340,7 +343,7 @@ cluster <span style="color: #666666">=</span> LocalCluster(dashboard_address<spa
                        memory_limit<span style="color: #666666">=</span><span style="color: #4070a0">'400MiB'</span>)
 client <span style="color: #666666">=</span> Client(cluster)
 </code></pre>
-<h3 class="mt-5 mb-3 fw-bold">Serialize posts <a id="serialize-posts" href="#serialize-posts"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Serialize posts <a id="serialize-posts" href="#serialize-posts" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <pre><code><span style="color: #60a0b0; font-style: italic"># Serialize</span>
 <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">json</span>
 <span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">pathlib</span> <span style="color: #007020; font-weight: bold">import</span> Path
@@ -351,7 +354,7 @@ posts_bag <span style="color: #666666">=</span> (dask<span style="color: #666666
                      <span style="color: #666666">.</span>map(json<span style="color: #666666">.</span>loads)
                      <span style="color: #666666">.</span>map(get_posts))
 </code></pre>
-<h3 class="mt-5 mb-3 fw-bold">Reduce fields and filter duplicates <a id="reduce-fields-and-filter-duplicates" href="#reduce-fields-and-filter-duplicates"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Reduce fields and filter duplicates <a id="reduce-fields-and-filter-duplicates" href="#reduce-fields-and-filter-duplicates" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <pre><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">tabulate</span> <span style="color: #007020; font-weight: bold">import</span> tabulate
 <span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">IPython.display</span> <span style="color: #007020; font-weight: bold">import</span> display_markdown
 
@@ -383,9 +386,9 @@ posts_bag <span style="color: #666666">=</span> posts_bag<span style="color: #66
 posts_ddf <span style="color: #666666">=</span> posts_bag<span style="color: #666666">.</span>to_dataframe()
 posts_ddf<span style="color: #666666">.</span>to_parquet(<span style="color: #4070a0">'files/preprocessed/'</span>)
 </code></pre>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Analyse data <a id="analyse-data" href="#analyse-data"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Analyse data <a id="analyse-data" href="#analyse-data" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Data is ready to compute statistics and find trends.</p>
-<h3 class="mt-5 mb-3 fw-bold">Extract moderatos. Summary view <a id="extract-moderatos.-summary-view" href="#extract-moderatos.-summary-view"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Extract moderatos. Summary view <a id="extract-moderatos.-summary-view" href="#extract-moderatos.-summary-view" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <pre><code><span style="color: #60a0b0; font-style: italic"># Filter moderators, admins, staff</span>
 posts_df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>read_parquet(<span style="color: #4070a0">'files/preprocessed/part.0.parquet'</span>)
 moderators_df <span style="color: #666666">=</span> posts_df[posts_df[[<span style="color: #4070a0">'post.admin'</span>, <span style="color: #4070a0">'post.moderator'</span>, <span style="color: #4070a0">'post.staff'</span>]]<span style="color: #666666">.</span>any(axis<span style="color: #666666">=</span><span style="color: #40a070">1</span>)]
@@ -640,7 +643,7 @@ sns<span style="color: #666666">.</span>despine(left<span style="color: #666666"
 </code></pre>
 <p><img src="files/moderators-summary.png" alt="" title="moderators summary" class="d-block mx-auto mw-100 h-100"></p>
 <p>The top two moderators are the most active, and the second is a bot. <code>randyzwitch</code> is the only leader here.</p>
-<h3 class="mt-5 mb-3 fw-bold">Responded topics disrtibution <a id="responded-topics-disrtibution" href="#responded-topics-disrtibution"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Responded topics disrtibution <a id="responded-topics-disrtibution" href="#responded-topics-disrtibution" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Responses distribution over the whole community lifetime.</p>
 <pre><code><span style="color: #60a0b0; font-style: italic"># Drop bots, add flags and convert datetime</span>
 posts_df <span style="color: #666666">=</span> posts_df[<span style="color: #666666">~</span>posts_df[<span style="color: #4070a0">'post.username'</span>]<span style="color: #666666">.</span>isin([<span style="color: #4070a0">'system'</span>, <span style="color: #4070a0">'streamlit'</span>])]
@@ -670,7 +673,7 @@ hist<span style="color: #666666">.</span>set_xticks([<span style="color: #40a070
 <li>The response frequency is decreased on the right part.</li>
 <li>Almost all topics on the left are responded. I guess they are simply closed after a long while.</li>
 </ul>
-<h3 class="mt-5 mb-3 fw-bold">First response delay stats <a id="first-response-delay-stats" href="#first-response-delay-stats"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">First response delay stats <a id="first-response-delay-stats" href="#first-response-delay-stats" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>How fast moderators respond to a new topic.</p>
 <pre><code>posts_df[<span style="color: #4070a0">'is_first_post'</span>] <span style="color: #666666">=</span> posts_df[<span style="color: #4070a0">'post.post_number'</span>] <span style="color: #666666">==</span> <span style="color: #40a070">1</span>
 first_posts <span style="color: #666666">=</span> posts_df[(posts_df[<span style="color: #4070a0">'is_first_post'</span>]) <span style="color: #666666">&amp;</span> (<span style="color: #666666">~</span>posts_df[<span style="color: #4070a0">'is_moderator'</span>])]<span style="color: #666666">.</span>sort_values(<span style="color: #4070a0">'topic.id'</span>)
@@ -788,7 +791,7 @@ box<span style="color: #666666">.</span>yaxis<span style="color: #666666">.</spa
 <li>The majority responses within <code>~25</code> hours or one day.</li>
 <li>A few come to the community even later.</li>
 </ul>
-<h3 class="mt-5 mb-3 fw-bold">Common delay stats <a id="common-delay-stats" href="#common-delay-stats"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Common delay stats <a id="common-delay-stats" href="#common-delay-stats" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>The common stats as a summary of those above.</p>
 <pre><code>sns<span style="color: #666666">.</span>set_theme(style<span style="color: #666666">=</span><span style="color: #4070a0">'dark'</span>)
 box <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>boxenplot(responded_lte_50, x<span style="color: #666666">=</span><span style="color: #4070a0">'first_response_delay_hours'</span>, color<span style="color: #666666">=</span><span style="color: #4070a0">'xkcd:mauve'</span>, linewidth<span style="color: #666666">=</span><span style="color: #40a070">0.5</span>)

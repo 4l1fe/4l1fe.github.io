@@ -47,13 +47,13 @@
         }
         h1, h2, h3, h4, h5, h5 {
             font-family: 'NMB';
-            color: #000000;
+            color: #5c5c5c;
         }
         div.row-article h3 {
             font-family: 'NMM';
         }
         a {
-            color: #920000
+            color: #975151
         }
         a:hover, a:focus {
             color: #b92929;
@@ -62,11 +62,14 @@
             text-decoration-thickness: initial;
             text-decoration-style: initial
         }
+        a.header-anchor {
+            visibility: hidden;
+        }
         a.link-dark {
-            color: #212529;
+            color: #5c5c5c;
         }
         a.link-dark-hover:hover {
-            color: #6c757d;
+            color: #212529;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -152,7 +155,7 @@
 <div class="container lh-base fs-5">
         <div class="row">
         <div id="content" class="col-lg-9 order-2 order-lg-1">
-            <h1 class="display-5 fw-bold">Resizing LVM based SWAP volume on Kubuntu. Lack of RAM <a id="resizing-lvm-based-swap-volume-on-kubuntu.-lack-of-ram" href="#resizing-lvm-based-swap-volume-on-kubuntu.-lack-of-ram"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
+            <h1 class="display-5 fw-bold">Resizing LVM based SWAP volume on Kubuntu. Lack of RAM <a id="resizing-lvm-based-swap-volume-on-kubuntu.-lack-of-ram" href="#resizing-lvm-based-swap-volume-on-kubuntu.-lack-of-ram" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
 <p>After updating the laptop OS from Kubuntu 20.04 to 22.04 i started experiencing RAM issue i didn't have before on 20.04. The laptop has 8GB Ram and my normal workload is using PyCharm, Vivaldi, Alacritty, Typora, Obsidian. All of them consume less then 8GB. On 22.04 when i run Vivaldi and PyCharm all the memory is swallowed up by them, i have no idea why, but OS functioning became unstable and sometimes i even press hard reboot.</p>
 <p>Unfortunately, there are no slots for extending memory and the default swap volume size is around 1GB after standard Ubuntu installation that is used in the case when no free memory is available. All the swap size is also occupied by the two applications and not released. The other point is that OS started cachhing data more aggressively i guess, i failed to release memory by a few approaches</p>
@@ -165,7 +168,7 @@
 <li>Extend the swap file size</li>
 <li>Test OS stability</li>
 </ul>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Disk states <a id="disk-states" href="#disk-states"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Disk states <a id="disk-states" href="#disk-states" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Display initial disk states to compare to the ones at the end.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df -h
 <span style="color: #888888">Filesystem                             Size  Used Avail Use% Mounted on</span>
@@ -183,7 +186,7 @@
 <span style="color: #888888">    ├─vgkubuntu-root                        253:1    0 474.8G  0 lvm   /</span>
 <span style="color: #888888">    └─vgkubuntu-swap_1                      253:2    0   980M  0 lvm</span>
 </code></pre>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Shrink the FS. Reduce the LVM volume <a id="shrink-the-fs.-reduce-the-lvm-volume" href="#shrink-the-fs.-reduce-the-lvm-volume"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Shrink the FS. Reduce the LVM volume <a id="shrink-the-fs.-reduce-the-lvm-volume" href="#shrink-the-fs.-reduce-the-lvm-volume" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>By default, when Kubuntu is installed on a <a href="https://gitlab.com/cryptsetup/cryptsetup" class="umami--click--gitlab-com-cryptsetup-cryptsetup">LUKS fully encrypted <span class="iconify" data-icon="la:external-link-alt"></span></a> disk LVM management split all the space into two LVM volumes <code>root</code> and <code>swap_1</code>.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvs vgkubuntu
 <span style="color: #888888">  LV     VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span>
@@ -197,7 +200,7 @@
 </code></pre>
 <p>The first thing have to be done is releasing some space from <code>root</code> which will be added to the <code>swap_1</code> volume after.</p>
 <p>The important notice, releasing file system space is not equal to releasing LVM space. The both have to be done. If to reduce an lvm volume only there is potential to corrupt your data.</p>
-<h3 class="mt-5 mb-3 fw-bold">Releasing space on an external HDD <a id="releasing-space-on-an-external-hdd" href="#releasing-space-on-an-external-hdd"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Releasing space on an external HDD <a id="releasing-space-on-an-external-hdd" href="#releasing-space-on-an-external-hdd" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Operations on modifying disk space are unsafe and irreversible, due to that, i prefer to make it on an external HDD as a test attempt for further reproducing it on the laptop disk.</p>
 <p>There is already the existent backup volume <code>vgstoragebox-home--backup</code> on the HDD that i'm going to shrink it to see how it works, what problems will appear, and how to solve them.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>lsblk
@@ -277,7 +280,7 @@
 <span style="color: #888888">/dev/mapper/vgstoragebox-home--backup  289G  161G  114G  59% /media/vol/d4b01a30-f6eb-4b16-9451-1c9fb8366243</span>
 </code></pre>
 <p>It's done. The file system now is <code>289G</code> thats equals to <code>294GB</code> on a lower level. The experimental attempt succeeded, time to move on to the laptop disk.</p>
-<h3 class="mt-5 mb-3 fw-bold">Reproduce releasing space from a live OS flash drive <a id="reproduce-releasing-space-from-a-live-os-flash-drive" href="#reproduce-releasing-space-from-a-live-os-flash-drive"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
+<h3 class="mt-5 mb-3 fw-bold">Reproduce releasing space from a live OS flash drive <a id="reproduce-releasing-space-from-a-live-os-flash-drive" href="#reproduce-releasing-space-from-a-live-os-flash-drive" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>To modify the <code>root</code> volume the OS has to be off. Boot up on a flash drive with a live OS</p>
 <p>Open the encrypted laptop disk.</p>
 <pre><code>sudo cryptsetup open /dev/nvme0n1p3 laptop-drive</code>
@@ -350,7 +353,7 @@
 <span style="color: #888888">  vgkubuntu   1   2   0 wz--n- &lt;475.71g 9.75g</span>
 </code></pre>
 <p>Ok, the <code>VFree</code> space has increased to <code>9.75GB</code> from <code>0</code>.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Extend the swap volume <a id="extend-the-swap-volume" href="#extend-the-swap-volume"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Extend the swap volume <a id="extend-the-swap-volume" href="#extend-the-swap-volume" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>I don't know how big i really need the swap volume to be. For now, i'm adding <code>3GB</code> and leave some space for a few other purposes. Similiar experience of people who had the same issue i found <a href="https://askubuntu.com/questions/1193618/increase-size-of-encrypted-swap/1412311#1412311" class="umami--click--askubuntu-com-questions-1193618-increase-size-of-encrypted-swap-1412311-1412311">in the article <span class="iconify" data-icon="la:external-link-alt"></span></a>. The main idea is:</p>
 <ul>
 <li>Turn the swap off.</li>
@@ -387,7 +390,7 @@
 <span style="color: #888888">/dev/dm-2 partition   4G   0B   -2</span>
 </code></pre>
 <p>Fine, the swap grew up to <code>4GB</code>. Time to exploitate it and figure out whether the OS issues are gone.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Test stability <a id="test-stability" href="#test-stability"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Test stability <a id="test-stability" href="#test-stability" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>To check that a bigger swap makes OS stable i'm playing Dota 2 and experiencing no spikes or other issues anymore. Even when i run many applications it's working much smoother now. And i'm seeing that not all RAM is acquired and the swap stays unfilled completely in comparison to when the size was <code>980M</code>.</p>
 <p>In conclusion, i'd like to understand why the standard Ubuntu installation suggests such a small swap size? For thin and lightweight laptops, the problem of lacking RAM isn't gone.</p>
 

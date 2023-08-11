@@ -112,7 +112,8 @@ class HTMLGen:
                                    'gz': 'icomoon-free:file-zip',
                                    'sql': 'bi:file-earmark-code',
                                    'sh': 'bi:terminal',
-                                   'json': 'bi:filetype-json'}
+                                   'json': 'bi:filetype-json',
+                                   'bz2': 'icomoon-free:file-zip'}
     HIGHLIGHTING_STYLE_MAP = {'language-python': 'friendly',
                               'language-shell': 'friendly',
                               'language-toml': 'friendly'}
@@ -208,7 +209,9 @@ class HTMLGen:
         for element in root_element:
             if element.tag in HEADERS:
                 id_ = make_header_id(element.text)
-                a_element = Element('a', attrib={'id': id_, 'href': f'#{id_}'})
+                a_element = Element('a', attrib={'id': id_,
+                                                 'href': f'#{id_}',
+                                                 'class': 'header-anchor'})
                 span_element = Element('span', attrib={'class': 'iconify',
                                                        'data-icon': HTMLGen.ANCHOR_LINK_ICON_CLASS})
                 a_element.append(span_element)

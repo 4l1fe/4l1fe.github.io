@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+    <loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/</loc>
+    <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/main-section.png</image:loc>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/categories-overview.png</image:loc>
+        <image:title>categories overview</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/continuous-index.png</image:loc>
+        <image:title>continuous index</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/target-events-frequency-per-5-min.png</image:loc>
+        <image:title>target events frequency per 5 min</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/target-events-ratio-per-5-min.png</image:loc>
+        <image:title>target events ratio per 5 min</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/thread-events-frequency-per-5-min.png</image:loc>
+        <image:title>thread events frequency per 5 min</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/unvalidated-validated-events.png</image:loc>
+        <image:title>unvalidated validated events</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/latency-timeseries.png</image:loc>
+        <image:title>latency time series</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/latency-distribution.png</image:loc>
+        <image:title>latency distribution</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/latency-statistics.png</image:loc>
+        <image:title>latency statistics</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/latency-seconds-timeseries-per-thread.png</image:loc>
+        <image:title>latency seconds time series per thread</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/latency-per-thread-distribution.png</image:loc>
+        <image:title>latency per thread distribution</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/latency-consumers-statistics.png</image:loc>
+        <image:title>latency consumers statistics</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/latency-producers-statistics.png</image:loc>
+        <image:title>latency `producers statistics</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/write-seconds-timeseries-per-thread.png</image:loc>
+        <image:title>write seconds time series per thread</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/anomalies-consumer-quantile-99.png</image:loc>
+        <image:title>anomalies consumer quantile 99</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/anomalies-consumer-quantile-95.png</image:loc>
+        <image:title>anomalies consumer quantile 95</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/anomalies-consumer-quantile-75.png</image:loc>
+        <image:title>anomalies consumer quantile 75</image:title>
+    </image:image>
+      </url>
+    <url>
     <loc>https://www.kvdm.dev/articles/resizing-lvm-based-swap-volume-on-kubuntu-lack-of-ram/</loc>
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/resizing-lvm-based-swap-volume-on-kubuntu-lack-of-ram/files/main-section.png</image:loc>
@@ -97,16 +171,16 @@
     </image:image>
       </url>
     <url>
-    <loc>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/</loc>
+    <loc>https://www.kvdm.dev/articles/data-conversion-with-redframes-and-dataset/</loc>
     <image:image>
-        <image:loc>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/files/main-section.png</image:loc>
+        <image:loc>https://www.kvdm.dev/articles/data-conversion-with-redframes-and-dataset/files/main-section.png</image:loc>
     </image:image>
         <image:image>
-        <image:loc>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/files/data-before.png</image:loc>
+        <image:loc>https://www.kvdm.dev/articles/data-conversion-with-redframes-and-dataset/files/data-before.png</image:loc>
         <image:title>data before</image:title>
     </image:image>
         <image:image>
-        <image:loc>https://www.kvdm.dev/articles/data-convertion-with-redframes-and-dataset/files/data-after.png</image:loc>
+        <image:loc>https://www.kvdm.dev/articles/data-conversion-with-redframes-and-dataset/files/data-after.png</image:loc>
         <image:title>data after</image:title>
     </image:image>
       </url>
