@@ -189,11 +189,27 @@
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/files/main-section.png</image:loc>
     </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/files/plain-lines.png</image:loc>
+        <image:title>Plain lines</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/files/plain-columns.png</image:loc>
+        <image:title>Plain columns</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/colorize-printed-text-to-get-eyes-focused-termcolor/files/colored-columns.png</image:loc>
+        <image:title>Colored columns</image:title>
+    </image:image>
       </url>
     <url>
     <loc>https://www.kvdm.dev/articles/derivative-table-of-basic-functions-matplotlib-visualization/</loc>
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/derivative-table-of-basic-functions-matplotlib-visualization/files/main-section.png</image:loc>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/derivative-table-of-basic-functions-matplotlib-visualization/files/derivative-table-panes.png</image:loc>
+        <image:title>Table</image:title>
     </image:image>
       </url>
     <url>
@@ -201,17 +217,53 @@
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/getting-selected-elements-by-a-time-series-range-bokeh/files/main-section.png</image:loc>
     </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/getting-selected-elements-by-a-time-series-range-bokeh/files/shift-left.png</image:loc>
+        <image:title>Range shift left</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/getting-selected-elements-by-a-time-series-range-bokeh/files/shift-right.png</image:loc>
+        <image:title>Range shift right</image:title>
+    </image:image>
       </url>
     <url>
     <loc>https://www.kvdm.dev/articles/sourcegraph-is-heavyweight/</loc>
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/sourcegraph-is-heavyweight/files/main-section.png</image:loc>
     </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/sourcegraph-is-heavyweight/files/resource-estimation.png</image:loc>
+        <image:title>![](Resource estimation</image:title>
+    </image:image>
       </url>
     <url>
     <loc>https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/</loc>
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/files/main-section.png</image:loc>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/files/plot.png</image:loc>
+        <image:title>Graph initial</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/files/plot-relations.png</image:loc>
+        <image:title>Graph relations</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/files/plot-relations-layout.png</image:loc>
+        <image:title>Graph layout</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/files/plot-relations-layout-emphasize.png</image:loc>
+        <image:title>Graph emphasizing</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/files/plot-relations-layout-emphasize-names.png</image:loc>
+        <image:title>Graph full</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/files/plot-relations-layout-emphasize-names-errors.png</image:loc>
+        <image:title>Graph final</image:title>
     </image:image>
       </url>
     <url>
@@ -332,8 +384,12 @@
         <image:loc>https://www.kvdm.dev/articles/laptop-bootloading-time-extreme-growth-systemd/files/main-section.png</image:loc>
     </image:image>
         <image:image>
+        <image:loc>https://www.kvdm.dev/articles/laptop-bootloading-time-extreme-growth-systemd/files/subsection-progress.png</image:loc>
+        <image:title>Subsection finding a cause</image:title>
+    </image:image>
+        <image:image>
         <image:loc>https://www.kvdm.dev/articles/laptop-bootloading-time-extreme-growth-systemd/files/subsection-done.png</image:loc>
-        <image:title>Subsection done</image:title>
+        <image:title>Subsection found</image:title>
     </image:image>
         <image:image>
         <image:loc>https://www.kvdm.dev/articles/laptop-bootloading-time-extreme-growth-systemd/files/subsection-chart.png</image:loc>
@@ -370,8 +426,36 @@
         <image:loc>https://www.kvdm.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/files/main-section.png</image:loc>
     </image:image>
         <image:image>
+        <image:loc>https://www.kvdm.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/files/tinydb/deps.png</image:loc>
+        <image:title>tinydb dependencies</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/files/peewee-kv/edited-deps.png</image:loc>
+        <image:title>peewee kv dependencies</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/files/tinydb/classes.png</image:loc>
+        <image:title>tinydb classes diagram</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/files/sqlitedict/classes.png</image:loc>
+        <image:title>sqlitedict classes diagram</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/files/peewee-kv/classes.png</image:loc>
+        <image:title>peewee kv classes diagram</image:title>
+    </image:image>
+        <image:image>
         <image:loc>https://www.kvdm.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/files/tinydb/basic-scenario-edited.png</image:loc>
-        <image:title>Call graph</image:title>
+        <image:title>tinydb call graph</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/files/sqlitedict/basic-scenario-edited.png</image:loc>
+        <image:title>sqlitedict call graph</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/files/peewee-kv/basic-scenario-edited.png</image:loc>
+        <image:title>peewee kv call graph</image:title>
     </image:image>
         <image:image>
         <image:loc>https://www.kvdm.dev/articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/files/CC-chart.png</image:loc>

@@ -53,23 +53,23 @@
             font-family: 'NMM';
         }
         a {
-            color: #975151
+            color: #434343;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
         }
         a:hover, a:focus {
-            color: #b92929;
-            text-decoration: underline;
-            text-decoration-line: underline;
-            text-decoration-thickness: initial;
-            text-decoration-style: initial
+            color: #ce0000;
         }
         a.header-anchor {
             visibility: hidden;
         }
         a.link-dark {
             color: #5c5c5c;
+            text-decoration: none;
         }
-        a.link-dark-hover:hover {
+        a.link-dark:hover {
             color: #212529;
+            text-decoration: underline;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -161,7 +161,7 @@
 <p>Thanks for this sort of the problems that lead us to dig into the mechanisms our modern low level software is based on. Such a fascinating technical journey <strong>(^o^)</strong></p>
 <p>I suppose you have heard the systemd term and have a general understanding of the <strong>root process</strong> in Linux, it is necessary in terms of who we have to ask for information about bootloading process.</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">What a cause is. How to reveal it <a id="what-a-cause-is.-how-to-reveal-it" href="#what-a-cause-is.-how-to-reveal-it" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p><img src="files/subsection-progress.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
+<p><img src="files/subsection-progress.png" alt="" title="Subsection finding a cause" class="d-block mx-auto mw-100 h-100"></p>
 <p>Obviously, first question appeared in my mind is how to list ran systemd's services during a bootloading phase. You, for sure, will get to the two reports <code>systemd-analyze, systemd-analyze blame</code> as me while answering the question. They display a list of the services, their running time and much more.</p>
 <p>In my case the list was following:</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>systemd-analyze
@@ -180,8 +180,8 @@
 </code></pre>
 <p><em>Output lines are reduced to those are longer than 1 second.</em></p>
 <p>As we see there a few problematic services longer than 6 and 10 seconds along with the shorter ones. It was pretty fast and simple to find it out, no effort at all. I went further asking myself what the couple is   about and how to disable them.</p>
-<h2 class="display-6 mt-5 mb-3 fw-bold">Causes are found. Which ones should be disabled <a id="causes-are-found.-which-ones-should-be-disabled" href="#causes-are-found.-which-ones-should-be-disabled" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
-<p><img src="files/subsection-done.png" alt="" title="Subsection done" class="d-block mx-auto mw-100 h-100"></p>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Causes are found. Which one should be disabled <a id="causes-are-found.-which-one-should-be-disabled" href="#causes-are-found.-which-one-should-be-disabled" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p><img src="files/subsection-done.png" alt="" title="Subsection found" class="d-block mx-auto mw-100 h-100"></p>
 <p>What do i thought about each service listed above? <code>dev-nvme0n1p3.device</code> is a necessary physical SSD device and is putted out from consideration. <code>docker.service</code> is required for my job purposes on every day basis so it is left enabled. Next candidates to consider were <code>snapd.service, vboxdrv.service</code>. I don't use neither SnapD nor VirtualBox therefore they were disabled immediately.</p>
 <p>A group of the further candidates was  <code>NetworkManager-wait-online.service, apt-daily.service, apt-daily-upgrade.service</code>, what do they do? Aptish services' function is software update checking and upgrading, but why they do start at the bootloading phase? I googled the subject and ended up with it happens seldom. Seldom? To be more concise, these services are running by <strong>timer units</strong>. This idea i came to by a small research:</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>systemctl list-unit-files <span style="color: #4070a0">'apt*'</span>
@@ -230,7 +230,7 @@
         </div>
         <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5 fs-6">
             <strong class="d-block py-1 my-2 border-bottom"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
-            <ol><li><a href="#what-a-cause-is.-how-to-reveal-it" class="text-decoration-none">What a cause is. How to reveal it</a></li><li><a href="#causes-are-found.-which-ones-should-be-disabled" class="text-decoration-none">Causes are found. Which ones should be disabled</a></li><li><a href="#is-there-chronological-statistics" class="text-decoration-none">Is there chronological statistics</a></li><li><a href="#afterword" class="text-decoration-none">Afterword</a></li></ol>
+            <ol><li><a href="#what-a-cause-is.-how-to-reveal-it" class="text-decoration-none">What a cause is. How to reveal it</a></li><li><a href="#causes-are-found.-which-one-should-be-disabled" class="text-decoration-none">Causes are found. Which one should be disabled</a></li><li><a href="#is-there-chronological-statistics" class="text-decoration-none">Is there chronological statistics</a></li><li><a href="#afterword" class="text-decoration-none">Afterword</a></li></ol>
         </div>
     </div>
     <div class="row">

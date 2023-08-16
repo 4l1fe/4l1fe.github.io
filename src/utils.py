@@ -2,6 +2,7 @@ import unicodedata
 import re
 from itertools import islice
 from functools import lru_cache
+from pathlib import Path
 
 
 def make_header_id(tag_text):
@@ -38,3 +39,16 @@ def first_h1_text(element):
 def first_p_text(element):
     """0th element has to be an article image"""
     return list(islice(element.iterfind('.//p'), 2))[1].text_content()
+
+
+def replace_relative_with_dots(path: Path, dots_to) -> Path:
+    parts = path.relative_to(dots_to).parts
+    dot_path = Path('')
+
+    for part in parts:
+        if part != parts[-1]:
+            dot_path = dot_path.joinpath('..')
+        else:
+            dot_path = dot_path.joinpath(part)
+
+    return dot_path

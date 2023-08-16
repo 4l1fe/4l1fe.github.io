@@ -9,6 +9,7 @@ from pathlib import Path
 from datetime import datetime
 from argparse import ArgumentParser
 from copy import deepcopy
+from enum import Enum
 
 import markdown_it
 from lxml.html import Element, fromstring, tostring as _tostring
@@ -19,38 +20,34 @@ from pygments.lexers.shell import BashSessionLexer
 from pygments.lexers.configs import TOMLLexer
 from pygments.formatters.html import HtmlFormatter
 from slugify import slugify
+from PIL import Image
 
-from constants import (DOCS_DIR, ARTICLES_DOCS_DIR, TEMPLATES_DIR, ARTICLE_TEMPLATE_FILE,
-                       INDEX_TEMPLATE_FILE, INDEX_FILE, AS_DIRS_IGNORE,
-                       SITEMAP_TEMPLATE_FILE, SITEMAP_FILE, SITE_ADDRESS, RSS_FILE, RSS_TEMPLATE_FILE, ARTICLE_IMG_FILE,
-                       SITE_NAME, ANALYTICS_SERVICE_TOKEN, ANALYTICS_SERVICE_JS,
-                       ANALYTICS_SERVICE_PAGE, ANALYTICS_ENABLED_DEFAULT, MONITORING_ENABLED_DEFAULT,
-                       MONITORING_SERVICE_PAGE, STATUSPAGE_ENABLED_DEFAULT, STATUSPAGE_SERVICE_ADDRESS,
-                       MEMOCARDS_ENABLED_DEFAULT, MEMOCARDS_SERVICE_ADDRESS, TRACK_ANALYTICS)
-from filters import trailing_slash, to_rfc822, prepend_site_address, update_classes
-from utils import make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text
+import constants as cns
+from filters import trailing_slash, to_rfc822, prepend_site_address, update_classes, replace_thumbnail_link
+from utils import make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text, replace_relative_with_dots
 
 
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 TOC_HEADERS = HEADERS[1:]
-TOC_LOWEST_HEADER = 3  # эквивалент <h3>
+TOC_LOWEST_HEADER = 3  # Meaning <h3>
 TocType = List[Tuple[int, str]]
 
 Dom = getDOMImplementation()
-env = Environment(loader=FileSystemLoader(TEMPLATES_DIR.as_posix()), trim_blocks=True,
+env = Environment(loader=FileSystemLoader(cns.TEMPLATES_DIR.as_posix()), trim_blocks=True,
                   autoescape=select_autoescape(['html']))
-env.globals['site_address'] = SITE_ADDRESS
-env.globals['site_name'] = SITE_NAME
-env.globals['analytics_service_token'] = ANALYTICS_SERVICE_TOKEN
-env.globals['analytics_service_js'] = ANALYTICS_SERVICE_JS
-env.globals['analytics_service_page'] = ANALYTICS_SERVICE_PAGE
-env.globals['monitoring_service_page'] = MONITORING_SERVICE_PAGE
-env.globals['memocards_service_address'] = MEMOCARDS_SERVICE_ADDRESS
-env.globals['statuspage_service_page'] = STATUSPAGE_SERVICE_ADDRESS
+env.globals['site_address'] = cns.SITE_ADDRESS
+env.globals['site_name'] = cns.SITE_NAME
+env.globals['analytics_service_token'] = cns.ANALYTICS_SERVICE_TOKEN
+env.globals['analytics_service_js'] = cns.ANALYTICS_SERVICE_JS
+env.globals['analytics_service_page'] = cns.ANALYTICS_SERVICE_PAGE
+env.globals['monitoring_service_page'] = cns.MONITORING_SERVICE_PAGE
+env.globals['memocards_service_address'] = cns.MEMOCARDS_SERVICE_ADDRESS
+env.globals['statuspage_service_page'] = cns.STATUSPAGE_SERVICE_ADDRESS
 env.filters['trailing_slash'] = trailing_slash
 env.filters['to_rfc822'] = to_rfc822
 env.filters['prepend_site_address'] = prepend_site_address
 env.filters['update_classes'] = update_classes
+env.filters['replace_thumbnail_link'] = replace_thumbnail_link
 tostring = functools.partial(_tostring, encoding='unicode')
 
 
@@ -58,7 +55,7 @@ tostring = functools.partial(_tostring, encoding='unicode')
 class AttachedImage:
     title: str
     relative_link: Path
-    article_relative_link: InitVar[Path]
+    article_relative_link: InitVar[Path]  # To prepend `relative_link`
 
     def __post_init__(self, article_relative_link):
         self.relative_link = article_relative_link.joinpath(self.relative_link)
@@ -70,15 +67,20 @@ class ArticleData:
     relative_link: Path
     paragraph: str
     created_date: datetime
-    main_img_relative_link: Path = ARTICLE_IMG_FILE
+    main_img_relative_link: Path = cns.ARTICLE_IMG_FILE
     images: Tuple[AttachedImage] = ()
 
     def __post_init__(self):
         self.main_img_relative_link = self.relative_link.joinpath(self.main_img_relative_link)
 
 
+class IndexViewEnum(str, Enum):
+    default = ''
+    preview = 'preview'
+
+ 
 def iter_articles_source_dir(articles_dir: Path, reverse=False):
-    ignore_dirs = set(articles_dir / d for d in AS_DIRS_IGNORE)
+    ignore_dirs = set(articles_dir / d for d in cns.AS_DIRS_IGNORE)
     iter_dir = articles_dir.iterdir()
 
     for article_source_dir in sorted(iter_dir, reverse=reverse):
@@ -87,19 +89,21 @@ def iter_articles_source_dir(articles_dir: Path, reverse=False):
 
 
 def generate_sitemap(articles_data: List[ArticleData]):
-    template = env.get_template(SITEMAP_TEMPLATE_FILE.name)
+    template = env.get_template(cns.SITEMAP_TEMPLATE_FILE.name)
     xml = template.render(articles_data=articles_data)
     return xml
 
 
 def generate_rss(articles_data: List[ArticleData]):
-    template = env.get_template(RSS_TEMPLATE_FILE.name)
+    template = env.get_template(cns.RSS_TEMPLATE_FILE.name)
     pub_date = datetime.now()
     xml = template.render(pub_date=pub_date, articles_data=articles_data)
     return xml
 
 
 class HTMLGen:
+    """Convert markdown to html. Operations on generating, extracting, formating html"""
+    
     EXTERNAL_LINK_ICON_CLASS = 'la:external-link-alt'
     EXTERNAL_LINK_GITHUB_ICON_CLASS = 'codicon:github-inverted'
     ANCHOR_LINK_ICON_CLASS = 'bi:link-45deg'
@@ -122,15 +126,15 @@ class HTMLGen:
                  'language-toml': TOMLLexer}
 
     @staticmethod
-    def generate_index_html(articles_data: List[ArticleData]):
-        template = env.get_template(INDEX_TEMPLATE_FILE.name)
-        html = template.render(articles_data=articles_data)
+    def generate_index_html(articles_data: List[ArticleData], view: IndexViewEnum):
+        template = env.get_template(cns.INDEX_TEMPLATE_FILE.name)
+        html = template.render(articles_data=articles_data, selected_view=view, IndexViewEnum=IndexViewEnum)
         return html
 
     @staticmethod
     def generate_article_html(md_text,  article_index_file, article_source_dir,
                               font_icons: bool = False, highlight: bool = False,
-                              track_analytics: bool = TRACK_ANALYTICS):
+                              track_analytics: bool = cns.TRACK_ANALYTICS):
         """Article is two big blocks `toc`, `content`"""
         parser = markdown_it.MarkdownIt().enable('table')
         html = parser.render(md_text)
@@ -144,12 +148,13 @@ class HTMLGen:
         content_html = HTMLGen._apply_highlighting(content_html) if highlight else content_html
         content_html = HTMLGen._apply_analytics_event_type(content_html) if track_analytics else content_html
         root_element = fromstring(content_html)
-        template = env.get_template(ARTICLE_TEMPLATE_FILE.name)
-        title = first_h1_text(root_element)
-        description = first_p_text(root_element)
         files_paths, images = HTMLGen.retrieve_attached_files_paths(html)
         article_data = HTMLGen._make_article_data(content_html, article_index_file, article_source_dir, images)
 
+        template = env.get_template(cns.ARTICLE_TEMPLATE_FILE.name)
+        title = first_h1_text(root_element)
+        description = first_p_text(root_element)
+        
         html = template.render(content=content_html, toc=toc_html, title=title,
                                description=description, article_data=article_data)
 
@@ -281,10 +286,9 @@ class HTMLGen:
 
     @staticmethod
     def _make_article_data(html: str, article_index_file, article_source_dir, images) -> ArticleData:
-        # Создание класса данных по статье для индекса блога
         root_element = fromstring(html)
         symlink_name = slugify(first_h1_text(root_element))
-        article_relative_symlink = ARTICLES_DOCS_DIR.joinpath(symlink_name).relative_to(DOCS_DIR)
+        article_relative_symlink = cns.DOCS_ARTICLES_DIR.joinpath(symlink_name).relative_to(cns.DOCS_DIR)
         created_date = datetime.strptime(article_source_dir.name, '%Y-%m-%d')
         images = tuple(AttachedImage(title, path, article_relative_symlink) for path, title in images.items() if title)
         adata = ArticleData(title=first_h1_text(root_element), relative_link=article_relative_symlink,
@@ -350,11 +354,11 @@ class HTMLGen:
 
 
 def main(articles_dir: Path, font_icons=True, highlight=True,
-         track_analytics=TRACK_ANALYTICS,
-         analytics=ANALYTICS_ENABLED_DEFAULT,
-         monitoring=MONITORING_ENABLED_DEFAULT,
-         memocards=MEMOCARDS_ENABLED_DEFAULT,
-         statuspage=STATUSPAGE_ENABLED_DEFAULT):
+         track_analytics=cns.TRACK_ANALYTICS,
+         analytics=cns.ANALYTICS_ENABLED_DEFAULT,
+         monitoring=cns.MONITORING_ENABLED_DEFAULT,
+         memocards=cns.MEMOCARDS_ENABLED_DEFAULT,
+         statuspage=cns.STATUSPAGE_ENABLED_DEFAULT):
     env.globals['track_analytics'] = track_analytics
     env.globals['analytics_enabled'] = analytics
     env.globals['monitoring_enabled'] = monitoring
@@ -363,11 +367,11 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
     articles_data = []
 
     for article_source_dir in iter_articles_source_dir(articles_dir, reverse=True):
-        # Генерация страницы и запись в файл
+        # Generate an article html and write it in a file
         article_md_file = next(article_source_dir.glob('*.md'))
         md_text = article_md_file.read_text()
-        article_dir = ARTICLES_DOCS_DIR / article_source_dir.name
-        article_index_file = article_dir / INDEX_FILE.name
+        article_dir = cns.DOCS_ARTICLES_DIR / article_source_dir.name
+        article_index_file = article_dir / cns.DOCS_INDEX_FILE.name
         data = HTMLGen.generate_article_html(md_text, article_index_file, article_source_dir,
                                              font_icons=font_icons, highlight=highlight,
                                              track_analytics=track_analytics)
@@ -376,33 +380,66 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
         article_index_file.write_text(article_html)
         articles_data.append(article_data)
 
-        # Создание ссылок на прикрепляемые файлы
+        # Making hardlinks to attached files
         # files_paths, images = HTMLGen.retrieve_attached_files_paths(article_html)
-        for path in chain(files_paths, images.keys()):
-            # Жесткие ссылки на исходные файлы
-            target = article_source_dir / path
-            hardlink_file = article_index_file.parent / path
-            hardlink_file.parent.mkdir(parents=True, exist_ok=True)
+        for file_path in chain(files_paths, images.keys()):
+            target_path = article_source_dir / file_path
+            hardlink_source_path = article_index_file.parent / file_path
+            hardlink_source_path.parent.mkdir(parents=True, exist_ok=True)
             with suppress(FileExistsError):
-                os.link(target, hardlink_file)
+                os.link(target_path, hardlink_source_path)
 
-        # Создание класса данных по статье для индекса блога
-        article_relative_link = article_index_file.relative_to(DOCS_DIR).parent
-        article_relative_symlink_path = Path('..') / DOCS_DIR.name / article_data.relative_link
+        # Create thumbnails for attached images
+        thumbnails_dir = article_dir / cns.ARTICLE_THUMBNAILS_DIR
+        # thumbnails_dir.mkdir(parents=True, exist_ok=True)
+        for image_path in images.keys():
+            source_image_path = article_source_dir / image_path
+            im = Image.open(source_image_path)
+            copied = im.copy()
+            size = (128, 128)
+            if Path(image_path) == cns.ARTICLE_IMG_FILE:
+                size = (256, 256)
+            copied.thumbnail(size, Image.LANCZOS)
+            thumbnail_path = thumbnails_dir.joinpath(Path(image_path).relative_to(cns.ARTICLE_FILES_DIR))
+            thumbnail_path.parent.mkdir(parents=True, exist_ok=True)
+            copied.save(thumbnail_path, quality=95)
+
+        # Symbol links with human-readable name
+        article_relative_link = article_index_file.relative_to(cns.DOCS_DIR).parent
+        article_relative_symlink_path = Path('..') / cns.DOCS_DIR.name / article_data.relative_link
         if not article_relative_symlink_path.is_symlink():
-            # Для файловой системы путь не совпадает, но ссылка по тому же узлу
             os.symlink(article_relative_link.name,
                        article_relative_symlink_path,
                        target_is_directory=True)
 
-    index_html = HTMLGen.generate_index_html(articles_data)
-    INDEX_FILE.write_text(index_html)
+    # Generate the original index
+    index_html = HTMLGen.generate_index_html(articles_data, IndexViewEnum.default)
+    cns.DOCS_INDEX_FILE.write_text(index_html)
+
+    # Generate a view index
+    preview_index_html = HTMLGen.generate_index_html(articles_data, IndexViewEnum.preview)
+    preview_index_file = cns.VIEWS_DIR / IndexViewEnum.preview.value / cns.DOCS_INDEX_FILE.name
+    preview_index_file.parent.mkdir(parents=True, exist_ok=True)
+    preview_index_file.write_text(preview_index_html)
+    preview_index_file = cns.VIEWS_DIR / IndexViewEnum.preview.value / cns.DOCS_INDEX_FILE.name
+
+    articles_dir_symlink = preview_index_file.with_name(cns.DOCS_ARTICLES_DIR.name)
+    relative_target_path = replace_relative_with_dots(preview_index_file, cns.DOCS_DIR)\
+                                                .with_name(cns.DOCS_ARTICLES_DIR.name)
+    if not articles_dir_symlink.is_symlink():
+        articles_dir_symlink.symlink_to(relative_target_path, target_is_directory=True)
+
+    files_dir_symlink = preview_index_file.with_name(cns.DOCS_FILES_DIR.name)
+    relative_target_path = replace_relative_with_dots(preview_index_file, cns.DOCS_DIR)\
+                                                .with_name(cns.DOCS_FILES_DIR.name)
+    if not files_dir_symlink.is_symlink():
+        files_dir_symlink.symlink_to(relative_target_path, target_is_directory=True)
 
     sitemap_xml = generate_sitemap(articles_data)
-    SITEMAP_FILE.write_text(sitemap_xml)
+    cns.SITEMAP_FILE.write_text(sitemap_xml)
 
     rss_xml = generate_rss(articles_data)
-    RSS_FILE.write_text(rss_xml)
+    cns.RSS_FILE.write_text(rss_xml)
 
 
 if __name__ == '__main__':

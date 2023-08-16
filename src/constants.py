@@ -1,23 +1,27 @@
 import os
 from pathlib import Path
 
+SITE_NAME = 'ТехнологоблогЪ'
+SITE_ADDRESS = 'https://www.kvdm.dev'
 
 PROJ_DIR = Path(__file__).parent.parent
 BUILD_DIR = PROJ_DIR / 'src'
 DOCS_DIR = PROJ_DIR / 'docs'
-ARTICLES_DOCS_DIR = DOCS_DIR / 'articles'
+DOCS_ARTICLES_DIR = DOCS_DIR / 'articles'
+DOCS_FILES_DIR = DOCS_DIR / 'files'
+VIEWS_DIR = DOCS_DIR / 'views'
 TEMPLATES_DIR = BUILD_DIR / 'templates'
+ARTICLE_THUMBNAILS_DIR = Path('thumbnails')
+ARTICLE_FILES_DIR = Path('files')
 ARTICLE_TEMPLATE_FILE = TEMPLATES_DIR / 'article.jinja'
 INDEX_TEMPLATE_FILE = TEMPLATES_DIR / 'index.jinja'
 SITEMAP_TEMPLATE_FILE = TEMPLATES_DIR / 'sitemap.jinja'
 RSS_TEMPLATE_FILE = TEMPLATES_DIR / 'rss.jinja'
-INDEX_FILE = DOCS_DIR / 'index.html'
+DOCS_INDEX_FILE = DOCS_DIR / 'index.html'
 SITEMAP_FILE = DOCS_DIR / 'sitemap.xml'
 RSS_FILE = DOCS_DIR / 'rss.xml'
+ARTICLE_IMG_FILE = ARTICLE_FILES_DIR / 'main-section.png'
 AS_DIRS_IGNORE = ('drafts', )
-ARTICLE_IMG_FILE = 'files/main-section.png'
-SITE_NAME = 'ТехнологоблогЪ'
-SITE_ADDRESS = 'https://www.kvdm.dev'
 
 TRACK_ANALYTICS = False
 ANALYTICS_ENABLED_DEFAULT = False
@@ -35,4 +39,3 @@ MEMOCARDS_SERVICE_ADDRESS = os.environ.get("MEMOCARDS_SERVICE_ADDRESS", "")
 
 STATUSPAGE_ENABLED_DEFAULT = False
 STATUSPAGE_SERVICE_ADDRESS = os.environ.get("STATUSPAGE_SERVICE_ADDRESS", "")
-

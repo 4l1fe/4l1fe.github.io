@@ -54,24 +54,57 @@
             <img src="files/photo.jpg" class="img-fluid rounded">
         </div>            
     </div>
+
+    {% macro wrap_if_selected(text, wrapped_view) -%}
+        {%- if selected_view == wrapped_view -%}
+            [{{ text }} <span class="iconify" data-icon="ic:sharp-view-comfy"></span>]
+        {%- else -%}
+            {{ text }}
+        {%- endif %}
+    {%- endmacro %}
+
     <div class="row mt-4">
         <div class="col-12">
             <h2 class="d-inline me-2 fw-bold">Articles</h2>
             <a class="me-1 {% if track_analytics %}umami--click--articles-subscribe{% endif %}" href="rss.xml">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a>
             <ul class="list-inline my-3">
-                <li class="list-inline-item text-muted"><span class="iconify" data-icon="ic:sharp-view-comfy"></span> View</li>
-                <li class="list-inline-item"><a href="">Titles</a></li>
+                <li class="list-inline-item text-muted">Select a view</li>
+                <li class="list-inline-item"><a href="/">{{ wrap_if_selected("Titles", IndexViewEnum.default) }}</a></li>
+                <li class="list-inline-item"><a href="/views/preview">{{ wrap_if_selected("Previews", IndexViewEnum.preview) }}</a></li>
             </ul>
         </div>
     </div>
+
+    {% set view_ns = namespace(article_row_mb = "mb-2") %}
+    {% if selected_view == IndexViewEnum.preview %}
+        {% set view_ns.article_row_mb = "mb-5" %}
+    {% endif %}
+
     {% for adata in articles_data %}
-    <div class="row row-article mb-2">
+    <div class="row row-article {{ view_ns.article_row_mb }}">
         <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark link-dark-hover text-decoration-none" href="{{ adata.relative_link | trailing_slash }}">{{ adata.title }}</a></h3>
+            <h3 class="fs-4 fw-light"><a class="link-dark" href="{{ adata.relative_link | trailing_slash }}">{{ adata.title }}</a></h3>
         </div>
-        <div class="col-lg-2 text-lg-end">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>{{ adata.created_date.strftime('%m-%Y') }}</p>
+
+        <div class="col-lg-2 text-lg-start">
+            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>{{ adata.created_date.strftime("%m-%Y") }}</p>
         </div>
+
+        {% if selected_view == IndexViewEnum.preview %}
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-3 col-4">
+                    <img src="{{ adata.main_img_relative_link | replace_thumbnail_link }}" class="img-fluid">
+                </div>
+                <div class="col-lg-9 col-8">
+                    {% for image in adata.images %}
+                    <img src="{{ image.relative_link | replace_thumbnail_link }}" class="img-fluid">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
     {% endfor %}
+
 {% endblock content %}

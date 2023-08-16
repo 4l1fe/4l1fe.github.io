@@ -53,23 +53,23 @@
             font-family: 'NMM';
         }
         a {
-            color: #975151
+            color: #434343;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
         }
         a:hover, a:focus {
-            color: #b92929;
-            text-decoration: underline;
-            text-decoration-line: underline;
-            text-decoration-thickness: initial;
-            text-decoration-style: initial
+            color: #ce0000;
         }
         a.header-anchor {
             visibility: hidden;
         }
         a.link-dark {
             color: #5c5c5c;
+            text-decoration: none;
         }
-        a.link-dark-hover:hover {
+        a.link-dark:hover {
             color: #212529;
+            text-decoration: underline;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -257,7 +257,7 @@ Event:  MouseMove Data:  (&lt;bokeh.events.MouseMove object at 0x7fc53a492400&gt
 Event:  MouseMove Data:  (&lt;bokeh.events.MouseMove object at 0x7fc53a492b20&gt;,)
 </code></pre>
 <p>While moving a UI selection element to the left on the <code>range_plot</code> the follow events happen:</p>
-<p><img src="files/shift-left.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
+<p><img src="files/shift-left.png" alt="" title="Range shift left" class="d-block mx-auto mw-100 h-100"></p>
 <pre><code>Event:  Press Data:  (&lt;bokeh.events.Press object at 0x7fc53a492970&gt;,)
 Event:  PanStart Data:  (&lt;bokeh.events.PanStart object at 0x7fc53a492730&gt;,)
 Event:  Pan Data:  (&lt;bokeh.events.Pan object at 0x7fc53a492c10&gt;,)
@@ -307,7 +307,7 @@ Attr: start, old=1204772902054.0552, new=1205382699243.2444
 Attr: end, old=1330312102054.054, new=1330921899243.2432
 </code></pre>
 <p>Check the timestamps whether they match the selection range position on the picture.</p>
-<p><img src="files/shift-right.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
+<p><img src="files/shift-right.png" alt="" title="Range shift right" class="d-block mx-auto mw-100 h-100"></p>
 <pre><code>In [<span style="color: #40a070">1</span>]: <span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">datetime</span> <span style="color: #007020; font-weight: bold">import</span> datetime
 
 In [<span style="color: #40a070">2</span>]: datetime<span style="color: #666666">.</span>utcfromtimestamp(<span style="color: #40a070">1205382699243</span><span style="color: #666666">/</span><span style="color: #40a070">1000</span>)

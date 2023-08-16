@@ -53,23 +53,23 @@
             font-family: 'NMM';
         }
         a {
-            color: #975151
+            color: #434343;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
         }
         a:hover, a:focus {
-            color: #b92929;
-            text-decoration: underline;
-            text-decoration-line: underline;
-            text-decoration-thickness: initial;
-            text-decoration-style: initial
+            color: #ce0000;
         }
         a.header-anchor {
             visibility: hidden;
         }
         a.link-dark {
             color: #5c5c5c;
+            text-decoration: none;
         }
-        a.link-dark-hover:hover {
+        a.link-dark:hover {
             color: #212529;
+            text-decoration: underline;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -157,7 +157,7 @@
         <div id="content" class="col-lg-9 order-2 order-lg-1">
             <h1 class="display-5 fw-bold">Explore and visualize the parser events and performance. Pandas. Seaborn. KLib. ADTK <a id="explore-and-visualize-the-parser-events-and-performance.-pandas.-seaborn.-klib.-adtk" href="#explore-and-visualize-the-parser-events-and-performance.-pandas.-seaborn.-klib.-adtk" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
 <p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
-<p>First, i was going to start writing an article about researching Plotly <a href="https://community.plotly.com" class="umami--click--community-plotly-com">community <span class="iconify" data-icon="la:external-link-alt"></span></a> and changed my mind after a short while in favor of exploring how a multithreaded parser that i've implemented <a href="https://github.com/4l1fe/DiscourseParser" class="umami--click--github-com-4l1fe-discourseparser">discourse-parser <span class="iconify" data-icon="codicon:github-inverted"></span></a> for the purpose of  whether getting the community data runs performant. Did it have performance issues? Is a way of data requesting and writing worked as expected due to multithreading? Was parsing completed correctly and had no anomalies?</p>
+<p>First, i was going to start writing an article about researching <a href="https://community.plotly.com" class="umami--click--community-plotly-com">Plotly community <span class="iconify" data-icon="la:external-link-alt"></span></a> and changed my mind after a short while in favor of exploring how a multithreaded parser that i've implemented <a href="https://github.com/4l1fe/DiscourseParser" class="umami--click--github-com-4l1fe-discourseparser">discourse-parser <span class="iconify" data-icon="codicon:github-inverted"></span></a> for the purpose of  whether getting the community data runs performant. Did it have performance issues? Is a way of data requesting and writing worked as expected due to multithreading? Was parsing completed correctly and had no anomalies?</p>
 <p>While the parser was working it produced a lot of logs, each log record is a specific type of event representing activity a thread is doing at a moment, for example <code>data.get</code> to request a community website. Those log records are the target to explore, visualize, and get insights from. Also, they are time series.</p>
 <p>For a broad view on the concerns the article is split into the following sections:</p>
 <ul>

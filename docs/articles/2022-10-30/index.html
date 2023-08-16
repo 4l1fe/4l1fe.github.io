@@ -53,23 +53,23 @@
             font-family: 'NMM';
         }
         a {
-            color: #975151
+            color: #434343;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
         }
         a:hover, a:focus {
-            color: #b92929;
-            text-decoration: underline;
-            text-decoration-line: underline;
-            text-decoration-thickness: initial;
-            text-decoration-style: initial
+            color: #ce0000;
         }
         a.header-anchor {
             visibility: hidden;
         }
         a.link-dark {
             color: #5c5c5c;
+            text-decoration: none;
         }
-        a.link-dark-hover:hover {
+        a.link-dark:hover {
             color: #212529;
+            text-decoration: underline;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -268,7 +268,7 @@
 <h2 class="display-6 mt-5 mb-3 fw-bold">Resource estimation <a id="resource-estimation" href="#resource-estimation" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>What i've seen that is relative to i revealed is you can estimate approximately the resources consumed to deploy a server.</p>
 <p>Here is my calculation in the <a href="https://docs.sourcegraph.com/admin/deploy/resource_estimator" class="umami--click--docs-sourcegraph-com-admin-deploy-resource-estimator">resource estimator <span class="iconify" data-icon="la:external-link-alt"></span></a>.</p>
-<p><img src="files/resource-estimation.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
+<p><img src="files/resource-estimation.png" alt="" title="![](Resource estimation" class="d-block mx-auto mw-100 h-100"></p>
 <p>Regulating parameters the summary is changed just a bit, for example, there is no difference between 1 user and 100. The total amount is too big to consider Sourcegraph as a code search tool, that's a platform.</p>
 <p>Here is what docker was showing about the resources consumed by the container to compare with the estimated summary.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>docker container stats sourcegraph

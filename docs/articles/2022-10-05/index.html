@@ -53,23 +53,23 @@
             font-family: 'NMM';
         }
         a {
-            color: #975151
+            color: #434343;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
         }
         a:hover, a:focus {
-            color: #b92929;
-            text-decoration: underline;
-            text-decoration-line: underline;
-            text-decoration-thickness: initial;
-            text-decoration-style: initial
+            color: #ce0000;
         }
         a.header-anchor {
             visibility: hidden;
         }
         a.link-dark {
             color: #5c5c5c;
+            text-decoration: none;
         }
-        a.link-dark-hover:hover {
+        a.link-dark:hover {
             color: #212529;
+            text-decoration: underline;
         }
         #toc, #toc a {
             color: #6c757d;
@@ -221,8 +221,8 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><img src="files/plot.png" alt="" class="d-block mx-auto mw-100 h-100"></td>
-<td style="text-align:center"><img src="files/plot-relations.png" alt="" class="d-block mx-auto mw-100 h-100"></td>
+<td style="text-align:center"><img src="files/plot.png" alt="" title="Graph initial" class="d-block mx-auto mw-100 h-100"></td>
+<td style="text-align:center"><img src="files/plot-relations.png" alt="" title="Graph relations" class="d-block mx-auto mw-100 h-100"></td>
 </tr>
 </tbody>
 </table>
@@ -240,8 +240,8 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><img src="files/plot-relations-layout.png" alt="" class="d-block mx-auto mw-100 h-100"></td>
-<td style="text-align:center"><img src="files/plot-relations-layout-emphasize.png" alt="" class="d-block mx-auto mw-100 h-100"></td>
+<td style="text-align:center"><img src="files/plot-relations-layout.png" alt="" title="Graph layout" class="d-block mx-auto mw-100 h-100"></td>
+<td style="text-align:center"><img src="files/plot-relations-layout-emphasize.png" alt="" title="Graph emphasizing" class="d-block mx-auto mw-100 h-100"></td>
 </tr>
 </tbody>
 </table>
@@ -249,7 +249,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 <p>Now, as the nodes look anonymous the picture doesn't tell what that most related account is and a few others. Their names could refine detalization. Displaying the names.</p>
 <pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --relations --layout <span style="color: #4070a0">"kamada kawai"</span> --emphasize --names secrets
 </code></pre>
-<p><img src="files/plot-relations-layout-emphasize-names.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
+<p><img src="files/plot-relations-layout-emphasize-names.png" alt="" title="Graph full" class="d-block mx-auto mw-100 h-100"></p>
 <p>Nice, it looks much better than text output.</p>
 <h3 class="mt-5 mb-3 fw-bold">Errors output <a id="errors-output" href="#errors-output" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>The final demo step. If i mistype a reference or forget to update the edited ones the checker points it out to me with the text and visual outputs as below.</p>
@@ -261,7 +261,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 <span style="color: #888888">[error    ] Reference doesn't exist.       node=PosixPath('secrets/mobile.toml') reference=wrong-acc.toml</span>
 <span style="color: #888888">[error    ] Fail.</span>
 </code></pre>
-<p><img src="files/plot-relations-layout-emphasize-names-errors.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
+<p><img src="files/plot-relations-layout-emphasize-names-errors.png" alt="" title="Graph final" class="d-block mx-auto mw-100 h-100"></p>
 <p>Great, eyes now stick to the red dots and fixing the errors displayed is going to be easier.</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Afterward <a id="afterward" href="#afterward" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Having on hand the checker lets me not keep in mind all the accounts relations and preserve their integrity.</p>
