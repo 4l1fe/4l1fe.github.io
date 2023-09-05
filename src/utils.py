@@ -3,6 +3,9 @@ import re
 from itertools import islice
 from functools import lru_cache
 from pathlib import Path
+from datetime import datetime
+
+import markdown_it
 
 
 def make_header_id(tag_text):
@@ -44,11 +47,26 @@ def first_p_text(element):
 def replace_relative_with_dots(path: Path, dots_to) -> Path:
     parts = path.relative_to(dots_to).parts
     dot_path = Path('')
-
+    self = parts[-1]
+    
     for part in parts:
-        if part != parts[-1]:
+        if part != self:
             dot_path = dot_path.joinpath('..')
         else:
             dot_path = dot_path.joinpath(part)
 
     return dot_path
+
+
+@lru_cache
+def parser_render(md_file: Path) -> str:
+    parser = markdown_it.MarkdownIt().enable('table')
+    md_text = Path(md_file).read_text()
+    html = parser.render(md_text)
+    return html
+
+
+@lru_cache
+def extract_path_date(dir_name: str) -> datetime:
+    created_date = datetime.strptime(dir_name, '%Y-%m-%d')
+    return created_date

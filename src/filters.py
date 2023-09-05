@@ -34,7 +34,3 @@ def update_classes(html: str, selector: str , classes: str) -> str:
     html = tostring(doc, encoding='unicode')
     html = wrap_unwrap_fake_tag(html, wrap=False)
     return html
-
-
-def replace_thumbnail_link(relative_link: Path):
-    return relative_link.as_posix().replace('files/', 'thumbnails/')

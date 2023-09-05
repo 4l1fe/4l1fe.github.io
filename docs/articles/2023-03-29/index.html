@@ -186,11 +186,11 @@
 <p>What a file content is, how it looks like?</p>
 <h3 class="mt-5 mb-3 fw-bold">Files overview <a id="files-overview" href="#files-overview" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>There are thousands of small json files on disk named like <code>topic-4288.json</code>.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>find /collected -name <span style="color: #4070a0">"topic-*"</span> | wc -l
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>find<span style="color: #bbbbbb"> </span>/collected<span style="color: #bbbbbb"> </span>-name<span style="color: #bbbbbb"> </span><span style="color: #4070a0">"topic-*"</span><span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>wc<span style="color: #bbbbbb"> </span>-l
 <span style="color: #888888">25139</span>
 </code></pre>
 <p>Each of them contains the topic's posts in the following structure</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>jq -r . files/topic-4288.json | head -n <span style="color: #40a070">9</span>
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>jq<span style="color: #bbbbbb"> </span>-r<span style="color: #bbbbbb"> </span>.<span style="color: #bbbbbb"> </span>files/topic-4288.json<span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>head<span style="color: #bbbbbb"> </span>-n<span style="color: #bbbbbb"> </span><span style="color: #40a070">9</span>
 
 <span style="color: #888888">{</span>
 <span style="color: #888888">  "post_stream": {</span>

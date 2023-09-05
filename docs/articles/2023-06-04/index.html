@@ -171,7 +171,7 @@
 </ul>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Disk states <a id="disk-states" href="#disk-states" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Display initial disk states to compare to the ones at the end.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df -h
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df<span style="color: #bbbbbb"> </span>-h
 <span style="color: #888888">Filesystem                             Size  Used Avail Use% Mounted on</span>
 <span style="color: #888888">/dev/mapper/vgkubuntu-root             467G  305G  138G  69% /</span>
 <span style="color: #888888">/dev/mapper/vgstoragebox-home--backup  290G  161G  114G  59% /media/vol/d4b01a30-f6eb-4b16-9451-1c9fb8366243</span>
@@ -189,13 +189,13 @@
 </code></pre>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Shrink the FS. Reduce the LVM volume <a id="shrink-the-fs.-reduce-the-lvm-volume" href="#shrink-the-fs.-reduce-the-lvm-volume" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>By default, when Kubuntu is installed on a <a href="https://gitlab.com/cryptsetup/cryptsetup" class="umami--click--gitlab-com-cryptsetup-cryptsetup">LUKS fully encrypted <span class="iconify" data-icon="la:external-link-alt"></span></a> disk LVM management split all the space into two LVM volumes <code>root</code> and <code>swap_1</code>.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvs vgkubuntu
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvs<span style="color: #bbbbbb"> </span>vgkubuntu
 <span style="color: #888888">  LV     VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span>
 <span style="color: #888888">  root   vgkubuntu -wi-ao---- 474.75g</span>
 <span style="color: #888888">  swap_1 vgkubuntu -wi-a----- 980.00m</span>
 </code></pre>
 <p>Therefore, having no space <code>VFree 0</code> blocks me from easily extending the swap.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo vgs vgkubuntu
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>vgs<span style="color: #bbbbbb"> </span>vgkubuntu
 <span style="color: #888888">  VG        #PV #LV #SN Attr   VSize    VFree</span>
 <span style="color: #888888">  vgkubuntu   1   2   0 wz--n- &lt;475.71g    0 </span>
 </code></pre>
@@ -212,22 +212,22 @@
 </code></pre>
 <p>The recommendation <a href="https://www.rootusers.com/lvm-resize-how-to-decrease-an-lvm-partition/" class="umami--click--www-rootusers-com-lvm-resize-how-to-decrease-an-lvm-partition">in the article <span class="iconify" data-icon="la:external-link-alt"></span></a> says to make a file system reduction a bit bigger than an LVM volume one with further extending the file system to all available space of a produced gap. It guarantees that you won't accidentally touch your stored data.</p>
 <p>In the current case, the file system size is going to be <code>292GB</code> and LVM volume size <code>294GB</code> from <code>295GB</code>.  For dealing with a file system resizing the system package  <code>e2fsprogs</code> is taken.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo resize2fs /dev/vgstoragebox/home-backup 292G
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>resize2fs<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/home-backup<span style="color: #bbbbbb"> </span>292G
 <span style="color: #888888">[sudo] password for vol:</span>
 <span style="color: #888888">resize2fs 1.46.5 (30-Dec-2021)</span>
 <span style="color: #888888">Filesystem at /dev/vgstoragebox/home-backup is mounted on /media/vol/d4b01a30-f6eb-4b16-9451-1c9fb8366243; on-line resizing required</span>
 <span style="color: #888888">resize2fs: On-line shrinking not supported</span>
 </code></pre>
 <p>From here and further for many operations the file system and volumes have to stay unmounted. My preference here is <code>udiskcie</code> system package.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>udisksctl unmount --block-device /dev/mapper/vgstoragebox-home--backup
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>udisksctl<span style="color: #bbbbbb"> </span>unmount<span style="color: #bbbbbb"> </span>--block-device<span style="color: #bbbbbb"> </span>/dev/mapper/vgstoragebox-home--backup
 <span style="color: #888888">Unmounted /dev/dm-4.</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo resize2fs /dev/vgstoragebox/home-backup 292G
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>resize2fs<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/home-backup<span style="color: #bbbbbb"> </span>292G
 <span style="color: #888888">resize2fs 1.46.5 (30-Dec-2021)</span>
 <span style="color: #888888">Please run 'e2fsck -f /dev/vgstoragebox/home-backup' first.</span>
 </code></pre>
 <p>After unmounting the warning says to run <code>e2fsck -f</code> before shrinking to check the file system state. The flags  <code>-f</code> is  for forceful running and <code>-y</code> for answering "yes" to the subsequent questions.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo e2fsck -f -y /dev/vgstoragebox/home-backup
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>e2fsck<span style="color: #bbbbbb"> </span>-f<span style="color: #bbbbbb"> </span>-y<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/home-backup
 <span style="color: #888888">e2fsck 1.46.5 (30-Dec-2021)</span>
 <span style="color: #888888">Pass 1: Checking inodes, blocks, and sizes</span>
 <span style="color: #888888">Pass 2: Checking directory structure</span>
@@ -236,47 +236,47 @@
 <span style="color: #888888">Pass 5: Checking group summary information</span>
 <span style="color: #888888">/dev/vgstoragebox/home-backup: 511643/19333120 files (0.2% non-contiguous), 43577986/77332480 blocks</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo resize2fs /dev/vgstoragebox/home-backup 292G
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>resize2fs<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/home-backup<span style="color: #bbbbbb"> </span>292G
 <span style="color: #888888">resize2fs 1.46.5 (30-Dec-2021)</span>
 <span style="color: #888888">Resizing the filesystem on /dev/vgstoragebox/home-backup to 76546048 (4k) blocks.</span>
 <span style="color: #888888">The filesystem on /dev/vgstoragebox/home-backup is now 76546048 (4k) blocks long.</span>
 </code></pre>
 <p>All goes wll. Display the resize change.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>udisksctl mount --block-device /dev/mapper/vgstoragebox-home--backup
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>udisksctl<span style="color: #bbbbbb"> </span>mount<span style="color: #bbbbbb"> </span>--block-device<span style="color: #bbbbbb"> </span>/dev/mapper/vgstoragebox-home--backup
 <span style="color: #888888">Mounted /dev/dm-4 at /media/vol/d4b01a30-f6eb-4b16-9451-1c9fb8366243</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df -h
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df<span style="color: #bbbbbb"> </span>-h
 <span style="color: #888888">Filesystem                             Size  Used Avail Use% Mounted on</span>
 <span style="color: #888888">/dev/mapper/vgstoragebox-home--backup  287G  161G  112G  60% /media/vol/d4b01a30-f6eb-4b16-9451-1c9fb8366243</span>
 </code></pre>
 <p>As you see the file system works with a slightly different space of <code>287GB</code>, that's normal.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>udisksctl unmount --block-device /dev/mapper/vgstoragebox-home--backup
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>udisksctl<span style="color: #bbbbbb"> </span>unmount<span style="color: #bbbbbb"> </span>--block-device<span style="color: #bbbbbb"> </span>/dev/mapper/vgstoragebox-home--backup
 </code></pre>
 <p>The next step is to reduce the LVM volume size.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvchange --activate n vgstoragebox/home-backup
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvchange<span style="color: #bbbbbb"> </span>--activate<span style="color: #bbbbbb"> </span>n<span style="color: #bbbbbb"> </span>vgstoragebox/home-backup
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvs
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvs
 <span style="color: #888888">  LV                 VG           Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span>
 <span style="color: #888888">  home-bckup        vgstoragebox -wi------- 295.00g</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvreduce -L 294G /dev/mapper/vgstoragebox-home--backup
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvreduce<span style="color: #bbbbbb"> </span>-L<span style="color: #bbbbbb"> </span>294G<span style="color: #bbbbbb"> </span>/dev/mapper/vgstoragebox-home--backup
 <span style="color: #888888">  Size of logical volume vgstoragebox/home-backup changed from 295.00 GiB (75520 extents) to 294.00 GiB (75264 extents).</span>
 <span style="color: #888888">  Logical volume vgstoragebox/home-backup successfully resized.</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvs
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvs
 <span style="color: #888888">  LV                 VG           Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span>
 <span style="color: #888888">  home-backup        vgstoragebox -wi------- 294.00g</span>
 </code></pre>
 <p>The final step here is to occupy all the available space by the file system.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvchange --activate y vgstoragebox/home-backup
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvchange<span style="color: #bbbbbb"> </span>--activate<span style="color: #bbbbbb"> </span>y<span style="color: #bbbbbb"> </span>vgstoragebox/home-backup
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo resize2fs /dev/vgstoragebox/home-backup
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>resize2fs<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/home-backup
 <span style="color: #888888">resize2fs 1.46.5 (30-Dec-2021)</span>
 <span style="color: #888888">Filesystem at /dev/vgstoragebox/home-backup is mounted on /media/vol/d4b01a30-f6eb-4b16-9451-1c9fb8366243; on-line resizing required</span>
 <span style="color: #888888">old_desc_blocks = 37, new_desc_blocks = 37</span>
 <span style="color: #888888">The filesystem on /dev/vgstoragebox/home-backup is now 77070336 (4k) blocks long.</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df -h
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df<span style="color: #bbbbbb"> </span>-h
 <span style="color: #888888">Filesystem                             Size  Used Avail Use% Mounted on</span>
 <span style="color: #888888">/dev/mapper/vgstoragebox-home--backup  289G  161G  114G  59% /media/vol/d4b01a30-f6eb-4b16-9451-1c9fb8366243</span>
 </code></pre>
@@ -287,12 +287,12 @@
 <pre><code>sudo cryptsetup open /dev/nvme0n1p3 laptop-drive</code>
 </pre>
 <p>Check that LVM can see the decrypted volumes and the FS is mounted</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvs
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvs
 <span style="color: #888888">  LV     VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span>
 <span style="color: #888888">  root   vgkubuntu -wi-ao---- 474.75g                                                    </span>
 <span style="color: #888888">  swap_1 vgkubuntu -wi-a----- 980.00m</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df -h
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df<span style="color: #bbbbbb"> </span>-h
 <span style="color: #888888">Filesystem                   Size  Used Avail Use% Mounted on</span>
 <span style="color: #888888">/dev/mapper/vgkubuntu-root   467G  305G  138G  69% /media/kubuntu/bd15f678-7f4d-4638-96e5-e0ea9d967ec7</span>
 </code></pre>
@@ -305,51 +305,51 @@
 <span style="color: #888888">    └─vgkubuntu-swap_1 253:2    0   980M  0 lvm </span>
 </code></pre>
 <p>List the file system attributes to compute a proper size to shrink to.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo dumpe2fs -h /dev/vgkubuntu/root 
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>dumpe2fs<span style="color: #bbbbbb"> </span>-h<span style="color: #bbbbbb"> </span>/dev/vgkubuntu/root<span style="color: #bbbbbb"> </span>
 <span style="color: #888888">dumpe2fs 1.45.5 (07-Jan-2020)</span>
 <span style="color: #888888">Block count:              124452864</span>
 <span style="color: #888888">Block size:               4096</span>
 </code></pre>
 <p>Unmount the file system and resize to <code>464Gb</code>. We compute the size based on <code>Block count</code>, the command <code>df -h</code> output doesn't fit to  working with blocks. The current size we have to subtract space from is <code>Block count * Block size / 1024 / 1024 / 0124</code>. In this case, it's <code>474.75GB - 10GB</code>.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>udisksctl unmount --block-device /dev/vgkubuntu/root 
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>udisksctl<span style="color: #bbbbbb"> </span>unmount<span style="color: #bbbbbb"> </span>--block-device<span style="color: #bbbbbb"> </span>/dev/vgkubuntu/root<span style="color: #bbbbbb"> </span>
 <span style="color: #888888">Unmounted /dev/dm-1.</span>
 </code></pre>
 <pre><code><span style="color: #888888">sudo e2fsck -f -y /dev/vgkubuntu/root </span>
 <span style="color: #888888">/dev/vgkubuntu/root: 2592737/31113216 files (0.3% non-contiguous), 82062147/124452864 blocks</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo resize2fs /dev/vgkubuntu/root 464G
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>resize2fs<span style="color: #bbbbbb"> </span>/dev/vgkubuntu/root<span style="color: #bbbbbb"> </span>464G
 <span style="color: #888888">resize2fs 1.45.5 (07-Jan-2020)</span>
 <span style="color: #888888">The filesystem on /dev/vgkubuntu/root is now 121634816 (4k) blocks long</span>
 </code></pre>
 <p>Reduce the lvm volume to <code>465GB</code> due to the precaution of keeping stored data untouched.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvchange --activate n vgkubuntu/root
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvchange<span style="color: #bbbbbb"> </span>--activate<span style="color: #bbbbbb"> </span>n<span style="color: #bbbbbb"> </span>vgkubuntu/root
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvs
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvs
 <span style="color: #888888">  LV     VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span>
 <span style="color: #888888">  root   vgkubuntu -wi------- 474.75g                                                    </span>
 <span style="color: #888888">  swap_1 vgkubuntu -wi-a----- 980.00m </span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvreduce -L 465G /dev/vgkubuntu/root
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvreduce<span style="color: #bbbbbb"> </span>-L<span style="color: #bbbbbb"> </span>465G<span style="color: #bbbbbb"> </span>/dev/vgkubuntu/root
 <span style="color: #888888">  Size of logical volume vgkubuntu/root changed from 474.75 GiB (121536 extents) to 465.00 GiB (119040 extents).</span>
 <span style="color: #888888">  Logical volume vgkubuntu/root successfully resized.</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvchange --activate y vgkubuntu/root
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvchange<span style="color: #bbbbbb"> </span>--activate<span style="color: #bbbbbb"> </span>y<span style="color: #bbbbbb"> </span>vgkubuntu/root
 </code></pre>
 <p>Now extend the shrunk file system occupying all the available space.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo resize2fs /dev/vgkubuntu/root
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>resize2fs<span style="color: #bbbbbb"> </span>/dev/vgkubuntu/root
 <span style="color: #888888">resize2fs 1.45.5 (07-Jan-2020)</span>
 <span style="color: #888888">Resizing the filesystem on /dev/vgkubuntu/root to 121896960 (4k) blocks.</span>
 <span style="color: #888888">The filesystem on /dev/vgkubuntu/root is now 121896960 (4k) blocks long.</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>udisksctl mount --block-device /dev/vgkubuntu/root 
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>udisksctl<span style="color: #bbbbbb"> </span>mount<span style="color: #bbbbbb"> </span>--block-device<span style="color: #bbbbbb"> </span>/dev/vgkubuntu/root<span style="color: #bbbbbb"> </span>
 <span style="color: #888888">Mounted /dev/dm-1 at /media/kubuntu/bd15f678-7f4d-4638-96e5-e0ea9d967ec7.</span>
 </code></pre>
 <p>See the final disk state.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df -h
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>df<span style="color: #bbbbbb"> </span>-h
 <span style="color: #888888">Filesystem                   Size  Used Avail Use% Mounted on</span>
 <span style="color: #888888">/dev/mapper/vgkubuntu-root   457G  305G  129G  71% /media/kubuntu/bd15f678-7f4d-4638-96e5-e0ea9d967ec7</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo vgs
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>vgs
 <span style="color: #888888">  VG        #PV #LV #SN Attr   VSize    VFree</span>
 <span style="color: #888888">  vgkubuntu   1   2   0 wz--n- &lt;475.71g 9.75g</span>
 </code></pre>
@@ -362,13 +362,13 @@
 <li>Make a new swap.</li>
 <li>Turn it on.</li>
 </ul>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>swapon --show
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>swapon<span style="color: #bbbbbb"> </span>--show
 <span style="color: #888888">NAME      TYPE      SIZE USED PRIO</span>
 <span style="color: #888888">/dev/dm-2 partition 980M   0B   -2</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>swapoff -a
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>swapoff<span style="color: #bbbbbb"> </span>-a
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvextend --size +3G vgkubuntu/swap_1
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvextend<span style="color: #bbbbbb"> </span>--size<span style="color: #bbbbbb"> </span>+3G<span style="color: #bbbbbb"> </span>vgkubuntu/swap_1
 <span style="color: #888888">  Size of logical volume vgkubuntu/swap_1 changed from 980.00 MiB (245 extents) to &lt;3.96 GiB (1013 extents).</span>
 <span style="color: #888888">  Logical volume vgkubuntu/swap_1 successfully resized.</span>
 </code></pre>
@@ -379,14 +379,14 @@
 <span style="color: #888888">    ├─vgkubuntu-root   253:1    0   465G  0 lvm   /</span>
 <span style="color: #888888">    └─vgkubuntu-swap_1 253:2    0     4G  0 lvm</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo mkswap /dev/dm-2
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>mkswap<span style="color: #bbbbbb"> </span>/dev/dm-2
 <span style="color: #888888">mkswap: /dev/dm-2: warning: wiping old swap signature.</span>
 <span style="color: #888888">Setting up swapspace version 1, size = 4 GiB (4248825856 bytes)</span>
 <span style="color: #888888">no label, UUID=ff6f4623-fdb9-4337-9986-e515c8d0b111</span>
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo swapon -a
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>swapon<span style="color: #bbbbbb"> </span>-a
 </code></pre>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>swapon --show
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>swapon<span style="color: #bbbbbb"> </span>--show
 <span style="color: #888888">NAME      TYPE      SIZE USED PRIO</span>
 <span style="color: #888888">/dev/dm-2 partition   4G   0B   -2</span>
 </code></pre>

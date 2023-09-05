@@ -2,7 +2,7 @@ import os
 import functools
 from typing import List, Tuple, Set
 from xml.dom.minidom import getDOMImplementation
-from dataclasses import dataclass, InitVar
+from dataclasses import dataclass
 from itertools import chain
 from contextlib import suppress
 from pathlib import Path
@@ -11,7 +11,6 @@ from argparse import ArgumentParser
 from copy import deepcopy
 from enum import Enum
 
-import markdown_it
 from lxml.html import Element, fromstring, tostring as _tostring
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from pygments import highlight
@@ -20,11 +19,14 @@ from pygments.lexers.shell import BashSessionLexer
 from pygments.lexers.configs import TOMLLexer
 from pygments.formatters.html import HtmlFormatter
 from slugify import slugify
-from PIL import Image
+from more_itertools import split_before
 
 import constants as cns
-from filters import trailing_slash, to_rfc822, prepend_site_address, update_classes, replace_thumbnail_link
-from utils import make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text, replace_relative_with_dots
+from filters import trailing_slash, to_rfc822, prepend_site_address, update_classes
+from utils import (make_header_id, wrap_unwrap_fake_tag, first_h1_text, first_p_text,
+                   replace_relative_with_dots, parser_render, extract_path_date)
+from summary import summarize, summarize_refine
+from thumbnail import create_thumbnail
 
 
 HEADERS = ('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
@@ -47,18 +49,14 @@ env.filters['trailing_slash'] = trailing_slash
 env.filters['to_rfc822'] = to_rfc822
 env.filters['prepend_site_address'] = prepend_site_address
 env.filters['update_classes'] = update_classes
-env.filters['replace_thumbnail_link'] = replace_thumbnail_link
 tostring = functools.partial(_tostring, encoding='unicode')
 
 
 @dataclass
 class AttachedImage:
     title: str
-    relative_link: Path
-    article_relative_link: InitVar[Path]  # To prepend `relative_link`
-
-    def __post_init__(self, article_relative_link):
-        self.relative_link = article_relative_link.joinpath(self.relative_link)
+    relative_link: Path  # to plug into html
+    relative_path: Path
 
 
 @dataclass
@@ -66,7 +64,7 @@ class ArticleData:
     title: str
     relative_link: Path
     paragraph: str
-    created_date: datetime
+    created_date: datetime  # article unique id
     main_img_relative_link: Path = cns.ARTICLE_IMG_FILE
     images: Tuple[AttachedImage] = ()
 
@@ -77,15 +75,27 @@ class ArticleData:
 class IndexViewEnum(str, Enum):
     default = ''
     preview = 'preview'
+    summary = 'summary'
 
- 
-def iter_articles_source_dir(articles_dir: Path, reverse=False):
+
+@dataclass
+class ThumbnailPair:
+    source_path: str
+    thumbnail_link: str
+
+
+@functools.lru_cache 
+def list_article_md_files(articles_dir: Path, reverse=False) -> list:
     ignore_dirs = set(articles_dir / d for d in cns.AS_DIRS_IGNORE)
     iter_dir = articles_dir.iterdir()
 
+    md_files = []
     for article_source_dir in sorted(iter_dir, reverse=reverse):
         if article_source_dir not in ignore_dirs:
-            yield article_source_dir
+            article_md_file = next(article_source_dir.glob('*.md'))
+            md_files.append(article_md_file)
+
+    return md_files
 
 
 def generate_sitemap(articles_data: List[ArticleData]):
@@ -126,18 +136,18 @@ class HTMLGen:
                  'language-toml': TOMLLexer}
 
     @staticmethod
-    def generate_index_html(articles_data: List[ArticleData], view: IndexViewEnum):
+    def generate_index_html(articles_data: List[ArticleData], view: IndexViewEnum, view_data=None):
         template = env.get_template(cns.INDEX_TEMPLATE_FILE.name)
-        html = template.render(articles_data=articles_data, selected_view=view, IndexViewEnum=IndexViewEnum)
+        html = template.render(articles_data=articles_data, selected_view=view,
+                               IndexViewEnum=IndexViewEnum, view_data=view_data)
         return html
 
     @staticmethod
-    def generate_article_html(md_text,  article_index_file, article_source_dir,
+    def generate_article_html(md_file,  article_index_file, article_source_dir,
                               font_icons: bool = False, highlight: bool = False,
                               track_analytics: bool = cns.TRACK_ANALYTICS):
         """Article is two big blocks `toc`, `content`"""
-        parser = markdown_it.MarkdownIt().enable('table')
-        html = parser.render(md_text)
+        html = parser_render(md_file)
 
         content_html = HTMLGen._apply_headers_anchors(html)
 
@@ -289,10 +299,18 @@ class HTMLGen:
         root_element = fromstring(html)
         symlink_name = slugify(first_h1_text(root_element))
         article_relative_symlink = cns.DOCS_ARTICLES_DIR.joinpath(symlink_name).relative_to(cns.DOCS_DIR)
-        created_date = datetime.strptime(article_source_dir.name, '%Y-%m-%d')
-        images = tuple(AttachedImage(title, path, article_relative_symlink) for path, title in images.items() if title)
-        adata = ArticleData(title=first_h1_text(root_element), relative_link=article_relative_symlink,
-                            paragraph=first_p_text(root_element), created_date=created_date, images=images)
+        created_date = extract_path_date(article_source_dir.name)
+
+        images = tuple(AttachedImage(title=im_title,
+                                     relative_link=article_relative_symlink.joinpath(im_path),
+                                     relative_path=im_path)
+                       for im_path, im_title in images.items() if im_title)
+
+        adata = ArticleData(title=first_h1_text(root_element),
+                            relative_link=article_relative_symlink,
+                            paragraph=first_p_text(root_element),
+                            created_date=created_date,
+                            images=images)
 
         return adata
 
@@ -353,12 +371,132 @@ class HTMLGen:
         return doc.documentElement.toxml()
 
 
+class ViewBase:
+
+    def __init__(self, is_enabled=False):
+        self.is_enabled = is_enabled
+
+    def create(self, *args, **kwargs):
+        if not self.is_enabled:
+            return
+
+        self._create(*args, **kwargs)
+
+    def _create_index(self, view: IndexViewEnum, articles_data, view_data=None) -> Path:
+        index_html = HTMLGen.generate_index_html(articles_data, view, view_data)
+        index_dir = cns.VIEWS_DIR / view.value
+        index_file = index_dir / cns.DOCS_INDEX_FILE.name
+        index_file.parent.mkdir(parents=True, exist_ok=True)
+        index_file.write_text(index_html)
+
+        return index_dir
+
+    def _create_symlinks(self, view_dir):
+        """Symlinks to the original articles and files dirs."""
+
+        articles_dir_symlink = view_dir / cns.DOCS_ARTICLES_DIR.name
+        relative_target_path = replace_relative_with_dots(articles_dir_symlink, cns.DOCS_DIR)
+        if not articles_dir_symlink.is_symlink():
+            articles_dir_symlink.symlink_to(relative_target_path, target_is_directory=True)
+
+        files_dir_symlink = view_dir / cns.DOCS_FILES_DIR.name
+        relative_target_path = replace_relative_with_dots(files_dir_symlink, cns.DOCS_DIR)
+        if not files_dir_symlink.is_symlink():
+            files_dir_symlink.symlink_to(relative_target_path, target_is_directory=True)
+
+
+class PreviewView(ViewBase):
+
+    def _create(self, articles_dir, articles_data):
+        view_data = {}
+        thumbnail_pairs = []
+        date_adata = {adata.created_date: adata for adata in articles_data}
+        
+        for article_md_file in list_article_md_files(articles_dir, reverse=True):
+            created_date = extract_path_date(article_md_file.parent.name)
+            view_data[created_date] = {'thumbnails': [],
+                                       'main_thumbnail': ''}
+            
+            for image in date_adata[created_date].images:
+                source_path = article_md_file.parent / image.relative_path
+                thumbnail_link = self._make_thumbnail_link(created_date, image.relative_path)
+                thumbnail_pairs.append(ThumbnailPair(source_path=source_path,
+                                                     thumbnail_link=thumbnail_link))
+                view_data[created_date]['thumbnails'].append(thumbnail_link)
+
+            source_path = article_md_file.parent / cns.ARTICLE_IMG_FILE
+            thumbnail_link = self._make_thumbnail_link(created_date, cns.ARTICLE_IMG_FILE)
+            thumbnail_pairs.append(ThumbnailPair(source_path=source_path,
+                                                 thumbnail_link=thumbnail_link))
+            view_data[created_date]['main_thumbnail'] = thumbnail_link
+
+        index_dir = self._create_index(IndexViewEnum.preview, articles_data, view_data=view_data)
+        self._create_symlinks(index_dir)
+
+        for tpair in thumbnail_pairs:
+            thumbnail_path = index_dir / tpair.thumbnail_link
+            create_thumbnail(tpair.source_path, thumbnail_path)
+ 
+    def _make_thumbnail_link(self, date, link):
+        return cns.THUMBNAILS_DIR / date.strftime('%Y-%M-%d') / link
+
+
+class SummaryView(ViewBase):
+
+    def _create(self, articles_dir, articles_data):
+        view_data = {}
+        for article_md_file in list_article_md_files(articles_dir, reverse=True):
+            summary = self._summarize(article_md_file)
+            created_date = extract_path_date(article_md_file.parent.name)
+            view_data[created_date] = summary
+        
+        index_dir = self._create_index(IndexViewEnum.summary, articles_data, view_data)
+        self._create_symlinks(index_dir)
+
+    def _summarize(self, md_file: Path):
+        clean_element = self._clean_text(md_file)
+        text_chunks = list(self._split_text_iter(clean_element))
+        # result = summarize(text_chunks)
+        result = summarize_refine(text_chunks)
+        return result
+
+    def _clean_text(self, md_file: Path) -> Element:
+        """Remove code blocks, images, and tables from an article's source text"""   
+
+        html = parser_render(md_file)
+        doc = fromstring(html)
+        remove_exprs = ['.//pre[code]', './/table', './/img']
+        findall = lambda doc, xpath_list: chain(*(doc.findall(xpath) for xpath in xpath_list))
+        
+        remove_elements = findall(doc, remove_exprs)
+        for element in remove_elements:
+            try:
+                doc.remove(element)
+            except ValueError as e:
+                # error `Element is not a child of this node` more likely refers to an already removed element.
+                print(e)
+
+        return doc
+
+    def _split_text_iter(self, element):        
+        """Split on the `h2` header"""
+
+        wrapper_el = Element('div')
+        for sub_elements in split_before(element.iterchildren(), lambda el: el.tag == 'h2'):
+            
+            wrapper_el.extend(sub_elements)
+            yield str(wrapper_el.text_content())  # convert lxml.etree._ElementUnicodeResult
+            wrapper_el.clear()
+            
+
 def main(articles_dir: Path, font_icons=True, highlight=True,
          track_analytics=cns.TRACK_ANALYTICS,
          analytics=cns.ANALYTICS_ENABLED_DEFAULT,
          monitoring=cns.MONITORING_ENABLED_DEFAULT,
          memocards=cns.MEMOCARDS_ENABLED_DEFAULT,
-         statuspage=cns.STATUSPAGE_ENABLED_DEFAULT):
+         statuspage=cns.STATUSPAGE_ENABLED_DEFAULT,
+         preview_view=False,
+         summary_view=False):
     env.globals['track_analytics'] = track_analytics
     env.globals['analytics_enabled'] = analytics
     env.globals['monitoring_enabled'] = monitoring
@@ -366,13 +504,12 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
     env.globals['statuspage_enabled'] = statuspage
     articles_data = []
 
-    for article_source_dir in iter_articles_source_dir(articles_dir, reverse=True):
+    for article_md_file in list_article_md_files(articles_dir, reverse=True):
         # Generate an article html and write it in a file
-        article_md_file = next(article_source_dir.glob('*.md'))
-        md_text = article_md_file.read_text()
+        article_source_dir = article_md_file.parent
         article_dir = cns.DOCS_ARTICLES_DIR / article_source_dir.name
         article_index_file = article_dir / cns.DOCS_INDEX_FILE.name
-        data = HTMLGen.generate_article_html(md_text, article_index_file, article_source_dir,
+        data = HTMLGen.generate_article_html(article_md_file, article_index_file, article_source_dir,
                                              font_icons=font_icons, highlight=highlight,
                                              track_analytics=track_analytics)
         article_html, toc_html, article_data, files_paths, images = data
@@ -389,21 +526,6 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
             with suppress(FileExistsError):
                 os.link(target_path, hardlink_source_path)
 
-        # Create thumbnails for attached images
-        thumbnails_dir = article_dir / cns.ARTICLE_THUMBNAILS_DIR
-        # thumbnails_dir.mkdir(parents=True, exist_ok=True)
-        for image_path in images.keys():
-            source_image_path = article_source_dir / image_path
-            im = Image.open(source_image_path)
-            copied = im.copy()
-            size = (128, 128)
-            if Path(image_path) == cns.ARTICLE_IMG_FILE:
-                size = (256, 256)
-            copied.thumbnail(size, Image.LANCZOS)
-            thumbnail_path = thumbnails_dir.joinpath(Path(image_path).relative_to(cns.ARTICLE_FILES_DIR))
-            thumbnail_path.parent.mkdir(parents=True, exist_ok=True)
-            copied.save(thumbnail_path, quality=95)
-
         # Symbol links with human-readable name
         article_relative_link = article_index_file.relative_to(cns.DOCS_DIR).parent
         article_relative_symlink_path = Path('..') / cns.DOCS_DIR.name / article_data.relative_link
@@ -416,25 +538,14 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
     index_html = HTMLGen.generate_index_html(articles_data, IndexViewEnum.default)
     cns.DOCS_INDEX_FILE.write_text(index_html)
 
-    # Generate a view index
-    preview_index_html = HTMLGen.generate_index_html(articles_data, IndexViewEnum.preview)
-    preview_index_file = cns.VIEWS_DIR / IndexViewEnum.preview.value / cns.DOCS_INDEX_FILE.name
-    preview_index_file.parent.mkdir(parents=True, exist_ok=True)
-    preview_index_file.write_text(preview_index_html)
-    preview_index_file = cns.VIEWS_DIR / IndexViewEnum.preview.value / cns.DOCS_INDEX_FILE.name
+    # Views
+    pv = PreviewView(is_enabled=preview_view)
+    pv.create(articles_dir, articles_data)
+    
+    sv = SummaryView(is_enabled=summary_view)
+    sv.create(articles_dir, articles_data)
 
-    articles_dir_symlink = preview_index_file.with_name(cns.DOCS_ARTICLES_DIR.name)
-    relative_target_path = replace_relative_with_dots(preview_index_file, cns.DOCS_DIR)\
-                                                .with_name(cns.DOCS_ARTICLES_DIR.name)
-    if not articles_dir_symlink.is_symlink():
-        articles_dir_symlink.symlink_to(relative_target_path, target_is_directory=True)
-
-    files_dir_symlink = preview_index_file.with_name(cns.DOCS_FILES_DIR.name)
-    relative_target_path = replace_relative_with_dots(preview_index_file, cns.DOCS_DIR)\
-                                                .with_name(cns.DOCS_FILES_DIR.name)
-    if not files_dir_symlink.is_symlink():
-        files_dir_symlink.symlink_to(relative_target_path, target_is_directory=True)
-
+    # Sitemap, RSS
     sitemap_xml = generate_sitemap(articles_data)
     cns.SITEMAP_FILE.write_text(sitemap_xml)
 
@@ -450,6 +561,8 @@ if __name__ == '__main__':
     parser.add_argument('--enable-monitoring', action="store_true")
     parser.add_argument('--enable-memocards', action="store_true")
     parser.add_argument('--enable-statuspage', action="store_true")
+    parser.add_argument('--preview-view', action="store_true")
+    parser.add_argument('--summary-view', action="store_true")
     args = parser.parse_args()
     
     main(args.articlesdir,
@@ -457,4 +570,6 @@ if __name__ == '__main__':
          analytics=args.enable_analytics,
          monitoring=args.enable_monitoring,
          memocards=args.enable_memocards,
-         statuspage=args.enable_statuspage)
+         statuspage=args.enable_statuspage,
+         preview_view=args.preview_view,
+         summary_view=args.summary_view)
