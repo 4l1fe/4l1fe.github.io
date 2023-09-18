@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>6 Sep 2023 00:00:00 +0000</pubDate>
+		<pubDate>18 Sep 2023 00:00:00 +0000</pubDate>
+				<item>
+			<title>Astrology Elements Distribution over a Few Years. Visualization. Pandas. Seaborn </title>
+			<link>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/</link>
+			<description>The four elements Fire, Water, Earth and Air describe an object with a set of their own characteristics, such as being active, perceptive, structured, versatile. By understanding all the other characteristics and the specific composition of elements,...</description>
+			<pubDate>18 Sep 2023 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/</guid>
+		</item>
 				<item>
 			<title>Explore and visualize the parser events and performance. Pandas. Seaborn. KLib. ADTK </title>
 			<link>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/</link>

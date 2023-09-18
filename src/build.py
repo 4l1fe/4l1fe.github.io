@@ -438,7 +438,7 @@ class PreviewView(ViewBase):
             create_thumbnail(tpair.source_path, thumbnail_path)
  
     def _make_thumbnail_link(self, date, link):
-        return cns.THUMBNAILS_DIR / date.strftime('%Y-%M-%d') / link
+        return cns.THUMBNAILS_DIR / date.strftime('%Y-%m-%d') / link
 
 
 class SummaryView(ViewBase):
@@ -504,11 +504,17 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
     env.globals['statuspage_enabled'] = statuspage
     articles_data = []
 
+    import sys
+    import aspectlib
+    import aspectlib.debug
     for article_md_file in list_article_md_files(articles_dir, reverse=True):
         # Generate an article html and write it in a file
         article_source_dir = article_md_file.parent
         article_dir = cns.DOCS_ARTICLES_DIR / article_source_dir.name
         article_index_file = article_dir / cns.DOCS_INDEX_FILE.name
+        # with aspectlib.weave(HTMLGen,
+        #                      aspectlib.debug.log(print_to=sys.stdout, stacktrace=None),
+        #                      lazy=True):
         data = HTMLGen.generate_article_html(article_md_file, article_index_file, article_source_dir,
                                              font_icons=font_icons, highlight=highlight,
                                              track_analytics=track_analytics)
@@ -541,7 +547,7 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
     # Views
     pv = PreviewView(is_enabled=preview_view)
     pv.create(articles_dir, articles_data)
-    
+
     sv = SummaryView(is_enabled=summary_view)
     sv.create(articles_dir, articles_data)
 

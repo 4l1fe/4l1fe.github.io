@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+    <loc>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/</loc>
+    <image:image>
+        <image:loc>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/files/main-section.png</image:loc>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/files/natal-chart-compared-signs.png</image:loc>
+        <image:title>natal chart astro-seek</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/files/natal-chart-compared-signs-sotis.png</image:loc>
+        <image:title>natal chart sotis</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/files/Elements.png</image:loc>
+        <image:title>elements chart</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/files/Modality.png</image:loc>
+        <image:title>modality chart</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/files/final-chart-2023.png</image:loc>
+        <image:title>year 2023 chart</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/files/final-chart-2022.png</image:loc>
+        <image:title>year 2022 chart</image:title>
+    </image:image>
+        <image:image>
+        <image:loc>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/files/final-chart-2024.png</image:loc>
+        <image:title>year 2024 chart</image:title>
+    </image:image>
+      </url>
+    <url>
     <loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/</loc>
     <image:image>
         <image:loc>https://www.kvdm.dev/articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/files/main-section.png</image:loc>

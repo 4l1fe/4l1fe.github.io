@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link rel="icon" type="image/png" href="/files/favicon.png">
+        <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn" />
+    <meta property="og:title" content="Astrology Elements Distribution over a Few Years. Visualization. Pandas. Seaborn " />
+    <meta property="og:description" content="The four elements Fire, Water, Earth and Air describe an object with a set of their own characteristics, such as being active, perceptive, structured, versatile. By understanding all the other characteristics and the specific composition of elements, we can attempt to profile an object. But what if that object is a calendar year? In such a case, to create a profile, the daily elements ratio has to be computed." />
+    <meta property="og:image" content="https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/files/main-section.png" />
+    <meta property="article:published_time" content="2023-09-18" />
+    <meta name="description" content="The four elements Fire, Water, Earth and Air describe an object with a set of their own characteristics, such as being active, perceptive, structured, versatile. By understanding all the other characteristics and the specific composition of elements, we can attempt to profile an object. But what if that object is a calendar year? In such a case, to create a profile, the daily elements ratio has to be computed.">    <link rel="icon" type="image/png" href="/files/favicon.png">
     <link rel="alternate" type="application/rss+xml" href="/rss.xml">
     <style>
          @charset "UTF-8";/*!
@@ -138,7 +144,7 @@
         "use strict";if(void 0===self.Iconify&&(self.Iconify={isReady:!1},self.SimpleSVG=self.Iconify,function(e,t){var i,n,o,r,s,a,c,l,u,d,f,h,p,v,g,b,m,y,w,_,x,O,A,j,I,E,k,C,M,L,S,N,P,T,F,R,D,H,V,G,Q,z,B,q,Y,J,U,W,$,K,X,Z,ee,te,ie,ne,oe,re={config:{},version:"1.0.7"};function se(e,t){var i;return t=t||{bubbles:!1,cancelable:!1,detail:void 0},(i=document.createEvent("CustomEvent")).initCustomEvent(e,t.bubbles,t.cancelable,t.detail),i}function ae(){document.removeEventListener("DOMContentLoaded",ae),window.removeEventListener("load",ae),o.DOMReadyCallback()}function ce(t,i,e){var n=t;if("_"!==t.slice(0,1)){if(void 0===u[t]){if(!e||void 0===u["_"+t])return;n="_"+t}switch(n){case"API":case"SVGAttributes":Object.keys(i).forEach(function(e){null===i[t]?delete u[n][e]:u[n][e]=i[e]});break;default:u[n]=i}}}function le(e,t){return function(e,t){switch(e){case"rotate":return t=parseInt(t),isNaN(t)?null:t;case"width":case"height":case"inlineHeight":case"inlineTop":case"verticalAlign":return t=parseFloat(t),isNaN(t)?null:t;case"vFlip":case"hFlip":return!!t;case"body":case"parent":return"string"==typeof t?t:null}return t}("rotate",e+t)}function ue(e,t){return!!e!=!!t}function de(e){var i=Object.create(null);return(void 0===e._defaults?[e,v]:[e,e._defaults,v]).forEach(function(t){Object.keys(t).forEach(function(e){"object"!=typeof t[e]&&void 0===i[e]&&(i[e]=t[e])})}),void 0===i.inlineTop&&(i.inlineTop=i.top),void 0===i.inlineHeight&&(i.inlineHeight=i.height),void 0===i.verticalAlign&&(i.height%7==0&&i.height%8!=0?i.verticalAlign=-.143:i.verticalAlign=-.125),i}function fe(){return this._icons=Object.create(null),this._aliases=Object.create(null),this._resolved=Object.create(null),this._add=function(e,t,i){var n=e?"_aliases":"_icons";void 0===this._resolved[t.prefix]?(this._resolved[t.prefix]=Object.create(null),this._icons[t.prefix]=Object.create(null),this._aliases[t.prefix]=Object.create(null)):(delete this._icons[t.prefix][t.icon],delete this._aliases[t.prefix][t.icon]),this._resolved[t.prefix][t.icon]=!1,this[n][t.prefix][t.icon]=i},this._resolveIcon=function(e){var t,i,n,o,r,s;if(void 0===this._resolved[e.prefix]||void 0===this._resolved[e.prefix][e.icon])return null;if(!1!==this._resolved[e.prefix][e.icon])return this._resolved[e.prefix][e.icon];if(void 0!==this._icons[e.prefix][e.icon])return this._resolved[e.prefix][e.icon]=de(this._icons[e.prefix][e.icon]);for(i=0,t=this._aliases[e.prefix][e.icon],n=Object.create(null),Object.keys(t).forEach(function(e){"parent"!==e&&(n[e]=t[e])}),o=t.parent;;){if(5<++i||void 0===this._resolved[e.prefix][o])return this._resolved[e.prefix][e.icon]=null;if(r=void 0===this._icons[e.prefix][o],s=this[r?"_aliases":"_icons"][e.prefix][o],Object.keys(s).forEach(function(e){if(void 0!==n[e])switch(e){case"rotate":n[e]=le(n[e],s[e]);break;case"hFlip":case"vFlip":n[e]=ue(n[e],s[e])}else"parent"!==e&&(n[e]=s[e])}),!r)break;o=s.parent}return this._resolved[e.prefix][e.icon]=de(n)},this.addCollection=function(n){var o=this,r=Object.create(null);g.forEach(function(e){void 0!==n[e]?r[e]=n[e]:void 0!==v[e]&&(r[e]=v[e])}),void 0!==n.icons&&Object.keys(n.icons).forEach(function(e){var t=p(e,n.prefix),i=n.icons[e];void 0!==i.body&&(i._defaults=r,o._add(!1,t,i))}),void 0!==n.aliases&&Object.keys(n.aliases).forEach(function(e){var t=p(e,n.prefix),i=n.aliases[e];if(void 0!==i.parent){if(void 0===n.prefix){if(i.parent.slice(0,t.prefix.length)!==t.prefix)return;i.parent=i.parent.slice(t.prefix.length+1)}o._add(!0,t,i)}})},this.addIcon=function(e,t,i){var n=void 0!==t.parent,o=p(e,i);if(n&&void 0===i){if(t.parent.slice(0,o.prefix.length)!==o.prefix)return;t.parent=t.parent.slice(o.prefix.length+1)}this._add(n,o,t)},this.exists=function(e,t){var i=p(e,t);return void 0!==this._resolved[i.prefix]&&void 0!==this._resolved[i.prefix][i.icon]},this.getIcon=function(e,t){var i=p(e,t);return this._resolveIcon(i)},this.copyIcon=function(e,t){var i,n=this.getIcon(e,t);return null===n?null:(i=Object.create(null),Object.keys(n).forEach(function(e){i[e]=n[e]}),i)},this.list=function(e){var i,n;return void 0!==e?void 0===this._resolved[e]?[]:Object.keys(this._resolved[e]):(i=[],n=this._resolved,Object.keys(n).forEach(function(t){i=i.concat(Object.keys(n[t]).map(function(e){return""===t&&-1===e.indexOf("-")?e:t+":"+e}))}),i)},this}function he(){w&&(w=!1,m.scanDOM())}function pe(e,t,i){var n,o,r,s,a;if(1===t)return e;if(i=void 0===i?100:i,"number"==typeof e)return Math.ceil(e*t*i)/i;if("string"!=typeof e)return e;if(null===(n=e.split(A))||!n.length)return e;for(o=[],r=n.shift(),s=j.test(r);;){if(s?(a=parseFloat(r),isNaN(a)?o.push(r):o.push(Math.ceil(a*t*i)/i)):o.push(r),void 0===(r=n.shift()))return o.join("");s=!s}}function ve(e,t,i){var n,o,r;for(n=0;n<t.length;n++)if(void 0!==e[o=t[n]])switch(typeof(r=e[o])){case"boolean":return r;case"number":return!!r;case"string":switch(r.toLowerCase()){case"1":case"true":case o:return!0;case"0":case"false":case"":return!1}}return i}function ge(e,t,i){var n,o;for(n=0;n<t.length;n++)if(void 0!==e[o=t[n]])return e[o];return i}function be(){var s=N.loaderMaxURLSize,o=Object.create(null);function a(e,t){var i,n=o[e];"function"!=typeof n?(n=n.replace("{icons}",t.join(",")),(i=document.createElement("script")).setAttribute("type","text/javascript"),i.setAttribute("src",n),i.setAttribute("async",!0),document.head.appendChild(i)):n.call(L,e,t)}function c(e){var t=void 0===N.API[e]?N.defaultAPI:N.API[e];return"function"==typeof t?(o[e]=t,!1):-1===t.indexOf("{icons}")?(o[e]=t,null):(t=t.replace("{prefix}",e).replace("{callback}","Iconify._loaderCallback"),(o[e]=t).replace("{icons}","").length)}Object.keys(T).forEach(function(i){var n=c(i),o=!1===n,r=[];if(null===n)return a(i,[]),void(F[i]=!0);T[i].forEach(function(e,t){o||(n+=e.length+1,s<=n&&(a(i,r),r=[],n=c(i)+e.length+1)),r.push(e)}),r.length&&a(i,r),F[i]=void 0===F[i]?T[i]:F[i].concat(T[i]),delete T[i]}),D=!1}function me(e,t,i){return i||S.domready||N.loadBeforeDOMReady?(void 0===T[e]||-1===T[e].indexOf(t))&&(void 0===F[e]||!0!==F[e]&&-1===F[e].indexOf(t))&&(void 0===T[e]&&(T[e]=[]),T[e].push(t),D||(D=!0,window.setTimeout(be,0)),1):(o=t,void 0===R[n=e]&&(R[n]=Object.create(null)),R[n][o]=!0,void 0===S._loaderDOMReady&&(S._loaderDOMReady=S.DOMReadyCallback,S.DOMReadyCallback=function(){S._loaderDOMReady(),Object.keys(R).forEach(function(t){Object.keys(R[t]).forEach(function(e){L.iconExists(e,t)||me(t,e,!0)})})}),1);var n,o}function ye(){var e;!1!==U&&U.length?(e=U,U=!1,Q.scanDOM(e)):U=!1}function we(e){e.forEach(function(e){var t;if(!1===U&&(U=[],window.setTimeout(ye,0)),e.addedNodes)for(t=0;t<e.addedNodes.length;t++)U.push(e.addedNodes[t])})}function _e(){q.observe(void 0===z._root?document.querySelector("body"):z._root,W)}function xe(e,t){var i;return"<?"===e.slice(0,2)&&(i=e.indexOf(">"),e=e.slice(i+1)),e=-1!==(i=(e=e.replace("viewbox=","viewBox=").replace("preserveaspectratio=","preserveAspectRatio=")).indexOf("</"))?e.replace("</",t+"</"):e.replace("/>",">"+t+"</svg>")}i=re,"function"!=typeof window.CustomEvent&&(se.prototype=window.Event.prototype,window.CustomEvent=se),i.event=function(e,t){document.dispatchEvent(new CustomEvent(e,t))},n=e,r=(o=re).config,s=null,o.DOMReadyCallback=function(){o.domready=!0,o.nextInitItem()},o.initTimeout=function(e){function t(){if(null!==s){if(!1!==s.callback())return s.stop(),void o.nextInitItem();s.counter++,10!==s.counter&&25!==s.counter||(window.clearInterval(s.id),s.id=window.setInterval(t,10===s.counter?250:1e3))}}null!==s&&s.stop(),s={id:window.setInterval(t,100),counter:0,callback:e,stop:function(){window.clearInterval(s.id),s=null},nextTick:t}},o.domready=!1,o.ready=!1,o.initQueue=[],o.readyQueue=[],o.nextInitItem=function(){var e;if(!o.ready){if(o.initQueue.length)e=o.initQueue.shift();else{if(!o.domready)return void o.initTimeout(function(){return!o.domready&&document.body&&o.scanDOM(),o.domready});if(!o.readyQueue.length)return o.ready=n.isReady=!0,o.event(r._readyEvent),void o.scanDOM();e=o.readyQueue.shift()}!1!==e()&&o.nextInitItem()}},o.addStylesheet=function(e){var t;if(!document.head||!document.body)return!!o.domready||(e||o.initTimeout(o.addStylesheet.bind(null,!0)),!1);try{(t=document.createElement("style")).type="text/css",t.innerHTML="span.iconify, i.iconify, iconify-icon { display: inline-block; width: 1em; }",null!==document.head.firstChild?document.head.insertBefore(t,document.head.firstChild):document.head.appendChild(t)}catch(e){}return!0},o.initQueue.push(o.addStylesheet.bind(null,!1)),n.ready=function(e){n.isReady?window.setTimeout(e):document.addEventListener(r._readyEvent,e)},window.setTimeout(function(){"complete"===document.readyState||"loading"!==document.readyState&&!document.documentElement.doScroll?o.domready=!0:(document.addEventListener("DOMContentLoaded",ae),window.addEventListener("load",ae)),o.nextInitItem()}),(a=re.config).SVGAttributes=Object.create(null),a._imageClass="iconify",a._loadingClass="svg-loading",a._iconAttribute="data-icon",a._rotateAttribute="data-rotate",a._flipAttribute="data-flip",a._inlineModeAttribute="data-inline",a._alignAttribute="data-align",a._appendAttribute="data-icon-append",a._appendedClass="svg-appended",a._readyEvent="IconifyReady",a._webComponentsPolyfill="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.24/webcomponents-lite.min.js",a._classListPolyfill="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20150312/classList.min.js",function(t){t.defaultAPI="https://api.iconify.design/{prefix}.js?icons={icons}",t.API=Object.create(null),t.loaderMaxURLSize=500,t.loadBeforeDOMReady=!(document&&document.body),t._loaderEvent="IconifyAddedIcons",t.sessionStorage=!0;try{t.localStorage=!!(window&&window.localStorage&&window.localStorage.length)}catch(e){t.localStorage=!1}}(re.config),c=e,l=t,u=re.config,c.setConfig=function(e,t){ce(e,t,!1)},c.setCustomAPI=function(e,t){switch(typeof e){case"string":0;break;case"object":if(e instanceof Array){0;break}default:return}e.forEach(function(e){null===t?delete u.API[e]:u.API[e]=t})},c.getConfig=function(e){return void 0===u[e]?void 0===u["_"+e]?null:u["_"+e]:u[e]},["SimpleSVG","Iconify"].forEach(function(e){var t;void 0!==l[e+"Config"]&&"object"==typeof l[e+"Config"]&&(t=l[e+"Config"],Object.keys(t).forEach(function(e){ce(e,t[e],!0)}))}),f=(d=re).config,h=t,d.initQueue.push(function(){var e={observer:!1,classList:!1},t={observer:!1,classList:!1};function i(e){var t;return!e.length||(document.head?((t=document.createElement("script")).setAttribute("src",e),t.setAttribute("type","text/javascript"),document.head.appendChild(t),!0):d.domready)}function n(){if("classList"in document.createElement("div"))return 1;t.classList||(t.classList=i(f._classListPolyfill))}function o(){return h.MutationObserver&&h.WeakMap||t.observer||(t.observer=i(f._webComponentsPolyfill)),1}return e.classList=!n(),e.observer=!o(),!e.classList&&!e.observer||(d.initTimeout(function(){return!(e.observer&&!o()||e.classList&&!n())}),!1)}),re.getPrefix=function(e,t){var i;return"string"==typeof t&&""!==t?{prefix:t,icon:e}:2===(i=e.split(":")).length?{prefix:i[0],icon:i[1]}:1<(i=e.split("-")).length?{prefix:t=i.shift(),icon:i.join("-")}:{prefix:"",icon:e}},p=re.getPrefix,v={left:0,top:0,width:16,height:16,rotate:0,vFlip:!1,hFlip:!1},g=["left","top","width","height","body","rotate","vFlip","hFlip","inlineTop","inlineHeight","verticalAlign"],fe.mergeFlip=ue,fe.mergeRotation=le,fe.blankIcon=function(){return de({body:"",width:16,height:16})},re.Storage=fe,b=e,y=t,w=!1,_=new(m=re).Storage,b.addCollection=function(e,t){_.addCollection(e),w||!0===t||(w=!0,window.setTimeout(he,0))},b.addIcon=function(e,t,i){_.addIcon(e,t),w||!0===i||(w=!0,window.setTimeout(he,0))},b.iconExists=_.exists.bind(_),b.getIcon=_.copyIcon.bind(_),b.listIcons=_.list.bind(_),["SimpleSVG","Iconify"].forEach(function(e){void 0!==y[e+"Preload"]&&y[e+"Preload"]instanceof Array&&y[e+"Preload"].forEach(function(e){"object"==typeof e&&void 0!==e.icons&&b.addCollection(e)})}),x=re.Storage,O=re.config,A=/(-?[0-9.]*[0-9]+[0-9.]*)/g,j=/^-?[0-9.]*[0-9]+[0-9.]*$/g,I=["width","height","inline"],E=["title"],k=0,re.SVG=function(_){return _=_||x.blankIcon(),this.item=_,this.height=function(e,t,i){return void 0===e?t?this.item.inlineHeight:this.item.height:pe(e,(t?this.item.inlineHeight:this.item.height)/this.item.width,i)},this.width=function(e,t,i){return void 0===e?this.item.width:pe(e,this.item.width/(t?this.item.inlineHeight:this.item.height),i)},this.defaultAttributes=function(){return{xmlns:"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink","aria-hidden":"true",focusable:"false"}},this.preserveAspectRatio=function(e,t,i){var n="";switch(e){case"left":n+="xMin";break;case"right":n+="xMax";break;default:n+="xMid"}switch(t){case"top":n+="YMin";break;case"bottom":n+="YMax";break;default:n+="YMid"}return n+=!0===i?" slice":" meet"},this.htmlspecialchars=function(e){switch(typeof e){case"boolean":case"number":return e+"";case"string":return e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}return""},this.attributes=function(t){var e,i,n,o,r,s,a,c,l,u,d,f,h,p,v=this,g={horizontal:"center",vertical:"middle",crop:!1},b={rotate:_.rotate,hFlip:_.hFlip,vFlip:_.vFlip},m="",y=this.defaultAttributes(),w=[];if(s=ve(t="object"==typeof t?t:Object.create(null),[O._inlineModeAttribute,"inline"],!0),u=ve(t,[O._appendAttribute],!1),e={left:_.left,top:s?_.inlineTop:_.top,width:_.width,height:s?_.inlineHeight:_.height},"string"==typeof t[O._flipAttribute]&&t[O._flipAttribute].split(/[\s,]+/).forEach(function(e){switch(e=e.toLowerCase()){case"horizontal":b.hFlip=!b.hFlip;break;case"vertical":b.vFlip=!b.vFlip}}),void 0!==t[O._rotateAttribute])if("number"==typeof(c=t[O._rotateAttribute]))b.rotate+=c;else if("string"==typeof c)if(""===(d=c.replace(/^-?[0-9.]*/,"")))c=parseInt(c),isNaN(c)||(b.rotate+=c);else if(d!==c){switch(l=!1,d){case"%":l=25;break;case"deg":l=90}l&&(c=parseInt(c.slice(0,c.length-d.length)),isNaN(c)||(b.rotate+=Math.round(c/l)))}switch(b.hFlip?b.vFlip?b.rotate+=2:(w.push("translate("+(e.width+e.left)+" "+(0-e.top)+")"),w.push("scale(-1 1)"),e.top=e.left=0):b.vFlip&&(w.push("translate("+(0-e.left)+" "+(e.height+e.top)+")"),w.push("scale(1 -1)"),e.top=e.left=0),b.rotate%4){case 1:p=e.height/2+e.top,w.unshift("rotate(90 "+p+" "+p+")"),0===e.left&&0===e.top||(p=e.left,e.left=e.top,e.top=p),e.width!==e.height&&(p=e.width,e.width=e.height,e.height=p);break;case 2:w.unshift("rotate(180 "+(e.width/2+e.left)+" "+(e.height/2+e.top)+")");break;case 3:p=e.width/2+e.left,w.unshift("rotate(-90 "+p+" "+p+")"),0===e.left&&0===e.top||(p=e.left,e.left=e.top,e.top=p),e.width!==e.height&&(p=e.width,e.width=e.height,e.height=p)}return i=ge(t,["data-width","width"],null),n=ge(t,["data-height","height"],null),null===i&&null===n&&(n="1em"),null!==i&&null!==n?(o=i,r=n):null!==i?r=pe(o=i,e.height/e.width):o=pe(r=n,e.width/e.height),!1!==o&&(y.width="auto"===o?e.width:o),!1!==r&&(y.height="auto"===r?e.height:r),s&&0!==_.verticalAlign?m+="vertical-align: "+(h=_.verticalAlign+"em")+";":h="","string"==typeof t[O._alignAttribute]&&t[O._alignAttribute].toLowerCase().split(/[\s,]+/).forEach(function(e){switch(e){case"left":case"right":case"center":g.horizontal=e;break;case"top":case"bottom":case"middle":g.vertical=e;break;case"crop":g.crop=!0;break;case"meet":g.crop=!1}}),m+="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);",y.style=m+(void 0===t.style?"":t.style),y.preserveAspectRatio=this.preserveAspectRatio(g.horizontal,g.vertical,g.crop),y.viewBox=e.left+" "+e.top+" "+e.width+" "+e.height,a=function(i){var e,n,t=/\sid="(\S+)"/g,o=[];function r(e,t,i){for(var n=0;-1!==(n=i.indexOf(e,n));)i=i.slice(0,n)+t+i.slice(n+e.length),n+=t.length;return i}for(;e=t.exec(i);)o.push(e[1]);return o.length&&(n="IconifyId-"+Date.now().toString(16)+"-"+(16777216*Math.random()|0).toString(16)+"-",o.forEach(function(e){var t=n+k;k++,i=r('="'+e+'"','="'+t+'"',i),i=r('="#'+e+'"','="#'+t+'"',i),i=r("(#"+e+")","(#"+t+")",i)})),i}(this.item.body),w.length&&(a='<g transform="'+w.join(" ")+'">'+a+"</g>"),f=Object.create(null),Object.keys(t).forEach(function(e){void 0===y[e]&&(-1!==E.indexOf(e)?a="<"+e+">"+v.htmlspecialchars(t[e])+"</"+e+">"+a:-1===I.indexOf(e)&&(f[e]=t[e]))}),{attributes:y,elementAttributes:f,body:a,append:u,verticalAlign:h}},this},M=(C=re).config._loadingClass,C.newImage=function(e,t,i){return{element:e,icon:t,parser:i,loading:e.classList.contains(M)}},C.parsedImage=function(e,t){return{element:e,icon:t}},C.getImageAttributes=function(t){var e,i,n=Object.create(null);if(!t.element.hasAttributes())return n;for(e=0;e<t.element.attributes.length;e++)i=t.element.attributes[e],n[i.name]=i.value;return t.parser&&void 0!==t.parser.filterAttributes&&(n=t.parser.filterAttributes(t,n)),void 0!==n.class&&(n.class=n.class.split(" ").filter(function(e){return e!==M}),t.parser&&void 0!==t.parser.filterClasses&&(n.class=t.parser.filterClasses(t,n.class)),n.class=n.class.join(" ")),void 0!==t.attributes&&Object.keys(t.attributes).forEach(function(e){n[e]=t.attributes[e]}),n},function(n,f,e){var s=e._imageClass,t=e._loadingClass,i=e._appendedClass,a=e._iconAttribute,o=e._inlineModeAttribute,r=":not(svg):not(."+i+")",c=":not(."+t+")",l="."+t,h={iconify:{selector:"."+s,selectorAll:"."+s+r,selectorNew:"."+s+r+c,selectorLoading:"."+s+r+l,icon:function(e){var t,i=e.getAttribute(a);if("string"==typeof i)return i;for(var n=0;n<e.classList.length;n++)if(5<(t=e.classList[n]).length&&"icon:"===t.slice(0,5))return t.slice(5);return""},filterClasses:function(e,t){var i,n,o;for(n=0;n<t.length;n++)"icon-"===(i=t[n]).slice(0,5)&&2===(i=i.slice(5).split(":")).length&&(o="data-"+i[0],void 0===e.attributes&&(e.attributes=Object.create(null)),e.attributes[o]=i[1]);return t}}},p=Object.keys(h);n.addFinder=function(e,t){void 0===t.selectorAll&&(t.selectorAll=t.selector+r),void 0===t.selectorNew&&(t.selectorNew=t.selector+r+c),void 0===t.selectorLoading&&(t.selectorLoading=t.selector+r+l),h[e]=t,p=Object.keys(h),n.isReady&&n.scanDOM()},n.addTag=function(e,i,t){n.addFinder("tag-"+e,{selector:e,icon:null==t?h.iconify.icon:t,filterAttributes:function(e,t){return void 0===t[o]&&(t[o]=i),t},filterClasses:h.iconify.filterClasses})};try{"object"==typeof Reflect&&"object"==typeof customElements&&Object.setPrototypeOf&&(Object.setPrototypeOf(u.prototype,HTMLElement.prototype),Object.setPrototypeOf(u,HTMLElement),customElements.define("iconify-icon",u))}catch(e){}function u(){return Reflect.construct(HTMLElement,[],u)}n.addTag("iconify-icon",!1),f.findNewImages=function(c,l){var u=[],d=[];return(c=void 0===c?void 0===e._root?document.body:e._root:c)&&p.forEach(function(e){var t,i,n,o,r=h[e],s=!0===l?r.selectorLoading:!1===l?r.selectorNew:r.selectorAll,a=c.querySelectorAll(s);for(t=0;t<a.length;t++)i=a[t],(n=r.icon(i))&&-1===d.indexOf(i)&&(d.push(i),o=f.newImage(i,n,r),u.push(o))}),u},f.findParsedImages=function(e){var t,i,n,o=[],r=e.querySelectorAll("svg."+s);for(t=0;t<r.length;t++)(n=(i=r[t]).getAttribute(a))&&o.push(f.parsedImage(i,n));return o}}(e,re,re.config),L=e,N=(S=re).config,P=t,T=Object.create(null),F=Object.create(null),R=Object.create(null),H={session:!(D=!1),local:!0},V={session:0,local:0},L._loaderCallback=function(i){var n=!1;"object"==typeof i&&(["local","session"].forEach(function(t){var e;if(!n&&H[t]&&N[t+"Storage"]){e=P[t+"Storage"];try{V[t]||e.setItem("iconify-version",S.version),e.setItem("iconify"+V[t],JSON.stringify(i)),n=!0,V[t]++,e.setItem("iconify-count",V[t])}catch(e){H[t]=!1}}}),L.addCollection(i),S.event(N._loaderEvent))},S.loadImage=function(e,t){var i=S.getPrefix(e.icon);return!!L.iconExists(i.icon,i.prefix)||(!1!==t&&me(i.prefix,i.icon,!1)&&e.element.classList.add(N._loadingClass),!1)},L.preloadImages=function(e){var t,i=!1;return e.forEach(function(e){t=S.getPrefix(e),L.iconExists(t.icon,t.prefix)||(me(t.prefix,t.icon,!0),i=!0)}),i},["local","session"].forEach(function(t){var e,i,n;try{if("object"!=typeof(e=P[t+"Storage"]))return void(H[t]=!1);if(e.getItem("iconify-version")!==S.version)return;if("number"!=typeof(n=parseInt(e.getItem("iconify-count")))||isNaN(n))return;for(;;){if(V[t]>=n)return;if("string"!=typeof(i=e.getItem("iconify"+V[t])))return;"object"==typeof(i=JSON.parse(i))&&L.addCollection(i),V[t]++}}catch(e){H[t]=!1}}),G=e,z=(Q=re).config,B=t,Y=0,W={childList:!(U=!1),subtree:!(J=q=null)},G.pauseObserving=function(){null!==q&&(Y||(J=q.takeRecords(),q.disconnect())),Y++},G.resumeObserving=function(){null!==q?Y&&(--Y||(_e(),null!==J&&J.length&&we(J))):Y--},G.isObserverPaused=function(){return null===q||!!Y},Q.readyQueue.push(function(){return q=new B.MutationObserver(we),Y||_e(),!0}),$=e,X=(K=re).config,Z=X._iconAttribute,ee=X._loadingClass,te=X._imageClass,ie=X._appendedClass,K.renderSVG=function(t){var e,i,n,o,r,s,a,c,l,u,d,f=K.getImageAttributes(t),h=$.getIcon(t.icon);for(f[Z]=t.icon,e=new K.SVG(h),n=document.createElement("svg"),r=e.attributes(f),Object.keys(r.attributes).forEach(function(e){if(d=r.attributes[e],"style"!==e||"string"==typeof(d=t.element.getAttribute("style"))&&d.length)try{n.setAttribute(e,d)}catch(e){}}),Object.keys(r.elementAttributes).forEach(function(e){try{(r.append?t.element:n).setAttribute(e,r.elementAttributes[e])}catch(e){}}),t.loading&&(n.classList.remove(ee),r.append&&t.element.classList.remove(ee)),n.classList.add(te),s=xe(n.outerHTML,r.body),(o=document.createElement("span")).innerHTML=s,i=o.childNodes[0],r.append?(t.element.classList.add(ie),t.element.appendChild(i)):(t.element.parentNode.replaceChild(i,t.element),t.element=i),a=i.style,c=t.element.style,r.verticalAlign&&(a.verticalAlign=r.verticalAlign),a.transform="rotate(360deg)",l=0;l<c.length;l++)a[u=c[l]]=c[u];delete t.parser,delete t.loading},$.getSVGObject=function(e,t){return!!$.iconExists(e)&&new K.SVG($.getIcon(e)).attributes(t,!1)},$.getSVG=function(e,t){var i,n;return!1!==(n=$.getSVGObject(e,t))&&(i=document.createElement("svg"),Object.keys(n.attributes).forEach(function(e){try{i.setAttribute(e,n.attributes[e])}catch(e){}}),xe(i.outerHTML,n.body))},ne=e,(oe=re).scanDOM=function(){var t=!1;function e(){oe.findNewImages().forEach(function(e){oe.loadImage(e)&&(t||(t=!0,ne.pauseObserving()),oe.renderSVG(e))})}if(oe.ready)e();else try{e()}catch(e){}t&&ne.resumeObserving()},ne.scanDOM=oe.scanDOM,ne.getVersion=function(){return oe.version}}(self.Iconify,self)),"object"==typeof exports)try{exports.__esModule=!0,exports.default=self.Iconify}catch(e){}
     </script>
         <script async defer data-website-id="44e692db-5276-4f47-9c8a-a5fe8c4184b5" src="https://analytics.kvdm.dev:23387/umami.js"></script>
-        <title>ТехнологоблогЪ</title>
+        <title>Astrology Elements Distribution over a Few Years. Visualization. Pandas. Seaborn </title>
 </head>
 <body>
 <nav class="navbar navbar-light bg-white sticky-top pb-0">
@@ -149,552 +155,287 @@
 </nav>
 <div class="container lh-base fs-5">
         <div class="row">
-        <div id="about" class="col-12">
-            <h1 class="fw-bold">About</h1>
-            <p>Observe existence <span class="iconify" data-icon="fa-solid:eye"></span>, drink tea <span class="iconify" data-icon="fa:coffee"></span>, experiment <span class="iconify" data-icon="icon-park-solid:experiment"></span>, cognize <span class="iconify" data-icon="fa-solid:pen-alt"></span></p>
-	</div>
-    </div>
-    <div class="row mt-2">
-        	<div id="services" class="col-sm-12 col-md-12 col-lg-6 mb-3">
-            <h2 class="card-title mb-0 fw-bold">Live services</h2>
-            <small>Click and test it out</small>
-            <ul class="list-group list-group-flush">
-                                <li class="list-group-item border-0 ps-0">
-                    <a class="umami--click--services-memo" target="_blank" rel="noopener noreferrer" href="https://memo.kvdm.dev:23387">Memo cards <span class="iconify" data-icon="foundation:clipboard-pencil"></span></a>
-                    <br><small class="text-dark">Service helps to memorize and repeat words to enrich a vocubalary.</small>
-                </li>
-                                                                                <li class="list-group-item border-0 ps-0">
-                    <a class="umami--click--services-statuspage" target="_blank" rel="noopener noreferrer" href="https://kvdm.cronitorstatus.com">Status Page <span class="iconify" data-icon="akar-icons:circle-check-fill"></span></a>
-                    <br><small class="text-dark">Check for the live services are running.</small>
-                </li>
-                            </ul>
-	</div>
-                <div id="profiles" class="col-sm-6 col-md-6 col-lg-3 mb-3">
-            <h2 class="card-title mb-0 fw-bold">Profiles</h2>
-            <small>Public info</small>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item border-0 ps-0"><a class="me-1 umami--click--profiles-github" target="_blank" rel="noopener noreferrer" href="https://github.com/4l1fe">Github <span class="iconify" data-icon="fa-brands:github"></span></a></li>
-                <li class="list-group-item border-0 ps-0"><a class="me-1 umami--click--profiles-linkedin" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/dmitrii-krasnov">Linkedin <span class="iconify" data-icon="brandico:linkedin-rect"></span></a></li>
-                <li class="list-group-item border-0 ps-0"><a class="me-1 umami--click--profiles-stackexchange" target="_blank" rel="noopener noreferrer" href="https://stackexchange.com/users/5761123/r45i?tab=accounts">Stackexchange <span class="iconify" data-icon="fa-brands:stack-exchange"></span></a></li>
-                <li class="list-group-item border-0 ps-0"><a class="me-1 umami--click--profiles-telegram" target="_blank" rel="noopener noreferrer" href="https://t.me/kvdm_dev">Telegram <span class="iconify" data-icon="fa:telegram"></span></a></li>
-            </ul>
-        </div>
-        <div id="photo" class="col-sm-6 col-md-6 col-lg-3 mb-3">
-            <img src="files/photo.jpg" class="img-fluid rounded">
-        </div>            
-    </div>
+        <div id="content" class="col-lg-9 order-2 order-lg-1">
+            <h1 class="display-5 fw-bold">Astrology Elements Distribution over a Few Years. Visualization. Pandas. Seaborn <a id="astrology-elements-distribution-over-a-few-years.-visualization.-pandas.-seaborn" href="#astrology-elements-distribution-over-a-few-years.-visualization.-pandas.-seaborn" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h1>
+<p><img src="files/main-section.png" alt="" class="d-block mx-auto mw-100 h-100"></p>
+<p>The four elements Fire, Water, Earth and Air describe an object with a set of their own characteristics, such as being active, perceptive, structured, versatile. By understanding all the other characteristics and the specific composition of elements, we can attempt to profile an object. But what if that object is a calendar year? In such a case, to create a profile, the daily elements ratio has to be computed.</p>
+<p>The idea of the year profile came to my mind while i was learning about the subjects of <strong>Elements</strong> and <strong>Modality</strong> in an astrology class. The profile, I believe, would lead to a better understanding of the elements and how to perceive them as a whole along with modality. I think that comparing three consecutive years - the previous, current, and upcoming - side by side would enhance profile understanding, as we all discover our lives in the same way.</p>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Generating Data. Elements Per Day <a id="generating-data.-elements-per-day" href="#generating-data.-elements-per-day" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p>I have a few candidates to assist me in generating planet positions at the zodiac sign per day - <a href="https://github.com/g-battaglia/kerykeion" class="umami--click--github-com-g-battaglia-kerykeion">kerykeion <span class="iconify" data-icon="codicon:github-inverted"></span></a>, <a href="https://github.com/astrorigin/pyswisseph" class="umami--click--github-com-astrorigin-pyswisseph">pyswisseph <span class="iconify" data-icon="codicon:github-inverted"></span></a>, and <a href="https://github.com/flatangle/flatlib" class="umami--click--github-com-flatangle-flatlib">flatlib <span class="iconify" data-icon="codicon:github-inverted"></span></a>. The data generated will be grouped up and visualized. While Pyswisseph is considered the industry standard library, flatlib serves as its wrapper. Kerykeion appears to be redundant. Personally, I prefer using a wrapper as it's a better fit for this task. Flatlib allows us to obtain a data record <code>datetime, planet, sign</code> with just a few lines of code.</p>
+<p>To compute the ratio the element points are summarized in according to a zodiac sign where a planet of 10 is placed at a given moment of time in a specific location, one planet is one point. Planets are Sun, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, and Pluto. The location is Moscow, the time is 12pm.</p>
+<pre><code><span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">flatlib.datetime</span> <span style="color: #007020; font-weight: bold">import</span> Datetime
+<span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">flatlib.geopos</span> <span style="color: #007020; font-weight: bold">import</span> GeoPos
+<span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">flatlib.chart</span> <span style="color: #007020; font-weight: bold">import</span> Chart
+<span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">flatlib</span> <span style="color: #007020; font-weight: bold">import</span> const
 
+LIST_OBJECTS <span style="color: #666666">=</span> const<span style="color: #666666">.</span>LIST_OBJECTS[:<span style="color: #666666">-</span><span style="color: #40a070">5</span>]
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">make_chart</span>(date, time<span style="color: #666666">=</span><span style="color: #4070a0">'12:00'</span>, timezone<span style="color: #666666">=</span><span style="color: #4070a0">'+03:00'</span>, moscow_lat<span style="color: #666666">=</span><span style="color: #40a070">55.752121</span>, moscow_long<span style="color: #666666">=</span><span style="color: #40a070">37.617664</span>):
+    date <span style="color: #666666">=</span> Datetime(date, time, timezone)
+    pos <span style="color: #666666">=</span> GeoPos(moscow_lat, moscow_long)
+    chart <span style="color: #666666">=</span> Chart(date, pos, IDs<span style="color: #666666">=</span>LIST_OBJECTS)
+    <span style="color: #007020; font-weight: bold">return</span> chart
+</code></pre>
+<p>I've never used Flatlib library before, so I've conducted a small comparison between the generated data and two third-party natal chart builders  - <a href="https://astro-seek.com" class="umami--click--astro-seek-com">astro-seek.com <span class="iconify" data-icon="la:external-link-alt"></span></a> and <a href="https://sotis-online.ru" class="umami--click--sotis-online-ru">sotis-online.ru <span class="iconify" data-icon="la:external-link-alt"></span></a> to ensure a full match. The date chosen is <code>2023/09/14</code>, which is the beginning of writing this article. The output displays all planets and their corresponding zodiac signs.</p>
+<pre><code>chart <span style="color: #666666">=</span> make_chart(<span style="color: #4070a0">'2023/09/14'</span>)
+
+ELEMENTS <span style="color: #666666">=</span> {<span style="color: #4070a0">'Aries'</span>: <span style="color: #4070a0">'Fire'</span>,
+            <span style="color: #4070a0">'Leo'</span>: <span style="color: #4070a0">'Fire'</span>,
+            <span style="color: #4070a0">'Sagittarius'</span>: <span style="color: #4070a0">'Fire'</span>,
+            <span style="color: #4070a0">'Cancer'</span>: <span style="color: #4070a0">'Water'</span>,
+            <span style="color: #4070a0">'Scorpio'</span>: <span style="color: #4070a0">'Water'</span>,
+            <span style="color: #4070a0">'Pisces'</span>: <span style="color: #4070a0">'Water'</span>,
+            <span style="color: #4070a0">'Taurus'</span>: <span style="color: #4070a0">'Earth'</span>,
+            <span style="color: #4070a0">'Virgo'</span>: <span style="color: #4070a0">'Earth'</span>,
+            <span style="color: #4070a0">'Capricorn'</span>: <span style="color: #4070a0">'Earth'</span>,
+            <span style="color: #4070a0">'Gemini'</span>: <span style="color: #4070a0">'Air'</span>,
+            <span style="color: #4070a0">'Libra'</span>: <span style="color: #4070a0">'Air'</span>,
+            <span style="color: #4070a0">'Aquarius'</span>: <span style="color: #4070a0">'Air'</span>}
+
+<span style="color: #007020; font-weight: bold">for</span> obj_id <span style="color: #007020; font-weight: bold">in</span> const<span style="color: #666666">.</span>LIST_OBJECTS[:<span style="color: #666666">-</span><span style="color: #40a070">5</span>]:
+    obj <span style="color: #666666">=</span> chart<span style="color: #666666">.</span>getObject(obj_id)
+    <span style="color: #007020; font-weight: bold">try</span>:
+        <span style="color: #007020">print</span>(obj<span style="color: #666666">.</span>id, <span style="color: #4070a0">'-'</span>, obj<span style="color: #666666">.</span>sign, <span style="color: #4070a0">'-'</span>, ELEMENTS[obj<span style="color: #666666">.</span>sign])
+    <span style="color: #007020; font-weight: bold">except</span>:
+        <span style="color: #007020; font-weight: bold">pass</span>
+</code></pre>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th style="text-align:center">Flatlib Data</th>
+<th style="text-align:left">Astro-Seek</th>
+<th>Sotis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Sun - Virgo - Earth<br>Moon - Virgo - Earth<br>Mercury - Virgo - Earth<br>Venus - Leo - Fire<br>Mars - Libra - Air<br>Jupiter - Taurus - Earth<br>Saturn - Pisces - Water<br>Uranus - Taurus - Earth<br>Neptune - Pisces - Water<br>Pluto - Capricorn - Earth</td>
+<td style="text-align:left"><img src="files/natal-chart-compared-signs.png" alt="" title="natal chart astro-seek" class="d-block mx-auto mw-100 h-100"></td>
+<td><img src="files/natal-chart-compared-signs-sotis.png" alt="" title="natal chart sotis" class="d-block mx-auto mw-100 h-100"></td>
+</tr>
+</tbody>
+</table>
+</div><p>The generated output and that is in two pictures match completely, the data credibility confirmed.</p>
+<p>Okay, it's now time to create a DataFrame for all the days of the year 2023.</p>
+<pre><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">pandas</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">pd</span>
+
+MODALITIES <span style="color: #666666">=</span> {<span style="color: #4070a0">'Aries'</span>: <span style="color: #4070a0">'Cardinal'</span>,
+            <span style="color: #4070a0">'Cancer'</span>: <span style="color: #4070a0">'Cardinal'</span>,
+            <span style="color: #4070a0">'Capricorn'</span>: <span style="color: #4070a0">'Cardinal'</span>,
+            <span style="color: #4070a0">'Libra'</span>: <span style="color: #4070a0">'Cardinal'</span>,
+            <span style="color: #4070a0">'Leo'</span>: <span style="color: #4070a0">'Fixed'</span>,
+            <span style="color: #4070a0">'Scorpio'</span>: <span style="color: #4070a0">'Fixed'</span>,
+            <span style="color: #4070a0">'Taurus'</span>: <span style="color: #4070a0">'Fixed'</span>,
+            <span style="color: #4070a0">'Aquarius'</span>: <span style="color: #4070a0">'Fixed'</span>,
+            <span style="color: #4070a0">'Sagittarius'</span>: <span style="color: #4070a0">'Mutable'</span>,
+            <span style="color: #4070a0">'Pisces'</span>: <span style="color: #4070a0">'Mutable'</span>,
+            <span style="color: #4070a0">'Virgo'</span>: <span style="color: #4070a0">'Mutable'</span>,
+            <span style="color: #4070a0">'Gemini'</span>: <span style="color: #4070a0">'Mutable'</span>}
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">make_record</span>(timestamp):
+    chart <span style="color: #666666">=</span> make_chart(timestamp<span style="color: #666666">.</span>strftime(<span style="color: #4070a0">'%Y/%m/</span><span style="color: #70a0d0; font-style: italic">%d</span><span style="color: #4070a0">'</span>))
+    record <span style="color: #666666">=</span> <span style="color: #007020">tuple</span>(chart<span style="color: #666666">.</span>getObject(id_)<span style="color: #666666">.</span>sign <span style="color: #007020; font-weight: bold">for</span> id_ <span style="color: #007020; font-weight: bold">in</span> LIST_OBJECTS)
+    <span style="color: #007020; font-weight: bold">return</span> record
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">make_year_df</span>(year: <span style="color: #007020">str</span>):
+    year_range <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>date_range(start<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>to_datetime(year),
+                               end<span style="color: #666666">=</span>pd<span style="color: #666666">.</span>to_datetime(year) <span style="color: #666666">+</span> pd<span style="color: #666666">.</span>offsets<span style="color: #666666">.</span>YearEnd(),
+                               freq<span style="color: #666666">=</span><span style="color: #4070a0">'D'</span>)
+    records <span style="color: #666666">=</span> [make_record(timestamp) <span style="color: #007020; font-weight: bold">for</span> timestamp <span style="color: #007020; font-weight: bold">in</span> year_range]
+    df <span style="color: #666666">=</span> pd<span style="color: #666666">.</span>DataFrame(index<span style="color: #666666">=</span>year_range, columns<span style="color: #666666">=</span>LIST_OBJECTS, data<span style="color: #666666">=</span>records)
+
+    year_df <span style="color: #666666">=</span> df<span style="color: #666666">.</span>melt(var_name<span style="color: #666666">=</span><span style="color: #4070a0">'Planet'</span>, 
+                      value_name<span style="color: #666666">=</span><span style="color: #4070a0">'Sign'</span>,
+                      ignore_index<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)\
+    			<span style="color: #666666">.</span>sort_index()
+    year_df[<span style="color: #4070a0">'Element'</span>] <span style="color: #666666">=</span> year_df[<span style="color: #4070a0">'Sign'</span>]<span style="color: #666666">.</span>map(ELEMENTS)
+    year_df[<span style="color: #4070a0">'Modality'</span>] <span style="color: #666666">=</span> year_df[<span style="color: #4070a0">'Sign'</span>]<span style="color: #666666">.</span>map(MODALITIES)
+    <span style="color: #007020; font-weight: bold">return</span> year_df
+
+year_df <span style="color: #666666">=</span> make_year_df(<span style="color: #4070a0">'2023'</span>)
+</code></pre>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">Planet</th>
+<th style="text-align:left">Sign</th>
+<th style="text-align:left">Element</th>
+<th style="text-align:left">Modality</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2023-12-17 00:00:00</td>
+<td style="text-align:left">Venus</td>
+<td style="text-align:left">Scorpio</td>
+<td style="text-align:left">Water</td>
+<td style="text-align:left">Fixed</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-05-05 00:00:00</td>
+<td style="text-align:left">Pluto</td>
+<td style="text-align:left">Aquarius</td>
+<td style="text-align:left">Air</td>
+<td style="text-align:left">Fixed</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-02-10 00:00:00</td>
+<td style="text-align:left">Pluto</td>
+<td style="text-align:left">Capricorn</td>
+<td style="text-align:left">Earth</td>
+<td style="text-align:left">Cardinal</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-09-25 00:00:00</td>
+<td style="text-align:left">Mercury</td>
+<td style="text-align:left">Virgo</td>
+<td style="text-align:left">Earth</td>
+<td style="text-align:left">Mutable</td>
+</tr>
+<tr>
+<td style="text-align:left">2023-11-11 00:00:00</td>
+<td style="text-align:left">Mercury</td>
+<td style="text-align:left">Sagittarius</td>
+<td style="text-align:left">Fire</td>
+<td style="text-align:left">Mutable</td>
+</tr>
+</tbody>
+</table>
+</div><p><em>The full year data <a href="files/year-2023-data.tar.bz2" class="umami--click--files-year-2023-data-tar-bz2">year-2023-data.tar.bz2 <span class="iconify" data-icon="icomoon-free:file-zip"></span></a></em></p>
+<p>The sample above also contains two additional columns, <code>Element</code> and <code>Modality</code>. Both of them derive from a zodiac sign's astrological properties. For example, Virgo is a Mutable sign of the Earth element.</p>
+<h2 class="display-6 mt-5 mb-3 fw-bold">The Elements Ratio Chart <a id="the-elements-ratio-chart" href="#the-elements-ratio-chart" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p>The table with all the necessary data of the year is prepared. We are approaching to a visual part of the research. The distribution type of a chart is chosen to display the elements as the ratio areas with their corresponding colors.</p>
+<pre><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">seaborn</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">sns</span>
+
+ax <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>kdeplot(data<span style="color: #666666">=</span>year_df,
+			x<span style="color: #666666">=</span>year_df<span style="color: #666666">.</span>index,
+            hue<span style="color: #666666">=</span><span style="color: #4070a0">'Element'</span>,
+            multiple<span style="color: #666666">=</span><span style="color: #4070a0">'fill'</span>,
+            cut<span style="color: #666666">=</span><span style="color: #40a070">0</span>,
+			palette<span style="color: #666666">=</span>{<span style="color: #4070a0">'Fire'</span>: <span style="color: #4070a0">'#EE1D23'</span>, <span style="color: #4070a0">'Water'</span>: <span style="color: #4070a0">'#23B24B'</span>, <span style="color: #4070a0">'Earth'</span>: <span style="color: #4070a0">'#DE6B27'</span>, <span style="color: #4070a0">'Air'</span>: <span style="color: #4070a0">'#4D87C6'</span>})
+sns<span style="color: #666666">.</span>move_legend(ax, <span style="color: #4070a0">"lower center"</span>, bbox_to_anchor<span style="color: #666666">=</span>(<span style="color: #40a070">.5</span>, <span style="color: #40a070">1</span>), ncol<span style="color: #666666">=</span><span style="color: #40a070">4</span>, title<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">None</span>, frameon<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)
+</code></pre>
+<p><img src="files/Elements.png" alt="" title="elements chart" class="d-block mx-auto mw-100 h-100"></p>
+<p>It looks nice. Obviously, the major part of the area is taken up by the Earth and Water elements. Other observations will be detailed in the final section of the article. The next step is modality ratio visualization	.</p>
+<h2 class="display-6 mt-5 mb-3 fw-bold">The Modality Ratio Chart <a id="the-modality-ratio-chart" href="#the-modality-ratio-chart" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p>The way of data generation is the same as of elements.</p>
+<p>Modality, in other words, is element dynamic. All the elements consist of three dynamic types - Cardinal, Fixed, Mutable which corresponds to three Zodiac Sign of the same element. Cardinal signs initiate. Fixed signs bring stability and endurance. Take Modality  into account with element to predict their influence.</p>
+<pre><code>ax <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>kdeplot(data<span style="color: #666666">=</span>year_df,
+                x<span style="color: #666666">=</span>year_df<span style="color: #666666">.</span>index,
+                hue<span style="color: #666666">=</span><span style="color: #4070a0">'Modality'</span>,
+                multiple<span style="color: #666666">=</span><span style="color: #4070a0">'fill'</span>,
+                cut<span style="color: #666666">=</span><span style="color: #40a070">0</span>,
+                palette<span style="color: #666666">=</span>{<span style="color: #4070a0">'Cardinal'</span>: <span style="color: #4070a0">'#5d5d5d'</span>, <span style="color: #4070a0">'Fixed'</span>: <span style="color: #4070a0">'#8b8b8b'</span>, <span style="color: #4070a0">'Mutable'</span>: <span style="color: #4070a0">'#b0b0b0'</span>})
+sns<span style="color: #666666">.</span>move_legend(ax, <span style="color: #4070a0">"lower center"</span>, bbox_to_anchor<span style="color: #666666">=</span>(<span style="color: #40a070">.5</span>, <span style="color: #40a070">1</span>), ncol<span style="color: #666666">=</span><span style="color: #40a070">4</span>, title<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">None</span>, frameon<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)
+</code></pre>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th><img src="files/Elements.png" alt="" title="elements chart" class="d-block mx-auto mw-100 h-100"></th>
+<th><img src="files/Modality.png" alt="" title="modality chart" class="d-block mx-auto mw-100 h-100"></th>
+</tr>
+</thead>
+</table>
+</div><p>Nice, the major tendencies are visible on the both charts. Before listing thoughts i see there, charts should be enhanced visually.</p>
+<h2 class="display-6 mt-5 mb-3 fw-bold">Enhanced Appearance <a id="enhanced-appearance" href="#enhanced-appearance" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p>To better focus on valuable information, it's best to combine both charts into one image. Remove unnecessary ticks and labels, and create a shared timeline on the X-axis. Replace dates with the names of the months.</p>
+<p>Add a background with with a fit picture. Define a specific color order to disable automatic placing of areas on the chart. Finally, add a title.</p>
+<p>The elements part should be placed at the bottom, outlined with bold, dark lines, while the modality part should be placed on top. We slide our eyes  once upside down and then fixate them at the bottom.</p>
+<pre><code><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">matplotlib.pyplot</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">plt</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">matplotlib.image</span> <span style="color: #007020; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">mpimg</span>
+<span style="color: #007020; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">matplotlib</span> <span style="color: #007020; font-weight: bold">import</span> dates <span style="color: #007020; font-weight: bold">as</span> mdates
+
+<span style="color: #007020; font-weight: bold">def</span> <span style="color: #06287e">make_improved_chart</span>(df):
+    <span style="color: #007020; font-weight: bold">with</span> sns<span style="color: #666666">.</span>plotting_context({<span style="color: #4070a0">'ytick.labelsize'</span>: <span style="color: #40a070">0</span>, <span style="color: #4070a0">'ytick.major.size'</span>: <span style="color: #40a070">0</span>, <span style="color: #4070a0">'ytick.minor.size'</span>: <span style="color: #40a070">0</span>, <span style="color: #4070a0">'axes.labelsize'</span>: <span style="color: #40a070">0</span>}):
+
+        <span style="color: #007020; font-weight: bold">with</span> sns<span style="color: #666666">.</span>axes_style(style<span style="color: #666666">=</span><span style="color: #4070a0">'white'</span>):
+            fig, (ax1,ax2) <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>subplots(<span style="color: #40a070">2</span>,<span style="color: #40a070">1</span>)
+            image <span style="color: #666666">=</span> mpimg<span style="color: #666666">.</span>imread(<span style="color: #4070a0">'files/texture-background-cropped.png'</span>)
+            ax <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>kdeplot(data<span style="color: #666666">=</span>df,
+                            x<span style="color: #666666">=</span>df<span style="color: #666666">.</span>index,
+                            hue<span style="color: #666666">=</span><span style="color: #4070a0">'Modality'</span>,
+                            hue_order<span style="color: #666666">=</span>[<span style="color: #4070a0">'Cardinal'</span>, <span style="color: #4070a0">'Fixed'</span>, <span style="color: #4070a0">'Mutable'</span>],
+                            multiple<span style="color: #666666">=</span><span style="color: #4070a0">'fill'</span>,
+                            cut<span style="color: #666666">=</span><span style="color: #40a070">0</span>,
+                            palette<span style="color: #666666">=</span>{<span style="color: #4070a0">'Cardinal'</span>: <span style="color: #4070a0">'#5d5d5d'</span>, <span style="color: #4070a0">'Fixed'</span>: <span style="color: #4070a0">'#8b8b8b'</span>, <span style="color: #4070a0">'Mutable'</span>: <span style="color: #4070a0">'#b0b0b0'</span>},
+                            ax<span style="color: #666666">=</span>ax1)
+            sns<span style="color: #666666">.</span>move_legend(ax, <span style="color: #4070a0">"lower center"</span>, bbox_to_anchor<span style="color: #666666">=</span>(<span style="color: #40a070">.5</span>, <span style="color: #40a070">1</span>), ncol<span style="color: #666666">=</span><span style="color: #40a070">4</span>, title<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">None</span>, frameon<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)
+            ax<span style="color: #666666">.</span>imshow(image, aspect<span style="color: #666666">=</span>ax<span style="color: #666666">.</span>get_aspect(), extent<span style="color: #666666">=</span>ax<span style="color: #666666">.</span>get_xlim() <span style="color: #666666">+</span> ax<span style="color: #666666">.</span>get_ylim(), zorder<span style="color: #666666">=</span><span style="color: #40a070">0.5</span>, alpha<span style="color: #666666">=</span><span style="color: #40a070">0.2</span>)
+            ax<span style="color: #666666">.</span>set(xticklabels<span style="color: #666666">=</span>[])
+            ax<span style="color: #666666">.</span>tick_params(bottom<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)
+            sns<span style="color: #666666">.</span>despine(ax<span style="color: #666666">=</span>ax, left<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>, bottom<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">True</span>)
+
+        image <span style="color: #666666">=</span> mpimg<span style="color: #666666">.</span>imread(<span style="color: #4070a0">'files/element-background.jpg'</span>)
+        ax <span style="color: #666666">=</span> sns<span style="color: #666666">.</span>kdeplot(data<span style="color: #666666">=</span>df,
+                        x<span style="color: #666666">=</span>df<span style="color: #666666">.</span>index,
+                        hue<span style="color: #666666">=</span><span style="color: #4070a0">'Element'</span>,
+                        hue_order<span style="color: #666666">=</span>[<span style="color: #4070a0">'Earth'</span>, <span style="color: #4070a0">'Air'</span>, <span style="color: #4070a0">'Fire'</span>, <span style="color: #4070a0">'Water'</span>],
+                        multiple<span style="color: #666666">=</span><span style="color: #4070a0">'fill'</span>,
+                        cut<span style="color: #666666">=</span><span style="color: #40a070">0</span>,
+                        palette<span style="color: #666666">=</span>{<span style="color: #4070a0">'Fire'</span>: <span style="color: #4070a0">'#EE1D23'</span>, <span style="color: #4070a0">'Water'</span>: <span style="color: #4070a0">'#23B24B'</span>, <span style="color: #4070a0">'Earth'</span>: <span style="color: #4070a0">'#DE6B27'</span>, <span style="color: #4070a0">'Air'</span>: <span style="color: #4070a0">'#4D87C6'</span>},
+                        ax<span style="color: #666666">=</span>ax2)	
+        sns<span style="color: #666666">.</span>move_legend(ax, <span style="color: #4070a0">"lower center"</span>, bbox_to_anchor<span style="color: #666666">=</span>(<span style="color: #40a070">.5</span>, <span style="color: #40a070">1</span>), ncol<span style="color: #666666">=</span><span style="color: #40a070">4</span>, title<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">None</span>, frameon<span style="color: #666666">=</span><span style="color: #007020; font-weight: bold">False</span>)
+        ax<span style="color: #666666">.</span>imshow(image, aspect<span style="color: #666666">=</span>ax<span style="color: #666666">.</span>get_aspect(), extent<span style="color: #666666">=</span>ax<span style="color: #666666">.</span>get_xlim() <span style="color: #666666">+</span> ax<span style="color: #666666">.</span>get_ylim(), zorder<span style="color: #666666">=</span><span style="color: #40a070">0.5</span>, alpha<span style="color: #666666">=</span><span style="color: #40a070">0.9</span>)
+        ax2<span style="color: #666666">.</span>xaxis<span style="color: #666666">.</span>set_major_locator( mdates<span style="color: #666666">.</span>MonthLocator())
+        ax2<span style="color: #666666">.</span>xaxis<span style="color: #666666">.</span>set_major_formatter(mdates<span style="color: #666666">.</span>DateFormatter(<span style="color: #4070a0">'%B'</span>))
     
-    <div class="row mt-4">
-        <div class="col-12">
-            <h2 class="d-inline me-2 fw-bold">Articles</h2>
-            <a class="me-1 umami--click--articles-subscribe" href="rss.xml">Subscribe <span class="iconify" data-icon="bi:rss-fill"></span></a>
-            <ul class="list-inline mt-1 mb-3 fs-6">
-                <li class="list-inline-item text-muted">Select a view</li>
-                <li class="list-inline-item"><a href="/">Titles</a></li>
-                <li class="list-inline-item"><a href="/views/preview">Previews<span class="iconify" data-icon="bi:arrow-left-short"></span></a></li>
-                <li class="list-inline-item"><a href="/views/summary">LLM Summaries</a></li>
-            </ul>
+    plt<span style="color: #666666">.</span>suptitle(<span style="color: #4070a0">f'Temper of </span><span style="color: #70a0d0; font-style: italic">{</span>df<span style="color: #666666">.</span>index[<span style="color: #40a070">0</span>]<span style="color: #666666">.</span>year<span style="color: #70a0d0; font-style: italic">}</span><span style="color: #4070a0"> Year'</span>, fontsize<span style="color: #666666">=</span><span style="color: #40a070">30</span>, fontweight<span style="color: #666666">=</span><span style="color: #4070a0">'medium'</span>, fontfamily<span style="color: #666666">=</span><span style="color: #4070a0">'Noto Sans'</span>)
+    
+make_improved_chart(year_df)
+</code></pre>
+<p><img src="files/final-chart-2023.png" alt="" title="year 2023 chart" class="d-block mx-auto mw-100 h-100"></p>
+<p>It looks much better.</p>
+<p>The final step, put the charts of three years in one line, running code <code>make_improved_chart(make_year_df('year'))</code>.</p>
+<div class="table-responsive mb-3"><table class="mb-0">
+<thead>
+<tr>
+<th><img src="files/final-chart-2022.png" alt="" title="year 2022 chart" class="d-block mx-auto mw-100 h-100"></th>
+<th><img src="files/final-chart-2023.png" alt="" title="year 2023 chart" class="d-block mx-auto mw-100 h-100"></th>
+<th><img src="files/final-chart-2024.png" alt="" title="year 2024 chart" class="d-block mx-auto mw-100 h-100"></th>
+</tr>
+</thead>
+</table>
+</div><h2 class="display-6 mt-5 mb-3 fw-bold">Takeaways <a id="takeaways" href="#takeaways" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
+<p>Well, the job is done, data generated and visualized, what i would like to say about what i see:</p>
+<ul>
+<li>2022 is more Cardinal than the others.</li>
+<li>Cardinality decreases, while Mutability increases over three years.</li>
+<li>The year 2023 year contains a lot of Earth and Water in comparison to 2022, 2024.</li>
+<li>In 2023, between July and September there is a lack of Air.</li>
+<li>In 2023, between October and November there is a lack of Fire.</li>
+<li>2024 is more Mutable than the others.</li>
+<li>The Earth ratio in 2024 is reduced, while the Air's one is significantly increased.</li>
+<li>The elements ratio for 2022 and 2024 are equal, while modality's is polarized.</li>
+</ul>
+<p>I, intentionally, didn't write my own interpretation here. The characteristics of elements and modality will help you to make your own view, take your time.</p>
+
+        </div>
+        <div id="toc" class="col-lg-3 order-1 order-lg-2 ps-5 fs-6">
+            <strong class="d-block py-1 my-2 border-bottom"><span class="iconify" data-icon="gridicons:list-ordered"></span> Table of content</strong>
+            <ol><li><a href="#generating-data.-elements-per-day" class="text-decoration-none">Generating Data. Elements Per Day</a></li><li><a href="#the-elements-ratio-chart" class="text-decoration-none">The Elements Ratio Chart</a></li><li><a href="#the-modality-ratio-chart" class="text-decoration-none">The Modality Ratio Chart</a></li><li><a href="#enhanced-appearance" class="text-decoration-none">Enhanced Appearance</a></li><li><a href="#takeaways" class="text-decoration-none">Takeaways</a></li></ol>
+        </div>
+    </div>
+    <div class="row">
+        <div id="star-footer" class="col-lg-9 text-center my-3">
+            <a class="github-button" href="https://github.com/4l1fe/4l1fe.github.io" data-size="large" data-show-count="true" aria-label="Star 4l1fe/4l1fe.github.io on GitHub">Give it a star</a>
+            <br>
+            <span class="iconify fs-3 my-3 text-secondary" data-icon="bi:box-arrow-in-up"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div id="comments" class="col-lg-9">
+            <script src="https://utteranc.es/client.js"
+                    repo="4l1fe/4l1fe.github.io"
+                    issue-term="pathname"
+                    label="comment"
+                    theme="github-light"
+                    crossorigin="anonymous"
+                    async>
+            </script>
         </div>
     </div>
 
-                    
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/">Astrology Elements Distribution over a Few Years. Visualization. Pandas. Seaborn </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>09-2023</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2023-09-18/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2023-09-18/files/natal-chart-compared-signs.png" class="img-fluid">
-                                        <img src="thumbnails/2023-09-18/files/natal-chart-compared-signs-sotis.png" class="img-fluid">
-                                        <img src="thumbnails/2023-09-18/files/Elements.png" class="img-fluid">
-                                        <img src="thumbnails/2023-09-18/files/Modality.png" class="img-fluid">
-                                        <img src="thumbnails/2023-09-18/files/final-chart-2023.png" class="img-fluid">
-                                        <img src="thumbnails/2023-09-18/files/final-chart-2022.png" class="img-fluid">
-                                        <img src="thumbnails/2023-09-18/files/final-chart-2024.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/explore-and-visualize-the-parser-events-and-performance-pandas-seaborn-klib-adtk/">Explore and visualize the parser events and performance. Pandas. Seaborn. KLib. ADTK </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>08-2023</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2023-08-10/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2023-08-10/files/categories-overview.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/continuous-index.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/target-events-frequency-per-5-min.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/target-events-ratio-per-5-min.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/thread-events-frequency-per-5-min.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/unvalidated-validated-events.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/latency-timeseries.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/latency-distribution.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/latency-statistics.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/latency-seconds-timeseries-per-thread.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/latency-per-thread-distribution.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/latency-consumers-statistics.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/latency-producers-statistics.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/write-seconds-timeseries-per-thread.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/anomalies-consumer-quantile-99.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/anomalies-consumer-quantile-95.png" class="img-fluid">
-                                        <img src="thumbnails/2023-08-10/files/anomalies-consumer-quantile-75.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/resizing-lvm-based-swap-volume-on-kubuntu-lack-of-ram/">Resizing LVM based SWAP volume on Kubuntu. Lack of RAM </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>06-2023</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2023-06-04/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/research-moderators-activity-in-the-streamlit-community-dask-pandas-seaborn/">Research moderators activity in the Streamlit community. Dask, Pandas, Seaborn </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>03-2023</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2023-03-29/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2023-03-29/files/moderators-summary.png" class="img-fluid">
-                                        <img src="thumbnails/2023-03-29/files/responded-topics-distribution.png" class="img-fluid">
-                                        <img src="thumbnails/2023-03-29/files/responding-dispersion-statistics.png" class="img-fluid">
-                                        <img src="thumbnails/2023-03-29/files/responding-common-statistics.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/telegram-group-leaders-research-pandas-seaborn-missingno/">Telegram group leaders research. Pandas, Seaborn, Missingno </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>03-2023</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2023-03-01/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2023-03-01/files/missing-values.png" class="img-fluid">
-                                        <img src="thumbnails/2023-03-01/files/top10-messages-count.png" class="img-fluid">
-                                        <img src="thumbnails/2023-03-01/files/top10-messages-count-per-month.png" class="img-fluid">
-                                        <img src="thumbnails/2023-03-01/files/top2-messages-frequency-per-month.png" class="img-fluid">
-                                        <img src="thumbnails/2023-03-01/files/top2-messages-frequency-per-month-relative.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/telegram-bot-as-a-command-interface-for-docker-daemon/">Telegram Bot as a command interface for Docker Daemon </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>02-2023</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2023-02-23/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2023-02-23/files/Diagram-Connected.png" class="img-fluid">
-                                        <img src="thumbnails/2023-02-23/files/Diagram-Disconnected.png" class="img-fluid">
-                                        <img src="thumbnails/2023-02-23/files/Diagram-ProviderReplacement.png" class="img-fluid">
-                                        <img src="thumbnails/2023-02-23/files/Diagram-TelegramBot.png" class="img-fluid">
-                                        <img src="thumbnails/2023-02-23/files/Diagram-TelegramBotCommands.png" class="img-fluid">
-                                        <img src="thumbnails/2023-02-23/files/list-command.png" class="img-fluid">
-                                        <img src="thumbnails/2023-02-23/files/logs-command.png" class="img-fluid">
-                                        <img src="thumbnails/2023-02-23/files/restart-command.png" class="img-fluid">
-                                        <img src="thumbnails/2023-02-23/files/menu-commands.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/data-conversion-with-redframes-and-dataset/">Data conversion with Redframes and Dataset </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>01-2023</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2023-01-23/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2023-01-23/files/data-before.png" class="img-fluid">
-                                        <img src="thumbnails/2023-01-23/files/data-after.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/colorize-printed-text-to-get-eyes-focused-termcolor/">Colorize printed text to get eyes focused. Termcolor </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>12-2022</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2022-12-15/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2022-12-15/files/plain-lines.png" class="img-fluid">
-                                        <img src="thumbnails/2022-12-15/files/plain-columns.png" class="img-fluid">
-                                        <img src="thumbnails/2022-12-15/files/colored-columns.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/derivative-table-of-basic-functions-matplotlib-visualization/">Derivative table of basic functions. Matplotlib. Visualization </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>12-2022</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2022-12-02/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2022-12-02/files/derivative-table-panes.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/getting-selected-elements-by-a-time-series-range-bokeh/">Getting selected elements by a time series range. Bokeh </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>11-2022</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2022-11-10/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2022-11-10/files/shift-left.png" class="img-fluid">
-                                        <img src="thumbnails/2022-11-10/files/shift-right.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/sourcegraph-is-heavyweight/">Sourcegraph is heavyweight </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>10-2022</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2022-10-30/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2022-10-30/files/resource-estimation.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/storing-related-accounts-data-in-the-toml-files-visualization-networkx-graph/">Storing related accounts data in the TOML files. Visualization. NetworkX graph </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>10-2022</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2022-10-05/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2022-10-05/files/plot.png" class="img-fluid">
-                                        <img src="thumbnails/2022-10-05/files/plot-relations.png" class="img-fluid">
-                                        <img src="thumbnails/2022-10-05/files/plot-relations-layout.png" class="img-fluid">
-                                        <img src="thumbnails/2022-10-05/files/plot-relations-layout-emphasize.png" class="img-fluid">
-                                        <img src="thumbnails/2022-10-05/files/plot-relations-layout-emphasize-names.png" class="img-fluid">
-                                        <img src="thumbnails/2022-10-05/files/plot-relations-layout-emphasize-names-errors.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/file-system-based-file-changes-history-on-snapshots-lvm-zfs-btrfs/">File System based file changes history on snapshots. LVM. ZFS. BTRFS </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>08-2022</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2022-08-25/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2022-08-25/files/zfs-snapshotting-cpu-consumption.png" class="img-fluid">
-                                        <img src="thumbnails/2022-08-25/files/creation-time-chart.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/drop-a-cloud-disk-in-favor-of-storing-data-on-the-phone-and-laptop-freefilesync-kdiff3/">Drop a cloud disk in favor of storing data on the phone and laptop. FreeFileSync. KDiff3 </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>05-2022</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2022-05-20/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2022-05-20/files/tools-syncing.png" class="img-fluid">
-                                        <img src="thumbnails/2022-05-20/files/tools-settings.png" class="img-fluid">
-                                        <img src="thumbnails/2022-05-20/files/tools-dialog.png" class="img-fluid">
-                                        <img src="thumbnails/2022-05-20/files/tools-merging.png" class="img-fluid">
-                                        <img src="thumbnails/2022-05-20/files/tools-batch-job.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/simply-patch-what-is-unextendable/">Simply patch what is unextendable. </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>01-2022</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2022-01-24/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/beneficial-chrome-replacement-vivaldi/">Beneficial Chrome replacement. Vivaldi </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>11-2021</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2021-11-23/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2021-11-23/files/Settings.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Cookies-settings.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Tiles.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Stack.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Pin.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Blank-page.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Actions-off.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Actions-on.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Quick-commands.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Reader-off.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Reader-on.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Sync-desktop.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Sync-mobile.jpg" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Gestures.png" class="img-fluid">
-                                        <img src="thumbnails/2021-11-23/files/Gestures-rocker.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/laptop-bootloading-time-extreme-growth-systemd/">Laptop bootloading time extreme growth. SystemD </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>09-2021</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2021-09-09/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2021-09-09/files/subsection-progress.png" class="img-fluid">
-                                        <img src="thumbnails/2021-09-09/files/subsection-done.png" class="img-fluid">
-                                        <img src="thumbnails/2021-09-09/files/subsection-chart.png" class="img-fluid">
-                                        <img src="thumbnails/2021-09-09/files/flow-chart-partial.png" class="img-fluid">
-                                        <img src="thumbnails/2021-09-09/files/flow-chart-endpoint.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/columnar-db-performance-in-action-duckdb/">Columnar DB performance in action. DuckDB </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>07-2021</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2021-07-14/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2021-07-14/files/chart.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/fix-err-cert-authority-invalid-error-python-clients-get-while-proxying-mitmproxy/">Fix ERR_CERT_AUTHORITY_INVALID error python clients get while proxying. Mitmproxy </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>06-2021</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2021-06-10/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-        <div class="row row-article mb-5">
-        <div class="col-lg-10">
-            <h3 class="fs-4 fw-light"><a class="link-dark" href="articles/rassmotrenie-abstraktsii-ikh-vzaimosviazei-i-slozhnosti-bibliotek-vstraivaemykh-bd/">Рассмотрение абстракций, их взаимосвязей и сложности библиотек встраиваемых БД </a></h3>
-        </div>
-
-        <div class="col-lg-2 text-lg-start">
-            <p class="text-muted"><span class="iconify me-1" data-icon="ic:round-date-range"></span>02-2021</p>
-        </div>
-
-                <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-3 col-4">
-                    <img src="thumbnails/2021-02-24/files/main-section.png" class="img-fluid">
-                </div>
-                <div class="col-lg-9 col-8">
-                                        <img src="thumbnails/2021-02-24/files/tinydb/deps.png" class="img-fluid">
-                                        <img src="thumbnails/2021-02-24/files/peewee-kv/edited-deps.png" class="img-fluid">
-                                        <img src="thumbnails/2021-02-24/files/tinydb/classes.png" class="img-fluid">
-                                        <img src="thumbnails/2021-02-24/files/sqlitedict/classes.png" class="img-fluid">
-                                        <img src="thumbnails/2021-02-24/files/peewee-kv/classes.png" class="img-fluid">
-                                        <img src="thumbnails/2021-02-24/files/tinydb/basic-scenario-edited.png" class="img-fluid">
-                                        <img src="thumbnails/2021-02-24/files/sqlitedict/basic-scenario-edited.png" class="img-fluid">
-                                        <img src="thumbnails/2021-02-24/files/peewee-kv/basic-scenario-edited.png" class="img-fluid">
-                                        <img src="thumbnails/2021-02-24/files/CC-chart.png" class="img-fluid">
-                                        <img src="thumbnails/2021-02-24/files/summary-chart.png" class="img-fluid">
-                                    </div>
-            </div>
-        </div>
-
-            </div>
-    
 </div>
 
 <script>
