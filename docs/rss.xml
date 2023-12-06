@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>18 Sep 2023 00:00:00 +0000</pubDate>
+		<pubDate>7 Dec 2023 00:00:00 +0000</pubDate>
+				<item>
+			<title>Apache SuperSet Architecture And Features Infographic </title>
+			<link>https://www.kvdm.dev/articles/apache-superset-architecture-and-features-infographic/</link>
+			<description>The first time i installed Apache SuperSet  i realized how heavyweight it is. There are two main docker compose files to run, containing either 10 or 6 services, that leads to tons of settings.</description>
+			<pubDate>7 Dec 2023 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/apache-superset-architecture-and-features-infographic/</guid>
+		</item>
 				<item>
 			<title>Astrology Elements Distribution over a Few Years. Visualization. Pandas. Seaborn </title>
 			<link>https://www.kvdm.dev/articles/astrology-elements-distribution-over-a-few-years-visualization-pandas-seaborn/</link>
