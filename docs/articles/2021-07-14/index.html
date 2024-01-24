@@ -181,26 +181,26 @@
 <span style="color: #888888">    value3 UINTEGER); </span>
 </code></pre>
 <p>The scenario <a href="files/database.py" class="umami--click--files-database-py">database.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a> provides the auxiliary commands to prepare an experimental stand. For now, we create the base table in duckdb and run data generation.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>database.py<span style="color: #bbbbbb"> </span>fill-duckdb<span style="color: #bbbbbb"> </span>--sample-size<span style="color: #bbbbbb"> </span><span style="color: #40a070">1000</span><span style="color: #bbbbbb"> </span>--samples-count<span style="color: #bbbbbb"> </span><span style="color: #40a070">10000</span>
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python database.py fill-duckdb --sample-size <span style="color: #40a070">1000</span> --samples-count <span style="color: #40a070">10000</span>
 <span style="color: #888888">...</span>
 <span style="color: #888888">Database random.duckdb is filled up</span>
 </code></pre>
 <p>After a while, as the filling 10M records has been completed, we dump all data to a CSV file and load it into a new SQLite db. You can take the archived 165Mb file <a href="files/random_data.csv.tar.gz" class="umami--click--files-random-data-csv-tar-gz">random_data.csv.tar.gz <span class="iconify" data-icon="icomoon-free:file-zip"></span></a> to pass data generating.</p>
 <p>We get to SQLite db. Dump data from <code>random.duckdb</code> as a CSV file and import it into <code>random.sqlite</code> table with the same schema.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>database.py<span style="color: #bbbbbb"> </span>dump-csv<span style="color: #bbbbbb"> </span>--path<span style="color: #bbbbbb"> </span>dump
-<span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>database.py<span style="color: #bbbbbb"> </span>fill-sqlite<span style="color: #bbbbbb"> </span>dump/0_random_data.csv
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python database.py dump-csv --path dump
+<span style="color: #c65d09; font-weight: bold">$ </span>python database.py fill-sqlite dump/0_random_data.csv
 <span style="color: #888888">Database random.sqlite is filled up</span>
 </code></pre>
 <p>Base tables are filled and we are able to run the special SQL query to figure out if its performance differs,  but having one result only, it doesn't reveal to us how performance is changing according to data amount.</p>
 <p>For such a purpose to see execution time growth we can split the base tables into a series of incrementally enlarging tables by reading data and adding it into a new table.</p>
 <p>Now we create the tables for both databases.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>database.py<span style="color: #bbbbbb"> </span>split-duckdb<span style="color: #bbbbbb"> </span>--tables-count<span style="color: #bbbbbb"> </span><span style="color: #40a070">10</span>
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python database.py split-duckdb --tables-count <span style="color: #40a070">10</span>
 <span style="color: #888888">...</span>
 <span style="color: #888888">Table created:  random_data10</span>
 <span style="color: #888888">...</span>
 <span style="color: #888888">Table filling:   random_data10</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>database.py<span style="color: #bbbbbb"> </span>split-sqlite<span style="color: #bbbbbb"> </span>--tables-count<span style="color: #bbbbbb"> </span><span style="color: #40a070">10</span>
+<span style="color: #c65d09; font-weight: bold">$ </span>python database.py split-sqlite --tables-count <span style="color: #40a070">10</span>
 <span style="color: #888888">...</span>
 <span style="color: #888888">Table created:  random_data10</span>
 <span style="color: #888888">...</span>
@@ -210,9 +210,9 @@
 <h2 class="display-6 mt-5 mb-3 fw-bold">Run the query <a id="run-the-query" href="#run-the-query" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>As we know, OLAP implies querying a database and computing metrics which can lead to getting insights about a business field. Therefore, we emulate it and compute <code>min(), max(), avg(), sum()</code> values on each column. SQL code we run <a href="files/query.sql" class="umami--click--files-query-sql">query.sql <span class="iconify" data-icon="bi:file-earmark-code"></span></a>.</p>
 <p>By using the shell scripting, we organize running the query measuring time in a for loop replacing the base table name with the split table name.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span><span style="color: #007020; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">in</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">`</span>seq<span style="color: #bbbbbb"> </span><span style="color: #40a070">1</span><span style="color: #bbbbbb"> </span><span style="color: #40a070">10</span><span style="color: #4070a0">`</span>;<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">do</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0; font-weight: bold">\</span>
-sed<span style="color: #bbbbbb"> </span><span style="color: #4070a0">'s/random_data/random_data'"</span><span style="color: #bb60d5">$i</span><span style="color: #4070a0">"'/g'</span><span style="color: #bbbbbb"> </span>query.sql<span style="color: #bbbbbb"> </span>&gt;<span style="color: #bbbbbb"> </span>edited-query.sql;<span style="color: #bbbbbb"> </span><span style="color: #4070a0; font-weight: bold">\</span>
-<span style="color: #007020">time</span><span style="color: #bbbbbb"> </span>sqlite3<span style="color: #bbbbbb"> </span>random.sqlite<span style="color: #bbbbbb"> </span>&lt;<span style="color: #bbbbbb"> </span>edited-query.sql<span style="color: #bbbbbb"> </span>&gt;/dev/null;<span style="color: #bbbbbb"> </span><span style="color: #4070a0; font-weight: bold">\</span>
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span><span style="color: #007020; font-weight: bold">for</span> i <span style="color: #007020; font-weight: bold">in</span> <span style="color: #4070a0">`</span>seq <span style="color: #40a070">1</span> <span style="color: #40a070">10</span><span style="color: #4070a0">`</span>; <span style="color: #007020; font-weight: bold">do</span> <span style="color: #4070a0; font-weight: bold">\</span>
+sed <span style="color: #4070a0">'s/random_data/random_data'"</span><span style="color: #bb60d5">$i</span><span style="color: #4070a0">"'/g'</span> query.sql &gt; edited-query.sql; <span style="color: #4070a0; font-weight: bold">\</span>
+<span style="color: #007020">time</span> sqlite3 random.sqlite &lt; edited-query.sql &gt;/dev/null; <span style="color: #4070a0; font-weight: bold">\</span>
 <span style="color: #007020; font-weight: bold">done</span>
 
 <span style="color: #888888">sqlite3 random.sqlite &lt; edited-query.sql &gt; /dev/null  1,42s user 0,04s system 99% cpu 1,464 total</span>
@@ -228,9 +228,9 @@ sed<span style="color: #bbbbbb"> </span><span style="color: #4070a0">'s/random_d
 </code></pre>
 <p>The longest query time is 14.52 seconds which is sensitive for a human perception. What if you run hundreds of such queries?</p>
 <p>Ok, we are at the key point, DuckDB comes into play.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span><span style="color: #007020; font-weight: bold">for</span><span style="color: #bbbbbb"> </span>i<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">in</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">`</span>seq<span style="color: #bbbbbb"> </span><span style="color: #40a070">1</span><span style="color: #bbbbbb"> </span><span style="color: #40a070">10</span><span style="color: #4070a0">`</span>;<span style="color: #bbbbbb"> </span><span style="color: #007020; font-weight: bold">do</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0; font-weight: bold">\</span>
-sed<span style="color: #bbbbbb"> </span><span style="color: #4070a0">'s/random_data/random_data'"</span><span style="color: #bb60d5">$i</span><span style="color: #4070a0">"'/g'</span><span style="color: #bbbbbb"> </span>query.sql<span style="color: #bbbbbb"> </span>&gt;<span style="color: #bbbbbb"> </span>edited-query.sql;<span style="color: #bbbbbb"> </span><span style="color: #4070a0; font-weight: bold">\</span>
-<span style="color: #007020">time</span><span style="color: #bbbbbb"> </span>duckdb<span style="color: #bbbbbb"> </span>random.duckdb<span style="color: #bbbbbb"> </span>&lt;<span style="color: #bbbbbb"> </span>edited-query.sql<span style="color: #bbbbbb"> </span>&gt;/dev/null;<span style="color: #bbbbbb"> </span><span style="color: #4070a0; font-weight: bold">\</span>
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span><span style="color: #007020; font-weight: bold">for</span> i <span style="color: #007020; font-weight: bold">in</span> <span style="color: #4070a0">`</span>seq <span style="color: #40a070">1</span> <span style="color: #40a070">10</span><span style="color: #4070a0">`</span>; <span style="color: #007020; font-weight: bold">do</span> <span style="color: #4070a0; font-weight: bold">\</span>
+sed <span style="color: #4070a0">'s/random_data/random_data'"</span><span style="color: #bb60d5">$i</span><span style="color: #4070a0">"'/g'</span> query.sql &gt; edited-query.sql; <span style="color: #4070a0; font-weight: bold">\</span>
+<span style="color: #007020">time</span> duckdb random.duckdb &lt; edited-query.sql &gt;/dev/null; <span style="color: #4070a0; font-weight: bold">\</span>
 <span style="color: #007020; font-weight: bold">done</span>
 
 <span style="color: #888888">duckdb random.duckdb &lt; edited-query.sql &gt; /dev/null  0,12s user 0,07s system 99% cpu 0,186 total</span>
@@ -248,7 +248,7 @@ sed<span style="color: #bbbbbb"> </span><span style="color: #4070a0">'s/random_d
 <p>Job is done and it's time to prettify output making each execution time visual.</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Visualize the results <a id="visualize-the-results" href="#visualize-the-results" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Here we take the result output, convert it to the python lists and build the performance chart upon it. The scripts <a href="files/convertation.py" class="umami--click--files-convertation-py">convertation.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a> and <a href="files/chart.py" class="umami--click--files-chart-py">chart.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a> do this job.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>chart.py
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python chart.py
 </code></pre>
 <p><img src="files/chart.png" alt="" title="Query execution performance" class="d-block mx-auto mw-100 h-100"></p>
 <p>Look at the picture and try to extrapolate the measurements on 100M records and over...</p>

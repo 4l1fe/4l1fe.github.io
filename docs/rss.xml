@@ -4,7 +4,14 @@
 		<title>ТехнологоблогЪ</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>7 Dec 2023 00:00:00 +0000</pubDate>
+		<pubDate>25 Jan 2024 00:00:00 +0000</pubDate>
+				<item>
+			<title>Aiomonitor Integration with Litestar. Uvicorn. FastApi </title>
+			<link>https://www.kvdm.dev/articles/aiomonitor-integration-with-litestar-uvicorn-fastapi/</link>
+			<description>As aiomonitor  primiraly developed for observing aiohttp  internal work, i didn't find an example of wrapping up an ASGI application to monitor async tasks. In my case, an app is built on Litestar  framework, which allows running ASGI app with uvicorn...</description>
+			<pubDate>25 Jan 2024 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/aiomonitor-integration-with-litestar-uvicorn-fastapi/</guid>
+		</item>
 				<item>
 			<title>Apache SuperSet Architecture And Features Infographic </title>
 			<link>https://www.kvdm.dev/articles/apache-superset-architecture-and-features-infographic/</link>

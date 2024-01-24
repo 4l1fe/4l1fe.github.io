@@ -165,20 +165,20 @@
 <h2 class="display-6 mt-5 mb-3 fw-bold">References and a checker <a id="references-and-a-checker" href="#references-and-a-checker" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The relations are references to the related files as a string value or a values list. A few minimalistic rules, as a toml file is a tree structure the references can be assigned for each node. Duplications are allowed.</p>
 <p>Here is the <code>.toml</code> sample to depict the idea:</p>
-<pre><code>reference<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">"path/to/email.toml"</span>
+<pre><code>reference<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span><span style="color: #4070a0">"path/to/email.toml"</span><span style="color: #bbbbbb"></span>
 
-<span style="color: #007020; font-weight: bold">[sub-section]</span>
-references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>[<span style="color: #4070a0">"path/to/creds.csv"</span>,<span style="color: #bbbbbb"> </span><span style="color: #4070a0">"path/to/cert.pem"</span>]
+<span style="color: #007020; font-weight: bold">[sub-section]</span><span style="color: #bbbbbb"></span>
+references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>[<span style="color: #4070a0">"path/to/creds.csv"</span>,<span style="color: #bbbbbb"> </span><span style="color: #4070a0">"path/to/cert.pem"</span>]<span style="color: #bbbbbb"></span>
 
-<span style="color: #007020; font-weight: bold">[sub-section-ext]</span>
-references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>[<span style="color: #4070a0">"path/to/email.toml"</span>]
+<span style="color: #007020; font-weight: bold">[sub-section-ext]</span><span style="color: #bbbbbb"></span>
+references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</span><span style="color: #bbbbbb"> </span>[<span style="color: #4070a0">"path/to/email.toml"</span>]<span style="color: #bbbbbb"></span>
 </code></pre>
 <p>This is the checker <a href="files/references.py" class="umami--click--files-references-py">references.py <span class="iconify" data-icon="teenyicons:python-outline"></span></a>. It scans a folder for the toml files, reads them with <a href="https://github.com/uiri/toml" class="umami--click--github-com-uiri-toml">toml <span class="iconify" data-icon="codicon:github-inverted"></span></a>, follows the references and checks for ref files to exist. Two kinds of commands to run with <a href="https://github.com/tiangolo/typer" class="umami--click--github-com-tiangolo-typer">typer <span class="iconify" data-icon="codicon:github-inverted"></span></a>, a text output for a quick check and a visual output, a <a href="https://github.com/networkx/networkx" class="umami--click--github-com-networkx-networkx">networkx <span class="iconify" data-icon="codicon:github-inverted"></span></a> graph on <a href="https://github.com/matplotlib/matplotlib" class="umami--click--github-com-matplotlib-matplotlib">matplotlib <span class="iconify" data-icon="codicon:github-inverted"></span></a>, to understand the accounts structure and see any issues.</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Demonstration <a id="demonstration" href="#demonstration" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>Steps from the very basic to the point when errors occur.</p>
 <h3 class="mt-5 mb-3 fw-bold">Accounts data folder <a id="accounts-data-folder" href="#accounts-data-folder" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>The tree output of a sample folder with interrelated accounts in the toml files which i scanned by the checker.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>tree<span style="color: #bbbbbb"> </span>secrets
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>tree secrets
 <span style="color: #888888">secrets</span>
 <span style="color: #888888">├── acc1.toml</span>
 <span style="color: #888888">├── acc2.toml</span>
@@ -198,7 +198,7 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </code></pre>
 <h3 class="mt-5 mb-3 fw-bold">Text output <a id="text-output" href="#text-output" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Basically, for fast and regular reference checking a text output is enough to see a current integrity state.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>references.py<span style="color: #bbbbbb"> </span>check<span style="color: #bbbbbb"> </span>secrets
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py check secrets
 <span style="color: #888888">[info     ] Reference exists.              node=PosixPath('secrets/acc15.toml') reference=mail.toml</span>
 <span style="color: #888888">[info     ] Reference exists.              node=PosixPath('secrets/acc6.toml') reference=mobile.toml</span>
 <span style="color: #888888">[info     ] Reference exists.              node=PosixPath('secrets/mail.toml') reference=mail-pri.asc</span>
@@ -210,8 +210,8 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 <h3 class="mt-5 mb-3 fw-bold">Visual graph output <a id="visual-graph-output" href="#visual-graph-output" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>Along with it, a text output isn't good at understanding relations structure while visualizing it as a graph is. Not much interpretation is needed when you see what the nodes are, where, and how connected.</p>
 <p>For a first step, it is worth visualizing the entire picture of the sample folder.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>references.py<span style="color: #bbbbbb"> </span>create-plot<span style="color: #bbbbbb"> </span>secrets
-<span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>references.py<span style="color: #bbbbbb"> </span>create-plot<span style="color: #bbbbbb"> </span>--relations<span style="color: #bbbbbb"> </span>secrets
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot secrets
+<span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --relations secrets
 </code></pre>
 <div class="table-responsive mb-3"><table class="mb-0">
 <thead>
@@ -229,8 +229,8 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </table>
 </div><p>Both appearances are chaotic even with the relation edges. Color differs on a file type. Purple is the toml type and the others are cyan. It's clear here to conclude that a node on the bottom right is the most related.</p>
 <p>The first step depicted how the accounts are interrelated. Next, two improvements are added, the <strong>Kamada Kawai</strong> nodes layout to group them all around the centers and emphasizing by increasing their size.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>references.py<span style="color: #bbbbbb"> </span>create-plot<span style="color: #bbbbbb"> </span>--realtions<span style="color: #bbbbbb"> </span>--layout<span style="color: #bbbbbb"> </span><span style="color: #4070a0">"kamada kawai"</span><span style="color: #bbbbbb"> </span>secrets
-<span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>references.py<span style="color: #bbbbbb"> </span>create-plot<span style="color: #bbbbbb"> </span>--relations<span style="color: #bbbbbb"> </span>--layout<span style="color: #bbbbbb"> </span><span style="color: #4070a0">"kamada kawai"</span><span style="color: #bbbbbb"> </span>--emphasize<span style="color: #bbbbbb"> </span>secrets
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --realtions --layout <span style="color: #4070a0">"kamada kawai"</span> secrets
+<span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --relations --layout <span style="color: #4070a0">"kamada kawai"</span> --emphasize secrets
 </code></pre>
 <div class="table-responsive mb-3"><table class="mb-0">
 <thead>
@@ -248,13 +248,13 @@ references<span style="color: #bbbbbb"> </span><span style="color: #666666">=</s
 </table>
 </div><p>Ok, it looks meaningful with the center nodes emphasized, especially on the right picture.</p>
 <p>Now, as the nodes look anonymous the picture doesn't tell what that most related account is and a few others. Their names could refine detalization. Displaying the names.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>references.py<span style="color: #bbbbbb"> </span>create-plot<span style="color: #bbbbbb"> </span>--relations<span style="color: #bbbbbb"> </span>--layout<span style="color: #bbbbbb"> </span><span style="color: #4070a0">"kamada kawai"</span><span style="color: #bbbbbb"> </span>--emphasize<span style="color: #bbbbbb"> </span>--names<span style="color: #bbbbbb"> </span>secrets
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --relations --layout <span style="color: #4070a0">"kamada kawai"</span> --emphasize --names secrets
 </code></pre>
 <p><img src="files/plot-relations-layout-emphasize-names.png" alt="" title="Graph full" class="d-block mx-auto mw-100 h-100"></p>
 <p>Nice, it looks much better than text output.</p>
 <h3 class="mt-5 mb-3 fw-bold">Errors output <a id="errors-output" href="#errors-output" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h3>
 <p>The final demo step. If i mistype a reference or forget to update the edited ones the checker points it out to me with the text and visual outputs as below.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python<span style="color: #bbbbbb"> </span>references.py<span style="color: #bbbbbb"> </span>create-plot<span style="color: #bbbbbb"> </span>--relations<span style="color: #bbbbbb"> </span>--layout<span style="color: #bbbbbb"> </span><span style="color: #4070a0">"kamada kawai"</span><span style="color: #bbbbbb"> </span>--emphasize<span style="color: #bbbbbb"> </span>--names<span style="color: #bbbbbb"> </span>secrets
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>python references.py create-plot --relations --layout <span style="color: #4070a0">"kamada kawai"</span> --emphasize --names secrets
 
 <span style="color: #888888">[error    ] Reference doesn't exist.       node=PosixPath('secrets/acc4.toml') reference=outdated-codes.txt</span>
 <span style="color: #888888">[error    ] Reference doesn't exist.       node=PosixPath('secrets/mail2.toml') reference=removed-already.toml</span>

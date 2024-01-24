@@ -185,43 +185,43 @@
 <h2 class="display-6 mt-5 mb-3 fw-bold">Installation <a id="installation" href="#installation" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>LVM is preinstalled in Ubuntu.</p>
 <p>Basically, ZFS has to be compiled from the source code, instead of it installing from the ppa <code>jonathonf/zfs</code> is a faster way.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>add-apt-repository<span style="color: #bbbbbb"> </span>ppa:jonathonf/zfs
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>apt<span style="color: #bbbbbb"> </span>install<span style="color: #bbbbbb"> </span>zfsutils-linux
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo add-apt-repository ppa:jonathonf/zfs
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo apt install zfsutils-linux
 </code></pre>
 <p>BTRFS is developing by Linux community and included in the standard Ubuntu package repo.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>apt<span style="color: #bbbbbb"> </span>install<span style="color: #bbbbbb"> </span>btrfs-progs
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>apt install btrfs-progs
 </code></pre>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Test volumes setup <a id="test-volumes-setup" href="#test-volumes-setup" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>First of all, the dedicated logical volumes on an HDD are creating for each file system and then mounting.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>pvcreate<span style="color: #bbbbbb"> </span>/dev/mapper/storagebox
-<span style="color: #c65d09; font-weight: bold">$ </span>vgcreate<span style="color: #bbbbbb"> </span>vgstoragebox<span style="color: #bbbbbb"> </span>/dev/mapper/storagebox
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>pvcreate /dev/mapper/storagebox
+<span style="color: #c65d09; font-weight: bold">$ </span>vgcreate vgstoragebox /dev/mapper/storagebox
 </code></pre>
 <p>ZFS,  the monstrous FS that tooks the longest time to set up than the others.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>lvcreate<span style="color: #bbbbbb"> </span>--size<span style="color: #bbbbbb"> </span>2G<span style="color: #bbbbbb"> </span>vgstoragebox<span style="color: #bbbbbb"> </span>--nname<span style="color: #bbbbbb"> </span>zfs
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>lvcreate --size 2G vgstoragebox --nname zfs
 
-<span style="color: #c65d09; font-weight: bold">$ </span>lvs<span style="color: #bbbbbb"> </span>vgstoragebox
+<span style="color: #c65d09; font-weight: bold">$ </span>lvs vgstoragebox
 <span style="color: #888888">LV            VG           Attr       LSize   Pool     Origin Data%  Meta%  Move Log Cpy%Sync Convert</span>
 <span style="color: #888888">zfs           vgstoragebox -wi-a-----   2.00g</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>zpool<span style="color: #bbbbbb"> </span>create<span style="color: #bbbbbb"> </span>zpool<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/zfs
+<span style="color: #c65d09; font-weight: bold">$ </span>zpool create zpool /dev/vgstoragebox/zfs
 
-<span style="color: #c65d09; font-weight: bold">$ </span>zpool<span style="color: #bbbbbb"> </span>list
+<span style="color: #c65d09; font-weight: bold">$ </span>zpool list
 <span style="color: #888888">NAME    SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT</span>
 <span style="color: #888888">zpool  1.88G   108K  1.87G        -         -     0%     0%  1.00x    ONLINE  -</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>zfs<span style="color: #bbbbbb"> </span>mount
+<span style="color: #c65d09; font-weight: bold">$ </span>zfs mount
 <span style="color: #888888">zpool                           /zpool</span>
-<span style="color: #c65d09; font-weight: bold">$ </span>zfs<span style="color: #bbbbbb"> </span>create<span style="color: #bbbbbb"> </span>zpool/documents
-<span style="color: #c65d09; font-weight: bold">$ </span>zfs<span style="color: #bbbbbb"> </span>list
+<span style="color: #c65d09; font-weight: bold">$ </span>zfs create zpool/documents
+<span style="color: #c65d09; font-weight: bold">$ </span>zfs list
 <span style="color: #888888">NAME              USED  AVAIL     REFER  MOUNTPOINT</span>
 <span style="color: #888888">zpool             158K  1.75G       24K  /zpool</span>
 <span style="color: #888888">zpool/documents    24K  1.75G       24K  /zpool/documents</span>
 </code></pre>
 <p>ZFS basically works with the <a href="https://docs.oracle.com/cd/E19253-01/819-5461/6n7ht6qtp/index.html#indexterm-31" class="umami--click--docs-oracle-com-cd-e19253-01-819-5461-6n7ht6qtp-index-html-indexterm-31">pools <span class="iconify" data-icon="la:external-link-alt"></span></a> and <a href="https://docs.oracle.com/cd/E19253-01/819-5461/6n7ht6qtp/index.html#indexterm-22" class="umami--click--docs-oracle-com-cd-e19253-01-819-5461-6n7ht6qtp-index-html-indexterm-22">datasets <span class="iconify" data-icon="la:external-link-alt"></span></a>. Many operations with them are doing by cli only, i got different side-effects while experimenting with trying the standard shell file operations. Very easy to get confused by a difference between <code>zpool/documents</code> and <code>/zpool/documents</code>.  Pool and dataset are ready and mounted.</p>
 <p>BTRFS is a truly lightweight FS that i realized while learning it in comparison to ZFS, the only root directory, nothing is hidden, designed to reside on a single server, but capable of grouping multiple devices up. The most frequent shell operations i executed are standard. Time is taken to set it up was drastically short.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>lvcreate<span style="color: #bbbbbb"> </span>--size<span style="color: #bbbbbb"> </span>2G<span style="color: #bbbbbb"> </span>vgstoragebox<span style="color: #bbbbbb"> </span>--name<span style="color: #bbbbbb"> </span>btrfs<span style="color: #bbbbbb"> </span>--yes
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>lvcreate --size 2G vgstoragebox --name btrfs --yes
 
-<span style="color: #c65d09; font-weight: bold">$ </span>mkfs.btrfs<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/btrfs
+<span style="color: #c65d09; font-weight: bold">$ </span>mkfs.btrfs /dev/vgstoragebox/btrfs
 <span style="color: #888888">btrfs-progs v5.4.1</span>
 <span style="color: #888888">See http://btrfs.wiki.kernel.org for more information.</span>
 
@@ -242,25 +242,25 @@
 <span style="color: #888888">   ID        SIZE  PATH</span>
 <span style="color: #888888">    1     2.00GiB  /dev/vgstoragebox/btrfs</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>mkdir<span style="color: #bbbbbb"> </span>/btrfs<span style="color: #bbbbbb">    </span>
-<span style="color: #c65d09; font-weight: bold">$ </span>mount<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/btrfs<span style="color: #bbbbbb"> </span>/btrfs
-<span style="color: #c65d09; font-weight: bold">$ </span>btrfs<span style="color: #bbbbbb"> </span>subvolume<span style="color: #bbbbbb"> </span>create<span style="color: #bbbbbb"> </span>documents
+<span style="color: #c65d09; font-weight: bold">$ </span>mkdir /btrfs    
+<span style="color: #c65d09; font-weight: bold">$ </span>mount /dev/vgstoragebox/btrfs /btrfs
+<span style="color: #c65d09; font-weight: bold">$ </span>btrfs subvolume create documents
 <span style="color: #888888">Create subvolume '/btrfs/documents'</span>
 </code></pre>
 <p>Interaction with BTRFS is mostly performing by  the <code>subvolume </code> subcommand.</p>
 <p>LVM tends to be difficult to understand its mechanic as there are two types of snapshots, one which is needed in my case called <strong>Thin</strong> as its size is computing dynamically by a pool. <strong>Standard</strong> type requires a snapshot size to be declared explicitly and static, in other words you have to be known in advance of how big your next snapshot is based on file changes. I don't think that dealing with a size calculation of file changes is worth to pay time for, so the thin type is chosen.</p>
 <p>According to the <code>man lvmthin</code> description <a href="https://man7.org/linux/man-pages/man7/lvmthin.7.html#THIN_TERMS" class="umami--click--man7-org-linux-man-pages-man7-lvmthin-7-html-thin-terms">there are five abstractions <span class="iconify" data-icon="la:external-link-alt"></span></a> thin snapshot's mechanic consist of. Each one has it's own parameters and those parameters combinations bring different effects. It seems already to be the most complicated tool in comparison to the other competitors, and it's just snapshotting functionality of the entire LVM system.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>./snapit-lvm.sh
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo ./snapit-lvm.sh
 <span style="color: #888888">  Logical volume "lvm-snap-1" created.</span>
 <span style="color: #888888">  Logical volume "lvm-snap-2" created.</span>
 <span style="color: #888888">  Logical volume "lvm-snap-3" created.</span>
 <span style="color: #888888">  Logical volume "lvm-snap-4" created.</span>
 <span style="color: #888888">  ...</span>
 <span style="color: #888888">  </span>
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvchange<span style="color: #bbbbbb"> </span>--activate<span style="color: #bbbbbb"> </span>y<span style="color: #bbbbbb"> </span>-K<span style="color: #bbbbbb"> </span>vgStorage/lvm-snap-20
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>mkdir<span style="color: #bbbbbb"> </span>/lvm-fs/snap-20
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>mount<span style="color: #bbbbbb"> </span>/dev/vgStorage/lvm-snap-20<span style="color: #bbbbbb"> </span>/lvm-fs/snap-20
-<span style="color: #c65d09; font-weight: bold">$ </span>diff<span style="color: #bbbbbb"> </span>-yr<span style="color: #bbbbbb"> </span>/lvm-fs/lvm-doc.txt<span style="color: #bbbbbb"> </span>/lvm-fs/snap-27/lvm-doc.txt
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo lvchange --activate y -K vgStorage/lvm-snap-20
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo mkdir /lvm-fs/snap-20
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo mount /dev/vgStorage/lvm-snap-20 /lvm-fs/snap-20
+<span style="color: #c65d09; font-weight: bold">$ </span>diff -yr /lvm-fs/lvm-doc.txt /lvm-fs/snap-27/lvm-doc.txt
 <span style="color: #888888">...</span>
 <span style="color: #888888">line27                                                          line27</span>
 <span style="color: #888888">line28                                                        &lt;</span>
@@ -268,13 +268,13 @@
 <span style="color: #888888">line30                                                        &lt;</span>
 </code></pre>
 <p>Many abstractions leads to many operations, here they are.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvcreate<span style="color: #bbbbbb"> </span>--name<span style="color: #bbbbbb"> </span>lvm-pool<span style="color: #bbbbbb"> </span>--size<span style="color: #bbbbbb"> </span>2G<span style="color: #bbbbbb"> </span>vgstoragebox
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvcreate --name lvm-pool --size 2G vgstoragebox
 <span style="color: #888888">  Logical volume "lvm-pool" created.</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvcreate<span style="color: #bbbbbb"> </span>--name<span style="color: #bbbbbb"> </span>lvm-pool-meta<span style="color: #bbbbbb"> </span>--size<span style="color: #bbbbbb"> </span>200m<span style="color: #bbbbbb"> </span>vgstoragebox
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo lvcreate --name lvm-pool-meta --size 200m vgstoragebox
 <span style="color: #888888">  Logical volume "lvm-pool-meta" created.</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvs<span style="color: #bbbbbb"> </span>vgstoragebox
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo lvs vgstoragebox
 <span style="color: #888888">  LV            VG           Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span>
 <span style="color: #888888">  btrfs         vgstoragebox -wi-ao----   2.00g</span>
 <span style="color: #888888">  home-backup   vgstoragebox -wi-ao---- 300.00g</span>
@@ -282,14 +282,14 @@
 <span style="color: #888888">  lvm-pool-meta vgstoragebox -wi-a----- 200.00m</span>
 <span style="color: #888888">  zfs           vgstoragebox -wi-a-----   2.00g</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvconvert<span style="color: #bbbbbb"> </span>--type<span style="color: #bbbbbb"> </span>thin-pool<span style="color: #bbbbbb"> </span>--poolmetadata<span style="color: #bbbbbb"> </span>vgstoragebox/lvm-pool-meta<span style="color: #bbbbbb"> </span>vgstoragebox/lvm-pool
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo lvconvert --type thin-pool --poolmetadata vgstoragebox/lvm-pool-meta vgstoragebox/lvm-pool
 <span style="color: #888888">  Thin pool volume with chunk size 64.00 KiB can address at most 15.81 TiB of data.</span>
 <span style="color: #888888">  WARNING: Converting vgstoragebox/lvm-pool and vgstoragebox/lvm-pool-meta to thin pool's data and metadata volumes with metadata wiping.</span>
 <span style="color: #888888">  THIS WILL DESTROY CONTENT OF LOGICAL VOLUME (filesystem etc.)</span>
 <span style="color: #888888">Do you really want to convert vgstoragebox/lvm-pool and vgstoragebox/lvm-pool-meta? [y/n]: y</span>
 <span style="color: #888888">  Converted vgstoragebox/lvm-pool and vgstoragebox/lvm-pool-meta to thin pool.</span>
 <span style="color: #888888">  </span>
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvs<span style="color: #bbbbbb"> </span>-a<span style="color: #bbbbbb"> </span>vgstoragebox
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo lvs -a vgstoragebox
 <span style="color: #888888">  LV               VG           Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span>
 <span style="color: #888888">  btrfs            vgstoragebox -wi-ao----   2.00g</span>
 <span style="color: #888888">  home-backup      vgstoragebox -wi-ao---- 300.00g</span>
@@ -299,10 +299,10 @@
 <span style="color: #888888">  [lvol0_pmspare]  vgstoragebox ewi------- 200.00m</span>
 <span style="color: #888888">  zfs              vgstoragebox -wi-a-----   2.00g</span>
 <span style="color: #888888">  </span>
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvcreate<span style="color: #bbbbbb"> </span>--name<span style="color: #bbbbbb"> </span>lvm<span style="color: #bbbbbb"> </span>--virtualsize<span style="color: #bbbbbb"> </span>2G<span style="color: #bbbbbb"> </span>--thinpool<span style="color: #bbbbbb"> </span>lvm-pool<span style="color: #bbbbbb"> </span>vgstoragebox
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo lvcreate --name lvm --virtualsize 2G --thinpool lvm-pool vgstoragebox
 <span style="color: #888888">  Logical volume "lvm" created.</span>
 <span style="color: #888888">  </span>
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>mkfs.ext4<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/lvm
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo mkfs.ext4 /dev/vgstoragebox/lvm
 <span style="color: #888888">mke2fs 1.45.5 (07-Jan-2020)</span>
 <span style="color: #888888">Discarding device blocks: done</span>
 <span style="color: #888888">Creating filesystem with 524288 4k blocks and 131072 inodes</span>
@@ -332,13 +332,13 @@
 <p>It turned out that keeping the logical volumes and snapshots in a working state is cumbersome. Have to determine a size limit of volume and snapshots to track it doesn't exceed. But what will happen if the limit is exceeded. I don't how to figure it out. For a simple case of having files history LVM is overkill i can conclude right now.</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Snapshots creation <a id="snapshots-creation" href="#snapshots-creation" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>A time measurement scenario is identical to all the tools, within a loop a text document is appending by a text line then a snapshot of the document's directory is taken. The shell scripts for each tool <a href="files/snapit-zfs.sh" class="umami--click--files-snapit-zfs-sh">snapit-zfs.sh <span class="iconify" data-icon="bi:terminal"></span></a>, <a href="files/snapit-btrfs.sh" class="umami--click--files-snapit-btrfs-sh">snapit-btrfs.sh <span class="iconify" data-icon="bi:terminal"></span></a>, <a href="files/snapit-lvm.sh" class="umami--click--files-snapit-lvm-sh">snapit-lvm.sh <span class="iconify" data-icon="bi:terminal"></span></a>.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>./snapit-zfs.sh<span style="color: #bbbbbb"> </span><span style="color: #40a070">2</span>&gt;&amp;<span style="color: #40a070">1</span><span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>tee<span style="color: #bbbbbb"> </span>output-zfs.txt
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo ./snapit-zfs.sh <span style="color: #40a070">2</span>&gt;&amp;<span style="color: #40a070">1</span> | tee output-zfs.txt
 <span style="color: #888888">execution time: 0:00.04</span>
 <span style="color: #888888">execution time: 0:00.69	</span>
 <span style="color: #888888">execution time: 0:00.03</span>
 <span style="color: #888888">...</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>zfs<span style="color: #bbbbbb"> </span>list<span style="color: #bbbbbb"> </span>-o<span style="color: #bbbbbb"> </span>space<span style="color: #bbbbbb"> </span>-r
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo zfs list -o space -r
 <span style="color: #888888">NAME                       AVAIL   USED  USEDSNAP  USEDDS  USEDREFRESERV  USEDCHILD</span>
 <span style="color: #888888">zpool                      1.67G  79.9M        0B     24K             0B      79.9M</span>
 <span style="color: #888888">zpool/documents            1.67G  39.5M     39.5M   40.5K             0B         0B</span>
@@ -353,17 +353,17 @@
 <p>Interesting, the ZFS snapshotting scenario loaded CPU significantly.</p>
 <p><img src="files/zfs-snapshotting-cpu-consumption.png" alt="" title="zfs snapshotting cpu consumption" class="d-block mx-auto mw-100 h-100"></p>
 <p>BTRFS turn.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>btrfs<span style="color: #bbbbbb"> </span>subvolume<span style="color: #bbbbbb"> </span>create<span style="color: #bbbbbb"> </span>/btrfs/snapshots
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo btrfs subvolume create /btrfs/snapshots
 <span style="color: #888888">Create subvolume '/btrfs/snapshots'</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>./snapit-btrfs.sh<span style="color: #bbbbbb"> </span><span style="color: #40a070">2</span>&gt;&amp;<span style="color: #40a070">1</span><span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>tee<span style="color: #bbbbbb"> </span>output-btrfs.txt
+<span style="color: #c65d09; font-weight: bold">$ </span>./snapit-btrfs.sh <span style="color: #40a070">2</span>&gt;&amp;<span style="color: #40a070">1</span> | tee output-btrfs.txt
 <span style="color: #888888">Create a snapshot of '/btrfs/documents' in '/btrfs/snapshots/documents-snap1'</span>
 <span style="color: #888888">execution time: 0:00.33</span>
 <span style="color: #888888">Create a snapshot of '/btrfs/documents' in '/btrfs/snapshots/documents-snap2'</span>
 <span style="color: #888888">execution time: 0:00.00</span>
 <span style="color: #888888">...</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>tree<span style="color: #bbbbbb"> </span>-vahpfugi<span style="color: #bbbbbb"> </span>/btrfs/snapshots
+<span style="color: #c65d09; font-weight: bold">$ </span>tree -vahpfugi /btrfs/snapshots
 <span style="color: #888888">[drwxr-xr-x root     root       26]  /btrfs/snapshots/documents-snap1</span>
 <span style="color: #888888">[-rw-r--r-- root     root        6]  /btrfs/snapshots/documents-snap1/btrfs-doc.txt</span>
 <span style="color: #888888">[drwxr-xr-x root     root       26]  /btrfs/snapshots/documents-snap2</span>
@@ -376,7 +376,7 @@
 </code></pre>
 <p>In contrary to ZFS, the scenario running didn't load CPU.</p>
 <p>LVM execution.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>./snapit-lvm.sh<span style="color: #bbbbbb"> </span><span style="color: #40a070">2</span>&gt;&amp;<span style="color: #40a070">1</span><span style="color: #bbbbbb"> </span>|<span style="color: #bbbbbb"> </span>tee<span style="color: #bbbbbb"> </span>output-lvm.txt
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo ./snapit-lvm.sh <span style="color: #40a070">2</span>&gt;&amp;<span style="color: #40a070">1</span> | tee output-lvm.txt
 <span style="color: #888888">  WARNING: Sum of all thin volume sizes (4.00 GiB) exceeds the size of thin pool vgstoragebox/lvm-pool (2.00 GiB).</span>
 <span style="color: #888888">  WARNING: You have not turned on protection against thin pools running out of space.</span>
 <span style="color: #888888">  WARNING: Set activation/thin_pool_autoextend_threshold below 100 to trigger automatic extension of thin pools before they get full.</span>
@@ -406,12 +406,12 @@
 <p>At this point the details have been gotten from the experiments are enough to chose the best deal, which is BTRFS, but extracting some additional information is worth to do as a file system is going to be exploited and it's behavior should be well learnt.</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Displaying diff <a id="displaying-diff" href="#displaying-diff" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>ZFS is able to run diff without mounting a snapshot, but doesn't display a content difference only file attributes:</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>zfs<span style="color: #bbbbbb"> </span>diff<span style="color: #bbbbbb"> </span>-F<span style="color: #bbbbbb"> </span>zpool/documents@snap-30<span style="color: #bbbbbb"> </span>zpool/documents@snap-400
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo zfs diff -F zpool/documents@snap-30 zpool/documents@snap-400
 <span style="color: #888888">M       F       /zpool/documents/zfs-doc.txt`</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>mkdir<span style="color: #bbbbbb"> </span>/zpool/documents-snap-1997
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>mount.zfs<span style="color: #bbbbbb"> </span>zpool/documents@snap-1997<span style="color: #bbbbbb"> </span>/zpool/documents-snap-1997
-<span style="color: #c65d09; font-weight: bold">$ </span>diff<span style="color: #bbbbbb"> </span>--side-by-side<span style="color: #bbbbbb">  </span>/zpool/documents/zfs-doc.txt<span style="color: #bbbbbb"> </span>/zpool/documents-snap-1997/zfs-doc.txt
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo mkdir /zpool/documents-snap-1997
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo mount.zfs zpool/documents@snap-1997 /zpool/documents-snap-1997
+<span style="color: #c65d09; font-weight: bold">$ </span>diff --side-by-side  /zpool/documents/zfs-doc.txt /zpool/documents-snap-1997/zfs-doc.txt
 <span style="color: #888888">...</span>
 <span style="color: #888888">line1996                                                        line1996</span>
 <span style="color: #888888">line1997                                                        line1997</span>
@@ -420,7 +420,7 @@
 <span style="color: #888888">line2000                                                      &lt;</span>
 </code></pre>
 <p>BTRFS has no a command to find out file attributes diff. To display a content difference there is the standard <code>diff</code> command. By default, if the root file system has been mounted all the snapshots are visible.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>diff<span style="color: #bbbbbb"> </span>--side-by-side<span style="color: #bbbbbb">  </span>/btrfs/documents/btrfs-doc.txt<span style="color: #bbbbbb"> </span>/btrfs/snapshots/documents-snap1997
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>diff --side-by-side  /btrfs/documents/btrfs-doc.txt /btrfs/snapshots/documents-snap1997
 <span style="color: #888888">...</span>
 <span style="color: #888888">line1996                                                        line1996</span>
 <span style="color: #888888">line1997                                                        line1997</span>
@@ -430,9 +430,9 @@
 </code></pre>
 <p>There is <a href="https://serverfault.com/questions/399894/does-btrfs-have-an-efficient-way-to-compare-snapshots" class="umami--click--serverfault-com-questions-399894-does-btrfs-have-an-efficient-way-to-compare-snapshots">a hack  of extracting <span class="iconify" data-icon="la:external-link-alt"></span></a> a file attributes diff using <code>send, receive</code>.</p>
 <p>LVM doesn't operate the files therefore the standard way is using.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvchange<span style="color: #bbbbbb"> </span>--activate<span style="color: #bbbbbb"> </span>y<span style="color: #bbbbbb"> </span>--ignoreactivationskip<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/lvm-snap-1505
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>mount<span style="color: #bbbbbb"> </span>/dev/vgstoragebox/lvm-snap-1505<span style="color: #bbbbbb"> </span>/lvm-fs/snap-1505
-<span style="color: #c65d09; font-weight: bold">$ </span>diff<span style="color: #bbbbbb"> </span>--side-by-side<span style="color: #bbbbbb"> </span>/lvm-fs/lvm-doc.txt<span style="color: #bbbbbb"> </span>/lvm-fs/snap-1503/lvm-doc.txt
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo lvchange --activate y --ignoreactivationskip /dev/vgstoragebox/lvm-snap-1505
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo mount /dev/vgstoragebox/lvm-snap-1505 /lvm-fs/snap-1505
+<span style="color: #c65d09; font-weight: bold">$ </span>diff --side-by-side /lvm-fs/lvm-doc.txt /lvm-fs/snap-1503/lvm-doc.txt
 <span style="color: #888888">...</span>
 <span style="color: #888888">line1504                                                        line1504</span>
 <span style="color: #888888">line1505                                                        line1505</span>
@@ -443,23 +443,23 @@
 <p>Snapshot mounting is a little tricky, as the other functional parts of LVM, why do i have to enable <code>--ignoreactivationskip</code>? I ha</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Disk space usage <a id="disk-space-usage" href="#disk-space-usage" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>A brief look at disk usage. It is a little unclear to figure out an exact total consumed space as the standard cli commands don't take file systems' specifics into account and the <code>df, du</code> commands don't display an actual usage.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>btrfs<span style="color: #bbbbbb"> </span>filesystem<span style="color: #bbbbbb"> </span>df<span style="color: #bbbbbb"> </span>-h<span style="color: #bbbbbb"> </span>/btrfs
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>sudo btrfs filesystem df -h /btrfs
 <span style="color: #888888">Data, single: total=216.00MiB, used=6.90MiB</span>
 <span style="color: #888888">System, DUP: total=8.00MiB, used=16.00KiB</span>
 <span style="color: #888888">Metadata, DUP: total=102.38MiB, used=33.42MiB</span>
 <span style="color: #888888">GlobalReserve, single: total=3.25MiB, used=0.00B</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>btrfs<span style="color: #bbbbbb"> </span>filesystem<span style="color: #bbbbbb"> </span>show<span style="color: #bbbbbb"> </span>--human-readable<span style="color: #bbbbbb"> </span>/btrfs
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo btrfs filesystem show --human-readable /btrfs
 <span style="color: #888888">Label: none  uuid: 9bb08305-55a7-4bd2-bd8c-f03530a1c5d6</span>
 <span style="color: #888888">        Total devices 1 FS bytes used 40.34MiB</span>
 <span style="color: #888888">        devid    1 size 2.00GiB used 436.75MiB path /dev/mapper/vgstoragebox-btrfs</span>
 <span style="color: #888888">        </span>
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>zpool<span style="color: #bbbbbb"> </span>list<span style="color: #bbbbbb"> </span>-v<span style="color: #bbbbbb"> </span>zpool
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo zpool list -v zpool
 <span style="color: #888888">NAME        SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT</span>
 <span style="color: #888888">zpool      1.88G  80.0M  1.80G        -         -    12%     4%  1.00x    ONLINE  -</span>
 <span style="color: #888888">  zfs      1.88G  80.0M  1.80G        -         -    12%  4.16%      -    ONLINE</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>zfs<span style="color: #bbbbbb"> </span>list
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo zfs list
 <span style="color: #888888">NAME                        USED  AVAIL     REFER  MOUNTPOINT</span>
 <span style="color: #888888">zpool                      80.0M  1.67G       25K  /zpool</span>
 <span style="color: #888888">zpool/documents            39.5M  1.67G     40.5K  /zpool/documents</span>
@@ -469,7 +469,7 @@
 <span style="color: #888888">zpool/documents@snap-1999  28.5K      -     40.5K  -</span>
 <span style="color: #888888">zpool/documents@snap-2000    12K      -     40.5K  -</span>
 
-<span style="color: #c65d09; font-weight: bold">$ </span>sudo<span style="color: #bbbbbb"> </span>lvs<span style="color: #bbbbbb"> </span>vgstoragebox
+<span style="color: #c65d09; font-weight: bold">$ </span>sudo lvs vgstoragebox
 <span style="color: #888888">LV            VG           Attr       LSize   Pool     Origin Data%  Meta%  Move Log Cpy%Sync Convert</span>
 <span style="color: #888888">lvm           vgstoragebox Vwi-aotz--   2.00g lvm-pool        4.77</span>
 <span style="color: #888888">lvm-pool      vgstoragebox twi-aotz--   2.00g                 28.38  19.88</span>
@@ -477,8 +477,8 @@
 <span style="color: #888888">lvm-snap-10   vgstoragebox Vwi---tz-k   2.00g lvm-pool lvm</span>
 <span style="color: #888888">...</span>
 
-<span style="color: #c65d09; font-weight: bold"># </span>Compare<span style="color: #bbbbbb"> </span>the<span style="color: #bbbbbb"> </span>fs<span style="color: #bbbbbb"> </span>commands<span style="color: #bbbbbb"> </span>output<span style="color: #bbbbbb"> </span>with<span style="color: #bbbbbb"> </span>df
-<span style="color: #c65d09; font-weight: bold">$ </span>df<span style="color: #bbbbbb"> </span>-h
+<span style="color: #c65d09; font-weight: bold"># </span>Compare the fs commands output with df
+<span style="color: #c65d09; font-weight: bold">$ </span>df -h
 <span style="color: #888888">Filesystem                             Size  Used Avail Use% Mounted on</span>
 <span style="color: #888888">/dev/mapper/vgstoragebox-btrfs         2.0G   78M  1.8G   5% /btrfs</span>
 <span style="color: #888888">/dev/mapper/vgstoragebox-lvm           2.0G   48K  1.8G   1% /lvm-fs</span>
@@ -488,9 +488,9 @@
 <p>That's not obvious to say which a file system uses a disk space less. BTRFS usage looks bigger on the output.</p>
 <h2 class="display-6 mt-5 mb-3 fw-bold">Events listening <a id="events-listening" href="#events-listening" class="header-anchor"><span class="iconify" data-icon="bi:link-45deg"></span></a></h2>
 <p>The file systems' capabilities of producing events are given a quick check to make sure an automation is implementable as it triggers snapshot command. Two types of the events <code>open, close</code> is enough for a test.</p>
-<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>inotifywait<span style="color: #bbbbbb"> </span>-m<span style="color: #bbbbbb"> </span>--format<span style="color: #bbbbbb"> </span><span style="color: #4070a0">'%e =&gt; %w%f'</span><span style="color: #bbbbbb"> </span>-e<span style="color: #bbbbbb"> </span>open<span style="color: #bbbbbb"> </span>-e<span style="color: #bbbbbb"> </span>close<span style="color: #bbbbbb"> </span>/zpool/documents/zfs-doc.txt<span style="color: #bbbbbb"> </span><span style="color: #4070a0; font-weight: bold">\</span>
-<span style="color: #bbbbbb">                                                        </span>/btrfs/documents/btrfs-doc.txt<span style="color: #bbbbbb"> </span><span style="color: #4070a0; font-weight: bold">\</span>
-<span style="color: #bbbbbb">                                                        </span>/lvm-fs/lvm-doc.txt
+<pre><code><span style="color: #c65d09; font-weight: bold">$ </span>inotifywait -m --format <span style="color: #4070a0">'%e =&gt; %w%f'</span> -e open -e close /zpool/documents/zfs-doc.txt <span style="color: #4070a0; font-weight: bold">\</span>
+                                                        /btrfs/documents/btrfs-doc.txt <span style="color: #4070a0; font-weight: bold">\</span>
+                                                        /lvm-fs/lvm-doc.txt
 
 <span style="color: #888888">Setting up watches.</span>
 <span style="color: #888888">Watches established.</span>
