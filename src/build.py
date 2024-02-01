@@ -44,6 +44,7 @@ env.globals['analytics_service_js'] = cns.ANALYTICS_SERVICE_JS
 env.globals['analytics_service_page'] = cns.ANALYTICS_SERVICE_PAGE
 env.globals['monitoring_service_page'] = cns.MONITORING_SERVICE_PAGE
 env.globals['memocards_service_address'] = cns.MEMOCARDS_SERVICE_ADDRESS
+env.globals['engqa_service_address'] = cns.ENGQA_SERVICE_ADDRESS
 env.globals['statuspage_service_page'] = cns.STATUSPAGE_SERVICE_ADDRESS
 env.filters['trailing_slash'] = trailing_slash
 env.filters['to_rfc822'] = to_rfc822
@@ -494,6 +495,7 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
          analytics=cns.ANALYTICS_ENABLED_DEFAULT,
          monitoring=cns.MONITORING_ENABLED_DEFAULT,
          memocards=cns.MEMOCARDS_ENABLED_DEFAULT,
+         engqa=cns.ENGQA_ENABLED_DEFAULT,
          statuspage=cns.STATUSPAGE_ENABLED_DEFAULT,
          preview_view=False,
          summary_view=False):
@@ -501,6 +503,7 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
     env.globals['analytics_enabled'] = analytics
     env.globals['monitoring_enabled'] = monitoring
     env.globals['memocards_enabled'] = memocards
+    env.globals['engqa_enabled'] = engqa
     env.globals['statuspage_enabled'] = statuspage
     articles_data = []
 
@@ -566,6 +569,7 @@ if __name__ == '__main__':
     parser.add_argument('--enable-analytics', action="store_true", help="Display a serivice in the list on the index page.")
     parser.add_argument('--enable-monitoring', action="store_true")
     parser.add_argument('--enable-memocards', action="store_true")
+    parser.add_argument('--enable-engqa', action="store_true")
     parser.add_argument('--enable-statuspage', action="store_true")
     parser.add_argument('--preview-view', action="store_true")
     parser.add_argument('--summary-view', action="store_true")
@@ -576,6 +580,7 @@ if __name__ == '__main__':
          analytics=args.enable_analytics,
          monitoring=args.enable_monitoring,
          memocards=args.enable_memocards,
+         engqa=args.enable_engqa,
          statuspage=args.enable_statuspage,
          preview_view=args.preview_view,
          summary_view=args.summary_view)
