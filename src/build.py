@@ -1,5 +1,6 @@
 import os
 import functools
+import sys
 from typing import List, Tuple, Set
 from xml.dom.minidom import getDOMImplementation
 from dataclasses import dataclass
@@ -11,6 +12,8 @@ from argparse import ArgumentParser
 from copy import deepcopy
 from enum import Enum
 
+import aspectlib
+import aspectlib.debug
 from lxml.html import Element, fromstring, tostring as _tostring
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from pygments import highlight
@@ -50,6 +53,8 @@ env.filters['trailing_slash'] = trailing_slash
 env.filters['to_rfc822'] = to_rfc822
 env.filters['prepend_site_address'] = prepend_site_address
 env.filters['update_classes'] = update_classes
+env.filters['any'] = any
+
 tostring = functools.partial(_tostring, encoding='unicode')
 
 
@@ -87,6 +92,9 @@ class ThumbnailPair:
 
 @functools.lru_cache 
 def list_article_md_files(articles_dir: Path, reverse=False) -> list:
+    # with aspectlib.weave(HTMLGen,
+    #                      aspectlib.debug.log(print_to=sys.stdout, stacktrace=None),
+    #                      lazy=True):
     ignore_dirs = set(articles_dir / d for d in cns.AS_DIRS_IGNORE)
     iter_dir = articles_dir.iterdir()
 
@@ -507,9 +515,7 @@ def main(articles_dir: Path, font_icons=True, highlight=True,
     env.globals['statuspage_enabled'] = statuspage
     articles_data = []
 
-    import sys
-    import aspectlib
-    import aspectlib.debug
+
     for article_md_file in list_article_md_files(articles_dir, reverse=True):
         # Generate an article html and write it in a file
         article_source_dir = article_md_file.parent

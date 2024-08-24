@@ -1,5 +1,5 @@
 aspectlib==2.0.0
-disckcache==5.6.3
+diskcache==5.6.3
 langchain==0.1.3
 more_itertools==10.2.0
 python-slugify==6.1.2
@@ -9,5 +9,3 @@ lxml==4.8.0
 markdown-it-py==2.1.0
 cssselect==1.2.0
 Pillow==10.0.0
-torch==2.0.1
-transformers==4.30.2
