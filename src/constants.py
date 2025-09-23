@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-SITE_NAME = 'ТехнологоблогЪ'
+SITE_NAME = 'Технологist'
 SITE_ADDRESS = 'https://www.kvdm.dev'
 
 PROJ_DIR = Path(__file__).parent.parent
