@@ -4,7 +4,14 @@
 		<title>Технологist</title>
 		<link>https://www.kvdm.dev</link>
 		<description>Observe existence, drink tea, cognize.</description>
-		<pubDate>31 May 2026 00:00:00 +0000</pubDate>
+		<pubDate>24 Sep 2026 00:00:00 +0000</pubDate>
+				<item>
+			<title>Нейросетевое Сопоставление Ножей. Gemini Flash High. ChatGPT High </title>
+			<link>https://www.kvdm.dev/articles/neirosetevoe-sopostavlenie-nozhei-gemini-flash-high-chatgpt-high/</link>
+			<description>Уже скопил достаточно базовых знаний и предпочтений о том, какой нож нужен для моих личных потребностей. Собственно на данный момент имею пару с которыми прохожу маршруты, режущий и рубящий(кто не знает, нож отлично заменят топор до определённой...</description>
+			<pubDate>24 Sep 2026 00:00:00 +0000</pubDate>
+			<guid>https://www.kvdm.dev/articles/neirosetevoe-sopostavlenie-nozhei-gemini-flash-high-chatgpt-high/</guid>
+		</item>
 				<item>
 			<title>Aiomonitor Integration with Litestar. Uvicorn. FastApi </title>
 			<link>https://www.kvdm.dev/articles/aiomonitor-integration-with-litestar-uvicorn-fastapi/</link>
